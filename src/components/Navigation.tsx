@@ -36,28 +36,28 @@ export function Navigation() {
   const services = [
     {
       id: "web-design",
-      title: "Web Design & Development",
-      description: "Moderne web stranice koje prodaju",
+      title: _t("services.web.title"),
+      description: _t("services.web.desc"),
     },
     {
       id: "seo",
-      title: "SEO & Google Business",
-      description: "Budite #1 na Google pretragama",
+      title: _t("services.seo.title"),
+      description: _t("services.seo.desc"),
     },
     {
       id: "social-media",
-      title: "Social Media Management",
-      description: "Izgradite zajednicu oko brenda",
+      title: _t("services.social.title"),
+      description: _t("services.social.desc"),
     },
     {
       id: "branding",
-      title: "Branding & Graphic Design",
-      description: "Nezaboravan brand identitet",
+      title: _t("services.branding.title"),
+      description: _t("services.branding.desc"),
     },
     {
       id: "strategy",
-      title: "Strategy & Consulting",
-      description: "Strategije za digitalni uspeh",
+      title: _t("services.strategy.title"),
+      description: _t("services.strategy.desc"),
     },
   ];
 
@@ -159,7 +159,7 @@ export function Navigation() {
                     : "text-white"
               }`}
             >
-              Početna
+              {_t('nav.home')}
             </button>
 
             {/* Services Dropdown */}
@@ -186,7 +186,7 @@ export function Navigation() {
                 aria-expanded={servicesOpen}
                 aria-haspopup="true"
               >
-                <span>Usluge</span>
+                <span>{_t('nav.services')}</span>
                 <ChevronDown
                   className={`h-4 w-4 transition-transform duration-300 ${servicesOpen ? "rotate-180" : ""}`}
                 />
@@ -228,7 +228,7 @@ export function Navigation() {
                 isScrolled ? "text-bdigital-navy" : "text-white"
               }`}
             >
-              Kontakt
+              {_t('nav.contact')}
             </button>
 
             {/* Language Switcher */}
@@ -310,7 +310,7 @@ export function Navigation() {
                           : "text-bdigital-navy hover:bg-gray-50"
                       }`}
                     >
-                      Početna
+                      {_t('nav.home')}
                     </button>
 
                     {/* Services Menu */}
@@ -320,7 +320,7 @@ export function Navigation() {
                         className="w-full flex items-center justify-between px-4 py-3 text-base font-medium text-bdigital-navy hover:bg-gray-50 rounded-lg transition-colors duration-200"
                         aria-expanded={servicesOpen}
                       >
-                        <span>Usluge</span>
+                        <span>{_t('nav.services')}</span>
                         <ChevronDown
                           className={`h-4 w-4 transition-transform duration-300 ${servicesOpen ? "rotate-180" : ""}`}
                         />
@@ -354,7 +354,7 @@ export function Navigation() {
                       onClick={handleContactClick}
                       className="w-full text-left px-4 py-3 text-base font-medium text-bdigital-navy hover:bg-gray-50 rounded-lg transition-colors duration-200"
                     >
-                      Kontakt
+                      {_t('nav.contact')}
                     </button>
                   </div>
 
