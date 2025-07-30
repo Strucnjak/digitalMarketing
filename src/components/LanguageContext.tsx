@@ -1,7 +1,9 @@
 import { createContext, useContext, useState } from "react";
 import type { ReactNode } from "react";
 
-export type Language = "sr" | "en" | "me";
+
+
+export type Language = 'sr' | 'en' | 'me';
 
 interface LanguageContextType {
   language: Language;
@@ -83,88 +85,7 @@ const translations = {
     "contact.message": "Poruka",
     "contact.send": "Pošaljite poruku",
 
-    // Footer
-    "footer.description": "Vaš partner za digitalni uspeh u Crnoj Gori",
-    "footer.services": "Usluge",
-    "footer.company": "Kompanija",
-    "footer.contact": "Kontakt",
-    "footer.rights": "Sva prava zadržana.",
-  },
-  me: {
-    // Navigation
-    "nav.home": "Početna",
-    "nav.services": "Usluge",
-    "nav.portfolio": "Portfolio",
-    "nav.about": "O nama",
-    "nav.contact": "Kontakt",
 
-    // Hero Section
-    "hero.title": "Digitalno transformišemo vaš biznis",
-    "hero.subtitle":
-      "Kreiramo moderne web stranice, optimizujemo SEO i upravljamo vašim digitalnim prisustvom u Crnoj Gori",
-    "hero.cta": "Započnite transformaciju",
-    "hero.secondary": "Pogledajte naš rad",
-
-    // Services
-    "services.title": "Naše usluge",
-    "services.subtitle": "Pružamo kompletna digitalna rešenja za vaš uspeh",
-    "services.web.title": "Web dizajn i razvoj",
-    "services.web.desc":
-      "Moderne, responzivne web stranice optimizovane za konverziju",
-    "services.seo.title": "SEO i Google Business",
-    "services.seo.desc":
-      "Poboljšajte vidljivost i osvojite više klijenata preko pretrage",
-    "services.social.title": "Upravljanje društvenim mrežama",
-    "services.social.desc":
-      "Strategije koje grade brendove i povećavaju angažovanje",
-    "services.branding.title": "Brendiranje i grafički dizajn",
-    "services.branding.desc": "Kreativna rešenja koja izdvajaju vaš brend",
-    "services.strategy.title": "Strategija i konsalting",
-    "services.strategy.desc": "Digitalne strategije usmerene na rezultate",
-
-    // Portfolio
-    "portfolio.title": "Naš rad",
-    "portfolio.subtitle":
-      "Pogledajte projekte koji su transformisali naše klijente",
-    "portfolio.all": "Sve kategorije",
-    "portfolio.web": "Web stranice",
-    "portfolio.seo": "SEO projekti",
-    "portfolio.social": "Društvene mreže",
-    "portfolio.branding": "Brendiranje",
-
-    // About
-    "about.title": "O nama",
-    "about.subtitle": "Vaš partner za digitalni uspeh u Crnoj Gori",
-    "about.description":
-      "BDigital je moderna digitalna agencija iz Crne Gore koja pomaže kompanijama da ostvare svoj puni potencijal u digitalnom svetu. Sa kombinacijom kreativnosti, tehnološke ekspertize i duboke analize tržišta, kreiramo rešenja koja donose merljive rezultate.",
-    "about.mission.title": "Naša misija",
-    "about.mission.desc":
-      "Pomaćemo lokalnim kompanijama da konkurišu na globalnom nivou kroz inovativna digitalna rešenja.",
-    "about.vision.title": "Naša vizija",
-    "about.vision.desc":
-      "Biti vodeća digitalna agencija u regionu poznata po kreativnosti i rezultatima.",
-    "about.values.title": "Naše vrednosti",
-    "about.values.desc":
-      "Transparentnost, inovacija, rezultati i dugotrajne partnerske veze sa klijentima.",
-
-    // Testimonials
-    "testimonials.title": "Šta kažu naši klijenti",
-    "testimonials.subtitle": "Poverite nam svoj digitalni uspeh",
-
-    // Contact
-    "contact.title": "Kontaktirajte nas",
-    "contact.subtitle": "Spremni smo da razgovaramo o vašem projektu",
-    "contact.name": "Ime",
-    "contact.email": "Email",
-    "contact.message": "Poruka",
-    "contact.send": "Pošaljite poruku",
-
-    // Footer
-    "footer.description": "Vaš partner za digitalni uspeh u Crnoj Gori",
-    "footer.services": "Usluge",
-    "footer.company": "Kompanija",
-    "footer.contact": "Kontakt",
-    "footer.rights": "Sva prava zadržana.",
   },
   en: {
     // Navigation
@@ -246,6 +167,34 @@ const translations = {
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [language, setLanguage] = useState<Language>("sr");
+    'footer.description': 'Your partner for digital success in Montenegro',
+    'footer.services': 'Services',
+    'footer.company': 'Company',
+    'footer.contact': 'Contact',
+    'footer.rights': 'All rights reserved.',
+
+    // General
+    'general.back_home': 'Back to home',
+    'general.back': 'Back',
+
+    // Branding
+    'branding.hero.title': 'Create an unforgettable brand identity',
+    'branding.hero.desc':
+      'From concept to full visual identity - we help you stand out in the market.',
+
+    // Social Media
+    'social.hero.title': 'Build a community around your brand',
+    'social.hero.desc':
+      'Create engaging content and grow followers on all social networks with our expert help.',
+
+    // Strategy
+    'strategy.hero.desc':
+      "Let's create a digital strategy together that will take your business to new heights."
+  }
+};
+
+export function LanguageProvider({ children }: { children: ReactNode }) {
+  const [language, setLanguage] = useState<Language>('me');
 
   const t = (key: string): string => {
     return (

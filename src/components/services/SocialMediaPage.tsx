@@ -11,9 +11,11 @@ import {
 } from 'lucide-react';
 import { useRouter } from '../Router';
 import { ImageWithFallback } from '../figma/ImageWithFallback';
+import { useLanguage } from '../LanguageContext';
 
 export function SocialMediaPage() {
   const { navigateTo } = useRouter();
+  const { t } = useLanguage();
 
   const services = [
     {
@@ -97,10 +99,10 @@ export function SocialMediaPage() {
                 Social Media Management
               </Badge>
               <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
-                <span className="text-bdigital-cyan">Izgradite zajednicu</span> oko vašeg brenda
+                {t('social.hero.title')}
               </h1>
               <p className="text-gray-300 text-lg mb-8 leading-relaxed">
-                Kreirajte angažovan sadržaj i povećajte broj pratilaca na svim društvenim mrežama uz našu stručnu pomoć.
+                {t('social.hero.desc')}
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 mb-8">
@@ -118,7 +120,7 @@ export function SocialMediaPage() {
                   className="border-bdigital-cyan text-bdigital-cyan hover:bg-bdigital-cyan hover:text-bdigital-navy px-8 py-3 font-semibold"
                   onClick={() => navigateTo('home')}
                 >
-                  Nazad na početnu
+                  {t('general.back_home')}
                 </Button>
               </div>
             </div>
