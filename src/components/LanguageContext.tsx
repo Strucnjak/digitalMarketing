@@ -1,5 +1,6 @@
 import { createContext, useContext, useState } from 'react';
 import type { ReactNode } from 'react';
+import { EMAIL, PHONE, ADDRESS } from '../config/contact';
 
 export type Language = 'en' | 'me';
 
@@ -313,9 +314,9 @@ const translations = {
     'footer.terms': 'Uslovi korišćenja',
     'footer.privacy': 'Politika privatnosti',
     'footer.cookies': 'Kolačići',
-    'footer.address': 'Podgorica, Crna Gora',
-    'footer.phone': '+382 XX XXX XXX',
-    'footer.email': 'info@bdigital.me',
+    'footer.address': ADDRESS,
+    'footer.phone': PHONE,
+    'footer.email': EMAIL,
     'footer.newsletter': 'Newsletter',
     'footer.newsletter.placeholder': 'Vaš email',
     // General
@@ -664,9 +665,9 @@ const translations = {
     'footer.terms': 'Terms of Service',
     'footer.privacy': 'Privacy Policy',
     'footer.cookies': 'Cookies',
-    'footer.address': 'Podgorica, Montenegro',
-    'footer.phone': '+382 XX XXX XXX',
-    'footer.email': 'info@bdigital.me',
+    'footer.address': ADDRESS,
+    'footer.phone': PHONE,
+    'footer.email': EMAIL,
     'footer.newsletter': 'Newsletter',
     'footer.newsletter.placeholder': 'Your email',
     // General
