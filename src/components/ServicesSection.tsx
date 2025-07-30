@@ -17,7 +17,7 @@ import { useLanguage } from './LanguageContext';
 import { useRouter } from './Router';
 
 export function ServicesSection() {
-  const { t: _t } = useLanguage();
+  const { t } = useLanguage();
   const { navigateTo } = useRouter();
 
   const services = [
@@ -52,7 +52,7 @@ export function ServicesSection() {
       id: 'branding',
       icon: Palette,
       title: 'Branding & Graphic Design',
-      description: 'Kreirajte nezaboravan brand identitet koji će vas izdvojiti od konkurencije i privući idealne klijente.',
+      description: t('branding.hero.desc'),
       features: ['Logo design', 'Brand guidelines', 'Print materials', 'Digital assets'],
       color: 'from-orange-500 to-red-500',
       stats: { value: '100+', label: 'Brand identiteta' }

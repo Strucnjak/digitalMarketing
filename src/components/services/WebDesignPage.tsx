@@ -17,7 +17,7 @@ import { useRouter } from '../Router';
 import { ImageWithFallback } from '../figma/ImageWithFallback';
 
 export function WebDesignPage() {
-  const { t: _t } = useLanguage();
+  const { t } = useLanguage();
   const { navigateTo } = useRouter();
 
   const features = [
@@ -190,7 +190,7 @@ export function WebDesignPage() {
                   className="border-bdigital-cyan text-bdigital-cyan hover:bg-bdigital-cyan hover:text-bdigital-navy px-8 py-3 font-semibold"
                   onClick={() => navigateTo('home')}
                 >
-                  Nazad na početnu
+                  {t('general.back_home')}
                 </Button>
               </div>
 

@@ -46,7 +46,7 @@ interface ConsultationFormData {
 
 export function FreeConsultationPage() {
   const { navigateTo } = useRouter();
-  const { t: _t } = useLanguage();
+  const { t } = useLanguage();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -163,7 +163,7 @@ export function FreeConsultationPage() {
                   onClick={() => navigateTo('home')}
                   className="bg-bdigital-cyan text-bdigital-navy hover:bg-bdigital-cyan-light font-semibold px-8 py-3"
                 >
-                  Nazad na početnu
+                  {t('general.back_home')}
                 </Button>
                 <Button 
                   variant="outline"
@@ -199,7 +199,7 @@ export function FreeConsultationPage() {
             className="text-bdigital-navy hover:text-bdigital-cyan mb-6 -ml-2"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
-            Nazad na početnu
+            {t('general.back_home')}
           </Button>
           
           <div className="text-center mb-8">
