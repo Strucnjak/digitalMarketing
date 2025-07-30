@@ -10,10 +10,10 @@ export function HeroSection() {
   const { navigateTo } = useRouter();
 
   const stats = [
-    { icon: Users, value: '100+', label: 'Zadovoljnih klijenata' },
-    { icon: Award, value: '200+', label: 'Uspešnih projekata' },
-    { icon: Star, value: '4.9', label: 'Prosečna ocena' },
-    { icon: CheckCircle, value: '24h', label: 'Vreme odgovora' }
+    { icon: Users, value: '100+', label: _t('hero.stats.clients') },
+    { icon: Award, value: '200+', label: _t('hero.stats.projects') },
+    { icon: Star, value: '4.9', label: _t('hero.stats.rating') },
+    { icon: CheckCircle, value: '24h', label: _t('hero.stats.response') }
   ];
 
   const handleGetStarted = () => {
@@ -55,24 +55,21 @@ export function HeroSection() {
             {/* Badge */}
             <div className="flex justify-center lg:justify-start">
               <Badge className="bg-bdigital-cyan/20 text-bdigital-cyan border-bdigital-cyan/30 px-4 py-2 text-sm font-medium backdrop-blur-sm">
-                🚀 Digitalna agencija #1 u Crnoj Gori
+                {_t('hero.badge')}
               </Badge>
             </div>
 
             {/* Main Heading */}
             <div className="space-y-4">
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">
-                <span className="block">Digitalni</span>
-                <span className="block text-bdigital-cyan">marketing</span>
-                <span className="block">koji radi</span>
+                {_t('hero.title')}
               </h1>
               <div className="w-20 h-1 bg-bdigital-cyan mx-auto lg:mx-0 rounded-full"></div>
             </div>
 
             {/* Subtitle */}
             <p className="text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-              Transformišemo vaš biznis kroz moderne web stranice, SEO optimizaciju i 
-              strategije digitalnog marketinga koje donose rezultate.
+              {_t('hero.subtitle')}
             </p>
 
             {/* CTA Buttons */}
@@ -82,7 +79,7 @@ export function HeroSection() {
                 onClick={handleGetStarted}
                 className="bg-bdigital-cyan text-bdigital-navy hover:bg-bdigital-cyan-light font-semibold px-8 py-4 text-base shadow-2xl hover:shadow-bdigital-cyan/25 transition-all duration-300 transform hover:scale-105 group"
               >
-                Počnite danas
+                {_t('hero.cta')}
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
               </Button>
               <Button
@@ -91,7 +88,7 @@ export function HeroSection() {
                 onClick={handleViewPortfolio}
                 className="border-2 border-bdigital-cyan text-bdigital-cyan hover:bg-bdigital-cyan hover:text-bdigital-navy font-semibold px-8 py-4 text-base backdrop-blur-sm transition-all duration-300 transform hover:scale-105"
               >
-                Pogledajte radove
+                {_t('hero.secondary')}
               </Button>
             </div>
 
@@ -135,7 +132,7 @@ export function HeroSection() {
                 <div className="relative overflow-hidden rounded-xl lg:rounded-2xl">
                   <ImageWithFallback
                     src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop&q=80"
-                    alt="Digitalni marketing dashboard"
+                    alt={_t('hero.image_alt')}
                     className="w-full h-64 sm:h-80 lg:h-96 object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                   
