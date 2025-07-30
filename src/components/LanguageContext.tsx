@@ -21,11 +21,17 @@ const translations = {
     'nav.contact': 'Kontakt',
 
     // Hero Section
-    'hero.title': 'Digitalno transformišemo vaš biznis',
+    'hero.badge': '🚀 Digitalna agencija #1 u Crnoj Gori',
+    'hero.title': 'Digitalni marketing koji radi',
     'hero.subtitle':
-      'Kreiramo moderne web stranice, optimizujemo SEO i upravljamo vašim digitalnim prisustvom u Crnoj Gori',
-    'hero.cta': 'Započnite transformaciju',
-    'hero.secondary': 'Pogledajte naš rad',
+      'Transformišemo vaš biznis kroz moderne web stranice, SEO optimizaciju i strategije digitalnog marketinga koje donose rezultate.',
+    'hero.cta': 'Počnite danas',
+    'hero.secondary': 'Pogledajte radove',
+    'hero.stats.clients': 'Zadovoljnih klijenata',
+    'hero.stats.projects': 'Uspešnih projekata',
+    'hero.stats.rating': 'Prosečna ocena',
+    'hero.stats.response': 'Vreme odgovora',
+    'hero.image_alt': 'Digitalni marketing dashboard',
 
     // Services
     'services.title': 'Naše usluge',
@@ -94,11 +100,17 @@ const translations = {
     'nav.contact': 'Contact',
 
     // Hero Section
-    'hero.title': 'We digitally transform your business',
+    'hero.badge': '🚀 #1 Digital agency in Montenegro',
+    'hero.title': 'Digital marketing that works',
     'hero.subtitle':
-      'We create modern websites, optimize SEO and manage your digital presence in Montenegro',
-    'hero.cta': 'Start transformation',
+      'We transform your business with modern websites, SEO optimization and digital marketing strategies that deliver results.',
+    'hero.cta': 'Get started today',
     'hero.secondary': 'View our work',
+    'hero.stats.clients': 'Happy clients',
+    'hero.stats.projects': 'Successful projects',
+    'hero.stats.rating': 'Average rating',
+    'hero.stats.response': 'Response time',
+    'hero.image_alt': 'Digital marketing dashboard',
 
     // Services
     'services.title': 'Our Services',
