@@ -1,13 +1,11 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Button } from './ui/button';
 import { Card, CardContent } from './ui/card';
 import { Badge } from './ui/badge';
 import { 
   ExternalLink, 
-  Eye, 
-  Calendar, 
-  Tag,
-  Filter,
+  Eye,
+  Calendar,
   ChevronLeft,
   ChevronRight
 } from 'lucide-react';
@@ -16,7 +14,7 @@ import { useRouter } from './Router';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 
 export function PortfolioSection() {
-  const { t } = useLanguage();
+  const { t: _t } = useLanguage();
   const { navigateTo } = useRouter();
   const [activeFilter, setActiveFilter] = useState('all');
   const [currentSlide, setCurrentSlide] = useState(0);

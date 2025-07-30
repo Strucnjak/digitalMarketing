@@ -1,13 +1,11 @@
-import React from 'react';
 import { Button } from '../ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { Badge } from '../ui/badge';
 import { 
-  Search, 
-  TrendingUp, 
-  Target, 
-  BarChart3, 
-  MapPin, 
+  Search,
+  TrendingUp,
+  BarChart3,
+  MapPin,
   Smartphone,
   Globe,
   ArrowRight,
@@ -20,7 +18,7 @@ import { useRouter } from '../Router';
 import { ImageWithFallback } from '../figma/ImageWithFallback';
 
 export function SEOPage() {
-  const { t } = useLanguage();
+  const { t: _t } = useLanguage();
   const { navigateTo } = useRouter();
 
   const services = [

@@ -1,27 +1,23 @@
-import React from 'react';
 import { Button } from '../ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { Badge } from '../ui/badge';
 import { 
-  Monitor, 
-  Smartphone, 
-  Zap, 
-  Search, 
-  ShoppingCart, 
+  Monitor,
+  Zap,
+  Search,
+  ShoppingCart,
   Palette,
   Code,
   ArrowRight,
   CheckCircle,
-  Clock,
-  Users,
-  Star
+  Clock
 } from 'lucide-react';
 import { useLanguage } from '../LanguageContext';
 import { useRouter } from '../Router';
 import { ImageWithFallback } from '../figma/ImageWithFallback';
 
 export function WebDesignPage() {
-  const { t } = useLanguage();
+  const { t: _t } = useLanguage();
   const { navigateTo } = useRouter();
 
   const features = [

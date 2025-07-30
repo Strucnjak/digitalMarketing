@@ -1,4 +1,3 @@
-import React from 'react';
 import { Button } from './ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Badge } from './ui/badge';
@@ -18,7 +17,7 @@ import { useLanguage } from './LanguageContext';
 import { useRouter } from './Router';
 
 export function ServicesSection() {
-  const { t } = useLanguage();
+  const { t: _t } = useLanguage();
   const { navigateTo } = useRouter();
 
   const services = [
@@ -96,7 +95,7 @@ export function ServicesSection() {
 
         {/* Services Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-12 lg:mb-16">
-          {services.map((service, index) => {
+          {services.map((service, _index) => {
             const IconComponent = service.icon;
             return (
               <Card 
@@ -176,10 +175,10 @@ export function ServicesSection() {
                 { icon: TrendingUp, title: 'Merljivi rezultati', desc: 'ROI koji možete videti' },
                 { icon: Users, title: 'Posvećena podrška', desc: '24/7 tehnička podrška' },
                 { icon: Award, title: 'Dokazano iskustvo', desc: '100+ uspešnih projekata' }
-              ].map((item, index) => {
+              ].map((item, _index) => {
                 const IconComponent = item.icon;
                 return (
-                  <div key={index} className="text-center group">
+                  <div key={_index} className="text-center group">
                     <div className="w-12 h-12 bg-bdigital-cyan/20 rounded-2xl flex items-center justify-center mx-auto mb-3 group-hover:bg-bdigital-cyan group-hover:scale-110 transition-all duration-300">
                       <IconComponent className="h-6 w-6 text-bdigital-cyan group-hover:text-bdigital-navy" />
                     </div>

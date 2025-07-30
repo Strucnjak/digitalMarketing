@@ -1,13 +1,10 @@
-import React from 'react';
 import { Button } from '../ui/button';
 import { Card, CardContent } from '../ui/card';
 import { Badge } from '../ui/badge';
 import { 
-  Instagram, 
-  Facebook, 
-  MessageSquare, 
-  Users, 
-  TrendingUp, 
+  Instagram,
+  Facebook,
+  TrendingUp,
   Camera,
   ArrowRight,
   CheckCircle
@@ -76,7 +73,7 @@ export function SocialMediaPage() {
     }
   ];
 
-  const handlePackageSelect = (packageName: string) => {
+  const handlePackageSelect = (_packageName: string) => {
     navigateTo('home');
     setTimeout(() => {
       const element = document.querySelector('#contact');

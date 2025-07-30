@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
@@ -18,7 +18,7 @@ import {
 import { useLanguage } from './LanguageContext';
 
 export function ContactSection() {
-  const { t } = useLanguage();
+  const { t: _t } = useLanguage();
   const [formData, setFormData] = useState({
     name: '',
     email: '',

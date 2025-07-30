@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Button } from "./ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
 import { Menu, X, ChevronDown } from "lucide-react";
@@ -6,7 +6,7 @@ import { useLanguage } from "./LanguageContext";
 import { useRouter } from "./Router";
 
 export function Navigation() {
-  const { language, setLanguage, t } = useLanguage();
+  const { language, setLanguage, t: _t } = useLanguage();
   const { currentPage, navigateTo } = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);

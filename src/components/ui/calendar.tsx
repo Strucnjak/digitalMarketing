@@ -44,8 +44,32 @@ function Calendar({ className, classNames, showOutsideDays = true, ...props }: R
         ...classNames,
       }}
       components={{
-        IconLeft: (props: React.SVGProps<SVGSVGElement>) => <ChevronLeft className={cn("size-4")} {...props} />,
-        IconRight: (props: React.SVGProps<SVGSVGElement>) => <ChevronRight className={cn("size-4")} {...props} />,
+        PreviousMonthButton: (
+          props: React.ButtonHTMLAttributes<HTMLButtonElement>
+        ) => (
+          <button
+            {...props}
+            className={cn(
+              buttonVariants({ variant: "outline" }),
+              "size-7 bg-transparent p-0 opacity-50 hover:opacity-100"
+            )}
+          >
+            <ChevronLeft className={cn("size-4")} />
+          </button>
+        ),
+        NextMonthButton: (
+          props: React.ButtonHTMLAttributes<HTMLButtonElement>
+        ) => (
+          <button
+            {...props}
+            className={cn(
+              buttonVariants({ variant: "outline" }),
+              "size-7 bg-transparent p-0 opacity-50 hover:opacity-100"
+            )}
+          >
+            <ChevronRight className={cn("size-4")} />
+          </button>
+        ),
       }}
       {...props}
     />

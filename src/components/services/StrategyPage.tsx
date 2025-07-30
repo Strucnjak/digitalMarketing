@@ -1,14 +1,12 @@
-import React from 'react';
 import { Button } from '../ui/button';
 import { Card, CardContent } from '../ui/card';
 import { Badge } from '../ui/badge';
 import { 
   TrendingUp, 
   Target, 
-  BarChart3, 
+  BarChart3,
   Users,
-  ArrowRight,
-  CheckCircle
+  ArrowRight
 } from 'lucide-react';
 import { useRouter } from '../Router';
 import { ImageWithFallback } from '../figma/ImageWithFallback';
