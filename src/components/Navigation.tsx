@@ -3,7 +3,7 @@ import { Button } from "./ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { useLanguage } from "./LanguageContext";
-import { useRouter } from "./Router";
+import { useRouter, type PageType, servicePageIds } from "./Router";
 
 export function Navigation() {
   const { language, setLanguage, t: _t } = useLanguage();
@@ -61,8 +61,8 @@ export function Navigation() {
     },
   ];
 
-  const handleServiceClick = (serviceId: string) => {
-    navigateTo(serviceId as any);
+  const handleServiceClick = (serviceId: PageType) => {
+    navigateTo(serviceId as PageType);
     setIsOpen(false);
     setServicesOpen(false);
   };
@@ -171,13 +171,9 @@ export function Navigation() {
             >
               <button
                 className={`flex items-center space-x-1 text-sm font-medium transition-colors duration-300 hover:text-bdigital-cyan py-2 ${
-                  [
-                    "web-design",
-                    "seo",
-                    "social-media",
-                    "branding",
-                    "strategy",
-                  ].includes(currentPage)
+                  servicePageIds.includes(
+                    currentPage as (typeof servicePageIds)[number]
+                  )
                     ? "text-bdigital-cyan"
                     : isScrolled
                       ? "text-bdigital-navy"
@@ -208,7 +204,7 @@ export function Navigation() {
                 {services.map((service) => (
                   <button
                     key={service.id}
-                    onClick={() => handleServiceClick(service.id)}
+                    onClick={() => handleServiceClick(service.id as PageType)}
                     className="w-full px-4 py-3 text-left hover:bg-gray-50 transition-colors duration-200 group focus:bg-gray-50 focus:outline-none"
                   >
                     <div className="font-medium text-bdigital-navy text-sm mb-1 group-hover:text-bdigital-cyan group-focus:text-bdigital-cyan transition-colors duration-200">
@@ -331,7 +327,7 @@ export function Navigation() {
                           {services.map((service) => (
                             <button
                               key={service.id}
-                              onClick={() => handleServiceClick(service.id)}
+                              onClick={() => handleServiceClick(service.id as PageType)}
                               className={`w-full text-left px-4 py-3 text-sm rounded-lg transition-all duration-200 ${
                                 currentPage === service.id
                                   ? "bg-bdigital-cyan text-bdigital-navy"

@@ -14,7 +14,7 @@ import {
   Award
 } from 'lucide-react';
 import { useLanguage } from './LanguageContext';
-import { useRouter } from './Router';
+import { useRouter, type PageType } from './Router';
 
 export function ServicesSection() {
   const { t } = useLanguage();
@@ -93,8 +93,8 @@ export function ServicesSection() {
     }
   ];
 
-  const handleServiceClick = (serviceId: string) => {
-    navigateTo(serviceId as any);
+  const handleServiceClick = (serviceId: PageType) => {
+    navigateTo(serviceId as PageType);
   };
 
   const handleViewAll = () => {
@@ -127,7 +127,7 @@ export function ServicesSection() {
               <Card 
                 key={service.id} 
                 className="group border-0 shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer transform hover:scale-105 hover:-translate-y-2 bg-white overflow-hidden"
-                onClick={() => handleServiceClick(service.id)}
+                onClick={() => handleServiceClick(service.id as PageType)}
               >
                 <CardHeader className="pb-4">
                   {/* Icon with gradient background */}
