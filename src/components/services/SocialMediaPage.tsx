@@ -73,20 +73,17 @@ export function SocialMediaPage() {
     }
   ];
 
-  const handlePackageSelect = (_packageName: string) => {
-    navigateTo('home');
-    setTimeout(() => {
-      const element = document.querySelector('#contact');
-      element?.scrollIntoView({ behavior: 'smooth' });
-    }, 100);
+  const handlePackageSelect = (packageName: string) => {
+    navigateTo('service-inquiry', {
+      service: 'social-media',
+      package: packageName
+    });
   };
 
   const handleConsultation = () => {
-    navigateTo('home');
-    setTimeout(() => {
-      const element = document.querySelector('#contact');
-      element?.scrollIntoView({ behavior: 'smooth' });
-    }, 100);
+    navigateTo('service-inquiry', {
+      service: 'social-media'
+    });
   };
 
   return (
