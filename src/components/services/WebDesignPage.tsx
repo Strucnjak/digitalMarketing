@@ -147,14 +147,14 @@ export function WebDesignPage() {
 
   const handlePackageSelect = (packageName: string) => {
     navigateTo('service-inquiry', {
-      service: 'Web Design & Development',
+      service: 'web-design',
       package: packageName
     });
   };
 
   const handleConsultation = () => {
     navigateTo('service-inquiry', {
-      service: 'Web Design & Development'
+      service: 'web-design'
     });
   };
 

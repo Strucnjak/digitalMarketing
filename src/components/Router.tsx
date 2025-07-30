@@ -1,5 +1,5 @@
-import { createContext, useContext, useState } from 'react';
-import type { ReactNode } from 'react';
+
+import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
 export type PageType = 
   | 'home' 
@@ -24,7 +24,28 @@ interface RouterProviderProps {
 }
 
 export function RouterProvider({ children }: RouterProviderProps) {
-  const [currentPage, setCurrentPage] = useState<PageType>('home');
+  const getPageFromPath = (pathname: string): PageType => {
+    const cleanPath = pathname.startsWith('/') ? pathname.slice(1) : pathname;
+    switch (cleanPath) {
+      case '':
+      case 'home':
+        return 'home';
+      case 'web-design':
+      case 'seo':
+      case 'social-media':
+      case 'branding':
+      case 'strategy':
+      case 'service-inquiry':
+      case 'free-consultation':
+        return cleanPath as PageType;
+      default:
+        return 'home';
+    }
+  };
+
+  const [currentPage, setCurrentPage] = useState<PageType>(() =>
+    getPageFromPath(window.location.pathname)
+  );
 
   const navigateTo = (page: PageType, params?: Record<string, string>) => {
     setCurrentPage(page);
@@ -43,6 +64,16 @@ export function RouterProvider({ children }: RouterProviderProps) {
     
     window.history.pushState({}, '', url.toString());
   };
+
+  useEffect(() => {
+    const handlePopState = () => {
+      setCurrentPage(getPageFromPath(window.location.pathname));
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+    };
+  }, []);
 
   const getQueryParams = () => {
     return new URLSearchParams(window.location.search);

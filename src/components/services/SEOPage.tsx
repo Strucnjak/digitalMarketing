@@ -150,14 +150,14 @@ export function SEOPage() {
 
   const handlePackageSelect = (packageName: string) => {
     navigateTo('service-inquiry', {
-      service: 'SEO & Google Business',
+      service: 'seo',
       package: packageName
     });
   };
 
   const handleConsultation = () => {
     navigateTo('service-inquiry', {
-      service: 'SEO & Google Business'
+      service: 'seo'
     });
   };
 
