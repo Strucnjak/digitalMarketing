@@ -67,7 +67,10 @@ export function FreeConsultationPage() {
     newsletter: false
   });
 
-  const updateFormData = (field: keyof ConsultationFormData, value: any) => {
+  const updateFormData = (
+    field: keyof ConsultationFormData,
+    value: ConsultationFormData[keyof ConsultationFormData]
+  ) => {
     setFormData(prev => ({
       ...prev,
       [field]: value
