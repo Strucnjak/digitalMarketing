@@ -16,6 +16,7 @@ import {
   Building
 } from 'lucide-react';
 import { useLanguage } from './LanguageContext';
+import { EMAIL, PHONE, ADDRESS } from '../config/contact';
 
 export function ContactSection() {
   const { t: _t } = useLanguage();
@@ -63,21 +64,21 @@ export function ContactSection() {
     {
       icon: Mail,
       title: 'Email',
-      content: 'info@bdigital.me',
-      link: 'mailto:info@bdigital.me',
+      content: EMAIL,
+      link: `mailto:${EMAIL}`,
       description: 'Pošaljite nam email za brz odgovor'
     },
     {
       icon: Phone,
       title: 'Telefon',
-      content: '+382 67 123 456',
-      link: 'tel:+38267123456',
+      content: PHONE,
+      link: `tel:${PHONE.replace(/\s+/g, '')}`,
       description: 'Pozovite nas radnim danima'
     },
     {
       icon: MapPin,
       title: 'Lokacija',
-      content: 'Podgorica, Crna Gora',
+      content: ADDRESS,
       link: 'https://maps.google.com',
       description: 'Možemo se sresti i lično'
     },
