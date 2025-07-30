@@ -143,25 +143,25 @@ export function Footer() {
             <div className="space-y-3">
               <div className="flex items-center gap-3 text-gray-300">
                 <MapPin className="h-4 w-4 text-bdigital-cyan" />
-                <span>Podgorica, Crna Gora</span>
+                <span>{t('footer.address')}</span>
               </div>
               <div className="flex items-center gap-3 text-gray-300">
                 <Phone className="h-4 w-4 text-bdigital-cyan" />
-                <span>+382 XX XXX XXX</span>
+                <span>{t('footer.phone')}</span>
               </div>
               <div className="flex items-center gap-3 text-gray-300">
                 <Mail className="h-4 w-4 text-bdigital-cyan" />
-                <span>info@bdigital.me</span>
+                <span>{t('footer.email')}</span>
               </div>
             </div>
 
             {/* Newsletter */}
             <div className="mt-6">
-              <h4 className="font-medium mb-3 text-bdigital-cyan">Newsletter</h4>
+              <h4 className="font-medium mb-3 text-bdigital-cyan">{t('footer.newsletter')}</h4>
               <div className="flex gap-2">
-                <input 
-                  type="email" 
-                  placeholder="Vaš email" 
+                <input
+                  type="email"
+                  placeholder={t('footer.newsletter.placeholder')}
                   className="flex-1 px-3 py-2 bg-bdigital-dark-navy border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-bdigital-cyan transition-colors duration-200"
                 />
                 <button className="bg-bdigital-cyan hover:bg-bdigital-cyan-light text-bdigital-navy px-4 py-2 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl">
@@ -181,13 +181,13 @@ export function Footer() {
           </p>
           <div className="flex gap-6 text-sm text-gray-400">
             <a href="#" className="hover:text-bdigital-cyan transition-colors duration-200">
-              Uslovi korišćenja
+              {t('footer.terms')}
             </a>
             <a href="#" className="hover:text-bdigital-cyan transition-colors duration-200">
-              Politika privatnosti
+              {t('footer.privacy')}
             </a>
             <a href="#" className="hover:text-bdigital-cyan transition-colors duration-200">
-              Kolačići
+              {t('footer.cookies')}
             </a>
           </div>
         </div>
