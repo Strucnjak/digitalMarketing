@@ -91,10 +91,10 @@ export function ContactSection() {
   ];
 
   const stats = [
-    { value: '24h', label: 'Vreme odgovora' },
-    { value: '100%', label: 'Zadovoljni klijenti' },
-    { value: '24/7', label: 'Email podrška' },
-    { value: '5+', label: 'Godina iskustva' }
+    { value: '24h', label: _t('contact.stats.response') },
+    { value: '100%', label: _t('contact.stats.clients') },
+    { value: '24/7', label: _t('contact.stats.support') },
+    { value: '5+', label: _t('contact.stats.years') }
   ];
 
   return (
@@ -103,13 +103,13 @@ export function ContactSection() {
         {/* Section Header */}
         <div className="text-center mb-12 lg:mb-16">
           <Badge className="bg-bdigital-cyan/10 text-bdigital-cyan border-bdigital-cyan/20 mb-4 px-4 py-2">
-            Kontakt
+            {_t('contact.badge')}
           </Badge>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-bdigital-navy mb-4 lg:mb-6">
-            Započnimo <span className="text-bdigital-cyan">razgovor</span>
+            {_t('contact.heading.part1')} <span className="text-bdigital-cyan">{_t('contact.heading.emphasis')}</span>
           </h2>
           <p className="text-lg lg:text-xl text-neutral-gray max-w-3xl mx-auto leading-relaxed">
-            Spremi ste da transformišete svoj biznis? Kontaktirajte nas danas za besplatnu konsultaciju i saznajte kako možemo pomoći.
+            {_t('contact.description')}
           </p>
         </div>
 
@@ -120,7 +120,7 @@ export function ContactSection() {
               <div className="flex items-center mb-6">
                 <MessageSquare className="h-6 w-6 text-bdigital-cyan mr-3" />
                 <h3 className="text-xl lg:text-2xl font-bold text-bdigital-navy">
-                  Pošaljite nam poruku
+                  {_t('contact.form.title')}
                 </h3>
               </div>
               
@@ -130,10 +130,10 @@ export function ContactSection() {
                     <CheckCircle className="h-8 w-8 text-green-600" />
                   </div>
                   <h4 className="text-lg font-semibold text-bdigital-navy mb-2">
-                    Poruka je uspešno poslata!
+                    {_t('contact.success.title')}
                   </h4>
                   <p className="text-neutral-gray">
-                    Kontaktiraćemo vas u najkraćem mogućem roku.
+                    {_t('contact.success.desc')}
                   </p>
                 </div>
               ) : (
@@ -142,7 +142,7 @@ export function ContactSection() {
                     <div>
                       <label className="flex items-center text-sm font-medium text-bdigital-navy mb-2">
                         <User className="h-4 w-4 mr-2" />
-                        Ime i prezime *
+                        {_t('contact.name')} *
                       </label>
                       <Input
                         type="text"
@@ -156,7 +156,7 @@ export function ContactSection() {
                     <div>
                       <label className="flex items-center text-sm font-medium text-bdigital-navy mb-2">
                         <Mail className="h-4 w-4 mr-2" />
-                        Email *
+                        {_t('contact.email')} *
                       </label>
                       <Input
                         type="email"
@@ -173,7 +173,7 @@ export function ContactSection() {
                     <div>
                       <label className="flex items-center text-sm font-medium text-bdigital-navy mb-2">
                         <Building className="h-4 w-4 mr-2" />
-                        Kompanija
+                        {_t('contact.company')}
                       </label>
                       <Input
                         type="text"
@@ -186,7 +186,7 @@ export function ContactSection() {
                     <div>
                       <label className="flex items-center text-sm font-medium text-bdigital-navy mb-2">
                         <Phone className="h-4 w-4 mr-2" />
-                        Telefon
+                        {_t('contact.phone')}
                       </label>
                       <Input
                         type="tel"
@@ -201,7 +201,7 @@ export function ContactSection() {
                   <div>
                     <label className="flex items-center text-sm font-medium text-bdigital-navy mb-2">
                       <MessageSquare className="h-4 w-4 mr-2" />
-                      Poruka *
+                        {_t('contact.message')} *
                     </label>
                     <Textarea
                       value={formData.message}
@@ -220,12 +220,12 @@ export function ContactSection() {
                     {isSubmitting ? (
                       <>
                         <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-bdigital-navy mr-2"></div>
-                        Šalje se...
+                        {_t('contact.sending')}
                       </>
                     ) : (
                       <>
                         <Send className="h-5 w-5 mr-2" />
-                        Pošaljite poruku
+                        {_t('contact.send')}
                       </>
                     )}
                   </Button>
@@ -272,7 +272,8 @@ export function ContactSection() {
             <Card className="border-0 shadow-xl bg-gradient-to-r from-bdigital-navy to-bdigital-dark-navy text-white">
               <CardContent className="p-6 lg:p-8">
                 <h4 className="text-xl font-bold mb-6 text-center">
-                  Zašto klijenti biraju <span className="text-bdigital-cyan">nas</span>
+                  {_t('contact.stats.title.pre')}{' '}
+                  <span className="text-bdigital-cyan">{_t('contact.stats.title.emphasis')}</span>
                 </h4>
                 <div className="grid grid-cols-2 gap-4 lg:gap-6">
                   {stats.map((stat, index) => (
@@ -291,23 +292,23 @@ export function ContactSection() {
             <Card className="border-0 shadow-xl">
               <CardContent className="p-6 lg:p-8">
                 <h4 className="text-xl font-bold text-bdigital-navy mb-4">
-                  Zakazivanje sastanka
+                  {_t('contact.meeting.title')}
                 </h4>
                 <p className="text-neutral-gray mb-4">
-                  Preferirate lični razgovor? Možemo se sresti u našoj kancelariji u Podgorici ili bilo gde što vama odgovara.
+                  {_t('contact.meeting.desc')}
                 </p>
                 <div className="space-y-3">
                   <div className="flex items-center text-sm">
                     <Clock className="h-4 w-4 text-bdigital-cyan mr-2" />
-                    <span className="text-neutral-gray">Fleksibilno vreme sastanka</span>
+                    <span className="text-neutral-gray">{_t('contact.meeting.flexible')}</span>
                   </div>
                   <div className="flex items-center text-sm">
                     <MapPin className="h-4 w-4 text-bdigital-cyan mr-2" />
-                    <span className="text-neutral-gray">Lokacija po vašoj želji</span>
+                    <span className="text-neutral-gray">{_t('contact.meeting.location')}</span>
                   </div>
                   <div className="flex items-center text-sm">
                     <CheckCircle className="h-4 w-4 text-bdigital-cyan mr-2" />
-                    <span className="text-neutral-gray">Besplatna konsultacija</span>
+                    <span className="text-neutral-gray">{_t('contact.meeting.free')}</span>
                   </div>
                 </div>
               </CardContent>

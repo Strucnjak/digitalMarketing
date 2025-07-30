@@ -28,10 +28,10 @@ export function AboutSection() {
   ];
 
   const stats = [
-    { icon: Users, number: '50+', label: 'Zadovoljnih klijenata' },
-    { icon: Award, number: '100+', label: 'Završenih projekata' },
-    { icon: Clock, number: '3+', label: 'Godine iskustva' },
-    { icon: Target, number: '98%', label: 'Stopa uspešnosti' }
+    { icon: Users, number: '50+', label: t('about.stats.clients') },
+    { icon: Award, number: '100+', label: t('about.stats.projects') },
+    { icon: Clock, number: '3+', label: t('about.stats.years') },
+    { icon: Target, number: '98%', label: t('about.stats.success_rate') }
   ];
 
   const team = [
@@ -100,9 +100,11 @@ export function AboutSection() {
         {/* Stats Section */}
         <div className="bg-gradient-to-r from-bdigital-navy to-bdigital-dark-navy rounded-2xl p-8 md:p-12 mb-20 text-white">
           <div className="text-center mb-12">
-            <h3 className="text-2xl md:text-3xl font-bold mb-4">Brojevi govore sami za sebe</h3>
+            <h3 className="text-2xl md:text-3xl font-bold mb-4">
+              {t('about.stats.title')}
+            </h3>
             <p className="text-gray-300 max-w-2xl mx-auto">
-              Naši rezultati su dokaz posvećenosti kvalitetu i uspešnosti naših klijenata.
+              {t('about.stats.subtitle')}
             </p>
           </div>
           
@@ -124,9 +126,11 @@ export function AboutSection() {
 
         {/* Team Section */}
         <div className="text-center mb-16">
-          <h3 className="text-2xl md:text-3xl font-bold text-bdigital-navy mb-4">Naš tim</h3>
+          <h3 className="text-2xl md:text-3xl font-bold text-bdigital-navy mb-4">
+            {t('about.team.title')}
+          </h3>
           <p className="text-lg text-neutral-gray max-w-2xl mx-auto">
-            Upoznajte kreativne umove iza BDigital-a koji stvaraju digitalna rešenja.
+            {t('about.team.subtitle')}
           </p>
         </div>
 
@@ -152,17 +156,17 @@ export function AboutSection() {
         {/* CTA Section */}
         <div className="text-center bg-gray-50 rounded-2xl p-8 md:p-12">
           <h3 className="text-2xl md:text-3xl font-bold text-bdigital-navy mb-4">
-            Spremni da radimo zajedno?
+            {t('about.cta.title')}
           </h3>
           <p className="text-neutral-gray mb-8 max-w-2xl mx-auto">
-            Pridružite se kompanijama koje su odabrale BDigital kao svog partnera za digitalni uspeh.
+            {t('about.cta.desc')}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button className="bg-bdigital-cyan text-bdigital-navy px-8 py-3 rounded-lg font-semibold hover:bg-bdigital-cyan-light transition-colors">
-              Kontaktirajte nas
+              {t('about.cta.primary')}
             </button>
             <button className="border border-bdigital-cyan text-bdigital-cyan px-8 py-3 rounded-lg font-semibold hover:bg-bdigital-cyan hover:text-bdigital-navy transition-colors">
-              Pogledajte naš rad
+              {t('about.cta.secondary')}
             </button>
           </div>
         </div>
