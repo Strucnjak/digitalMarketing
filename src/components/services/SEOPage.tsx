@@ -80,7 +80,7 @@ export function SEOPage() {
   const packages = [
     {
       name: 'Starter SEO',
-      price: '€500/mes',
+      price: '500 €/mes',
       description: 'Za manje kompanije',
       features: [
         'Keyword research (20 KW)',
@@ -93,7 +93,7 @@ export function SEOPage() {
     },
     {
       name: 'Professional SEO',
-      price: '€800/mes',
+      price: '800 €/mes',
       description: 'Najpopularniji paket',
       features: [
         'Keyword research (50 KW)',
@@ -107,7 +107,7 @@ export function SEOPage() {
     },
     {
       name: 'Enterprise SEO',
-      price: '€1,500/mes',
+      price: '1.500 €/mes',
       description: 'Za velike kompanije',
       features: [
         'Unlimited keyword research',

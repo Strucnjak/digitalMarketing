@@ -83,7 +83,7 @@ export function WebDesignPage() {
   const packages = [
     {
       name: 'Starter',
-      price: '€1,200',
+      price: '1.200 €',
       description: 'Idealno za manje kompanije',
       features: [
         'Do 5 stranica',
@@ -96,7 +96,7 @@ export function WebDesignPage() {
     },
     {
       name: 'Professional', 
-      price: '€2,500',
+      price: '2.500 €',
       description: 'Najpopularniji paket',
       features: [
         'Do 15 stranica',
@@ -110,7 +110,7 @@ export function WebDesignPage() {
     },
     {
       name: 'Enterprise',
-      price: '€5,000+',
+      price: '5.000 €+',
       description: 'Za velike kompanije',
       features: [
         'Neograničen broj stranica',

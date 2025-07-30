@@ -41,7 +41,7 @@ export function BrandingPage() {
   const packages = [
     {
       name: 'Starter Branding',
-      price: '€500',
+      price: '500 €',
       features: [
         'Logo dizajn',
         'Osnovni brand vodič',
@@ -52,7 +52,7 @@ export function BrandingPage() {
     },
     {
       name: 'Professional Branding',
-      price: '€900',
+      price: '900 €',
       features: [
         'Kompletan vizuelni identitet',
         'Brand knjiga',
@@ -64,7 +64,7 @@ export function BrandingPage() {
     },
     {
       name: 'Enterprise Branding',
-      price: '€1,500+',
+      price: '1.500 €+',
       features: [
         'Strategija brenda',
         'Packaging dizajn',
