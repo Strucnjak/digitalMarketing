@@ -1,4 +1,3 @@
-import React from "react";
 import { LanguageProvider } from "./components/LanguageContext";
 import { RouterProvider, useRouter } from "./components/Router";
 import { Navigation } from "./components/Navigation";

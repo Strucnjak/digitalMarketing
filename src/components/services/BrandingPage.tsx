@@ -1,4 +1,3 @@
-import React from 'react';
 import { Button } from '../ui/button';
 import { Card, CardContent } from '../ui/card';
 import { Badge } from '../ui/badge';
@@ -7,8 +6,7 @@ import {
   FileImage, 
   Type, 
   Package,
-  ArrowRight,
-  CheckCircle
+  ArrowRight
 } from 'lucide-react';
 import { useRouter } from '../Router';
 import { ImageWithFallback } from '../figma/ImageWithFallback';

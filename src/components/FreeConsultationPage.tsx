@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Button } from './ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Input } from './ui/input';
@@ -8,8 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 import { Checkbox } from './ui/checkbox';
 import { RadioGroup, RadioGroupItem } from './ui/radio-group';
 import { 
-  ArrowLeft, 
-  Send, 
+  ArrowLeft,
   CheckCircle, 
   Building, 
   User, 
@@ -47,7 +46,7 @@ interface ConsultationFormData {
 
 export function FreeConsultationPage() {
   const { navigateTo } = useRouter();
-  const { t } = useLanguage();
+  const { t: _t } = useLanguage();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});

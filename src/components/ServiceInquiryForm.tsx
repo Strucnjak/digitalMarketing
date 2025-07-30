@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from './ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Input } from './ui/input';
@@ -26,8 +26,7 @@ import {
   ChevronRight,
   Check,
   Package,
-  Star,
-  Clock
+  Star
 } from 'lucide-react';
 import { useRouter } from './Router';
 import { useLanguage } from './LanguageContext';
@@ -97,7 +96,7 @@ const serviceInfo: Record<string, { title: string; description: string; icon: st
 
 export function ServiceInquiryForm() {
   const { navigateTo } = useRouter();
-  const { t } = useLanguage();
+  const { t: _t } = useLanguage();
   const [currentStep, setCurrentStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -375,7 +374,7 @@ export function ServiceInquiryForm() {
           
           {/* Step Indicators */}
           <div className="flex items-center justify-between">
-            {steps.map((step, index) => {
+            {steps.map((step, _index) => {
               const IconComponent = step.icon;
               const isActive = currentStep === step.id;
               const isCompleted = currentStep > step.id;

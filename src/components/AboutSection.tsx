@@ -1,4 +1,3 @@
-import React from 'react';
 import { Card, CardContent } from './ui/card';
 import { Target, Eye, Heart, Users, Award, Clock } from 'lucide-react';
 import { useLanguage } from './LanguageContext';

@@ -1,4 +1,3 @@
-import React from 'react';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
 import { ArrowRight, CheckCircle, Star, Users, Award } from 'lucide-react';
@@ -7,7 +6,7 @@ import { useRouter } from './Router';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 
 export function HeroSection() {
-  const { t } = useLanguage();
+  const { t: _t } = useLanguage();
   const { navigateTo } = useRouter();
 
   const stats = [
