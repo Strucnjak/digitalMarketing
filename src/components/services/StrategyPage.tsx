@@ -11,9 +11,11 @@ import {
 } from 'lucide-react';
 import { useRouter } from '../Router';
 import { ImageWithFallback } from '../figma/ImageWithFallback';
+import { useLanguage } from '../LanguageContext';
 
 export function StrategyPage() {
   const { navigateTo } = useRouter();
+  const { t } = useLanguage();
 
   const services = [
     {
@@ -102,7 +104,7 @@ export function StrategyPage() {
                 <span className="text-bdigital-cyan">Strategije</span> za digitalni uspeh
               </h1>
               <p className="text-gray-300 text-lg mb-8 leading-relaxed">
-                Kreirajmo zajedno digitalnu strategiju koja će dovesti vaš biznis do novih visina.
+                {t('strategy.hero.desc')}
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 mb-8">
@@ -120,7 +122,7 @@ export function StrategyPage() {
                   className="border-bdigital-cyan text-bdigital-cyan hover:bg-bdigital-cyan hover:text-bdigital-navy px-8 py-3 font-semibold"
                   onClick={() => navigateTo('home')}
                 >
-                  Nazad na početnu
+                  {t('general.back_home')}
                 </Button>
               </div>
             </div>

@@ -96,7 +96,7 @@ const serviceInfo: Record<string, { title: string; description: string; icon: st
 
 export function ServiceInquiryForm() {
   const { navigateTo } = useRouter();
-  const { t: _t } = useLanguage();
+  const { t } = useLanguage();
   const [currentStep, setCurrentStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -259,7 +259,7 @@ export function ServiceInquiryForm() {
                   onClick={() => navigateTo('home')}
                   className="bg-bdigital-cyan text-bdigital-navy hover:bg-bdigital-cyan-light font-semibold px-8 py-3"
                 >
-                  Nazad na početnu
+                  {t('general.back_home')}
                 </Button>
                 <Button 
                   variant="outline"
@@ -297,7 +297,7 @@ export function ServiceInquiryForm() {
             className="text-bdigital-navy hover:text-bdigital-cyan mb-6 -ml-2"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
-            Nazad na početnu
+            {t('general.back_home')}
           </Button>
           
           <div className="text-center mb-8">
@@ -786,7 +786,7 @@ export function ServiceInquiryForm() {
                 className="border-bdigital-cyan text-bdigital-cyan hover:bg-bdigital-cyan hover:text-bdigital-navy disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <ArrowLeft className="h-4 w-4 mr-2" />
-                Nazad
+                {t('general.back')}
               </Button>
               
               {currentStep < 4 ? (
