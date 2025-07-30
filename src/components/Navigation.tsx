@@ -34,11 +34,31 @@ export function Navigation() {
   }, []);
 
   const services = [
-    { id: "web-design", title: "Web Design & Development", description: "Moderne web stranice koje prodaju" },
-    { id: "seo", title: "SEO & Google Business", description: "Budite #1 na Google pretragama" },
-    { id: "social-media", title: "Social Media Management", description: "Izgradite zajednicu oko brenda" },
-    { id: "branding", title: "Branding & Graphic Design", description: "Nezaboravan brand identitet" },
-    { id: "strategy", title: "Strategy & Consulting", description: "Strategije za digitalni uspeh" },
+    {
+      id: "web-design",
+      title: "Web Design & Development",
+      description: "Moderne web stranice koje prodaju",
+    },
+    {
+      id: "seo",
+      title: "SEO & Google Business",
+      description: "Budite #1 na Google pretragama",
+    },
+    {
+      id: "social-media",
+      title: "Social Media Management",
+      description: "Izgradite zajednicu oko brenda",
+    },
+    {
+      id: "branding",
+      title: "Branding & Graphic Design",
+      description: "Nezaboravan brand identitet",
+    },
+    {
+      id: "strategy",
+      title: "Strategy & Consulting",
+      description: "Strategije za digitalni uspeh",
+    },
   ];
 
   const handleServiceClick = (serviceId: string) => {
@@ -61,7 +81,7 @@ export function Navigation() {
     }, 100);
   };
 
-  const handleLanguageChange = (newLanguage: "sr" | "en") => {
+  const handleLanguageChange = (newLanguage: "sr" | "en" | "me") => {
     setLanguage(newLanguage);
     setIsOpen(false);
   };
@@ -100,7 +120,9 @@ export function Navigation() {
   return (
     <nav
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        isScrolled ? "bg-white/95 backdrop-blur-sm shadow-lg border-b border-gray-200/20" : "bg-transparent"
+        isScrolled
+          ? "bg-white/95 backdrop-blur-sm shadow-lg border-b border-gray-200/20"
+          : "bg-transparent"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -113,9 +135,13 @@ export function Navigation() {
               aria-label="BDigital - Početna stranica"
             >
               <div className="w-8 h-8 lg:w-10 lg:h-10 bg-bdigital-cyan rounded-lg flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow duration-300">
-                <span className="text-bdigital-navy text-sm lg:text-base font-bold">B</span>
+                <span className="text-bdigital-navy text-sm lg:text-base font-bold">
+                  B
+                </span>
               </div>
-              <span className={`text-lg lg:text-xl font-bold transition-colors duration-300 ${isScrolled ? "text-bdigital-navy" : "text-white"}`}>
+              <span
+                className={`text-lg lg:text-xl font-bold transition-colors duration-300 ${isScrolled ? "text-bdigital-navy" : "text-white"}`}
+              >
                 BDigital
               </span>
             </button>
@@ -126,33 +152,52 @@ export function Navigation() {
             <button
               onClick={handleHomeClick}
               className={`text-sm font-medium transition-colors duration-300 hover:text-bdigital-cyan ${
-                currentPage === "home" ? "text-bdigital-cyan" : isScrolled ? "text-bdigital-navy" : "text-white"
+                currentPage === "home"
+                  ? "text-bdigital-cyan"
+                  : isScrolled
+                    ? "text-bdigital-navy"
+                    : "text-white"
               }`}
             >
               Početna
             </button>
 
             {/* Services Dropdown */}
-            <div ref={dropdownRef} className="relative" onMouseEnter={handleServicesMouseEnter} onMouseLeave={handleServicesMouseLeave}>
+            <div
+              ref={dropdownRef}
+              className="relative"
+              onMouseEnter={handleServicesMouseEnter}
+              onMouseLeave={handleServicesMouseLeave}
+            >
               <button
                 className={`flex items-center space-x-1 text-sm font-medium transition-colors duration-300 hover:text-bdigital-cyan py-2 ${
-                  ["web-design", "seo", "social-media", "branding", "strategy"].includes(currentPage)
+                  [
+                    "web-design",
+                    "seo",
+                    "social-media",
+                    "branding",
+                    "strategy",
+                  ].includes(currentPage)
                     ? "text-bdigital-cyan"
                     : isScrolled
-                    ? "text-bdigital-navy"
-                    : "text-white"
+                      ? "text-bdigital-navy"
+                      : "text-white"
                 }`}
                 aria-expanded={servicesOpen}
                 aria-haspopup="true"
               >
                 <span>Usluge</span>
-                <ChevronDown className={`h-4 w-4 transition-transform duration-300 ${servicesOpen ? "rotate-180" : ""}`} />
+                <ChevronDown
+                  className={`h-4 w-4 transition-transform duration-300 ${servicesOpen ? "rotate-180" : ""}`}
+                />
               </button>
 
               {/* Dropdown Menu */}
               <div
                 className={`absolute top-full left-0 mt-1 w-80 bg-white rounded-xl shadow-xl border border-gray-200 py-4 transform transition-all duration-300 ${
-                  servicesOpen ? "opacity-100 translate-y-0 pointer-events-auto visible" : "opacity-0 translate-y-2 pointer-events-none invisible"
+                  servicesOpen
+                    ? "opacity-100 translate-y-0 pointer-events-auto visible"
+                    : "opacity-0 translate-y-2 pointer-events-none invisible"
                 }`}
                 onMouseEnter={handleDropdownMouseEnter}
                 onMouseLeave={handleDropdownMouseLeave}
@@ -169,7 +214,9 @@ export function Navigation() {
                     <div className="font-medium text-bdigital-navy text-sm mb-1 group-hover:text-bdigital-cyan group-focus:text-bdigital-cyan transition-colors duration-200">
                       {service.title}
                     </div>
-                    <div className="text-xs text-neutral-gray">{service.description}</div>
+                    <div className="text-xs text-neutral-gray">
+                      {service.description}
+                    </div>
                   </button>
                 ))}
               </div>
@@ -197,6 +244,16 @@ export function Navigation() {
                 SR
               </button>
               <button
+                onClick={() => handleLanguageChange("me")}
+                className={`px-2 py-1 text-xs font-medium rounded transition-all duration-300 ${
+                  language === "me"
+                    ? "bg-bdigital-cyan text-bdigital-navy"
+                    : `hover:bg-bdigital-cyan/20 ${isScrolled ? "text-bdigital-navy" : "text-white"}`
+                }`}
+              >
+                ME
+              </button>
+              <button
                 onClick={() => handleLanguageChange("en")}
                 className={`px-2 py-1 text-xs font-medium rounded transition-all duration-300 ${
                   language === "en"
@@ -221,7 +278,10 @@ export function Navigation() {
           <div className="lg:hidden">
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
               <SheetTrigger asChild>
-                <Button className={`p-2 ${isScrolled ? "text-bdigital-navy" : "text-white"} hover:bg-bdigital-cyan/20`} aria-label="Otvori meni">
+                <Button
+                  className={`p-2 ${isScrolled ? "text-bdigital-navy" : "text-white"} hover:bg-bdigital-cyan/20`}
+                  aria-label="Otvori meni"
+                >
                   <Menu className="h-6 w-6" />
                 </Button>
               </SheetTrigger>
@@ -231,9 +291,13 @@ export function Navigation() {
                   <div className="flex justify-between items-center py-4 border-b border-gray-200">
                     <div className="flex items-center space-x-2">
                       <div className="w-8 h-8 bg-bdigital-cyan rounded-lg flex items-center justify-center">
-                        <span className="text-bdigital-navy text-sm font-bold">B</span>
+                        <span className="text-bdigital-navy text-sm font-bold">
+                          B
+                        </span>
                       </div>
-                      <span className="text-lg font-bold text-bdigital-navy">BDigital</span>
+                      <span className="text-lg font-bold text-bdigital-navy">
+                        BDigital
+                      </span>
                     </div>
                     <Button
                       variant="ghost"
@@ -251,7 +315,9 @@ export function Navigation() {
                     <button
                       onClick={handleHomeClick}
                       className={`w-full text-left px-4 py-3 text-base font-medium rounded-lg transition-all duration-200 ${
-                        currentPage === "home" ? "bg-bdigital-cyan text-bdigital-navy" : "text-bdigital-navy hover:bg-gray-50"
+                        currentPage === "home"
+                          ? "bg-bdigital-cyan text-bdigital-navy"
+                          : "text-bdigital-navy hover:bg-gray-50"
                       }`}
                     >
                       Početna
@@ -265,7 +331,9 @@ export function Navigation() {
                         aria-expanded={servicesOpen}
                       >
                         <span>Usluge</span>
-                        <ChevronDown className={`h-4 w-4 transition-transform duration-300 ${servicesOpen ? "rotate-180" : ""}`} />
+                        <ChevronDown
+                          className={`h-4 w-4 transition-transform duration-300 ${servicesOpen ? "rotate-180" : ""}`}
+                        />
                       </button>
 
                       {servicesOpen && (
@@ -280,8 +348,12 @@ export function Navigation() {
                                   : "text-neutral-gray hover:bg-gray-50 hover:text-bdigital-navy"
                               }`}
                             >
-                              <div className="font-medium mb-1">{service.title}</div>
-                              <div className="text-xs opacity-70">{service.description}</div>
+                              <div className="font-medium mb-1">
+                                {service.title}
+                              </div>
+                              <div className="text-xs opacity-70">
+                                {service.description}
+                              </div>
                             </button>
                           ))}
                         </div>
@@ -304,15 +376,29 @@ export function Navigation() {
                       <button
                         onClick={() => handleLanguageChange("sr")}
                         className={`px-3 py-1 text-sm font-medium rounded-lg transition-all duration-200 ${
-                          language === "sr" ? "bg-bdigital-cyan text-bdigital-navy" : "text-bdigital-navy hover:bg-gray-100"
+                          language === "sr"
+                            ? "bg-bdigital-cyan text-bdigital-navy"
+                            : "text-bdigital-navy hover:bg-gray-100"
                         }`}
                       >
                         Srpski
                       </button>
                       <button
+                        onClick={() => handleLanguageChange("me")}
+                        className={`px-3 py-1 text-sm font-medium rounded-lg transition-all duration-200 ${
+                          language === "me"
+                            ? "bg-bdigital-cyan text-bdigital-navy"
+                            : "text-bdigital-navy hover:bg-gray-100"
+                        }`}
+                      >
+                        Crnogorski
+                      </button>
+                      <button
                         onClick={() => handleLanguageChange("en")}
                         className={`px-3 py-1 text-sm font-medium rounded-lg transition-all duration-200 ${
-                          language === "en" ? "bg-bdigital-cyan text-bdigital-navy" : "text-bdigital-navy hover:bg-gray-100"
+                          language === "en"
+                            ? "bg-bdigital-cyan text-bdigital-navy"
+                            : "text-bdigital-navy hover:bg-gray-100"
                         }`}
                       >
                         English
