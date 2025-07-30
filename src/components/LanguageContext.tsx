@@ -81,6 +81,9 @@ const translations = {
     'footer.company': 'Kompanija',
     'footer.contact': 'Kontakt',
     'footer.rights': 'Sva prava zadržana.',
+    // General
+    'general.back_home': 'Nazad na početnu',
+    'general.back': 'Nazad',
   },
   en: {
     // Navigation
@@ -151,6 +154,9 @@ const translations = {
     'footer.company': 'Company',
     'footer.contact': 'Contact',
     'footer.rights': 'All rights reserved.',
+    // General
+    'general.back_home': 'Back to home',
+    'general.back': 'Back',
   },
 } as const;
 
