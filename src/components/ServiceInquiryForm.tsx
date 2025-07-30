@@ -165,22 +165,22 @@ export function ServiceInquiryForm() {
     
     switch (step) {
       case 1:
-        if (!formData.fullName.trim()) newErrors.fullName = 'Ime je obavezno';
-        if (!formData.email.trim()) newErrors.email = 'Email je obavezan';
-        else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = 'Email nije valjan';
-        if (!formData.company.trim()) newErrors.company = 'Kompanija je obavezna';
+        if (!formData.fullName.trim()) newErrors.fullName = t('form.required_name');
+        if (!formData.email.trim()) newErrors.email = t('form.required_email');
+        else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = t('form.invalid_email');
+        if (!formData.company.trim()) newErrors.company = t('form.required_company');
         break;
       case 2:
-        if (formData.projectTypes.length === 0) newErrors.projectTypes = 'Odaberite najmanje jedan tip projekta';
-        if (!formData.currentSituation.trim()) newErrors.currentSituation = 'Ovo polje je obavezno';
-        if (!formData.projectGoals.trim()) newErrors.projectGoals = 'Ovo polje je obavezno';
+        if (formData.projectTypes.length === 0) newErrors.projectTypes = t('form.required_project_types');
+        if (!formData.currentSituation.trim()) newErrors.currentSituation = t('form.required_field');
+        if (!formData.projectGoals.trim()) newErrors.projectGoals = t('form.required_field');
         break;
       case 3:
-        if (!formData.timeline) newErrors.timeline = 'Odaberite vremenski okvir';
-        if (!formData.budget) newErrors.budget = 'Odaberite budžet';
+        if (!formData.timeline) newErrors.timeline = t('form.required_timeline');
+        if (!formData.budget) newErrors.budget = t('form.required_budget');
         break;
       case 4:
-        if (!formData.preferredContact) newErrors.preferredContact = 'Odaberite način kontakta';
+        if (!formData.preferredContact) newErrors.preferredContact = t('form.required_contact');
         break;
     }
     
@@ -276,7 +276,7 @@ export function ServiceInquiryForm() {
                   }}
                   className="border-bdigital-cyan text-bdigital-cyan hover:bg-bdigital-cyan hover:text-bdigital-navy font-semibold px-8 py-3"
                 >
-                  Nova ponuda
+                  {t('form.new_quote')}
                 </Button>
               </div>
             </CardContent>
@@ -429,7 +429,7 @@ export function ServiceInquiryForm() {
                     <Input
                       value={formData.fullName}
                       onChange={(e) => updateFormData('fullName', e.target.value)}
-                      placeholder="Vaše puno ime"
+                      placeholder={t('form.placeholder_full_name')}
                       className={`border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan ${
                         errors.fullName ? 'border-red-500' : ''
                       }`}
@@ -450,7 +450,7 @@ export function ServiceInquiryForm() {
                       type="email"
                       value={formData.email}
                       onChange={(e) => updateFormData('email', e.target.value)}
-                      placeholder="vasa@email.com"
+                      placeholder={t('form.placeholder_email')}
                       className={`border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan ${
                         errors.email ? 'border-red-500' : ''
                       }`}
@@ -473,7 +473,7 @@ export function ServiceInquiryForm() {
                     <Input
                       value={formData.phone}
                       onChange={(e) => updateFormData('phone', e.target.value)}
-                      placeholder="+382 67 123 456"
+                      placeholder={t('form.placeholder_phone')}
                       className="border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan"
                     />
                   </div>
@@ -485,7 +485,7 @@ export function ServiceInquiryForm() {
                     <Input
                       value={formData.company}
                       onChange={(e) => updateFormData('company', e.target.value)}
-                      placeholder="Naziv vaše kompanije"
+                      placeholder={t('form.placeholder_company')}
                       className={`border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan ${
                         errors.company ? 'border-red-500' : ''
                       }`}
@@ -507,7 +507,7 @@ export function ServiceInquiryForm() {
                   <Input
                     value={formData.website}
                     onChange={(e) => updateFormData('website', e.target.value)}
-                    placeholder="https://www.vasasajt.com"
+                    placeholder={t('form.placeholder_website')}
                     className="border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan"
                   />
                 </div>
@@ -560,7 +560,7 @@ export function ServiceInquiryForm() {
                   <Textarea
                     value={formData.currentSituation}
                     onChange={(e) => updateFormData('currentSituation', e.target.value)}
-                    placeholder="Opišite šta trenutno imate (ili nemate) i zašto tražite naše usluge..."
+                    placeholder={t('form.placeholder_current_situation')}
                     className={`border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan min-h-[100px] resize-none ${
                       errors.currentSituation ? 'border-red-500' : ''
                     }`}
@@ -580,7 +580,7 @@ export function ServiceInquiryForm() {
                   <Textarea
                     value={formData.projectGoals}
                     onChange={(e) => updateFormData('projectGoals', e.target.value)}
-                    placeholder="Šta želite da postignete ovim projektom? Povećanje prodaje, više klijenata, bolja online pozicija..."
+                    placeholder={t('form.placeholder_project_goals')}
                     className={`border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan min-h-[100px] resize-none ${
                       errors.projectGoals ? 'border-red-500' : ''
                     }`}
@@ -600,7 +600,7 @@ export function ServiceInquiryForm() {
                   <Input
                     value={formData.targetAudience}
                     onChange={(e) => updateFormData('targetAudience', e.target.value)}
-                    placeholder="Ko su vaši idealni klijenti? (uzrast, lokacija, interesi...)"
+                    placeholder={t('form.placeholder_target_audience')}
                     className="border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan"
                   />
                 </div>
@@ -619,7 +619,7 @@ export function ServiceInquiryForm() {
                     <SelectTrigger className={`border-gray-300 focus:border-bdigital-cyan ${
                       errors.timeline ? 'border-red-500' : ''
                     }`}>
-                      <SelectValue placeholder="Kada bi voleli da se projekat završi?" />
+                      <SelectValue placeholder={t('form.placeholder_timeline')} />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="asap">Što pre moguće</SelectItem>
@@ -646,7 +646,7 @@ export function ServiceInquiryForm() {
                     <SelectTrigger className={`border-gray-300 focus:border-bdigital-cyan ${
                       errors.budget ? 'border-red-500' : ''
                     }`}>
-                      <SelectValue placeholder="Koliki je vaš budžet za ovaj projekat?" />
+                      <SelectValue placeholder={t('form.placeholder_budget')} />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="under-1000">Manje od 1.000 €</SelectItem>
@@ -738,7 +738,7 @@ export function ServiceInquiryForm() {
                   </Label>
                   <Select value={formData.howDidYouHear} onValueChange={(value) => updateFormData('howDidYouHear', value)}>
                     <SelectTrigger className="border-gray-300 focus:border-bdigital-cyan">
-                      <SelectValue placeholder="Odaberite opciju" />
+                      <SelectValue placeholder={t('form.placeholder_how_hear')} />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="google">Google pretraga</SelectItem>
@@ -759,7 +759,7 @@ export function ServiceInquiryForm() {
                   <Textarea
                     value={formData.additionalInfo}
                     onChange={(e) => updateFormData('additionalInfo', e.target.value)}
-                    placeholder="Ima li još nešto što bi trebalo da znamo o vašem projektu?"
+                    placeholder={t('form.placeholder_additional_info')}
                     className="border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan min-h-[100px] resize-none"
                   />
                 </div>
@@ -794,7 +794,7 @@ export function ServiceInquiryForm() {
                   onClick={nextStep}
                   className="bg-bdigital-cyan text-bdigital-navy hover:bg-bdigital-cyan-light font-semibold px-8 py-3"
                 >
-                  Sledeći korak
+                  {t('form.next_step')}
                   <ChevronRight className="h-4 w-4 ml-2" />
                 </Button>
               ) : (
@@ -806,12 +806,12 @@ export function ServiceInquiryForm() {
                   {isSubmitting ? (
                     <>
                       <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-bdigital-navy mr-2"></div>
-                      Šalje se...
+                      {t('form.submitting')}
                     </>
                   ) : (
                     <>
                       <Send className="h-5 w-5 mr-2" />
-                      Pošalji upit za ponudu
+                      {t('form.submit_inquiry')}
                     </>
                   )}
                 </Button>
