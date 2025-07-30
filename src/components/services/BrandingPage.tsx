@@ -1,12 +1,13 @@
 import { Button } from '../ui/button';
 import { Card, CardContent } from '../ui/card';
 import { Badge } from '../ui/badge';
-import { 
-  Palette, 
-  FileImage, 
-  Type, 
+import {
+  Palette,
+  FileImage,
+  Type,
   Package,
-  ArrowRight
+  ArrowRight,
+  CheckCircle
 } from 'lucide-react';
 import { useRouter } from '../Router';
 import { ImageWithFallback } from '../figma/ImageWithFallback';
@@ -37,12 +38,54 @@ export function BrandingPage() {
     }
   ];
 
+  const packages = [
+    {
+      name: 'Starter Branding',
+      price: '€500',
+      features: [
+        'Logo dizajn',
+        'Osnovni brand vodič',
+        'Do 2 revizije',
+        'Vizit karta dizajn',
+        '3 meseca podrška'
+      ]
+    },
+    {
+      name: 'Professional Branding',
+      price: '€900',
+      features: [
+        'Kompletan vizuelni identitet',
+        'Brand knjiga',
+        'Marketing materijali',
+        'Do 5 revizija',
+        '6 meseci podrška'
+      ],
+      popular: true
+    },
+    {
+      name: 'Enterprise Branding',
+      price: '€1,500+',
+      features: [
+        'Strategija brenda',
+        'Packaging dizajn',
+        'Neograničene revizije',
+        'Kompletan identitet',
+        '12 meseci podrška'
+      ]
+    }
+  ];
+
+  const handlePackageSelect = (packageName: string) => {
+    navigateTo('service-inquiry', {
+      service: 'branding',
+      package: packageName
+    });
+  };
+
   const handleConsultation = () => {
-    navigateTo('home');
-    setTimeout(() => {
-      const element = document.querySelector('#contact');
-      element?.scrollIntoView({ behavior: 'smooth' });
-    }, 100);
+    navigateTo('service-inquiry', {
+      service: 'branding'
+    });
   };
 
   return (
@@ -121,9 +164,58 @@ export function BrandingPage() {
             })}
           </div>
         </div>
-      </section>
+        </section>
 
-      {/* CTA Section */}
+        {/* Pricing Section */}
+        <section className="py-20 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold text-bdigital-navy mb-4">
+                Branding paketi
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {packages.map((pkg, index) => (
+                <Card
+                  key={index}
+                  className={`border-0 shadow-lg hover:shadow-xl transition-all duration-300 relative ${pkg.popular ? 'ring-2 ring-bdigital-cyan' : ''}`}
+                >
+                  {pkg.popular && (
+                    <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                      <Badge className="bg-bdigital-cyan text-bdigital-navy px-4 py-1">
+                        Najpopularniji
+                      </Badge>
+                    </div>
+                  )}
+                  <CardContent className="p-6">
+                    <div className="text-center mb-6">
+                      <h3 className="text-xl font-bold text-bdigital-navy mb-2">{pkg.name}</h3>
+                      <div className="text-3xl font-bold text-bdigital-cyan">{pkg.price}</div>
+                    </div>
+                    <ul className="space-y-3 mb-6">
+                      {pkg.features.map((feature, idx) => (
+                        <li key={idx} className="flex items-center text-sm">
+                          <CheckCircle className="h-4 w-4 text-bdigital-cyan mr-3 flex-shrink-0" />
+                          <span className="text-neutral-gray">{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <Button
+                      className={`w-full ${pkg.popular ? 'bg-bdigital-cyan text-bdigital-navy hover:bg-bdigital-cyan-light' : 'border border-bdigital-cyan text-bdigital-cyan hover:bg-bdigital-cyan hover:text-bdigital-navy'} font-semibold`}
+                      variant={pkg.popular ? 'default' : 'outline'}
+                      onClick={() => handlePackageSelect(pkg.name)}
+                    >
+                      Odaberi paket
+                    </Button>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* CTA Section */}
       <section className="py-20 bg-gradient-to-r from-bdigital-navy to-bdigital-dark-navy text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
