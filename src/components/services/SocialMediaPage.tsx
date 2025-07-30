@@ -20,29 +20,29 @@ export function SocialMediaPage() {
   const services = [
     {
       icon: Instagram,
-      title: 'Instagram Management',
+      title: t('social.feature.instagram'),
       description: 'Kreiranje sadržaja, stories, reels i interakcija sa vašom publikom'
     },
     {
       icon: Facebook,
-      title: 'Facebook Marketing',
+      title: t('social.feature.facebook'),
       description: 'Facebook stranice, grupe, Facebook Ads i community management'
     },
     {
       icon: Camera,
-      title: 'Content Creation',
+      title: t('services.social.feature1'),
       description: 'Profesionalne fotografije, video sadržaj i grafički dizajn'
     },
     {
       icon: TrendingUp,
-      title: 'Social Media Ads',
+      title: t('services.social.feature3'),
       description: 'Plaćene reklame na svim društvenim mrežama sa ciljanim publikom'
     }
   ];
 
   const packages = [
     {
-      name: 'Starter Social',
+      name: t('social.package.starter.name'),
       price: '800 €/mes',
       features: [
         '10 postova mesečno',
@@ -52,7 +52,7 @@ export function SocialMediaPage() {
       ]
     },
     {
-      name: 'Professional Social',
+      name: t('social.package.professional.name'),
       price: '1.200 €/mes',
       features: [
         '20 postova mesečno',
@@ -64,7 +64,7 @@ export function SocialMediaPage() {
       popular: true
     },
     {
-      name: 'Enterprise Social',
+      name: t('social.package.enterprise.name'),
       price: '2.000 €/mes',
       features: [
         'Unlimited posts',
@@ -96,7 +96,7 @@ export function SocialMediaPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="text-white">
               <Badge className="bg-bdigital-cyan/20 text-bdigital-cyan border-bdigital-cyan mb-4">
-                Social Media Management
+                {t('social.badge')}
               </Badge>
               <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
                 {t('social.hero.title')}
@@ -106,12 +106,12 @@ export function SocialMediaPage() {
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 mb-8">
-                <Button 
+                <Button
                   size="lg"
                   className="bg-bdigital-cyan text-bdigital-navy hover:bg-bdigital-cyan-light px-8 py-3 font-semibold"
                   onClick={handleConsultation}
                 >
-                  Počnite danas
+                  {t('social.hero.cta')}
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
                 <Button 
@@ -143,7 +143,7 @@ export function SocialMediaPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-bdigital-navy mb-4">
-              Naše social media usluge
+              {t('social.services.heading')}
             </h2>
           </div>
 
@@ -171,7 +171,7 @@ export function SocialMediaPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-bdigital-navy mb-4">
-              Social Media paketi
+              {t('social.pricing.heading')}
             </h2>
           </div>
 
@@ -198,12 +198,12 @@ export function SocialMediaPage() {
                       </li>
                     ))}
                   </ul>
-                  <Button 
+                  <Button
                     className={`w-full ${pkg.popular ? 'bg-bdigital-cyan text-bdigital-navy hover:bg-bdigital-cyan-light' : 'border border-bdigital-cyan text-bdigital-cyan hover:bg-bdigital-cyan hover:text-bdigital-navy'} font-semibold`}
                     variant={pkg.popular ? 'default' : 'outline'}
                     onClick={() => handlePackageSelect(pkg.name)}
                   >
-                    Odaberi paket
+                    {t('packages.select')}
                   </Button>
                 </CardContent>
               </Card>
@@ -216,17 +216,17 @@ export function SocialMediaPage() {
       <section className="py-20 bg-gradient-to-r from-bdigital-navy to-bdigital-dark-navy text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Spremni za jače prisustvo na društvenim mrežama?
+            {t('social.cta.title')}
           </h2>
           <p className="text-gray-300 text-lg mb-8 max-w-2xl mx-auto">
-            Kontaktirajte nas i saznajte kako možemo povećati vaše pratioce i angažman.
+            {t('social.cta.desc')}
           </p>
-          <Button 
+          <Button
             size="lg"
             className="bg-bdigital-cyan text-bdigital-navy hover:bg-bdigital-cyan-light px-8 py-3 font-semibold"
             onClick={handleConsultation}
           >
-            Početak saradnje
+            {t('social.cta.primary')}
           </Button>
         </div>
       </section>

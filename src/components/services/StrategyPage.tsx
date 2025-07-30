@@ -20,29 +20,29 @@ export function StrategyPage() {
   const services = [
     {
       icon: TrendingUp,
-      title: 'Digitalna strategija',
+      title: t('strategy.feature.digital'),
       description: 'Kompletna digitalna strategija usmerena na vaše poslovne ciljeve'
     },
     {
       icon: Target,
-      title: 'Konkurentska analiza',
+      title: t('services.strategy.feature2'),
       description: 'Detaljna analiza konkurencije i mogućnosti na tržištu'
     },
     {
       icon: BarChart3,
-      title: 'ROI optimizacija',
+      title: t('services.strategy.feature3'),
       description: 'Maksimiziranje povrata na investiciju u digitalni marketing'
     },
     {
       icon: Users,
-      title: 'Konsultacije',
+      title: t('strategy.feature.consulting'),
       description: 'Stručne konsultacije i podrška u implementaciji strategije'
     }
   ];
 
   const packages = [
     {
-      name: 'Starter Strategy',
+      name: t('strategy.package.starter.name'),
       price: '600 €',
       features: [
         'Audit poslovanja',
@@ -53,7 +53,7 @@ export function StrategyPage() {
       ]
     },
     {
-      name: 'Professional Strategy',
+      name: t('strategy.package.professional.name'),
       price: '1.100 €',
       features: [
         'Detaljna strategija rasta',
@@ -65,7 +65,7 @@ export function StrategyPage() {
       popular: true
     },
     {
-      name: 'Enterprise Strategy',
+      name: t('strategy.package.enterprise.name'),
       price: '2.000 €+',
       features: [
         'Sveobuhvatna transformacija',
@@ -98,22 +98,22 @@ export function StrategyPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="text-white">
               <Badge className="bg-bdigital-cyan/20 text-bdigital-cyan border-bdigital-cyan mb-4">
-                Strategy & Consulting
+                {t('strategy.badge')}
               </Badge>
               <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
-                <span className="text-bdigital-cyan">Strategije</span> za digitalni uspeh
+                <span className="text-bdigital-cyan">{t('strategy.hero.emphasis')}</span>{' '}{t('strategy.hero.trailing')}
               </h1>
               <p className="text-gray-300 text-lg mb-8 leading-relaxed">
                 {t('strategy.hero.desc')}
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 mb-8">
-                <Button 
+                <Button
                   size="lg"
                   className="bg-bdigital-cyan text-bdigital-navy hover:bg-bdigital-cyan-light px-8 py-3 font-semibold"
                   onClick={handleConsultation}
                 >
-                  Konsultacija
+                  {t('strategy.hero.cta')}
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
                 <Button 
@@ -145,7 +145,7 @@ export function StrategyPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-bdigital-navy mb-4">
-              Konsalting usluge
+              {t('strategy.services.heading')}
             </h2>
           </div>
 
@@ -173,7 +173,7 @@ export function StrategyPage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-bold text-bdigital-navy mb-4">
-                Strategy paketi
+                {t('strategy.pricing.heading')}
               </h2>
             </div>
 
@@ -208,7 +208,7 @@ export function StrategyPage() {
                       variant={pkg.popular ? 'default' : 'outline'}
                       onClick={() => handlePackageSelect(pkg.name)}
                     >
-                      Odaberi paket
+                      {t('packages.select')}
                     </Button>
                   </CardContent>
                 </Card>
@@ -221,17 +221,17 @@ export function StrategyPage() {
       <section className="py-20 bg-gradient-to-r from-bdigital-navy to-bdigital-dark-navy text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Spremni za digitalnu transformaciju?
+            {t('strategy.cta.title')}
           </h2>
           <p className="text-gray-300 text-lg mb-8 max-w-2xl mx-auto">
-            Zakažite besplatnu konsultaciju i saznajte kako možemo pomoći vašem biznisu.
+            {t('strategy.cta.desc')}
           </p>
-          <Button 
+          <Button
             size="lg"
             className="bg-bdigital-cyan text-bdigital-navy hover:bg-bdigital-cyan-light px-8 py-3 font-semibold"
             onClick={handleConsultation}
           >
-            Zakažite konsultaciju
+            {t('strategy.cta.primary')}
           </Button>
         </div>
       </section>

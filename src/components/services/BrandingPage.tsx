@@ -20,29 +20,29 @@ export function BrandingPage() {
   const services = [
     {
       icon: Palette,
-      title: 'Logo dizajn',
+      title: t('services.branding.feature1'),
       description: 'Jedinstveni logo koji predstavlja suštinu vašeg brenda'
     },
     {
       icon: FileImage,
-      title: 'Brand identitet',
+      title: t('branding.feature.identity'),
       description: 'Kompletna vizuelna identifikacija uključujući boje, fontove i stil'
     },
     {
       icon: Type,
-      title: 'Print materijali',
+      title: t('services.branding.feature3'),
       description: 'Vizit karte, brošure, plakati i ostali print materijali'
     },
     {
       icon: Package,
-      title: 'Brand guidelines',
+      title: t('services.branding.feature2'),
       description: 'Detaljno uputstvo za korišćenje brenda u svim situacijama'
     }
   ];
 
   const packages = [
     {
-      name: 'Starter Branding',
+      name: t('branding.package.starter.name'),
       price: '500 €',
       features: [
         'Logo dizajn',
@@ -53,7 +53,7 @@ export function BrandingPage() {
       ]
     },
     {
-      name: 'Professional Branding',
+      name: t('branding.package.professional.name'),
       price: '900 €',
       features: [
         'Kompletan vizuelni identitet',
@@ -65,7 +65,7 @@ export function BrandingPage() {
       popular: true
     },
     {
-      name: 'Enterprise Branding',
+      name: t('branding.package.enterprise.name'),
       price: '1.500 €+',
       features: [
         'Strategija brenda',
@@ -98,7 +98,7 @@ export function BrandingPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="text-white">
               <Badge className="bg-bdigital-cyan/20 text-bdigital-cyan border-bdigital-cyan mb-4">
-                Branding & Graphic Design
+                {t('branding.badge')}
               </Badge>
               <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
                 {t('branding.hero.title')}
@@ -108,12 +108,12 @@ export function BrandingPage() {
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 mb-8">
-                <Button 
+                <Button
                   size="lg"
                   className="bg-bdigital-cyan text-bdigital-navy hover:bg-bdigital-cyan-light px-8 py-3 font-semibold"
                   onClick={handleConsultation}
                 >
-                  Početak projekta
+                  {t('branding.hero.cta')}
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
                 <Button 
@@ -145,7 +145,7 @@ export function BrandingPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-bdigital-navy mb-4">
-              Branding usluge
+              {t('branding.services.heading')}
             </h2>
           </div>
 
@@ -173,7 +173,7 @@ export function BrandingPage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-bold text-bdigital-navy mb-4">
-                Branding paketi
+                {t('branding.pricing.heading')}
               </h2>
             </div>
 
@@ -208,7 +208,7 @@ export function BrandingPage() {
                       variant={pkg.popular ? 'default' : 'outline'}
                       onClick={() => handlePackageSelect(pkg.name)}
                     >
-                      Odaberi paket
+                      {t('packages.select')}
                     </Button>
                   </CardContent>
                 </Card>
@@ -221,17 +221,17 @@ export function BrandingPage() {
       <section className="py-20 bg-gradient-to-r from-bdigital-navy to-bdigital-dark-navy text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Spremni za novi brand identitet?
+            {t('branding.cta.title')}
           </h2>
           <p className="text-gray-300 text-lg mb-8 max-w-2xl mx-auto">
-            Kontaktirajte nas i kreirajmo zajedno brand koji će vas izdvojiti od konkurencije.
+            {t('branding.cta.desc')}
           </p>
-          <Button 
+          <Button
             size="lg"
             className="bg-bdigital-cyan text-bdigital-navy hover:bg-bdigital-cyan-light px-8 py-3 font-semibold"
             onClick={handleConsultation}
           >
-            Konsultacija
+            {t('branding.cta.primary')}
           </Button>
         </div>
       </section>
