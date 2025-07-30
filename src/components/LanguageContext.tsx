@@ -313,6 +313,48 @@ const translations = {
     // General
     'general.back_home': 'Nazad na početnu',
     'general.back': 'Nazad',
+    // Form
+    'form.required_name': 'Ime je obavezno',
+    'form.required_email': 'Email je obavezan',
+    'form.invalid_email': 'Email nije valjan',
+    'form.required_company': 'Kompanija je obavezna',
+    'form.required_project_types': 'Odaberite najmanje jedan tip projekta',
+    'form.required_field': 'Ovo polje je obavezno',
+    'form.required_timeline': 'Odaberite vremenski okvir',
+    'form.required_budget': 'Odaberite budžet',
+    'form.required_contact': 'Odaberite način kontakta',
+    'form.required_business_type': 'Tip biznisa je obavezan',
+    'form.required_services': 'Odaberite najmanje jednu uslugu',
+    'form.placeholder_full_name': 'Vaše puno ime',
+    'form.placeholder_email': 'vasa@email.com',
+    'form.placeholder_phone': '+382 67 123 456',
+    'form.placeholder_company': 'Naziv vaše kompanije',
+    'form.placeholder_website': 'https://www.vasasajt.com',
+    'form.placeholder_current_situation':
+      'Opišite šta trenutno imate (ili nemate) i zašto tražite naše usluge...',
+    'form.placeholder_project_goals':
+      'Šta želite da postignete ovim projektom? Povećanje prodaje, više klijenata, bolja online pozicija...',
+    'form.placeholder_target_audience':
+      'Ko su vaši idealni klijenti? (uzrast, lokacija, interesi...)',
+    'form.placeholder_timeline': 'Kada bi voleli da se projekat završi?',
+    'form.placeholder_budget': 'Koliki je vaš budžet za ovaj projekat?',
+    'form.placeholder_how_hear': 'Odaberite opciju',
+    'form.placeholder_current_challenges':
+      'Opišite glavne izazove sa kojima se suočavate u digitalnom marketingu...',
+    'form.placeholder_goals':
+      'Šta želite da postignete? (više klijenata, bolja online pozicija, povećanje prodaje...)',
+    'form.placeholder_preferred_time': 'Kada vam odgovara?',
+    'form.placeholder_additional_info':
+      'Ima li još nešto što bi trebalo da znamo o vašem projektu?',
+    'form.placeholder_additional_info_consult':
+      'Ima li još nešto što bi trebalo da znamo pre konsultacije?',
+    'form.next_step': 'Sledeći korak',
+    'form.submit_inquiry': 'Pošalji upit za ponudu',
+    'form.submitting': 'Šalje se...',
+    'form.submit_consultation': 'Zakaži besplatnu konsultaciju',
+    'form.scheduling': 'Zakazuje se konsultacija...',
+    'form.new_quote': 'Nova ponuda',
+    'form.new_consultation': 'Nova konsultacija',
     'packages.select': 'Odaberi paket',
   },
   en: {
@@ -614,6 +656,48 @@ const translations = {
     // General
     'general.back_home': 'Back to home',
     'general.back': 'Back',
+    // Form
+    'form.required_name': 'Name is required',
+    'form.required_email': 'Email is required',
+    'form.invalid_email': 'Invalid email',
+    'form.required_company': 'Company is required',
+    'form.required_project_types': 'Select at least one project type',
+    'form.required_field': 'This field is required',
+    'form.required_timeline': 'Select a timeline',
+    'form.required_budget': 'Select a budget',
+    'form.required_contact': 'Select a contact method',
+    'form.required_business_type': 'Business type is required',
+    'form.required_services': 'Select at least one service',
+    'form.placeholder_full_name': 'Your full name',
+    'form.placeholder_email': 'you@email.com',
+    'form.placeholder_phone': '+1 234 567 890',
+    'form.placeholder_company': 'Your company name',
+    'form.placeholder_website': 'https://www.yoursite.com',
+    'form.placeholder_current_situation':
+      'Describe your current situation and why you need our services...',
+    'form.placeholder_project_goals':
+      'What do you want to achieve with this project? More sales, more clients, better online presence...',
+    'form.placeholder_target_audience':
+      'Who are your ideal clients? (age, location, interests...)',
+    'form.placeholder_timeline': 'When would you like the project completed?',
+    'form.placeholder_budget': 'What is your budget for this project?',
+    'form.placeholder_how_hear': 'Select an option',
+    'form.placeholder_current_challenges':
+      'Describe the main challenges you face in digital marketing...',
+    'form.placeholder_goals':
+      'What do you want to achieve? (more clients, better ranking, increased sales...)',
+    'form.placeholder_preferred_time': 'What time works best for you?',
+    'form.placeholder_additional_info':
+      'Is there anything else we should know about your project?',
+    'form.placeholder_additional_info_consult':
+      'Is there anything else we should know before the consultation?',
+    'form.next_step': 'Next step',
+    'form.submit_inquiry': 'Submit inquiry',
+    'form.submitting': 'Sending...',
+    'form.submit_consultation': 'Schedule free consultation',
+    'form.scheduling': 'Scheduling consultation...',
+    'form.new_quote': 'New quote',
+    'form.new_consultation': 'New consultation',
     'packages.select': 'Choose package',
   },
 } as const;

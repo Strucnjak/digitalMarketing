@@ -85,15 +85,15 @@ export function FreeConsultationPage() {
   const validateForm = (): boolean => {
     const newErrors: Record<string, string> = {};
     
-    if (!formData.fullName.trim()) newErrors.fullName = 'Ime je obavezno';
-    if (!formData.email.trim()) newErrors.email = 'Email je obavezan';
-    else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = 'Email nije valjan';
-    if (!formData.company.trim()) newErrors.company = 'Kompanija je obavezna';
-    if (!formData.businessType) newErrors.businessType = 'Tip biznisa je obavezan';
-    if (!formData.currentChallenges.trim()) newErrors.currentChallenges = 'Ovo polje je obavezno';
-    if (!formData.goals.trim()) newErrors.goals = 'Ovo polje je obavezno';
-    if (formData.interestedServices.length === 0) newErrors.interestedServices = 'Odaberite najmanje jednu uslugu';
-    if (!formData.preferredContact) newErrors.preferredContact = 'Odaberite način kontakta';
+    if (!formData.fullName.trim()) newErrors.fullName = t('form.required_name');
+    if (!formData.email.trim()) newErrors.email = t('form.required_email');
+    else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = t('form.invalid_email');
+    if (!formData.company.trim()) newErrors.company = t('form.required_company');
+    if (!formData.businessType) newErrors.businessType = t('form.required_business_type');
+    if (!formData.currentChallenges.trim()) newErrors.currentChallenges = t('form.required_field');
+    if (!formData.goals.trim()) newErrors.goals = t('form.required_field');
+    if (formData.interestedServices.length === 0) newErrors.interestedServices = t('form.required_services');
+    if (!formData.preferredContact) newErrors.preferredContact = t('form.required_contact');
     
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -178,7 +178,7 @@ export function FreeConsultationPage() {
                   }}
                   className="border-bdigital-cyan text-bdigital-cyan hover:bg-bdigital-cyan hover:text-bdigital-navy font-semibold px-8 py-3"
                 >
-                  Nova konsultacija
+                  {t('form.new_consultation')}
                 </Button>
               </div>
             </CardContent>
@@ -263,7 +263,7 @@ export function FreeConsultationPage() {
                   <Input
                     value={formData.fullName}
                     onChange={(e) => updateFormData('fullName', e.target.value)}
-                    placeholder="Vaše puno ime"
+                    placeholder={t('form.placeholder_full_name')}
                     className={`border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan ${
                       errors.fullName ? 'border-red-500' : ''
                     }`}
@@ -284,7 +284,7 @@ export function FreeConsultationPage() {
                     type="email"
                     value={formData.email}
                     onChange={(e) => updateFormData('email', e.target.value)}
-                    placeholder="vasa@email.com"
+                    placeholder={t('form.placeholder_email')}
                     className={`border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan ${
                       errors.email ? 'border-red-500' : ''
                     }`}
@@ -307,7 +307,7 @@ export function FreeConsultationPage() {
                   <Input
                     value={formData.phone}
                     onChange={(e) => updateFormData('phone', e.target.value)}
-                    placeholder="+382 67 123 456"
+                    placeholder={t('form.placeholder_phone')}
                     className="border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan"
                   />
                 </div>
@@ -319,7 +319,7 @@ export function FreeConsultationPage() {
                   <Input
                     value={formData.company}
                     onChange={(e) => updateFormData('company', e.target.value)}
-                    placeholder="Naziv vaše kompanije"
+                    placeholder={t('form.placeholder_company')}
                     className={`border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan ${
                       errors.company ? 'border-red-500' : ''
                     }`}
@@ -342,7 +342,7 @@ export function FreeConsultationPage() {
                   <Input
                     value={formData.website}
                     onChange={(e) => updateFormData('website', e.target.value)}
-                    placeholder="https://www.vasasajt.com"
+                    placeholder={t('form.placeholder_website')}
                     className="border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan"
                   />
                 </div>
@@ -354,7 +354,7 @@ export function FreeConsultationPage() {
                     <SelectTrigger className={`border-gray-300 focus:border-bdigital-cyan ${
                       errors.businessType ? 'border-red-500' : ''
                     }`}>
-                      <SelectValue placeholder="Odaberite tip biznisa" />
+                      <SelectValue placeholder={t('form.placeholder_business_type')} />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="startup">Startup</SelectItem>
@@ -384,7 +384,7 @@ export function FreeConsultationPage() {
                 <Textarea
                   value={formData.currentChallenges}
                   onChange={(e) => updateFormData('currentChallenges', e.target.value)}
-                  placeholder="Opišite glavne izazove sa kojima se suočavate u digitalnom marketingu..."
+                  placeholder={t('form.placeholder_current_challenges')}
                   className={`border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan min-h-[100px] resize-none ${
                     errors.currentChallenges ? 'border-red-500' : ''
                   }`}
@@ -405,7 +405,7 @@ export function FreeConsultationPage() {
                 <Textarea
                   value={formData.goals}
                   onChange={(e) => updateFormData('goals', e.target.value)}
-                  placeholder="Šta želite da postignete? (više klijenata, bolja online pozicija, povećanje prodaje...)"
+                  placeholder={t('form.placeholder_goals')}
                   className={`border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan min-h-[100px] resize-none ${
                     errors.goals ? 'border-red-500' : ''
                   }`}
@@ -494,7 +494,7 @@ export function FreeConsultationPage() {
                   </Label>
                   <Select value={formData.preferredTime} onValueChange={(value) => updateFormData('preferredTime', value)}>
                     <SelectTrigger className="border-gray-300 focus:border-bdigital-cyan">
-                      <SelectValue placeholder="Kada vam odgovara?" />
+                      <SelectValue placeholder={t('form.placeholder_preferred_time')} />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="morning">Ujutru (09:00-12:00)</SelectItem>
@@ -515,7 +515,7 @@ export function FreeConsultationPage() {
                 <Textarea
                   value={formData.additionalInfo}
                   onChange={(e) => updateFormData('additionalInfo', e.target.value)}
-                  placeholder="Ima li još nešto što bi trebalo da znamo pre konsultacije?"
+                  placeholder={t('form.placeholder_additional_info_consult')}
                   className="border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan min-h-[80px] resize-none"
                 />
               </div>
@@ -542,12 +542,12 @@ export function FreeConsultationPage() {
                   {isSubmitting ? (
                     <>
                       <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-bdigital-navy mr-2"></div>
-                      Zakazuje se konsultacija...
+                      {t('form.scheduling')}
                     </>
                   ) : (
                     <>
                       <Calendar className="h-5 w-5 mr-2" />
-                      Zakaži besplatnu konsultaciju
+                      {t('form.submit_consultation')}
                     </>
                   )}
                 </Button>
