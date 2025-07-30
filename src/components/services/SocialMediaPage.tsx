@@ -41,7 +41,7 @@ export function SocialMediaPage() {
   const packages = [
     {
       name: 'Starter Social',
-      price: '€800/mes',
+      price: '800 €/mes',
       features: [
         '10 postova mesečno',
         'Instagram + Facebook',
@@ -51,7 +51,7 @@ export function SocialMediaPage() {
     },
     {
       name: 'Professional Social',
-      price: '€1,200/mes',
+      price: '1.200 €/mes',
       features: [
         '20 postova mesečno',
         'Sve društvene mreže',
@@ -63,7 +63,7 @@ export function SocialMediaPage() {
     },
     {
       name: 'Enterprise Social',
-      price: '€2,000/mes',
+      price: '2.000 €/mes',
       features: [
         'Unlimited posts',
         'Dedicated social manager',

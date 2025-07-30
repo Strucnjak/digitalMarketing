@@ -649,11 +649,11 @@ export function ServiceInquiryForm() {
                       <SelectValue placeholder="Koliki je vaš budžet za ovaj projekat?" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="under-1000">Manje od €1,000</SelectItem>
-                      <SelectItem value="1000-2500">€1,000 - €2,500</SelectItem>
-                      <SelectItem value="2500-5000">€2,500 - €5,000</SelectItem>
-                      <SelectItem value="5000-10000">€5,000 - €10,000</SelectItem>
-                      <SelectItem value="over-10000">Više od €10,000</SelectItem>
+                      <SelectItem value="under-1000">Manje od 1.000 €</SelectItem>
+                      <SelectItem value="1000-2500">1.000 € - 2.500 €</SelectItem>
+                      <SelectItem value="2500-5000">2.500 € - 5.000 €</SelectItem>
+                      <SelectItem value="5000-10000">5.000 € - 10.000 €</SelectItem>
+                      <SelectItem value="over-10000">Više od 10.000 €</SelectItem>
                       <SelectItem value="discuss">Razmotrićemo opcije</SelectItem>
                     </SelectContent>
                   </Select>

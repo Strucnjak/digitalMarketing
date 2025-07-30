@@ -41,7 +41,7 @@ export function StrategyPage() {
   const packages = [
     {
       name: 'Starter Strategy',
-      price: '€600',
+      price: '600 €',
       features: [
         'Audit poslovanja',
         'Osnovna digitalna strategija',
@@ -52,7 +52,7 @@ export function StrategyPage() {
     },
     {
       name: 'Professional Strategy',
-      price: '€1,100',
+      price: '1.100 €',
       features: [
         'Detaljna strategija rasta',
         'Konkurenatska analiza',
@@ -64,7 +64,7 @@ export function StrategyPage() {
     },
     {
       name: 'Enterprise Strategy',
-      price: '€2,000+',
+      price: '2.000 €+',
       features: [
         'Sveobuhvatna transformacija',
         'Dedicated strategist',
