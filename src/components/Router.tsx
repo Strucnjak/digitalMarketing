@@ -2,13 +2,17 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import type { ReactNode } from 'react';
 
-export type PageType = 
-  | 'home' 
-  | 'web-design' 
-  | 'seo' 
-  | 'social-media' 
-  | 'branding' 
-  | 'strategy' 
+export const servicePageIds = [
+  'web-design',
+  'seo',
+  'social-media',
+  'branding',
+  'strategy'
+] as const;
+
+export type PageType =
+  | 'home'
+  | (typeof servicePageIds)[number]
   | 'service-inquiry'
   | 'free-consultation';
 
