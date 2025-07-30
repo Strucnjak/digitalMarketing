@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import type { Project } from '../types';
 import { Button } from './ui/button';
 import { Card, CardContent } from './ui/card';
 import { Badge } from './ui/badge';
@@ -27,7 +28,7 @@ export function PortfolioSection() {
     { id: 'seo', label: _t('portfolio.filter.seo'), count: 2 }
   ];
 
-  const projects = [
+  const projects: Project[] = [
     {
       id: 1,
       title: 'Montenegrin Properties',
@@ -256,7 +257,7 @@ export function PortfolioSection() {
 }
 
 // Project Card Component
-function ProjectCard({ project }: { project: any }) {
+function ProjectCard({ project }: { project: Project }) {
   const [isHovered, setIsHovered] = useState(false);
   const { t: _t } = useLanguage();
 
