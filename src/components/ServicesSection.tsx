@@ -24,45 +24,70 @@ export function ServicesSection() {
     {
       id: 'web-design',
       icon: Monitor,
-      title: 'Web Design & Development',
-      description: 'Kreiramo moderne, responzivne web stranice koje kombinuju izuzetan dizajn sa funkcionalnosti koja konvertuje posetioce u klijente.',
-      features: ['Responzivni dizajn', 'SEO optimizovano', 'CMS integracija', 'E-commerce'],
+      title: t('services.web.title'),
+      description: t('services.web.desc'),
+      features: [
+        t('services.web.feature1'),
+        t('services.web.feature2'),
+        t('services.web.feature3'),
+        t('services.web.feature4')
+      ],
       color: 'from-blue-500 to-cyan-500',
       stats: { value: '50+', label: 'Web stranica' }
     },
     {
       id: 'seo',
       icon: Search,
-      title: 'SEO & Google Business',
-      description: 'Povećajte vidljivost na Google pretragama i osvojite više klijenata organskim rezultatima pretrage.',
-      features: ['Keyword research', 'On-page SEO', 'Local SEO', 'Analytics'],
+      title: t('services.seo.title'),
+      description: t('services.seo.desc'),
+      features: [
+        t('services.seo.feature1'),
+        t('services.seo.feature2'),
+        t('services.seo.feature3'),
+        t('services.seo.feature4')
+      ],
       color: 'from-green-500 to-emerald-500',
       stats: { value: '300%', label: 'Avg. povećanje' }
     },
     {
       id: 'social-media',
       icon: Share2,
-      title: 'Social Media Management',
-      description: 'Izgradite jaku zajednicu oko vašeg brenda kroz angažovan sadržaj na društvenim mrežama.',
-      features: ['Content creation', 'Community management', 'Paid advertising', 'Analytics'],
+      title: t('services.social.title'),
+      description: t('services.social.desc'),
+      features: [
+        t('services.social.feature1'),
+        t('services.social.feature2'),
+        t('services.social.feature3'),
+        t('services.social.feature4')
+      ],
       color: 'from-purple-500 to-pink-500',
       stats: { value: '10K+', label: 'Followers gained' }
     },
     {
       id: 'branding',
       icon: Palette,
-      title: 'Branding & Graphic Design',
-      description: t('branding.hero.desc'),
-      features: ['Logo design', 'Brand guidelines', 'Print materials', 'Digital assets'],
+      title: t('services.branding.title'),
+      description: t('services.branding.desc'),
+      features: [
+        t('services.branding.feature1'),
+        t('services.branding.feature2'),
+        t('services.branding.feature3'),
+        t('services.branding.feature4')
+      ],
       color: 'from-orange-500 to-red-500',
       stats: { value: '100+', label: 'Brand identiteta' }
     },
     {
       id: 'strategy',
       icon: Target,
-      title: 'Strategy & Consulting',
-      description: 'Razvijamo sveobuhvatne digitalne strategije koje su usklađene sa vašim poslovnim ciljevima.',
-      features: ['Market analysis', 'Competitor research', 'ROI optimization', 'Growth strategy'],
+      title: t('services.strategy.title'),
+      description: t('services.strategy.desc'),
+      features: [
+        t('services.strategy.feature1'),
+        t('services.strategy.feature2'),
+        t('services.strategy.feature3'),
+        t('services.strategy.feature4')
+      ],
       color: 'from-indigo-500 to-purple-500',
       stats: { value: '250%', label: 'ROI povećanje' }
     }
@@ -82,14 +107,15 @@ export function ServicesSection() {
         {/* Section Header */}
         <div className="text-center mb-12 lg:mb-20">
           <Badge className="bg-bdigital-cyan/10 text-bdigital-cyan border-bdigital-cyan/20 mb-4 px-4 py-2">
-            Naše usluge
+            {t('services.title')}
           </Badge>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-bdigital-navy mb-4 lg:mb-6">
-            Digitalne usluge za<br />
-            <span className="text-bdigital-cyan">vaš uspeh</span>
+            {t('services.heading.part1')}
+            <br />
+            <span className="text-bdigital-cyan">{t('services.heading.emphasis')}</span>
           </h2>
           <p className="text-lg lg:text-xl text-neutral-gray max-w-3xl mx-auto leading-relaxed">
-            Od web development-a do kompletnih marketing strategija - pomažemo vašem biznisu da ostvari maksimalan potencijal u digitalnom svetu.
+            {t('services.description')}
           </p>
         </div>
 
@@ -141,7 +167,7 @@ export function ServicesSection() {
                     variant="ghost"
                     className="w-full justify-between text-bdigital-cyan hover:text-bdigital-navy hover:bg-bdigital-cyan/10 font-semibold p-4 group-hover:bg-bdigital-cyan group-hover:text-bdigital-navy transition-all duration-300"
                   >
-                    Saznajte više
+                    {t('services.learn_more')}
                     <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
                   </Button>
                 </CardContent>
@@ -155,26 +181,28 @@ export function ServicesSection() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             <div>
               <h3 className="text-2xl lg:text-3xl font-bold mb-4 lg:mb-6">
-                Zašto odabrati <span className="text-bdigital-cyan">BDigital</span>?
+                {t('services.why.title.pre')}{' '}
+                <span className="text-bdigital-cyan">BDigital</span>
+                {t('services.why.title.post')}
               </h3>
               <p className="text-gray-300 text-lg leading-relaxed mb-6 lg:mb-8">
-                Kombinujemo kreativnost sa tehnologijom da kreiramo rešenja koja ne samo da izgledaju odlično, već i donose merljive rezultate za vaš biznis.
+                {t('services.why.desc')}
               </p>
               <Button
                 onClick={handleViewAll}
                 className="bg-bdigital-cyan text-bdigital-navy hover:bg-bdigital-cyan-light font-semibold px-8 py-3 transform hover:scale-105 transition-all duration-300 shadow-xl"
               >
-                Započnite projekat
+                {t('services.why.cta')}
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </div>
             
             <div className="grid grid-cols-2 gap-6 lg:gap-8">
               {[
-                { icon: Zap, title: 'Brza implementacija', desc: 'Projekti se završavaju u roku' },
-                { icon: TrendingUp, title: 'Merljivi rezultati', desc: 'ROI koji možete videti' },
-                { icon: Users, title: 'Posvećena podrška', desc: '24/7 tehnička podrška' },
-                { icon: Award, title: 'Dokazano iskustvo', desc: '100+ uspešnih projekata' }
+                { icon: Zap, title: t('services.why.fast.title'), desc: t('services.why.fast.desc') },
+                { icon: TrendingUp, title: t('services.why.results.title'), desc: t('services.why.results.desc') },
+                { icon: Users, title: t('services.why.support.title'), desc: t('services.why.support.desc') },
+                { icon: Award, title: t('services.why.experience.title'), desc: t('services.why.experience.desc') }
               ].map((item, _index) => {
                 const IconComponent = item.icon;
                 return (
