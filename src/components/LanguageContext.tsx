@@ -86,6 +86,132 @@ const translations = {
     'services.strategy.feature3': 'ROI optimization',
     'services.strategy.feature4': 'Growth strategy',
 
+
+    // Service Pages - Web Design
+    'web.badge': 'Web Design & Development',
+    'web.hero.part1': 'Kreiramo',
+    'web.hero.emphasis': 'moderne web stranice',
+    'web.hero.part2': 'koje prodaju',
+    'web.hero.desc':
+      'Od ideje do realizacije - razvijamo web stranice koje kombinuju izuzetan dizajn sa funkcionalnosti koja donosi rezultate.',
+    'web.hero.cta': 'Započni projekat',
+    'web.features.heading': 'Što dobijate sa našim web stranicama',
+    'web.features.desc':
+      'Svaka web stranica koju kreiramo uključuje sve što vam je potrebno za uspeh online',
+    'web.feature.responsive': 'Responzivni dizajn',
+    'web.feature.speed': 'Optimizacija brzine',
+    'web.feature.seo': 'SEO optimizovano',
+    'web.feature.ecommerce': 'E-commerce rešenja',
+    'web.feature.design': 'Jedinstveni dizajn',
+    'web.feature.clean_code': 'Čist kod',
+    'web.process.heading': 'Naš proces rada',
+    'web.process.desc':
+      'Transparentan i strukturisan pristup koji garantuje uspeh vašeg projekta',
+    'web.pricing.heading': 'Paketi i cene',
+    'web.pricing.desc':
+      'Odaberite paket koji najbolje odgovara vašim potrebama i budžetu',
+    'web.package.starter.name': 'Starter',
+    'web.package.starter.desc': 'Idealno za manje kompanije',
+    'web.package.professional.name': 'Professional',
+    'web.package.professional.desc': 'Najpopularniji paket',
+    'web.package.enterprise.name': 'Enterprise',
+    'web.package.enterprise.desc': 'Za velike kompanije',
+    'web.portfolio.heading': 'Naši radovi',
+    'web.portfolio.desc':
+      'Pogledajte neke od web stranica koje smo kreirali za naše klijente',
+    'web.portfolio.view_more': 'Pogledaj više',
+    'web.cta.title': 'Spremni za vašu novu web stranicu?',
+    'web.cta.desc':
+      'Kontaktirajte nas danas za besplatnu konsultaciju i saznajte kako možemo transformisati vaše online prisustvo.',
+    'web.cta.primary': 'Besplatna konsultacija',
+    'web.cta.secondary': 'Pozovite nas',
+
+    // Service Pages - SEO
+    'seo.badge': 'SEO & Google Business',
+    'seo.hero.part1': 'Budite',
+    'seo.hero.emphasis': '#1 na Google',
+    'seo.hero.part2': 'pretragama',
+    'seo.hero.desc':
+      'Povećajte vidljivost vašeg biznisa u pretraživačima i osvojite više klijenata putem organskih rezultata pretrage.',
+    'seo.hero.cta': 'Besplatan SEO audit',
+    'seo.services.heading': 'Kompletna SEO usluga',
+    'seo.services.desc':
+      'Sveobuhvatan pristup SEO optimizaciji koji pokriva sve aspekte digitalnog marketinga',
+    'seo.feature.mobile': 'Mobile SEO',
+    'seo.feature.technical': 'Technical SEO',
+    'seo.results.heading': 'Rezultati koji govore',
+    'seo.results.desc':
+      'Ovi brojevi pokazuju zašto kompanije u Crnoj Gori biraju BDigital za svoj SEO',
+    'seo.pricing.heading': 'SEO paketi',
+    'seo.pricing.desc':
+      'Odaberite SEO paket koji odgovara veličini vašeg biznisa i ambicijama',
+    'seo.package.starter.name': 'Starter SEO',
+    'seo.package.starter.desc': 'Za manje kompanije',
+    'seo.package.professional.name': 'Professional SEO',
+    'seo.package.professional.desc': 'Najpopularniji paket',
+    'seo.package.enterprise.name': 'Enterprise SEO',
+    'seo.package.enterprise.desc': 'Za velike kompanije',
+    'seo.case.heading': 'Studije slučaja',
+    'seo.case.desc': 'Kako smo pomogli našim klijentima da dominiraju Google pretragama',
+    'seo.cta.title': 'Besplatan SEO audit vašeg sajta',
+    'seo.cta.desc':
+      'Saznajte šta možete poboljšati na vašoj web stranici da biste se bolje rangirali na Google pretragama.',
+    'seo.cta.primary': 'Zatražite besplatan audit',
+    'seo.cta.secondary': 'Pozovite nas',
+
+    // Service Pages - Social Media
+    'social.badge': 'Social Media Management',
+    'social.hero.title': 'Osvajajte društvene mreže',
+    'social.hero.desc':
+      'Gradimo zajednicu i povećavamo angažman kroz kreativne strategije.',
+    'social.hero.cta': 'Počnite danas',
+    'social.services.heading': 'Naše social media usluge',
+    'social.feature.instagram': 'Instagram Management',
+    'social.feature.facebook': 'Facebook Marketing',
+    'social.pricing.heading': 'Social Media paketi',
+    'social.package.starter.name': 'Starter Social',
+    'social.package.professional.name': 'Professional Social',
+    'social.package.enterprise.name': 'Enterprise Social',
+    'social.cta.title': 'Spremni za jače prisustvo na društvenim mrežama?',
+    'social.cta.desc':
+      'Kontaktirajte nas i saznajte kako možemo povećati vaše pratioce i angažman.',
+    'social.cta.primary': 'Početak saradnje',
+
+    // Service Pages - Branding
+    'branding.badge': 'Branding & Graphic Design',
+    'branding.hero.title': 'Izgradite prepoznatljiv brend',
+    'branding.hero.desc': 'Kreiramo vizuelni identitet koji ostavlja jak utisak.',
+    'branding.hero.cta': 'Početak projekta',
+    'branding.services.heading': 'Branding usluge',
+    'branding.feature.identity': 'Brand identitet',
+    'branding.pricing.heading': 'Branding paketi',
+    'branding.package.starter.name': 'Starter Branding',
+    'branding.package.professional.name': 'Professional Branding',
+    'branding.package.enterprise.name': 'Enterprise Branding',
+    'branding.cta.title': 'Spremni za novi brand identitet?',
+    'branding.cta.desc':
+      'Kontaktirajte nas i kreirajmo zajedno brand koji će vas izdvojiti od konkurencije.',
+    'branding.cta.primary': 'Konsultacija',
+
+    // Service Pages - Strategy
+    'strategy.badge': 'Strategy & Consulting',
+    'strategy.hero.emphasis': 'Strategije',
+    'strategy.hero.trailing': 'za digitalni uspeh',
+    'strategy.hero.desc':
+      'Stručne konsultacije i podrška u implementaciji strategije.',
+    'strategy.hero.cta': 'Konsultacija',
+    'strategy.services.heading': 'Konsalting usluge',
+    'strategy.feature.digital': 'Digitalna strategija',
+    'strategy.feature.consulting': 'Konsultacije',
+    'strategy.pricing.heading': 'Strategy paketi',
+    'strategy.package.starter.name': 'Starter Strategy',
+    'strategy.package.professional.name': 'Professional Strategy',
+    'strategy.package.enterprise.name': 'Enterprise Strategy',
+    'strategy.cta.title': 'Spremni za digitalnu transformaciju?',
+    'strategy.cta.desc':
+      'Zakažite besplatnu konsultaciju i saznajte kako možemo pomoći vašem biznisu.',
+    'strategy.cta.primary': 'Zakažite konsultaciju',
+
     // Portfolio
     'portfolio.title': 'Naš rad',
     'portfolio.subtitle': 'Pogledajte projekte koji su transformisali naše klijente',
@@ -129,6 +255,7 @@ const translations = {
     // General
     'general.back_home': 'Nazad na početnu',
     'general.back': 'Nazad',
+    'packages.select': 'Odaberi paket',
   },
   en: {
     // Navigation
@@ -204,6 +331,130 @@ const translations = {
     'services.strategy.feature3': 'ROI optimization',
     'services.strategy.feature4': 'Growth strategy',
 
+// Service Pages - Web Design
+    'web.badge': 'Web Design & Development',
+    'web.hero.part1': 'We create',
+    'web.hero.emphasis': 'modern websites',
+    'web.hero.part2': 'that sell',
+    'web.hero.desc':
+      'From concept to launch - we craft websites that combine amazing design with functionality that delivers results.',
+    'web.hero.cta': 'Start a project',
+    'web.features.heading': 'What you get with our websites',
+    'web.features.desc':
+      'Every website we build includes everything you need for online success',
+    'web.feature.responsive': 'Responsive design',
+    'web.feature.speed': 'Speed optimization',
+    'web.feature.seo': 'SEO optimized',
+    'web.feature.ecommerce': 'E-commerce solutions',
+    'web.feature.design': 'Unique design',
+    'web.feature.clean_code': 'Clean code',
+    'web.process.heading': 'Our process',
+    'web.process.desc':
+      'A transparent and structured approach that ensures your project succeeds',
+    'web.pricing.heading': 'Packages & pricing',
+    'web.pricing.desc':
+      'Choose the package that fits your needs and budget',
+    'web.package.starter.name': 'Starter',
+    'web.package.starter.desc': 'Ideal for small companies',
+    'web.package.professional.name': 'Professional',
+    'web.package.professional.desc': 'Most popular package',
+    'web.package.enterprise.name': 'Enterprise',
+    'web.package.enterprise.desc': 'For large companies',
+    'web.portfolio.heading': 'Our work',
+    'web.portfolio.desc':
+      "Check out some of the sites we've built for clients",
+    'web.portfolio.view_more': 'View more',
+    'web.cta.title': 'Ready for your new website?',
+    'web.cta.desc':
+      'Contact us today for a free consultation and see how we can transform your online presence.',
+    'web.cta.primary': 'Free consultation',
+    'web.cta.secondary': 'Call us',
+
+    // Service Pages - SEO
+    'seo.badge': 'SEO & Google Business',
+    'seo.hero.part1': 'Be',
+    'seo.hero.emphasis': '#1 on Google',
+    'seo.hero.part2': 'search results',
+    'seo.hero.desc':
+      'Increase your visibility in search engines and win more clients through organic search results.',
+    'seo.hero.cta': 'Free SEO audit',
+    'seo.services.heading': 'Comprehensive SEO service',
+    'seo.services.desc':
+      'A complete SEO approach covering all aspects of digital marketing',
+    'seo.feature.mobile': 'Mobile SEO',
+    'seo.feature.technical': 'Technical SEO',
+    'seo.results.heading': 'Results that speak',
+    'seo.results.desc':
+      'These numbers show why companies in Montenegro choose BDigital for SEO',
+    'seo.pricing.heading': 'SEO packages',
+    'seo.pricing.desc':
+      'Choose an SEO package that matches your business size and ambitions',
+    'seo.package.starter.name': 'Starter SEO',
+    'seo.package.starter.desc': 'For small companies',
+    'seo.package.professional.name': 'Professional SEO',
+    'seo.package.professional.desc': 'Most popular package',
+    'seo.package.enterprise.name': 'Enterprise SEO',
+    'seo.package.enterprise.desc': 'For large companies',
+    'seo.case.heading': 'Case studies',
+    'seo.case.desc': 'How we helped our clients dominate Google searches',
+    'seo.cta.title': 'Free SEO audit of your site',
+    'seo.cta.desc':
+      'Find out what you can improve on your website to rank better on Google.',
+    'seo.cta.primary': 'Request free audit',
+    'seo.cta.secondary': 'Call us',
+
+    // Service Pages - Social Media
+    'social.badge': 'Social Media Management',
+    'social.hero.title': 'Dominate social networks',
+    'social.hero.desc':
+      'We build community and boost engagement through creative strategies.',
+    'social.hero.cta': 'Start today',
+    'social.services.heading': 'Our social media services',
+    'social.feature.instagram': 'Instagram Management',
+    'social.feature.facebook': 'Facebook Marketing',
+    'social.pricing.heading': 'Social Media packages',
+    'social.package.starter.name': 'Starter Social',
+    'social.package.professional.name': 'Professional Social',
+    'social.package.enterprise.name': 'Enterprise Social',
+    'social.cta.title': 'Ready for a stronger social presence?',
+    'social.cta.desc':
+      'Contact us to learn how we can grow your followers and engagement.',
+    'social.cta.primary': 'Start cooperation',
+
+    // Service Pages - Branding
+    'branding.badge': 'Branding & Graphic Design',
+    'branding.hero.title': 'Build a recognizable brand',
+    'branding.hero.desc': 'We create a visual identity that leaves a strong impression.',
+    'branding.hero.cta': 'Start project',
+    'branding.services.heading': 'Branding services',
+    'branding.feature.identity': 'Brand identity',
+    'branding.pricing.heading': 'Branding packages',
+    'branding.package.starter.name': 'Starter Branding',
+    'branding.package.professional.name': 'Professional Branding',
+    'branding.package.enterprise.name': 'Enterprise Branding',
+    'branding.cta.title': 'Ready for a new brand identity?',
+    'branding.cta.desc':
+      'Contact us and together we’ll create a brand that sets you apart from the competition.',
+    'branding.cta.primary': 'Consultation',
+
+    // Service Pages - Strategy
+    'strategy.badge': 'Strategy & Consulting',
+    'strategy.hero.emphasis': 'Strategies',
+    'strategy.hero.trailing': 'for digital success',
+    'strategy.hero.desc':
+      'Expert consulting and support in implementing your strategy.',
+    'strategy.hero.cta': 'Consultation',
+    'strategy.services.heading': 'Consulting services',
+    'strategy.feature.digital': 'Digital strategy',
+    'strategy.feature.consulting': 'Consultations',
+    'strategy.pricing.heading': 'Strategy packages',
+    'strategy.package.starter.name': 'Starter Strategy',
+    'strategy.package.professional.name': 'Professional Strategy',
+    'strategy.package.enterprise.name': 'Enterprise Strategy',
+    'strategy.cta.title': 'Ready for digital transformation?',
+    'strategy.cta.desc':
+      'Schedule a free consultation to see how we can help your business.',
+    'strategy.cta.primary': 'Schedule consultation',
     // Portfolio
     'portfolio.title': 'Our Work',
     'portfolio.subtitle': 'See projects that transformed our clients',
@@ -247,6 +498,7 @@ const translations = {
     // General
     'general.back_home': 'Back to home',
     'general.back': 'Back',
+    'packages.select': 'Choose package',
   },
 } as const;
 

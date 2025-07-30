@@ -23,32 +23,32 @@ export function WebDesignPage() {
   const features = [
     {
       icon: Monitor,
-      title: 'Responzivni dizajn',
+      title: t('web.feature.responsive'),
       description: 'Web stranice koje savršeno rade na svim uređajima - desktop, tablet i mobilni'
     },
     {
       icon: Zap,
-      title: 'Optimizacija brzine',
+      title: t('web.feature.speed'),
       description: 'Optimizujemo svaku stranicu za maksimalnu brzinu učitavanja'
     },
     {
       icon: Search,
-      title: 'SEO optimizovano',
+      title: t('web.feature.seo'),
       description: 'Izgrađeno za pretraživače od prvog dana'
     },
     {
       icon: ShoppingCart,
-      title: 'E-commerce rešenja',
+      title: t('web.feature.ecommerce'),
       description: 'Kompletan online shop sa payment gateway integracijom'
     },
     {
       icon: Palette,
-      title: 'Jedinstveni dizajn',
+      title: t('web.feature.design'),
       description: 'Kreativni dizajni koji odražavaju identitet vašeg brenda'
     },
     {
       icon: Code,
-      title: 'Čist kod',
+      title: t('web.feature.clean_code'),
       description: 'Moderan, maintainable kod koji prati najbolje prakse'
     }
   ];
@@ -82,9 +82,9 @@ export function WebDesignPage() {
 
   const packages = [
     {
-      name: 'Starter',
+      name: t('web.package.starter.name'),
       price: '1.200 €',
-      description: 'Idealno za manje kompanije',
+      description: t('web.package.starter.desc'),
       features: [
         'Do 5 stranica',
         'Responzivni dizajn', 
@@ -95,9 +95,9 @@ export function WebDesignPage() {
       popular: false
     },
     {
-      name: 'Professional', 
+      name: t('web.package.professional.name'),
       price: '2.500 €',
-      description: 'Najpopularniji paket',
+      description: t('web.package.professional.desc'),
       features: [
         'Do 15 stranica',
         'Custom dizajn',
@@ -109,9 +109,9 @@ export function WebDesignPage() {
       popular: true
     },
     {
-      name: 'Enterprise',
+      name: t('web.package.enterprise.name'),
       price: '5.000 €+',
-      description: 'Za velike kompanije',
+      description: t('web.package.enterprise.desc'),
       features: [
         'Neograničen broj stranica',
         'E-commerce funkcionalnost',
@@ -166,22 +166,24 @@ export function WebDesignPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="text-white">
               <Badge className="bg-bdigital-cyan/20 text-bdigital-cyan border-bdigital-cyan mb-4">
-                Web Design & Development
+                {t('web.badge')}
               </Badge>
               <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
-                Kreiramo <span className="text-bdigital-cyan">moderne web stranice</span> koje prodaju
+                {t('web.hero.part1')}{' '}
+                <span className="text-bdigital-cyan">{t('web.hero.emphasis')}</span>{' '}
+                {t('web.hero.part2')}
               </h1>
               <p className="text-gray-300 text-lg mb-8 leading-relaxed">
-                Od ideje do realizacije - razvijamo web stranice koje kombinuju izuzetan dizajn sa funkcionalnosti koja donosi rezultate.
+                {t('web.hero.desc')}
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 mb-8">
-                <Button 
+                <Button
                   size="lg"
                   className="bg-bdigital-cyan text-bdigital-navy hover:bg-bdigital-cyan-light px-8 py-3 font-semibold"
                   onClick={handleConsultation}
                 >
-                  Započni projekat
+                  {t('web.hero.cta')}
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
                 <Button 
@@ -229,10 +231,10 @@ export function WebDesignPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-bdigital-navy mb-4">
-              Što dobijate sa našim web stranicama
+              {t('web.features.heading')}
             </h2>
             <p className="text-lg text-neutral-gray max-w-2xl mx-auto">
-              Svaka web stranica koju kreiramo uključuje sve što vam je potrebno za uspeh online
+              {t('web.features.desc')}
             </p>
           </div>
 
@@ -260,10 +262,10 @@ export function WebDesignPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-bdigital-navy mb-4">
-              Naš proces rada
+              {t('web.process.heading')}
             </h2>
             <p className="text-lg text-neutral-gray max-w-2xl mx-auto">
-              Transparentan i strukturisan pristup koji garantuje uspeh vašeg projekta
+              {t('web.process.desc')}
             </p>
           </div>
 
@@ -296,10 +298,10 @@ export function WebDesignPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-bdigital-navy mb-4">
-              Paketi i cene
+              {t('web.pricing.heading')}
             </h2>
             <p className="text-lg text-neutral-gray max-w-2xl mx-auto">
-              Odaberite paket koji najbolje odgovara vašim potrebama i budžetu
+              {t('web.pricing.desc')}
             </p>
           </div>
 
@@ -327,12 +329,12 @@ export function WebDesignPage() {
                       </li>
                     ))}
                   </ul>
-                  <Button 
+                  <Button
                     className={`w-full ${pkg.popular ? 'bg-bdigital-cyan text-bdigital-navy hover:bg-bdigital-cyan-light' : 'border border-bdigital-cyan text-bdigital-cyan hover:bg-bdigital-cyan hover:text-bdigital-navy'} font-semibold`}
                     variant={pkg.popular ? 'default' : 'outline'}
                     onClick={() => handlePackageSelect(pkg.name)}
                   >
-                    Odaberi paket
+                    {t('packages.select')}
                   </Button>
                 </CardContent>
               </Card>
@@ -346,10 +348,10 @@ export function WebDesignPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-bdigital-navy mb-4">
-              Naši radovi
+              {t('web.portfolio.heading')}
             </h2>
             <p className="text-lg text-neutral-gray max-w-2xl mx-auto">
-              Pogledajte neke od web stranica koje smo kreirali za naše klijente
+              {t('web.portfolio.desc')}
             </p>
           </div>
 
@@ -363,11 +365,11 @@ export function WebDesignPage() {
                     className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-bdigital-navy/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                    <Button 
-                      variant="outline" 
+                    <Button
+                      variant="outline"
                       className="border-white text-white hover:bg-white hover:text-bdigital-navy"
                     >
-                      Pogledaj više
+                      {t('web.portfolio.view_more')}
                     </Button>
                   </div>
                 </div>
@@ -388,26 +390,26 @@ export function WebDesignPage() {
       <section className="py-20 bg-gradient-to-r from-bdigital-navy to-bdigital-dark-navy text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Spremni za vašu novu web stranicu?
+            {t('web.cta.title')}
           </h2>
           <p className="text-gray-300 text-lg mb-8 max-w-2xl mx-auto">
-            Kontaktirajte nas danas za besplatnu konsultaciju i saznajte kako možemo transformisati vaše online prisustvo.
+            {t('web.cta.desc')}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button 
+            <Button
               size="lg"
               className="bg-bdigital-cyan text-bdigital-navy hover:bg-bdigital-cyan-light px-8 py-3 font-semibold"
               onClick={handleConsultation}
             >
-              Besplatna konsultacija
+              {t('web.cta.primary')}
             </Button>
-            <Button 
-              variant="outline" 
+            <Button
+              variant="outline"
               size="lg"
               className="border-bdigital-cyan text-bdigital-cyan hover:bg-bdigital-cyan hover:text-bdigital-navy px-8 py-3 font-semibold"
               onClick={handleConsultation}
             >
-              Pozovite nas
+              {t('web.cta.secondary')}
             </Button>
           </div>
         </div>

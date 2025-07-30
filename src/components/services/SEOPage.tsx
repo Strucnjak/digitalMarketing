@@ -24,32 +24,32 @@ export function SEOPage() {
   const services = [
     {
       icon: Search,
-      title: 'Keyword Research',
+      title: t('services.seo.feature1'),
       description: 'Detaljno istraživanje ključnih reči za vašu industriju i lokalno tržište'
     },
     {
       icon: TrendingUp,
-      title: 'On-Page SEO',
+      title: t('services.seo.feature2'),
       description: 'Optimizacija sadržaja, meta tagova i tehnička poboljšanja'
     },
     {
       icon: MapPin,
-      title: 'Lokalni SEO',
+      title: t('services.seo.feature3'),
       description: 'Google My Business optimizacija za lokalne pretrage u Crnoj Gori'
     },
     {
       icon: BarChart3,
-      title: 'SEO analitika',
+      title: t('services.seo.feature4'),
       description: 'Detaljni mesečni izveštaji o napretku i performansama'
     },
     {
       icon: Smartphone,
-      title: 'Mobile SEO',
+      title: t('seo.feature.mobile'),
       description: 'Optimizacija za mobilne pretraživače i glasovne pretrage'
     },
     {
       icon: Globe,
-      title: 'Technical SEO',
+      title: t('seo.feature.technical'),
       description: 'Brzina sajta, Core Web Vitals i strukturirani podatci'
     }
   ];
@@ -79,9 +79,9 @@ export function SEOPage() {
 
   const packages = [
     {
-      name: 'Starter SEO',
+      name: t('seo.package.starter.name'),
       price: '500 €/mes',
-      description: 'Za manje kompanije',
+      description: t('seo.package.starter.desc'),
       features: [
         'Keyword research (20 KW)',
         'On-page optimizacija',
@@ -92,9 +92,9 @@ export function SEOPage() {
       popular: false
     },
     {
-      name: 'Professional SEO',
+      name: t('seo.package.professional.name'),
       price: '800 €/mes',
-      description: 'Najpopularniji paket',
+      description: t('seo.package.professional.desc'),
       features: [
         'Keyword research (50 KW)',
         'Kompletna on-page optimizacija',
@@ -106,9 +106,9 @@ export function SEOPage() {
       popular: true
     },
     {
-      name: 'Enterprise SEO',
+      name: t('seo.package.enterprise.name'),
       price: '1.500 €/mes',
-      description: 'Za velike kompanije',
+      description: t('seo.package.enterprise.desc'),
       features: [
         'Unlimited keyword research',
         'Tehnička SEO auditacija',
@@ -169,22 +169,24 @@ export function SEOPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="text-white">
               <Badge className="bg-bdigital-cyan/20 text-bdigital-cyan border-bdigital-cyan mb-4">
-                SEO & Google Business
+                {t('seo.badge')}
               </Badge>
               <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
-                Budite <span className="text-bdigital-cyan">#1 na Google</span> pretragama
+                {t('seo.hero.part1')}{' '}
+                <span className="text-bdigital-cyan">{t('seo.hero.emphasis')}</span>{' '}
+                {t('seo.hero.part2')}
               </h1>
               <p className="text-gray-300 text-lg mb-8 leading-relaxed">
-                Povećajte vidljivost vašeg biznisa u pretraživačima i osvojite više klijenata putem organskih rezultata pretrage.
+                {t('seo.hero.desc')}
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 mb-8">
-                <Button 
+                <Button
                   size="lg"
                   className="bg-bdigital-cyan text-bdigital-navy hover:bg-bdigital-cyan-light px-8 py-3 font-semibold"
                   onClick={handleConsultation}
                 >
-                  Besplatan SEO audit
+                  {t('seo.hero.cta')}
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
                 <Button 
@@ -236,10 +238,10 @@ export function SEOPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-bdigital-navy mb-4">
-              Kompletna SEO usluga
+              {t('seo.services.heading')}
             </h2>
             <p className="text-lg text-neutral-gray max-w-2xl mx-auto">
-              Sveobuhvatan pristup SEO optimizaciji koji pokriva sve aspekte digitalnog marketinga
+              {t('seo.services.desc')}
             </p>
           </div>
 
@@ -267,10 +269,10 @@ export function SEOPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-bdigital-navy mb-4">
-              Rezultati koji govore
+              {t('seo.results.heading')}
             </h2>
             <p className="text-lg text-neutral-gray max-w-2xl mx-auto">
-              Ovi brojevi pokazuju zašto kompanije u Crnoj Gori biraju BDigital za svoj SEO
+              {t('seo.results.desc')}
             </p>
           </div>
 
@@ -295,10 +297,10 @@ export function SEOPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-bdigital-navy mb-4">
-              SEO paketi
+              {t('seo.pricing.heading')}
             </h2>
             <p className="text-lg text-neutral-gray max-w-2xl mx-auto">
-              Odaberite SEO paket koji odgovara veličini vašeg biznisa i ambicijama
+              {t('seo.pricing.desc')}
             </p>
           </div>
 
@@ -326,12 +328,12 @@ export function SEOPage() {
                       </li>
                     ))}
                   </ul>
-                  <Button 
+                  <Button
                     className={`w-full ${pkg.popular ? 'bg-bdigital-cyan text-bdigital-navy hover:bg-bdigital-cyan-light' : 'border border-bdigital-cyan text-bdigital-cyan hover:bg-bdigital-cyan hover:text-bdigital-navy'} font-semibold`}
                     variant={pkg.popular ? 'default' : 'outline'}
                     onClick={() => handlePackageSelect(pkg.name)}
                   >
-                    Odaberi paket
+                    {t('packages.select')}
                   </Button>
                 </CardContent>
               </Card>
@@ -345,10 +347,10 @@ export function SEOPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-bdigital-navy mb-4">
-              Studije slučaja
+              {t('seo.case.heading')}
             </h2>
             <p className="text-lg text-neutral-gray max-w-2xl mx-auto">
-              Kako smo pomogli našim klijentima da dominiraju Google pretragama
+              {t('seo.case.desc')}
             </p>
           </div>
 
@@ -403,26 +405,26 @@ export function SEOPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <Award className="h-16 w-16 text-bdigital-cyan mx-auto mb-6" />
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Besplatan SEO audit vašeg sajta
+            {t('seo.cta.title')}
           </h2>
           <p className="text-gray-300 text-lg mb-8 max-w-2xl mx-auto">
-            Saznajte šta možete poboljšati na vašoj web stranici da biste se bolje rangirali na Google pretragama.
+            {t('seo.cta.desc')}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button 
+            <Button
               size="lg"
               className="bg-bdigital-cyan text-bdigital-navy hover:bg-bdigital-cyan-light px-8 py-3 font-semibold"
               onClick={handleConsultation}
             >
-              Zatražite besplatan audit
+              {t('seo.cta.primary')}
             </Button>
-            <Button 
-              variant="outline" 
+            <Button
+              variant="outline"
               size="lg"
               className="border-bdigital-cyan text-bdigital-cyan hover:bg-bdigital-cyan hover:text-bdigital-navy px-8 py-3 font-semibold"
               onClick={handleConsultation}
             >
-              Pozovite nas
+              {t('seo.cta.secondary')}
             </Button>
           </div>
         </div>
