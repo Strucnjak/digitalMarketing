@@ -1,7 +1,7 @@
 import { createContext, useContext, useState } from 'react';
 import type { ReactNode } from 'react';
 
-export type Language = 'sr' | 'en';
+export type Language = 'sr' | 'en' | 'me';
 
 interface LanguageContextType {
   language: Language;
@@ -79,6 +79,77 @@ const translations = {
     'footer.contact': 'Kontakt',
     'footer.rights': 'Sva prava zadržana.'
   },
+  me: {
+    // Navigation
+    'nav.home': 'Početna',
+    'nav.services': 'Usluge',
+    'nav.portfolio': 'Portfolio',
+    'nav.about': 'O nama',
+    'nav.contact': 'Kontakt',
+
+    // Hero Section
+    'hero.title': 'Digitalno transformišemo vaš biznis',
+    'hero.subtitle':
+      'Kreiramo moderne web stranice, optimizujemo SEO i upravljamo vašim digitalnim prisustvom u Crnoj Gori',
+    'hero.cta': 'Započnite transformaciju',
+    'hero.secondary': 'Pogledajte naš rad',
+
+    // Services
+    'services.title': 'Naše usluge',
+    'services.subtitle': 'Pružamo kompletna digitalna rješenja za vaš uspjeh',
+    'services.web.title': 'Web dizajn i razvoj',
+    'services.web.desc': 'Moderne, responzivne web stranice optimizovane za konverziju',
+    'services.seo.title': 'SEO i Google Business',
+    'services.seo.desc': 'Poboljšajte vidljivost i osvojite više klijenata preko pretrage',
+    'services.social.title': 'Upravljanje društvenim mrežama',
+    'services.social.desc': 'Strategije koje grade brendove i povećavaju angažovanje',
+    'services.branding.title': 'Brendiranje i grafički dizajn',
+    'services.branding.desc': 'Kreativna rješenja koja izdvajaju vaš brend',
+    'services.strategy.title': 'Strategija i savjetovanje',
+    'services.strategy.desc': 'Digitalne strategije usmjerene na rezultate',
+
+    // Portfolio
+    'portfolio.title': 'Naš rad',
+    'portfolio.subtitle': 'Pogledajte projekte koji su transformisali naše klijente',
+    'portfolio.all': 'Sve kategorije',
+    'portfolio.web': 'Web stranice',
+    'portfolio.seo': 'SEO projekti',
+    'portfolio.social': 'Društvene mreže',
+    'portfolio.branding': 'Brendiranje',
+
+    // About
+    'about.title': 'O nama',
+    'about.subtitle': 'Vaš partner za digitalni uspjeh u Crnoj Gori',
+    'about.description':
+      'BDigital je moderna digitalna agencija iz Crne Gore koja pomaže kompanijama da ostvare svoj puni potencijal u digitalnom svijetu. Sa kombinacijom kreativnosti, tehnološke ekspertize i duboke analize tržišta, kreiramo rješenja koja donose mjerljive rezultate.',
+    'about.mission.title': 'Naša misija',
+    'about.mission.desc':
+      'Pomažemo lokalnim kompanijama da se takmiče na globalnom nivou kroz inovativna digitalna rješenja.',
+    'about.vision.title': 'Naša vizija',
+    'about.vision.desc': 'Biti vodeća digitalna agencija u regionu poznata po kreativnosti i rezultatima.',
+    'about.values.title': 'Naše vrijednosti',
+    'about.values.desc':
+      'Transparentnost, inovacija, rezultati i dugotrajne partnerske veze sa klijentima.',
+
+    // Testimonials
+    'testimonials.title': 'Šta kažu naši klijenti',
+    'testimonials.subtitle': 'Poverite nam svoj digitalni uspjeh',
+
+    // Contact
+    'contact.title': 'Kontaktirajte nas',
+    'contact.subtitle': 'Spremni smo da razgovaramo o vašem projektu',
+    'contact.name': 'Ime',
+    'contact.email': 'Email',
+    'contact.message': 'Poruka',
+    'contact.send': 'Pošaljite poruku',
+
+    // Footer
+    'footer.description': 'Vaš partner za digitalni uspjeh u Crnoj Gori',
+    'footer.services': 'Usluge',
+    'footer.company': 'Kompanija',
+    'footer.contact': 'Kontakt',
+    'footer.rights': 'Sva prava zadržana.'
+  },
   en: {
     // Navigation
     'nav.home': 'Home',
@@ -149,7 +220,7 @@ const translations = {
 };
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguage] = useState<Language>('sr');
+  const [language, setLanguage] = useState<Language>('me');
 
   const t = (key: string): string => {
     return translations[language][key as keyof typeof translations['sr']] || key;
