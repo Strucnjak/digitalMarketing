@@ -81,7 +81,7 @@ export function Navigation() {
     }, 100);
   };
 
-  const handleLanguageChange = (newLanguage: "sr" | "en" | "me") => {
+  const handleLanguageChange = (newLanguage: "en" | "me") => {
     setLanguage(newLanguage);
     setIsOpen(false);
   };
@@ -234,16 +234,6 @@ export function Navigation() {
             {/* Language Switcher */}
             <div className="flex items-center space-x-2">
               <button
-                onClick={() => handleLanguageChange("sr")}
-                className={`px-2 py-1 text-xs font-medium rounded transition-all duration-300 ${
-                  language === "sr"
-                    ? "bg-bdigital-cyan text-bdigital-navy"
-                    : `hover:bg-bdigital-cyan/20 ${isScrolled ? "text-bdigital-navy" : "text-white"}`
-                }`}
-              >
-                SR
-              </button>
-              <button
                 onClick={() => handleLanguageChange("me")}
                 className={`px-2 py-1 text-xs font-medium rounded transition-all duration-300 ${
                   language === "me"
@@ -373,16 +363,6 @@ export function Navigation() {
                     {/* Language Switcher */}
                     <div className="flex items-center justify-center space-x-2">
                       <span className="text-sm text-neutral-gray">Jezik:</span>
-                      <button
-                        onClick={() => handleLanguageChange("sr")}
-                        className={`px-3 py-1 text-sm font-medium rounded-lg transition-all duration-200 ${
-                          language === "sr"
-                            ? "bg-bdigital-cyan text-bdigital-navy"
-                            : "text-bdigital-navy hover:bg-gray-100"
-                        }`}
-                      >
-                        Srpski
-                      </button>
                       <button
                         onClick={() => handleLanguageChange("me")}
                         className={`px-3 py-1 text-sm font-medium rounded-lg transition-all duration-200 ${

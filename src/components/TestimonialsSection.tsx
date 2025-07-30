@@ -6,7 +6,7 @@ import { useLanguage } from './LanguageContext';
 export function TestimonialsSection() {
   const { t, language } = useLanguage();
 
-  const testimonials = language === 'sr' ? [
+  const testimonials = language === 'me' ? [
     {
       name: 'Marko Petrović',
       role: 'Vlasnik restorana "Konoba Stari Grad"',
