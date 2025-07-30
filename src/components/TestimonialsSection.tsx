@@ -105,19 +105,19 @@ export function TestimonialsSection() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
             <div className="text-center">
               <div className="text-2xl font-bold text-digital-blue mb-2">100%</div>
-              <div className="text-sm text-neutral-gray">Zadovoljnih klijenata</div>
+              <div className="text-sm text-neutral-gray">{t('testimonials.stats.clients')}</div>
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-digital-blue mb-2">24h</div>
-              <div className="text-sm text-neutral-gray">Vreme odgovora</div>
+              <div className="text-sm text-neutral-gray">{t('testimonials.stats.response')}</div>
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-digital-blue mb-2">3+</div>
-              <div className="text-sm text-neutral-gray">Godine iskustva</div>
+              <div className="text-sm text-neutral-gray">{t('testimonials.stats.years')}</div>
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-digital-blue mb-2">50+</div>
-              <div className="text-sm text-neutral-gray">Završenih projekata</div>
+              <div className="text-sm text-neutral-gray">{t('testimonials.stats.projects')}</div>
             </div>
           </div>
         </div>

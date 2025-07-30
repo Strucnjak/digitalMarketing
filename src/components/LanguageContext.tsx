@@ -220,6 +220,22 @@ const translations = {
     'portfolio.seo': 'SEO projekti',
     'portfolio.social': 'Društvene mreže',
     'portfolio.branding': 'Brendiranje',
+    'portfolio.badge': 'Portfolio',
+    'portfolio.heading.part1': 'Naši',
+    'portfolio.heading.emphasis': 'uspešni',
+    'portfolio.heading.part2': 'projekti',
+    'portfolio.description':
+      'Pogledajte kako smo pomogli našim klijentima da ostvare svoje digitalne ambicije i postignu izuzetne rezultate.',
+    'portfolio.filter.all': 'Sve',
+    'portfolio.filter.web-design': 'Web Design',
+    'portfolio.filter.ecommerce': 'E-commerce',
+    'portfolio.filter.branding': 'Branding',
+    'portfolio.filter.seo': 'SEO',
+    'portfolio.cta.title': 'Vaš projekat može biti sledeći',
+    'portfolio.cta.desc':
+      'Kontaktirajte nas danas i zajedno kreirajmo digitalno rešenje koje će transformisati vaš biznis.',
+    'portfolio.cta.primary': 'Započnite svoj projekat',
+    'portfolio.view': 'Pogledaj',
 
     // About
     'about.title': 'O nama',
@@ -234,9 +250,28 @@ const translations = {
     'about.values.title': 'Naše vrijednosti',
     'about.values.desc': 'Transparentnost, inovacija, rezultati i dugotrajne partnerske veze sa klijentima.',
 
+    'about.stats.title': 'Brojevi govore sami za sebe',
+    'about.stats.subtitle':
+      'Naši rezultati su dokaz posvećenosti kvalitetu i uspešnosti naših klijenata.',
+    'about.stats.clients': 'Zadovoljnih klijenata',
+    'about.stats.projects': 'Završenih projekata',
+    'about.stats.years': 'Godine iskustva',
+    'about.stats.success_rate': 'Stopa uspešnosti',
+    'about.team.title': 'Naš tim',
+    'about.team.subtitle': 'Upoznajte kreativne umove iza BDigital-a koji stvaraju digitalna rešenja.',
+    'about.cta.title': 'Spremni da radimo zajedno?',
+    'about.cta.desc':
+      'Pridružite se kompanijama koje su odabrale BDigital kao svog partnera za digitalni uspeh.',
+    'about.cta.primary': 'Kontaktirajte nas',
+    'about.cta.secondary': 'Pogledajte naš rad',
+
     // Testimonials
     'testimonials.title': 'Šta kažu naši klijenti',
     'testimonials.subtitle': 'Poverite nam svoj digitalni uspjeh',
+    'testimonials.stats.clients': 'Zadovoljnih klijenata',
+    'testimonials.stats.response': 'Vreme odgovora',
+    'testimonials.stats.years': 'Godine iskustva',
+    'testimonials.stats.projects': 'Završenih projekata',
 
     // Contact
     'contact.title': 'Kontaktirajte nas',
@@ -245,6 +280,29 @@ const translations = {
     'contact.email': 'Email',
     'contact.message': 'Poruka',
     'contact.send': 'Pošaljite poruku',
+    'contact.sending': 'Šalje se...',
+    'contact.badge': 'Kontakt',
+    'contact.heading.part1': 'Započnimo',
+    'contact.heading.emphasis': 'razgovor',
+    'contact.description':
+      'Spremi ste da transformišete svoj biznis? Kontaktirajte nas danas za besplatnu konsultaciju i saznajte kako možemo pomoći.',
+    'contact.form.title': 'Pošaljite nam poruku',
+    'contact.success.title': 'Poruka je uspešno poslata!',
+    'contact.success.desc': 'Kontaktiraćemo vas u najkraćem mogućem roku.',
+    'contact.company': 'Kompanija',
+    'contact.phone': 'Telefon',
+    'contact.stats.title.pre': 'Zašto klijenti biraju',
+    'contact.stats.title.emphasis': 'nas',
+    'contact.stats.response': 'Vreme odgovora',
+    'contact.stats.clients': 'Zadovoljni klijenti',
+    'contact.stats.support': 'Email podrška',
+    'contact.stats.years': 'Godina iskustva',
+    'contact.meeting.title': 'Zakazivanje sastanka',
+    'contact.meeting.desc':
+      'Preferirate lični razgovor? Možemo se sresti u našoj kancelariji u Podgorici ili bilo gde što vama odgovara.',
+    'contact.meeting.flexible': 'Fleksibilno vreme sastanka',
+    'contact.meeting.location': 'Lokacija po vašoj želji',
+    'contact.meeting.free': 'Besplatna konsultacija',
 
     // Footer
     'footer.description': 'Vaš partner za digitalni uspjeh u Crnoj Gori',
@@ -463,6 +521,22 @@ const translations = {
     'portfolio.seo': 'SEO Projects',
     'portfolio.social': 'Social Media',
     'portfolio.branding': 'Branding',
+    'portfolio.badge': 'Portfolio',
+    'portfolio.heading.part1': 'Our',
+    'portfolio.heading.emphasis': 'successful',
+    'portfolio.heading.part2': 'projects',
+    'portfolio.description':
+      'See how we helped our clients achieve their digital ambitions and outstanding results.',
+    'portfolio.filter.all': 'All',
+    'portfolio.filter.web-design': 'Web Design',
+    'portfolio.filter.ecommerce': 'E-commerce',
+    'portfolio.filter.branding': 'Branding',
+    'portfolio.filter.seo': 'SEO',
+    'portfolio.cta.title': 'Your project could be next',
+    'portfolio.cta.desc':
+      "Contact us today and together let's create a digital solution that will transform your business.",
+    'portfolio.cta.primary': 'Start your project',
+    'portfolio.view': 'View',
 
     // About
     'about.title': 'About Us',
@@ -477,9 +551,28 @@ const translations = {
     'about.values.title': 'Our Values',
     'about.values.desc': 'Transparency, innovation, results and long-term partnerships with clients.',
 
+    'about.stats.title': 'Numbers speak for themselves',
+    'about.stats.subtitle':
+      'Our results show our commitment to quality and success of our clients.',
+    'about.stats.clients': 'Happy clients',
+    'about.stats.projects': 'Completed projects',
+    'about.stats.years': 'Years of experience',
+    'about.stats.success_rate': 'Success rate',
+    'about.team.title': 'Our Team',
+    'about.team.subtitle': 'Meet the creative minds behind BDigital who craft digital solutions.',
+    'about.cta.title': 'Ready to work together?',
+    'about.cta.desc':
+      'Join the companies that chose BDigital as their partner for digital success.',
+    'about.cta.primary': 'Contact us',
+    'about.cta.secondary': 'View our work',
+
     // Testimonials
     'testimonials.title': 'What our clients say',
     'testimonials.subtitle': 'Trust us with your digital success',
+    'testimonials.stats.clients': 'Satisfied clients',
+    'testimonials.stats.response': 'Response time',
+    'testimonials.stats.years': 'Years of experience',
+    'testimonials.stats.projects': 'Completed projects',
 
     // Contact
     'contact.title': 'Contact us',
@@ -488,6 +581,29 @@ const translations = {
     'contact.email': 'Email',
     'contact.message': 'Message',
     'contact.send': 'Send message',
+    'contact.sending': 'Sending...',
+    'contact.badge': 'Contact',
+    'contact.heading.part1': "Let's start",
+    'contact.heading.emphasis': 'a conversation',
+    'contact.description':
+      'Ready to transform your business? Contact us today for a free consultation and learn how we can help.',
+    'contact.form.title': 'Send us a message',
+    'contact.success.title': 'Message sent successfully!',
+    'contact.success.desc': 'We will get back to you as soon as possible.',
+    'contact.company': 'Company',
+    'contact.phone': 'Phone',
+    'contact.stats.title.pre': 'Why clients choose',
+    'contact.stats.title.emphasis': 'us',
+    'contact.stats.response': 'Response time',
+    'contact.stats.clients': 'Happy clients',
+    'contact.stats.support': 'Email support',
+    'contact.stats.years': 'Years of experience',
+    'contact.meeting.title': 'Schedule a meeting',
+    'contact.meeting.desc':
+      'Prefer a face-to-face talk? We can meet at our office in Podgorica or wherever suits you.',
+    'contact.meeting.flexible': 'Flexible meeting time',
+    'contact.meeting.location': 'Location of your choice',
+    'contact.meeting.free': 'Free consultation',
 
     // Footer
     'footer.description': 'Your partner for digital success in Montenegro',

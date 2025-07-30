@@ -20,11 +20,11 @@ export function PortfolioSection() {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const filters = [
-    { id: 'all', label: 'Sve', count: 12 },
-    { id: 'web-design', label: 'Web Design', count: 5 },
-    { id: 'ecommerce', label: 'E-commerce', count: 3 },
-    { id: 'branding', label: 'Branding', count: 2 },
-    { id: 'seo', label: 'SEO', count: 2 }
+    { id: 'all', label: _t('portfolio.filter.all'), count: 12 },
+    { id: 'web-design', label: _t('portfolio.filter.web-design'), count: 5 },
+    { id: 'ecommerce', label: _t('portfolio.filter.ecommerce'), count: 3 },
+    { id: 'branding', label: _t('portfolio.filter.branding'), count: 2 },
+    { id: 'seo', label: _t('portfolio.filter.seo'), count: 2 }
   ];
 
   const projects = [
@@ -145,13 +145,13 @@ export function PortfolioSection() {
         {/* Section Header */}
         <div className="text-center mb-12 lg:mb-16">
           <Badge className="bg-bdigital-cyan/10 text-bdigital-cyan border-bdigital-cyan/20 mb-4 px-4 py-2">
-            Portfolio
+            {_t('portfolio.badge')}
           </Badge>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-bdigital-navy mb-4 lg:mb-6">
-            Naši <span className="text-bdigital-cyan">uspešni</span> projekti
+            {_t('portfolio.heading.part1')} <span className="text-bdigital-cyan">{_t('portfolio.heading.emphasis')}</span> {_t('portfolio.heading.part2')}
           </h2>
           <p className="text-lg lg:text-xl text-neutral-gray max-w-3xl mx-auto leading-relaxed">
-            Pogledajte kako smo pomogli našim klijentima da ostvare svoje digitalne ambicije i postignu izuzetne rezultate.
+            {_t('portfolio.description')}
           </p>
         </div>
 
@@ -237,16 +237,16 @@ export function PortfolioSection() {
         <div className="text-center mt-12 lg:mt-16">
           <div className="bg-gradient-to-r from-bdigital-navy to-bdigital-dark-navy rounded-3xl p-8 lg:p-12 text-white">
             <h3 className="text-2xl lg:text-3xl font-bold mb-4">
-              Vaš projekat može biti sledeći
+              {_t('portfolio.cta.title')}
             </h3>
             <p className="text-gray-300 text-lg mb-6 lg:mb-8 max-w-2xl mx-auto">
-              Kontaktirajte nas danas i zajedno kreirajmo digitalno rešenje koje će transformisati vaš biznis.
+              {_t('portfolio.cta.desc')}
             </p>
             <Button
               onClick={() => navigateTo('service-inquiry')}
               className="bg-bdigital-cyan text-bdigital-navy hover:bg-bdigital-cyan-light font-semibold px-8 py-3 transform hover:scale-105 transition-all duration-300 shadow-xl"
             >
-              Započnite svoj projekat
+              {_t('portfolio.cta.primary')}
             </Button>
           </div>
         </div>
@@ -258,6 +258,7 @@ export function PortfolioSection() {
 // Project Card Component
 function ProjectCard({ project }: { project: any }) {
   const [isHovered, setIsHovered] = useState(false);
+  const { t: _t } = useLanguage();
 
   return (
     <Card
@@ -291,7 +292,7 @@ function ProjectCard({ project }: { project: any }) {
                 className="bg-white/20 text-white hover:bg-white hover:text-bdigital-navy backdrop-blur-sm"
               >
                 <Eye className="h-4 w-4 mr-1" />
-                Pogledaj
+                {_t('portfolio.view')}
               </Button>
             </div>
           </div>
