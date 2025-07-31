@@ -21,22 +21,22 @@ export function StrategyPage() {
     {
       icon: TrendingUp,
       title: t('strategy.feature.digital'),
-      description: 'Kompletna digitalna strategija usmerena na vaše poslovne ciljeve'
+      description: t('strategy.service.digital_desc')
     },
     {
       icon: Target,
       title: t('services.strategy.feature2'),
-      description: 'Detaljna analiza konkurencije i mogućnosti na tržištu'
+      description: t('strategy.service.analysis_desc')
     },
     {
       icon: BarChart3,
       title: t('services.strategy.feature3'),
-      description: 'Maksimiziranje povrata na investiciju u digitalni marketing'
+      description: t('strategy.service.roi_desc')
     },
     {
       icon: Users,
       title: t('strategy.feature.consulting'),
-      description: 'Stručne konsultacije i podrška u implementaciji strategije'
+      description: t('strategy.service.consulting_desc')
     }
   ];
 
@@ -45,22 +45,22 @@ export function StrategyPage() {
       name: t('strategy.package.starter.name'),
       price: '600 €',
       features: [
-        'Audit poslovanja',
-        'Osnovna digitalna strategija',
-        '2 konsultacije mesečno',
-        'Mesečni izveštaj',
-        'Email podrška'
+        t('strategy.package.starter.feature1'),
+        t('strategy.package.starter.feature2'),
+        t('strategy.package.starter.feature3'),
+        t('strategy.package.starter.feature4'),
+        t('strategy.package.starter.feature5')
       ]
     },
     {
       name: t('strategy.package.professional.name'),
       price: '1.100 €',
       features: [
-        'Detaljna strategija rasta',
-        'Konkurenatska analiza',
-        '4 konsultacije mesečno',
-        'Bi-weekly izveštaji',
-        'Telefonska podrška'
+        t('strategy.package.professional.feature1'),
+        t('strategy.package.professional.feature2'),
+        t('strategy.package.professional.feature3'),
+        t('strategy.package.professional.feature4'),
+        t('strategy.package.professional.feature5')
       ],
       popular: true
     },
@@ -68,11 +68,11 @@ export function StrategyPage() {
       name: t('strategy.package.enterprise.name'),
       price: '2.000 €+',
       features: [
-        'Sveobuhvatna transformacija',
-        'Dedicated strategist',
-        'Neograničene konsultacije',
-        'Puna implementacija',
-        'Weekly izveštaji'
+        t('strategy.package.enterprise.feature1'),
+        t('strategy.package.enterprise.feature2'),
+        t('strategy.package.enterprise.feature3'),
+        t('strategy.package.enterprise.feature4'),
+        t('strategy.package.enterprise.feature5')
       ]
     }
   ];
@@ -186,7 +186,7 @@ export function StrategyPage() {
                   {pkg.popular && (
                     <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
                       <Badge className="bg-bdigital-cyan text-bdigital-navy px-4 py-1">
-                        Najpopularniji
+                        {t('packages.most_popular')}
                       </Badge>
                     </div>
                   )}

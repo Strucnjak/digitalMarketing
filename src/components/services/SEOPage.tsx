@@ -310,7 +310,7 @@ export function SEOPage() {
                 {pkg.popular && (
                   <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
                     <Badge className="bg-bdigital-cyan text-bdigital-navy px-4 py-1">
-                      Najpopularniji
+                      {t('packages.most_popular')}
                     </Badge>
                   </div>
                 )}
