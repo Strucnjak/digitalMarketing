@@ -63,41 +63,17 @@ interface InquiryFormData {
   // Marketing
   howDidYouHear: string;
   newsletter: boolean;
-}
-
-// Service and package information for better display
-const serviceInfo: Record<string, { title: string; description: string; icon: string }> = {
-  'web-design': {
-    title: 'Web Design & Development',
-    description: 'Profesionalne web stranice koje konvertuju posetioce u klijente',
-    icon: '🎨'
-  },
-  'seo': {
-    title: 'SEO & Google Business',
-    description: 'Organska vidljivost na Google pretragama',
-    icon: '🔍'
-  },
-  'social-media': {
-    title: 'Social Media Management',
-    description: 'Upravljanje i rast na društvenim mrežama',
-    icon: '📱'
-  },
-  'branding': {
-    title: 'Branding & Graphic Design',
-    description: 'Kreiranje prepoznatljivog brand identiteta',
-    icon: '✨'
-  },
-  'strategy': {
-    title: 'Strategy & Consulting',
-    description: 'Digitalne strategije za brži rast biznisa',
-    icon: '📊'
-  }
-};
-
 export function ServiceInquiryForm() {
   const { navigateTo } = useRouter();
   const { t } = useLanguage();
   const [currentStep, setCurrentStep] = useState(1);
+  const serviceInfo: Record<string, { title: string; description: string; icon: string }> = {
+    "web-design": { title: t("services.web.title"), description: t("services.web.desc"), icon: "🎨" },
+    "seo": { title: t("services.seo.title"), description: t("services.seo.desc"), icon: "🔍" },
+    "social-media": { title: t("services.social.title"), description: t("services.social.desc"), icon: "📱" },
+    "branding": { title: t("services.branding.title"), description: t("services.branding.desc"), icon: "✨" },
+    "strategy": { title: t("services.strategy.title"), description: t("services.strategy.desc"), icon: "📊" }
+  };
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -124,10 +100,10 @@ export function ServiceInquiryForm() {
   });
 
   const steps = [
-    { id: 1, title: 'Kontakt', description: 'Osnovne informacije', icon: User },
-    { id: 2, title: 'Projekat', description: 'Detalji o projektu', icon: Target },
-    { id: 3, title: 'Budžet', description: 'Vreme i budžet', icon: DollarSign },
-    { id: 4, title: 'Finalizacija', description: 'Poslednje informacije', icon: CheckCircle }
+    { id: 1, title: t('form.step1.title'), description: t('form.step1.desc'), icon: User },
+    { id: 2, title: t('form.step2.title'), description: t('form.step2.desc'), icon: Target },
+    { id: 3, title: t('form.step3.title'), description: t('form.step3.desc'), icon: DollarSign },
+    { id: 4, title: t('form.step4.title'), description: t('form.step4.desc'), icon: CheckCircle }
   ];
 
   // Get service and package from URL params or local storage
@@ -249,10 +225,10 @@ export function ServiceInquiryForm() {
                 <CheckCircle className="h-10 w-10 text-green-600" />
               </div>
               <h2 className="text-2xl lg:text-3xl font-bold text-bdigital-navy mb-4">
-                Vaša ponuda je na putu!
+                {t('form.success_title')}
               </h2>
               <p className="text-neutral-gray text-lg mb-8 leading-relaxed">
-                Hvala vam na interesu za naše usluge! Kontaktiraćemo vas u roku od 24 sata sa personalizovanom ponudom za {currentServiceInfo?.title && formData.selectedPackage ? `${currentServiceInfo.title} - ${formData.selectedPackage}` : 'vaš projekat'}.
+                {t('form.success_intro')} {currentServiceInfo?.title && formData.selectedPackage ? `${currentServiceInfo.title} - ${formData.selectedPackage}` : t('form.success_project')}.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button 
@@ -319,8 +295,8 @@ export function ServiceInquiryForm() {
                       <Package className="h-6 w-6 text-bdigital-cyan" />
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold text-bdigital-navy">Odabrana usluga</h3>
-                      <p className="text-sm text-neutral-gray">Vaš odabir za personalizovanu ponudu</p>
+                      <h3 className="text-lg font-semibold text-bdigital-navy">{t('form.selected_service_title')}</h3>
+                      <p className="text-sm text-neutral-gray">{t('form.selected_service_desc')}</p>
                     </div>
                   </div>
                   
@@ -336,7 +312,7 @@ export function ServiceInquiryForm() {
                         </div>
                         <Badge className="bg-bdigital-cyan text-bdigital-navy">
                           <Star className="h-3 w-3 mr-1" />
-                          Odabrano
+                          {t('form.chosen')}
                         </Badge>
                       </div>
                     )}
@@ -348,12 +324,12 @@ export function ServiceInquiryForm() {
                             <Package className="h-4 w-4 text-bdigital-navy" />
                           </div>
                           <div>
-                            <div className="font-medium text-bdigital-navy">Paket: {formData.selectedPackage}</div>
-                            <div className="text-sm text-neutral-gray">Odabrani plan usluga</div>
+                            <div className="font-medium text-bdigital-navy">{t('form.package_prefix')} {formData.selectedPackage}</div>
+                            <div className="text-sm text-neutral-gray">{t('form.selected_package_desc')}</div>
                           </div>
                         </div>
                         <Badge variant="outline" className="border-bdigital-navy text-bdigital-navy">
-                          Paket
+                          {t('form.package_badge')}
                         </Badge>
                       </div>
                     )}
@@ -424,7 +400,7 @@ export function ServiceInquiryForm() {
                   <div>
                     <Label className="flex items-center gap-2 mb-2 text-bdigital-navy">
                       <User className="h-4 w-4" />
-                      Ime i prezime *
+                      {t('form.full_name')}
                     </Label>
                     <Input
                       value={formData.fullName}
@@ -444,7 +420,7 @@ export function ServiceInquiryForm() {
                   <div>
                     <Label className="flex items-center gap-2 mb-2 text-bdigital-navy">
                       <Mail className="h-4 w-4" />
-                      Email adresa *
+                      {t('form.email')}
                     </Label>
                     <Input
                       type="email"
@@ -468,7 +444,7 @@ export function ServiceInquiryForm() {
                   <div>
                     <Label className="flex items-center gap-2 mb-2 text-bdigital-navy">
                       <Phone className="h-4 w-4" />
-                      Telefon
+                      {t('form.phone')}
                     </Label>
                     <Input
                       value={formData.phone}
@@ -480,7 +456,7 @@ export function ServiceInquiryForm() {
                   <div>
                     <Label className="flex items-center gap-2 mb-2 text-bdigital-navy">
                       <Building className="h-4 w-4" />
-                      Kompanija/Organizacija *
+                      {t('form.company')}
                     </Label>
                     <Input
                       value={formData.company}
@@ -502,7 +478,7 @@ export function ServiceInquiryForm() {
                 <div>
                   <Label className="flex items-center gap-2 mb-2 text-bdigital-navy">
                     <Globe className="h-4 w-4" />
-                    Trenutni website (ako postoji)
+                    {t('form.website')}
                   </Label>
                   <Input
                     value={formData.website}
@@ -519,19 +495,19 @@ export function ServiceInquiryForm() {
               <div className="space-y-6">
                 <div>
                   <Label className="mb-3 block text-bdigital-navy">
-                    Tip projekta * (možete odabrati više opcija)
+                    {t('form.project_types_label')}
                   </Label>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                     {[
-                      { value: 'new-website', label: 'Novi website od nule' },
-                      { value: 'redesign', label: 'Redizajn postojećeg website-a' },
-                      { value: 'ecommerce', label: 'E-commerce shop' },
-                      { value: 'mobile-app', label: 'Mobilna aplikacija' },
-                      { value: 'seo-optimization', label: 'SEO optimizacija' },
-                      { value: 'social-media', label: 'Social media management' },
-                      { value: 'branding', label: 'Branding i grafički dizajn' },
-                      { value: 'marketing-strategy', label: 'Marketing strategija' },
-                      { value: 'other', label: 'Ostalo' }
+                      { value: 'new-website', label: t('form.project_type.new_website') },
+                      { value: 'redesign', label: t('form.project_type.redesign') },
+                      { value: 'ecommerce', label: t('form.project_type.ecommerce') },
+                      { value: 'mobile-app', label: t('form.project_type.mobile_app') },
+                      { value: 'seo-optimization', label: t('form.project_type.seo_optimization') },
+                      { value: 'social-media', label: t('form.project_type.social_media') },
+                      { value: 'branding', label: t('form.project_type.branding') },
+                      { value: 'marketing-strategy', label: t('form.project_type.marketing_strategy') },
+                      { value: 'other', label: t('form.project_type.other') }
                     ].map((projectType) => (
                       <div key={projectType.value} className="flex items-center space-x-2">
                         <Checkbox
@@ -555,7 +531,7 @@ export function ServiceInquiryForm() {
 
                 <div>
                   <Label className="mb-2 block text-bdigital-navy">
-                    Opišite vašu trenutnu situaciju *
+                    {t('form.current_situation')}
                   </Label>
                   <Textarea
                     value={formData.currentSituation}
@@ -575,7 +551,7 @@ export function ServiceInquiryForm() {
 
                 <div>
                   <Label className="mb-2 block text-bdigital-navy">
-                    Ciljevi projekta *
+                    {t('form.project_goals')}
                   </Label>
                   <Textarea
                     value={formData.projectGoals}
@@ -595,7 +571,7 @@ export function ServiceInquiryForm() {
 
                 <div>
                   <Label className="mb-2 block text-bdigital-navy">
-                    Ciljna grupa
+                    {t('form.target_audience')}
                   </Label>
                   <Input
                     value={formData.targetAudience}
@@ -613,7 +589,7 @@ export function ServiceInquiryForm() {
                 <div>
                   <Label className="flex items-center gap-2 mb-3 text-bdigital-navy">
                     <Calendar className="h-4 w-4" />
-                    Vremenski okvir *
+                    {t('form.timeline')}
                   </Label>
                   <Select value={formData.timeline} onValueChange={(value) => updateFormData('timeline', value)}>
                     <SelectTrigger className={`border-gray-300 focus:border-bdigital-cyan ${
@@ -622,11 +598,11 @@ export function ServiceInquiryForm() {
                       <SelectValue placeholder={t('form.placeholder_timeline')} />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="asap">Što pre moguće</SelectItem>
-                      <SelectItem value="1-month">U roku od mesec dana</SelectItem>
-                      <SelectItem value="2-3-months">2-3 meseca</SelectItem>
-                      <SelectItem value="3-6-months">3-6 meseci</SelectItem>
-                      <SelectItem value="flexible">Fleksibilno</SelectItem>
+                      <SelectItem value="asap">{t('form.timeline_option.asap')}</SelectItem>
+                      <SelectItem value="1-month">{t('form.timeline_option.one_month')}</SelectItem>
+                      <SelectItem value="2-3-months">{t('form.timeline_option.two_three_months')}</SelectItem>
+                      <SelectItem value="3-6-months">{t('form.timeline_option.three_six_months')}</SelectItem>
+                      <SelectItem value="flexible">{t('form.timeline_option.flexible')}</SelectItem>
                     </SelectContent>
                   </Select>
                   {errors.timeline && (
@@ -640,7 +616,7 @@ export function ServiceInquiryForm() {
                 <div>
                   <Label className="flex items-center gap-2 mb-3 text-bdigital-navy">
                     <DollarSign className="h-4 w-4" />
-                    Budžet *
+                    {t('form.budget')}
                   </Label>
                   <Select value={formData.budget} onValueChange={(value) => updateFormData('budget', value)}>
                     <SelectTrigger className={`border-gray-300 focus:border-bdigital-cyan ${
@@ -649,12 +625,12 @@ export function ServiceInquiryForm() {
                       <SelectValue placeholder={t('form.placeholder_budget')} />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="under-1000">Manje od 1.000 €</SelectItem>
-                      <SelectItem value="1000-2500">1.000 € - 2.500 €</SelectItem>
-                      <SelectItem value="2500-5000">2.500 € - 5.000 €</SelectItem>
-                      <SelectItem value="5000-10000">5.000 € - 10.000 €</SelectItem>
-                      <SelectItem value="over-10000">Više od 10.000 €</SelectItem>
-                      <SelectItem value="discuss">Razmotrićemo opcije</SelectItem>
+                      <SelectItem value="under-1000">{t('form.budget_option.under_1000')}</SelectItem>
+                      <SelectItem value="1000-2500">{t('form.budget_option.1000_2500')}</SelectItem>
+                      <SelectItem value="2500-5000">{t('form.budget_option.2500_5000')}</SelectItem>
+                      <SelectItem value="5000-10000">{t('form.budget_option.5000_10000')}</SelectItem>
+                      <SelectItem value="over-10000">{t('form.budget_option.over_10000')}</SelectItem>
+                      <SelectItem value="discuss">{t('form.budget_option.discuss')}</SelectItem>
                     </SelectContent>
                   </Select>
                   {errors.budget && (
@@ -667,18 +643,18 @@ export function ServiceInquiryForm() {
 
                 <div>
                   <Label className="mb-3 block text-bdigital-navy">
-                    Dodatne usluge koje vas zanimaju
+                    {t('form.additional_services_label')}
                   </Label>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                     {[
-                      'SEO optimizacija',
-                      'Social media marketing',
-                      'Google Ads kampanje',
-                      'Content kreiranje',
-                      'Branding & logo dizajn',
-                      'Email marketing',
-                      'Analytics & izveštavanje',
-                      'Ongoing podrška'
+                      t("form.additional_service.seo"),
+                      t("form.additional_service.social_media"),
+                      t("form.additional_service.google_ads"),
+                      t("form.additional_service.content"),
+                      t("form.additional_service.branding"),
+                      t("form.additional_service.email"),
+                      t("form.additional_service.analytics"),
+                      t("form.additional_service.support")
                     ].map((service) => (
                       <div key={service} className="flex items-center space-x-2">
                         <Checkbox
@@ -701,7 +677,7 @@ export function ServiceInquiryForm() {
               <div className="space-y-6">
                 <div>
                   <Label className="mb-3 block text-bdigital-navy">
-                    Preferirani način kontakta *
+                    {t('form.preferred_contact_label')}
                   </Label>
                   <RadioGroup 
                     value={formData.preferredContact} 
@@ -709,19 +685,19 @@ export function ServiceInquiryForm() {
                   >
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem value="email" />
-                      <Label className="text-neutral-gray">Email</Label>
+                      <Label className="text-neutral-gray">{t('form.contact_option.email')}</Label>
                     </div>
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem value="phone" />
-                      <Label className="text-neutral-gray">Telefon</Label>
+                      <Label className="text-neutral-gray">{t('form.contact_option.phone')}</Label>
                     </div>
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem value="whatsapp" />
-                      <Label className="text-neutral-gray">WhatsApp</Label>
+                      <Label className="text-neutral-gray">{t('form.contact_option.whatsapp')}</Label>
                     </div>
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem value="meeting" />
-                      <Label className="text-neutral-gray">Lični sastanak</Label>
+                      <Label className="text-neutral-gray">{t('form.contact_option.meeting')}</Label>
                     </div>
                   </RadioGroup>
                   {errors.preferredContact && (
@@ -734,19 +710,19 @@ export function ServiceInquiryForm() {
 
                 <div>
                   <Label className="mb-2 block text-bdigital-navy">
-                    Kako ste čuli za nas?
+                    {t('form.how_hear_label')}
                   </Label>
                   <Select value={formData.howDidYouHear} onValueChange={(value) => updateFormData('howDidYouHear', value)}>
                     <SelectTrigger className="border-gray-300 focus:border-bdigital-cyan">
                       <SelectValue placeholder={t('form.placeholder_how_hear')} />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="google">Google pretraga</SelectItem>
-                      <SelectItem value="social-media">Društvene mreže</SelectItem>
-                      <SelectItem value="referral">Preporuka prijatelja/kolege</SelectItem>
-                      <SelectItem value="advertisement">Reklama</SelectItem>
-                      <SelectItem value="website">Direktno na website</SelectItem>
-                      <SelectItem value="other">Ostalo</SelectItem>
+                      <SelectItem value="google">{t('form.how_hear_option.google')}</SelectItem>
+                      <SelectItem value="social-media">{t('form.how_hear_option.social_media')}</SelectItem>
+                      <SelectItem value="referral">{t('form.how_hear_option.referral')}</SelectItem>
+                      <SelectItem value="advertisement">{t('form.how_hear_option.advertisement')}</SelectItem>
+                      <SelectItem value="website">{t('form.how_hear_option.website')}</SelectItem>
+                      <SelectItem value="other">{t('form.how_hear_option.other')}</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -754,7 +730,7 @@ export function ServiceInquiryForm() {
                 <div>
                   <Label className="flex items-center gap-2 mb-2 text-bdigital-navy">
                     <MessageSquare className="h-4 w-4" />
-                    Dodatne informacije
+                    {t('form.additional_info_label')}
                   </Label>
                   <Textarea
                     value={formData.additionalInfo}
@@ -771,7 +747,7 @@ export function ServiceInquiryForm() {
                     className="border-gray-300"
                   />
                   <Label className="text-sm font-normal text-neutral-gray">
-                    Želim da primam newsletter sa tips & tricks za digitalni marketing
+                    {t('form.newsletter_label')}
                   </Label>
                 </div>
               </div>
