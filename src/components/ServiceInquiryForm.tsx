@@ -1,28 +1,15 @@
 import { useState, useEffect } from 'react';
 import { Button } from './ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
-import { Input } from './ui/input';
-import { Label } from './ui/label';
-import { Textarea } from './ui/textarea';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
-import { Checkbox } from './ui/checkbox';
 import { Badge } from './ui/badge';
-import { RadioGroup, RadioGroupItem } from './ui/radio-group';
 import { Progress } from './ui/progress';
 import { 
   ArrowLeft, 
   Send, 
   CheckCircle, 
-  Building, 
   User, 
-  Mail, 
-  Phone, 
-  Globe,
-  Calendar,
   DollarSign,
   Target,
-  MessageSquare,
-  AlertCircle,
   ChevronRight,
   Check,
   Package,
@@ -30,8 +17,12 @@ import {
 } from 'lucide-react';
 import { useRouter } from './Router';
 import { useLanguage } from './LanguageContext';
+import { Step1 } from "./serviceInquirySteps/Step1";
+import { Step2 } from "./serviceInquirySteps/Step2";
+import { Step3 } from "./serviceInquirySteps/Step3";
+import { Step4 } from "./serviceInquirySteps/Step4";
 
-interface InquiryFormData {
+export interface InquiryFormData {
   // Contact Information
   fullName: string;
   email: string;
@@ -394,365 +385,29 @@ export function ServiceInquiryForm() {
             </CardTitle>
           </CardHeader>
           <CardContent className="p-6 lg:p-8">
-            {/* Step 1: Contact Information */}
             {currentStep === 1 && (
-              <div className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <Label className="flex items-center gap-2 mb-2 text-bdigital-navy">
-                      <User className="h-4 w-4" />
-                      {t('form.full_name')}
-                    </Label>
-                    <Input
-                      value={formData.fullName}
-                      onChange={(e) => updateFormData('fullName', e.target.value)}
-                      placeholder={t('form.placeholder_full_name')}
-                      className={`border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan ${
-                        errors.fullName ? 'border-red-500' : ''
-                      }`}
-                    />
-                    {errors.fullName && (
-                      <div className="flex items-center mt-1 text-red-600 text-sm">
-                        <AlertCircle className="h-4 w-4 mr-1" />
-                        {errors.fullName}
-                      </div>
-                    )}
-                  </div>
-                  <div>
-                    <Label className="flex items-center gap-2 mb-2 text-bdigital-navy">
-                      <Mail className="h-4 w-4" />
-                      {t('form.email')}
-                    </Label>
-                    <Input
-                      type="email"
-                      value={formData.email}
-                      onChange={(e) => updateFormData('email', e.target.value)}
-                      placeholder={t('form.placeholder_email')}
-                      className={`border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan ${
-                        errors.email ? 'border-red-500' : ''
-                      }`}
-                    />
-                    {errors.email && (
-                      <div className="flex items-center mt-1 text-red-600 text-sm">
-                        <AlertCircle className="h-4 w-4 mr-1" />
-                        {errors.email}
-                      </div>
-                    )}
-                  </div>
-                </div>
-                
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <Label className="flex items-center gap-2 mb-2 text-bdigital-navy">
-                      <Phone className="h-4 w-4" />
-                      {t('form.phone')}
-                    </Label>
-                    <Input
-                      value={formData.phone}
-                      onChange={(e) => updateFormData('phone', e.target.value)}
-                      placeholder={t('form.placeholder_phone')}
-                      className="border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan"
-                    />
-                  </div>
-                  <div>
-                    <Label className="flex items-center gap-2 mb-2 text-bdigital-navy">
-                      <Building className="h-4 w-4" />
-                      {t('form.company')}
-                    </Label>
-                    <Input
-                      value={formData.company}
-                      onChange={(e) => updateFormData('company', e.target.value)}
-                      placeholder={t('form.placeholder_company')}
-                      className={`border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan ${
-                        errors.company ? 'border-red-500' : ''
-                      }`}
-                    />
-                    {errors.company && (
-                      <div className="flex items-center mt-1 text-red-600 text-sm">
-                        <AlertCircle className="h-4 w-4 mr-1" />
-                        {errors.company}
-                      </div>
-                    )}
-                  </div>
-                </div>
-
-                <div>
-                  <Label className="flex items-center gap-2 mb-2 text-bdigital-navy">
-                    <Globe className="h-4 w-4" />
-                    {t('form.website')}
-                  </Label>
-                  <Input
-                    value={formData.website}
-                    onChange={(e) => updateFormData('website', e.target.value)}
-                    placeholder={t('form.placeholder_website')}
-                    className="border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan"
-                  />
-                </div>
-              </div>
+              <Step1 formData={formData} errors={errors} updateFormData={updateFormData} />
             )}
-
-            {/* Step 2: Project Details */}
             {currentStep === 2 && (
-              <div className="space-y-6">
-                <div>
-                  <Label className="mb-3 block text-bdigital-navy">
-                    {t('form.project_types_label')}
-                  </Label>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    {[
-                      { value: 'new-website', label: t('form.project_type.new_website') },
-                      { value: 'redesign', label: t('form.project_type.redesign') },
-                      { value: 'ecommerce', label: t('form.project_type.ecommerce') },
-                      { value: 'mobile-app', label: t('form.project_type.mobile_app') },
-                      { value: 'seo-optimization', label: t('form.project_type.seo_optimization') },
-                      { value: 'social-media', label: t('form.project_type.social_media') },
-                      { value: 'branding', label: t('form.project_type.branding') },
-                      { value: 'marketing-strategy', label: t('form.project_type.marketing_strategy') },
-                      { value: 'other', label: t('form.project_type.other') }
-                    ].map((projectType) => (
-                      <div key={projectType.value} className="flex items-center space-x-2">
-                        <Checkbox
-                          checked={formData.projectTypes.includes(projectType.value)}
-                          onCheckedChange={(checked) => handleProjectTypeChange(projectType.value, checked as boolean)}
-                          className="border-gray-300"
-                        />
-                        <Label className="text-sm font-normal text-neutral-gray">
-                          {projectType.label}
-                        </Label>
-                      </div>
-                    ))}
-                  </div>
-                  {errors.projectTypes && (
-                    <div className="flex items-center mt-2 text-red-600 text-sm">
-                      <AlertCircle className="h-4 w-4 mr-1" />
-                      {errors.projectTypes}
-                    </div>
-                  )}
-                </div>
-
-                <div>
-                  <Label className="mb-2 block text-bdigital-navy">
-                    {t('form.current_situation')}
-                  </Label>
-                  <Textarea
-                    value={formData.currentSituation}
-                    onChange={(e) => updateFormData('currentSituation', e.target.value)}
-                    placeholder={t('form.placeholder_current_situation')}
-                    className={`border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan min-h-[100px] resize-none ${
-                      errors.currentSituation ? 'border-red-500' : ''
-                    }`}
-                  />
-                  {errors.currentSituation && (
-                    <div className="flex items-center mt-1 text-red-600 text-sm">
-                      <AlertCircle className="h-4 w-4 mr-1" />
-                      {errors.currentSituation}
-                    </div>
-                  )}
-                </div>
-
-                <div>
-                  <Label className="mb-2 block text-bdigital-navy">
-                    {t('form.project_goals')}
-                  </Label>
-                  <Textarea
-                    value={formData.projectGoals}
-                    onChange={(e) => updateFormData('projectGoals', e.target.value)}
-                    placeholder={t('form.placeholder_project_goals')}
-                    className={`border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan min-h-[100px] resize-none ${
-                      errors.projectGoals ? 'border-red-500' : ''
-                    }`}
-                  />
-                  {errors.projectGoals && (
-                    <div className="flex items-center mt-1 text-red-600 text-sm">
-                      <AlertCircle className="h-4 w-4 mr-1" />
-                      {errors.projectGoals}
-                    </div>
-                  )}
-                </div>
-
-                <div>
-                  <Label className="mb-2 block text-bdigital-navy">
-                    {t('form.target_audience')}
-                  </Label>
-                  <Input
-                    value={formData.targetAudience}
-                    onChange={(e) => updateFormData('targetAudience', e.target.value)}
-                    placeholder={t('form.placeholder_target_audience')}
-                    className="border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan"
-                  />
-                </div>
-              </div>
+              <Step2
+                formData={formData}
+                errors={errors}
+                updateFormData={updateFormData}
+                handleProjectTypeChange={handleProjectTypeChange}
+              />
             )}
-
-            {/* Step 3: Timeline & Budget */}
             {currentStep === 3 && (
-              <div className="space-y-6">
-                <div>
-                  <Label className="flex items-center gap-2 mb-3 text-bdigital-navy">
-                    <Calendar className="h-4 w-4" />
-                    {t('form.timeline')}
-                  </Label>
-                  <Select value={formData.timeline} onValueChange={(value) => updateFormData('timeline', value)}>
-                    <SelectTrigger className={`border-gray-300 focus:border-bdigital-cyan ${
-                      errors.timeline ? 'border-red-500' : ''
-                    }`}>
-                      <SelectValue placeholder={t('form.placeholder_timeline')} />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="asap">{t('form.timeline_option.asap')}</SelectItem>
-                      <SelectItem value="1-month">{t('form.timeline_option.one_month')}</SelectItem>
-                      <SelectItem value="2-3-months">{t('form.timeline_option.two_three_months')}</SelectItem>
-                      <SelectItem value="3-6-months">{t('form.timeline_option.three_six_months')}</SelectItem>
-                      <SelectItem value="flexible">{t('form.timeline_option.flexible')}</SelectItem>
-                    </SelectContent>
-                  </Select>
-                  {errors.timeline && (
-                    <div className="flex items-center mt-1 text-red-600 text-sm">
-                      <AlertCircle className="h-4 w-4 mr-1" />
-                      {errors.timeline}
-                    </div>
-                  )}
-                </div>
-
-                <div>
-                  <Label className="flex items-center gap-2 mb-3 text-bdigital-navy">
-                    <DollarSign className="h-4 w-4" />
-                    {t('form.budget')}
-                  </Label>
-                  <Select value={formData.budget} onValueChange={(value) => updateFormData('budget', value)}>
-                    <SelectTrigger className={`border-gray-300 focus:border-bdigital-cyan ${
-                      errors.budget ? 'border-red-500' : ''
-                    }`}>
-                      <SelectValue placeholder={t('form.placeholder_budget')} />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="under-1000">{t('form.budget_option.under_1000')}</SelectItem>
-                      <SelectItem value="1000-2500">{t('form.budget_option.1000_2500')}</SelectItem>
-                      <SelectItem value="2500-5000">{t('form.budget_option.2500_5000')}</SelectItem>
-                      <SelectItem value="5000-10000">{t('form.budget_option.5000_10000')}</SelectItem>
-                      <SelectItem value="over-10000">{t('form.budget_option.over_10000')}</SelectItem>
-                      <SelectItem value="discuss">{t('form.budget_option.discuss')}</SelectItem>
-                    </SelectContent>
-                  </Select>
-                  {errors.budget && (
-                    <div className="flex items-center mt-1 text-red-600 text-sm">
-                      <AlertCircle className="h-4 w-4 mr-1" />
-                      {errors.budget}
-                    </div>
-                  )}
-                </div>
-
-                <div>
-                  <Label className="mb-3 block text-bdigital-navy">
-                    {t('form.additional_services_label')}
-                  </Label>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    {[
-                      t("form.additional_service.seo"),
-                      t("form.additional_service.social_media"),
-                      t("form.additional_service.google_ads"),
-                      t("form.additional_service.content"),
-                      t("form.additional_service.branding"),
-                      t("form.additional_service.email"),
-                      t("form.additional_service.analytics"),
-                      t("form.additional_service.support")
-                    ].map((service) => (
-                      <div key={service} className="flex items-center space-x-2">
-                        <Checkbox
-                          checked={formData.additionalServices.includes(service)}
-                          onCheckedChange={(checked) => handleAdditionalServicesChange(service, checked as boolean)}
-                          className="border-gray-300"
-                        />
-                        <Label className="text-sm font-normal text-neutral-gray">
-                          {service}
-                        </Label>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
+              <Step3
+                formData={formData}
+                errors={errors}
+                updateFormData={updateFormData}
+                handleAdditionalServicesChange={handleAdditionalServicesChange}
+              />
             )}
-
-            {/* Step 4: Finalization */}
             {currentStep === 4 && (
-              <div className="space-y-6">
-                <div>
-                  <Label className="mb-3 block text-bdigital-navy">
-                    {t('form.preferred_contact_label')}
-                  </Label>
-                  <RadioGroup 
-                    value={formData.preferredContact} 
-                    onValueChange={(value) => updateFormData('preferredContact', value)}
-                  >
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="email" />
-                      <Label className="text-neutral-gray">{t('form.contact_option.email')}</Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="phone" />
-                      <Label className="text-neutral-gray">{t('form.contact_option.phone')}</Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="whatsapp" />
-                      <Label className="text-neutral-gray">{t('form.contact_option.whatsapp')}</Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="meeting" />
-                      <Label className="text-neutral-gray">{t('form.contact_option.meeting')}</Label>
-                    </div>
-                  </RadioGroup>
-                  {errors.preferredContact && (
-                    <div className="flex items-center mt-2 text-red-600 text-sm">
-                      <AlertCircle className="h-4 w-4 mr-1" />
-                      {errors.preferredContact}
-                    </div>
-                  )}
-                </div>
-
-                <div>
-                  <Label className="mb-2 block text-bdigital-navy">
-                    {t('form.how_hear_label')}
-                  </Label>
-                  <Select value={formData.howDidYouHear} onValueChange={(value) => updateFormData('howDidYouHear', value)}>
-                    <SelectTrigger className="border-gray-300 focus:border-bdigital-cyan">
-                      <SelectValue placeholder={t('form.placeholder_how_hear')} />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="google">{t('form.how_hear_option.google')}</SelectItem>
-                      <SelectItem value="social-media">{t('form.how_hear_option.social_media')}</SelectItem>
-                      <SelectItem value="referral">{t('form.how_hear_option.referral')}</SelectItem>
-                      <SelectItem value="advertisement">{t('form.how_hear_option.advertisement')}</SelectItem>
-                      <SelectItem value="website">{t('form.how_hear_option.website')}</SelectItem>
-                      <SelectItem value="other">{t('form.how_hear_option.other')}</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                <div>
-                  <Label className="flex items-center gap-2 mb-2 text-bdigital-navy">
-                    <MessageSquare className="h-4 w-4" />
-                    {t('form.additional_info_label')}
-                  </Label>
-                  <Textarea
-                    value={formData.additionalInfo}
-                    onChange={(e) => updateFormData('additionalInfo', e.target.value)}
-                    placeholder={t('form.placeholder_additional_info')}
-                    className="border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan min-h-[100px] resize-none"
-                  />
-                </div>
-
-                <div className="flex items-center space-x-2">
-                  <Checkbox
-                    checked={formData.newsletter}
-                    onCheckedChange={(checked) => updateFormData('newsletter', checked)}
-                    className="border-gray-300"
-                  />
-                  <Label className="text-sm font-normal text-neutral-gray">
-                    {t('form.newsletter_label')}
-                  </Label>
-                </div>
-              </div>
+              <Step4 formData={formData} errors={errors} updateFormData={updateFormData} />
             )}
+
 
             {/* Navigation Buttons */}
             <div className="flex justify-between items-center mt-8 pt-6 border-t border-gray-200">
