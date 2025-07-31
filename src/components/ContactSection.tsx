@@ -63,28 +63,28 @@ export function ContactSection() {
   const contactInfo = [
     {
       icon: Mail,
-      title: 'Email',
+      title: _t('contact.info.email'),
       content: EMAIL,
       link: `mailto:${EMAIL}`,
       description: _t('contact.info.emailDesc')
     },
     {
       icon: Phone,
-      title: 'Telefon',
+      title: _t('contact.info.phone'),
       content: PHONE,
       link: `tel:${PHONE.replace(/\s+/g, '')}`,
       description: _t('contact.info.phoneDesc')
     },
     {
       icon: MapPin,
-      title: 'Lokacija',
+      title: _t('contact.info.location'),
       content: ADDRESS,
       link: 'https://maps.google.com',
       description: _t('contact.info.locationDesc')
     },
     {
       icon: Clock,
-      title: 'Radno vreme',
+      title: _t('contact.info.hours'),
       content: '09:00 - 17:00',
       link: null,
       description: _t('contact.info.hoursDesc')
@@ -149,7 +149,7 @@ export function ContactSection() {
                         type="text"
                         value={formData.name}
                         onChange={(e) => handleChange('name', e.target.value)}
-                        placeholder="Vaše ime"
+                        placeholder={_t('form.placeholder_full_name')}
                         required
                         className="border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan"
                       />
@@ -163,7 +163,7 @@ export function ContactSection() {
                         type="email"
                         value={formData.email}
                         onChange={(e) => handleChange('email', e.target.value)}
-                        placeholder="vas@email.com"
+                        placeholder={_t('form.placeholder_email')}
                         required
                         className="border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan"
                       />
@@ -180,7 +180,7 @@ export function ContactSection() {
                         type="text"
                         value={formData.company}
                         onChange={(e) => handleChange('company', e.target.value)}
-                        placeholder="Naziv kompanije"
+                        placeholder={_t('form.placeholder_company')}
                         className="border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan"
                       />
                     </div>
@@ -193,7 +193,7 @@ export function ContactSection() {
                         type="tel"
                         value={formData.phone}
                         onChange={(e) => handleChange('phone', e.target.value)}
-                        placeholder="+382 67 123 456"
+                        placeholder={_t('form.placeholder_phone')}
                         className="border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan"
                       />
                     </div>
@@ -207,7 +207,7 @@ export function ContactSection() {
                     <Textarea
                       value={formData.message}
                       onChange={(e) => handleChange('message', e.target.value)}
-                      placeholder="Opišite vaš projekat ili kako možemo da vam pomognemo..."
+                      placeholder={_t('form.placeholder_additional_info')}
                       required
                       className="min-h-[120px] border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan resize-none"
                     />
