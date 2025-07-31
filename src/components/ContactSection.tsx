@@ -66,28 +66,28 @@ export function ContactSection() {
       title: 'Email',
       content: EMAIL,
       link: `mailto:${EMAIL}`,
-      description: 'Pošaljite nam email za brz odgovor'
+      description: _t('contact.info.emailDesc')
     },
     {
       icon: Phone,
       title: 'Telefon',
       content: PHONE,
       link: `tel:${PHONE.replace(/\s+/g, '')}`,
-      description: 'Pozovite nas radnim danima'
+      description: _t('contact.info.phoneDesc')
     },
     {
       icon: MapPin,
       title: 'Lokacija',
       content: ADDRESS,
       link: 'https://maps.google.com',
-      description: 'Možemo se sresti i lično'
+      description: _t('contact.info.locationDesc')
     },
     {
       icon: Clock,
       title: 'Radno vreme',
       content: '09:00 - 17:00',
       link: null,
-      description: 'Ponedeljak - Petak'
+      description: _t('contact.info.hoursDesc')
     }
   ];
 
