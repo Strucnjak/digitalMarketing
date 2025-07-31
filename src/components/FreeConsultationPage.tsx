@@ -127,7 +127,7 @@ export function FreeConsultationPage() {
     return (
       <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white pt-20 pb-16">
         <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Card className="border-0 shadow-2xl">
+          <Card className="border-0 shadow-2xl overflow-visible">
             <CardContent className="p-8 lg:p-12 text-center">
               <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
                 <CheckCircle className="h-10 w-10 text-green-600" />
@@ -245,7 +245,7 @@ export function FreeConsultationPage() {
           </div>
         </div>
 
-        <Card className="border-0 shadow-2xl">
+        <Card className="border-0 shadow-2xl overflow-visible">
           <CardHeader>
             <CardTitle className="text-2xl text-bdigital-navy text-center">
               Zakazivanje konsultacije
@@ -349,7 +349,7 @@ export function FreeConsultationPage() {
                     className="border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan"
                   />
                 </div>
-                <div>
+                <div className="relative z-20">
                   <Label className="mb-2 block text-bdigital-navy">
                     Tip biznisa *
                   </Label>
@@ -491,7 +491,7 @@ export function FreeConsultationPage() {
                     </div>
                   )}
                 </div>
-                <div>
+                <div className="relative z-20">
                   <Label className="mb-2 block text-bdigital-navy">
                     Preferirano vreme
                   </Label>
