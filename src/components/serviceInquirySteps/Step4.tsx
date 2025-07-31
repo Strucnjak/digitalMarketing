@@ -3,17 +3,26 @@ import { Label } from '../ui/label';
 import { RadioGroup, RadioGroupItem } from '../ui/radio-group';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 import { Textarea } from '../ui/textarea';
-import { AlertCircle, MessageSquare } from 'lucide-react';
+import { MessageSquare } from 'lucide-react';
+import { Tooltip, TooltipContent, TooltipTrigger } from '../ui/tooltip';
 import { useLanguage } from '../LanguageContext';
 import type { InquiryFormData } from '../ServiceInquiryForm';
 
 interface Step4Props {
   formData: InquiryFormData;
   errors: Record<string, string>;
+  touched: Record<string, boolean>;
   updateFormData: (field: keyof InquiryFormData, value: unknown) => void;
+  handleBlur: (field: keyof InquiryFormData) => void;
 }
 
-export function Step4({ formData, errors, updateFormData }: Step4Props) {
+export function Step4({
+  formData,
+  errors,
+  touched,
+  updateFormData,
+  handleBlur
+}: Step4Props) {
   const { t } = useLanguage();
 
   return (
@@ -22,14 +31,17 @@ export function Step4({ formData, errors, updateFormData }: Step4Props) {
         <Label className="mb-3 block text-bdigital-navy">
           {t('form.preferred_contact_label')}
         </Label>
-        <RadioGroup
-          value={formData.preferredContact}
-          onValueChange={value => updateFormData('preferredContact', value)}
-        >
-          <div className="flex items-center space-x-2">
-            <RadioGroupItem value="email" />
-            <Label className="text-neutral-gray">{t('form.contact_option.email')}</Label>
-          </div>
+        <Tooltip open={!!errors.preferredContact && touched.preferredContact}>
+          <TooltipTrigger asChild>
+            <RadioGroup
+              value={formData.preferredContact}
+              onValueChange={value => updateFormData('preferredContact', value)}
+              onBlur={() => handleBlur('preferredContact')}
+            >
+              <div className="flex items-center space-x-2">
+                <RadioGroupItem value="email" />
+                <Label className="text-neutral-gray">{t('form.contact_option.email')}</Label>
+              </div>
           <div className="flex items-center space-x-2">
             <RadioGroupItem value="phone" />
             <Label className="text-neutral-gray">{t('form.contact_option.phone')}</Label>
@@ -42,13 +54,10 @@ export function Step4({ formData, errors, updateFormData }: Step4Props) {
             <RadioGroupItem value="meeting" />
             <Label className="text-neutral-gray">{t('form.contact_option.meeting')}</Label>
           </div>
-        </RadioGroup>
-        {errors.preferredContact && (
-          <div className="flex items-center mt-2 text-red-600 text-sm">
-            <AlertCircle className="h-4 w-4 mr-1" />
-            {errors.preferredContact}
-          </div>
-        )}
+            </RadioGroup>
+          </TooltipTrigger>
+          <TooltipContent side="right">{errors.preferredContact}</TooltipContent>
+        </Tooltip>
       </div>
 
       <div>
