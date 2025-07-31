@@ -21,22 +21,22 @@ export function BrandingPage() {
     {
       icon: Palette,
       title: t('services.branding.feature1'),
-      description: 'Jedinstveni logo koji predstavlja suštinu vašeg brenda'
+      description: t('branding.service.logo_desc')
     },
     {
       icon: FileImage,
       title: t('branding.feature.identity'),
-      description: 'Kompletna vizuelna identifikacija uključujući boje, fontove i stil'
+      description: t('branding.service.identity_desc')
     },
     {
       icon: Type,
       title: t('services.branding.feature3'),
-      description: 'Vizit karte, brošure, plakati i ostali print materijali'
+      description: t('branding.service.print_desc')
     },
     {
       icon: Package,
       title: t('services.branding.feature2'),
-      description: 'Detaljno uputstvo za korišćenje brenda u svim situacijama'
+      description: t('branding.service.guidelines_desc')
     }
   ];
 
@@ -45,22 +45,22 @@ export function BrandingPage() {
       name: t('branding.package.starter.name'),
       price: '500 €',
       features: [
-        'Logo dizajn',
-        'Osnovni brand vodič',
-        'Do 2 revizije',
-        'Vizit karta dizajn',
-        '3 meseca podrška'
+        t('branding.package.starter.feature1'),
+        t('branding.package.starter.feature2'),
+        t('branding.package.starter.feature3'),
+        t('branding.package.starter.feature4'),
+        t('branding.package.starter.feature5')
       ]
     },
     {
       name: t('branding.package.professional.name'),
       price: '900 €',
       features: [
-        'Kompletan vizuelni identitet',
-        'Brand knjiga',
-        'Marketing materijali',
-        'Do 5 revizija',
-        '6 meseci podrška'
+        t('branding.package.professional.feature1'),
+        t('branding.package.professional.feature2'),
+        t('branding.package.professional.feature3'),
+        t('branding.package.professional.feature4'),
+        t('branding.package.professional.feature5')
       ],
       popular: true
     },
@@ -68,11 +68,11 @@ export function BrandingPage() {
       name: t('branding.package.enterprise.name'),
       price: '1.500 €+',
       features: [
-        'Strategija brenda',
-        'Packaging dizajn',
-        'Neograničene revizije',
-        'Kompletan identitet',
-        '12 meseci podrška'
+        t('branding.package.enterprise.feature1'),
+        t('branding.package.enterprise.feature2'),
+        t('branding.package.enterprise.feature3'),
+        t('branding.package.enterprise.feature4'),
+        t('branding.package.enterprise.feature5')
       ]
     }
   ];
@@ -186,7 +186,7 @@ export function BrandingPage() {
                   {pkg.popular && (
                     <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
                       <Badge className="bg-bdigital-cyan text-bdigital-navy px-4 py-1">
-                        Najpopularniji
+                        {t('packages.most_popular')}
                       </Badge>
                     </div>
                   )}
