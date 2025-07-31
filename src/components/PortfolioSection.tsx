@@ -3,9 +3,8 @@ import type { Project } from '../types';
 import { Button } from './ui/button';
 import { Card, CardContent } from './ui/card';
 import { Badge } from './ui/badge';
-import { 
-  ExternalLink, 
-  Eye,
+import {
+  ExternalLink,
   Calendar,
   ChevronLeft,
   ChevronRight
@@ -258,15 +257,11 @@ export function PortfolioSection() {
 
 // Project Card Component
 function ProjectCard({ project }: { project: Project }) {
-  const [isHovered, setIsHovered] = useState(false);
-  const { t: _t } = useLanguage();
 
   return (
-    <Card
-      className="group border-0 shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden cursor-pointer transform hover:scale-105"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
+      <Card
+        className="group border-0 shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden cursor-pointer transform hover:scale-105"
+      >
       <div className="relative overflow-hidden">
         <ImageWithFallback
           src={project.image}
@@ -274,30 +269,7 @@ function ProjectCard({ project }: { project: Project }) {
           className="w-full h-48 lg:h-56 object-cover transition-transform duration-700 group-hover:scale-110"
         />
         
-        {/* Overlay */}
-        <div className={`absolute inset-0 bg-gradient-to-t from-bdigital-navy/90 via-bdigital-navy/50 to-transparent transition-opacity duration-500 ${
-          isHovered ? 'opacity-100' : 'opacity-0'
-        }`}>
-          <div className="absolute bottom-4 left-4 right-4">
-            <div className="flex items-center justify-between">
-              <div className="flex flex-wrap gap-2">
-                {project.technologies.slice(0, 2).map((tech: string, index: number) => (
-                  <Badge key={index} variant="secondary" className="bg-white/20 text-white text-xs backdrop-blur-sm">
-                    {tech}
-                  </Badge>
-                ))}
-              </div>
-              <Button
-                size="sm"
-                variant="secondary"
-                className="bg-white/20 text-white hover:bg-white hover:text-bdigital-navy backdrop-blur-sm"
-              >
-                <Eye className="h-4 w-4 mr-1" />
-                {_t('portfolio.view')}
-              </Button>
-            </div>
-          </div>
-        </div>
+
 
         {/* Category Badge */}
         <div className="absolute top-4 left-4">
