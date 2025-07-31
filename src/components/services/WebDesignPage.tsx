@@ -24,59 +24,59 @@ export function WebDesignPage() {
     {
       icon: Monitor,
       title: t('web.feature.responsive'),
-      description: 'Web stranice koje savršeno rade na svim uređajima - desktop, tablet i mobilni'
+      description: t('web.feature.responsive_desc')
     },
     {
       icon: Zap,
       title: t('web.feature.speed'),
-      description: 'Optimizujemo svaku stranicu za maksimalnu brzinu učitavanja'
+      description: t('web.feature.speed_desc')
     },
     {
       icon: Search,
       title: t('web.feature.seo'),
-      description: 'Izgrađeno za pretraživače od prvog dana'
+      description: t('web.feature.seo_desc')
     },
     {
       icon: ShoppingCart,
       title: t('web.feature.ecommerce'),
-      description: 'Kompletan online shop sa payment gateway integracijom'
+      description: t('web.feature.ecommerce_desc')
     },
     {
       icon: Palette,
       title: t('web.feature.design'),
-      description: 'Kreativni dizajni koji odražavaju identitet vašeg brenda'
+      description: t('web.feature.design_desc')
     },
     {
       icon: Code,
       title: t('web.feature.clean_code'),
-      description: 'Moderan, maintainable kod koji prati najbolje prakse'
+      description: t('web.feature.clean_code_desc')
     }
   ];
 
   const process = [
     {
       step: '01',
-      title: 'Planiranje i analiza',
-      description: 'Analiziramo vaše potrebe, ciljeve i konkurenciju',
-      duration: '1-2 nedelje'
+      title: t('web.process.step1.title'),
+      description: t('web.process.step1.desc'),
+      duration: t('web.process.step1.duration')
     },
     {
       step: '02', 
-      title: 'Dizajn i prototip',
-      description: 'Kreiramo wireframes i visoko-fidelni dizajn',
-      duration: '2-3 nedelje'
+      title: t('web.process.step2.title'),
+      description: t('web.process.step2.desc'),
+      duration: t('web.process.step2.duration')
     },
     {
       step: '03',
-      title: 'Development',
-      description: 'Kodiramo web stranicu koristeći najnovije tehnologije',
-      duration: '3-4 nedelje'
+      title: t('web.process.step3.title'),
+      description: t('web.process.step3.desc'),
+      duration: t('web.process.step3.duration')
     },
     {
       step: '04',
-      title: 'Testiranje i lansiranje',
-      description: 'Testiramo sve funkcionalnosti i lansiramo sajt',
-      duration: '1 nedelja'
+      title: t('web.process.step4.title'),
+      description: t('web.process.step4.desc'),
+      duration: t('web.process.step4.duration')
     }
   ];
 
@@ -86,11 +86,11 @@ export function WebDesignPage() {
       price: '1.200 €',
       description: t('web.package.starter.desc'),
       features: [
-        'Do 5 stranica',
-        'Responzivni dizajn', 
-        'Kontakt forma',
-        'Osnovni SEO',
-        '3 meseca podrška'
+        t('web.package.starter.feature1'),
+        t('web.package.starter.feature2'), 
+        t('web.package.starter.feature3'),
+        t('web.package.starter.feature4'),
+        t('web.package.starter.feature5')
       ],
       popular: false
     },
@@ -99,12 +99,12 @@ export function WebDesignPage() {
       price: '2.500 €',
       description: t('web.package.professional.desc'),
       features: [
-        'Do 15 stranica',
-        'Custom dizajn',
-        'CMS sistem',
-        'Napredni SEO',
-        'Google Analytics',
-        '6 meseci podrška'
+        t('web.package.professional.feature1'),
+        t('web.package.professional.feature2'),
+        t('web.package.professional.feature3'),
+        t('web.package.professional.feature4'),
+        t('web.package.professional.feature5'),
+        t('web.package.professional.feature6')
       ],
       popular: true
     },
@@ -113,12 +113,12 @@ export function WebDesignPage() {
       price: '5.000 €+',
       description: t('web.package.enterprise.desc'),
       features: [
-        'Neograničen broj stranica',
-        'E-commerce funkcionalnost',
-        'API integracije',
-        'Multilingvalni sajt',
-        'Premium podrška',
-        '12 meseci podrška'
+        t('web.package.enterprise.feature1'),
+        t('web.package.enterprise.feature2'),
+        t('web.package.enterprise.feature3'),
+        t('web.package.enterprise.feature4'),
+        t('web.package.enterprise.feature5'),
+        t('web.package.enterprise.feature6')
       ],
       popular: false
     }
@@ -129,19 +129,19 @@ export function WebDesignPage() {
       title: 'Restoran Konoba',
       category: 'Restaurant Website',
       image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=400&h=300&fit=crop',
-      description: 'Moderna web stranica za tradicionalni restoran sa online rezervacijama'
+      description: t('web.portfolio.project1.desc')
     },
     {
       title: 'Montenegro Properties',
       category: 'Real Estate',
       image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=400&h=300&fit=crop',
-      description: 'Elegantna web stranica za agenciju za nekretnine'
+      description: t('web.portfolio.project2.desc')
     },
     {
       title: 'Tech Startup',
       category: 'Technology',
       image: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=400&h=300&fit=crop',
-      description: 'Inovativna web stranica za tehnološki startup'
+      description: t('web.portfolio.project3.desc')
     }
   ];
 
@@ -200,7 +200,7 @@ export function WebDesignPage() {
               <div className="grid grid-cols-3 gap-6 pt-8 border-t border-gray-600">
                 <div>
                   <div className="text-2xl font-bold text-bdigital-cyan">50+</div>
-                  <div className="text-gray-400 text-sm">Web sajtova</div>
+                  <div className="text-gray-400 text-sm">{t('web.stat.sites')}</div>
                 </div>
                 <div>
                   <div className="text-2xl font-bold text-bdigital-cyan">99%</div>
@@ -208,7 +208,7 @@ export function WebDesignPage() {
                 </div>
                 <div>
                   <div className="text-2xl font-bold text-bdigital-cyan">24h</div>
-                  <div className="text-gray-400 text-sm">Podrška</div>
+                  <div className="text-gray-400 text-sm">{t('web.stat.support')}</div>
                 </div>
               </div>
             </div>
@@ -311,7 +311,7 @@ export function WebDesignPage() {
                 {pkg.popular && (
                   <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
                     <Badge className="bg-bdigital-cyan text-bdigital-navy px-4 py-1">
-                      Najpopularniji
+                      {t('packages.most_popular')}
                     </Badge>
                   </div>
                 )}
