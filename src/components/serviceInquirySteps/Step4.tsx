@@ -59,7 +59,7 @@ export function Step4({ formData, errors, updateFormData }: Step4Props) {
           <SelectTrigger className="border-gray-300 focus:border-bdigital-cyan">
             <SelectValue placeholder={t('form.placeholder_how_hear')} />
           </SelectTrigger>
-          <SelectContent>
+          <SelectContent forceMount>
             <SelectItem value="google">{t('form.how_hear_option.google')}</SelectItem>
             <SelectItem value="social-media">{t('form.how_hear_option.social_media')}</SelectItem>
             <SelectItem value="referral">{t('form.how_hear_option.referral')}</SelectItem>

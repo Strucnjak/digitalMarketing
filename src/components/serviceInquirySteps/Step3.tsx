@@ -31,7 +31,7 @@ export function Step3({
           <SelectTrigger className={`border-gray-300 focus:border-bdigital-cyan ${errors.timeline ? 'border-red-500' : ''}`}>
             <SelectValue placeholder={t('form.placeholder_timeline')} />
           </SelectTrigger>
-          <SelectContent>
+          <SelectContent forceMount>
             <SelectItem value="asap">{t('form.timeline_option.asap')}</SelectItem>
             <SelectItem value="1-month">{t('form.timeline_option.one_month')}</SelectItem>
             <SelectItem value="2-3-months">{t('form.timeline_option.two_three_months')}</SelectItem>
@@ -56,7 +56,7 @@ export function Step3({
           <SelectTrigger className={`border-gray-300 focus:border-bdigital-cyan ${errors.budget ? 'border-red-500' : ''}`}>
             <SelectValue placeholder={t('form.placeholder_budget')} />
           </SelectTrigger>
-          <SelectContent>
+          <SelectContent forceMount>
             <SelectItem value="under-1000">{t('form.budget_option.under_1000')}</SelectItem>
             <SelectItem value="1000-2500">{t('form.budget_option.1000_2500')}</SelectItem>
             <SelectItem value="2500-5000">{t('form.budget_option.2500_5000')}</SelectItem>
