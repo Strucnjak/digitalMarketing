@@ -1,6 +1,13 @@
 import { useState, useEffect, useRef } from "react";
 import { Button } from "./ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+  SheetHeader,
+  SheetTitle,
+  SheetDescription,
+} from "./ui/sheet";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { useLanguage } from "./LanguageContext";
 import { useRouter, type PageType, servicePageIds } from "./Router";
@@ -272,6 +279,12 @@ export function Navigation() {
                 </Button>
               </SheetTrigger>
               <SheetContent side="right" className="w-full sm:w-80 bg-white">
+                <SheetHeader className="sr-only">
+                  <SheetTitle>Navigation</SheetTitle>
+                  <SheetDescription>
+                    Displays the mobile navigation menu.
+                  </SheetDescription>
+                </SheetHeader>
                 <div className="flex flex-col h-full">
                   {/* Header */}
                   <div className="flex justify-between items-center py-4 border-b border-gray-200">
