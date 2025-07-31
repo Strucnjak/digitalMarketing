@@ -21,22 +21,22 @@ export function SocialMediaPage() {
     {
       icon: Instagram,
       title: t('social.feature.instagram'),
-      description: 'Kreiranje sadržaja, stories, reels i interakcija sa vašom publikom'
+      description: t('social.service.instagram_desc')
     },
     {
       icon: Facebook,
       title: t('social.feature.facebook'),
-      description: 'Facebook stranice, grupe, Facebook Ads i community management'
+      description: t('social.service.facebook_desc')
     },
     {
       icon: Camera,
       title: t('services.social.feature1'),
-      description: 'Profesionalne fotografije, video sadržaj i grafički dizajn'
+      description: t('services.social.feature1_desc')
     },
     {
       icon: TrendingUp,
       title: t('services.social.feature3'),
-      description: 'Plaćene reklame na svim društvenim mrežama sa ciljanim publikom'
+      description: t('services.social.feature3_desc')
     }
   ];
 
@@ -45,21 +45,21 @@ export function SocialMediaPage() {
       name: t('social.package.starter.name'),
       price: '800 €/mes',
       features: [
-        '10 postova mesečno',
-        'Instagram + Facebook',
-        'Basic content creation',
-        'Mesečni izveštaj'
+        t('social.package.starter.feature1'),
+        t('social.package.starter.feature2'),
+        t('social.package.starter.feature3'),
+        t('social.package.starter.feature4')
       ]
     },
     {
       name: t('social.package.professional.name'),
       price: '1.200 €/mes',
       features: [
-        '20 postova mesečno',
-        'Sve društvene mreže',
-        'Professional photography',
-        'Video content',
-        'Paid ads management'
+        t('social.package.professional.feature1'),
+        t('social.package.professional.feature2'),
+        t('social.package.professional.feature3'),
+        t('social.package.professional.feature4'),
+        t('social.package.professional.feature5')
       ],
       popular: true
     },
@@ -67,10 +67,10 @@ export function SocialMediaPage() {
       name: t('social.package.enterprise.name'),
       price: '2.000 €/mes',
       features: [
-        'Unlimited posts',
-        'Dedicated social manager',
-        'Influencer collaborations',
-        'Advanced analytics'
+        t('social.package.enterprise.feature1'),
+        t('social.package.enterprise.feature2'),
+        t('social.package.enterprise.feature3'),
+        t('social.package.enterprise.feature4')
       ]
     }
   ];
@@ -181,7 +181,7 @@ export function SocialMediaPage() {
                 {pkg.popular && (
                   <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
                     <Badge className="bg-bdigital-cyan text-bdigital-navy px-4 py-1">
-                      Najpopularniji
+                      {t('packages.most_popular')}
                     </Badge>
                   </div>
                 )}
