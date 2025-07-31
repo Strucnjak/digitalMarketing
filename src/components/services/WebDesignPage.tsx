@@ -364,14 +364,6 @@ export function WebDesignPage() {
                     alt={project.title}
                     className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
                   />
-                  <div className="absolute inset-0 bg-bdigital-navy/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                    <Button
-                      variant="outline"
-                      className="border-white text-white hover:bg-white hover:text-bdigital-navy"
-                    >
-                      {t('web.portfolio.view_more')}
-                    </Button>
-                  </div>
                 </div>
                 <CardContent className="p-6">
                   <Badge variant="secondary" className="mb-3 text-xs">
