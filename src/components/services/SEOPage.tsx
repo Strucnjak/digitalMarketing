@@ -25,55 +25,55 @@ export function SEOPage() {
     {
       icon: Search,
       title: t('services.seo.feature1'),
-      description: 'Detaljno istraživanje ključnih reči za vašu industriju i lokalno tržište'
+      description: t('seo.service.keyword_desc')
     },
     {
       icon: TrendingUp,
       title: t('services.seo.feature2'),
-      description: 'Optimizacija sadržaja, meta tagova i tehnička poboljšanja'
+      description: t('seo.service.onpage_desc')
     },
     {
       icon: MapPin,
       title: t('services.seo.feature3'),
-      description: 'Google My Business optimizacija za lokalne pretrage u Crnoj Gori'
+      description: t('seo.service.local_desc')
     },
     {
       icon: BarChart3,
       title: t('services.seo.feature4'),
-      description: 'Detaljni mesečni izveštaji o napretku i performansama'
+      description: t('seo.service.reporting_desc')
     },
     {
       icon: Smartphone,
       title: t('seo.feature.mobile'),
-      description: 'Optimizacija za mobilne pretraživače i glasovne pretrage'
+      description: t('seo.feature.mobile_desc')
     },
     {
       icon: Globe,
       title: t('seo.feature.technical'),
-      description: 'Brzina sajta, Core Web Vitals i strukturirani podatci'
+      description: t('seo.feature.technical_desc')
     }
   ];
 
   const results = [
     {
       metric: '300%',
-      label: 'Povećanje organskog saobraćaja',
-      description: 'Prosečno povećanje za naše klijente u prva 6 meseci'
+      label: t('seo.result.traffic.label'),
+      description: t('seo.result.traffic.desc')
     },
     {
       metric: '#1',
-      label: 'Pozicija na Google',
-      description: 'Više od 200 ključnih reči na prvoj strani Google pretrage'
+      label: t('seo.result.position.label'),
+      description: t('seo.result.position.desc')
     },
     {
       metric: '150%',
-      label: 'Više konverzija',
-      description: 'Povećanje broja upita i prodaje preko web stranica'
+      label: t('seo.result.conversions.label'),
+      description: t('seo.result.conversions.desc')
     },
     {
       metric: '50+',
-      label: 'Zadovoljnih klijenata',
-      description: 'Kompanije koje su poboljšale svoje online prisustvo'
+      label: t('seo.result.clients.label'),
+      description: t('seo.result.clients.desc')
     }
   ];
 
@@ -83,11 +83,11 @@ export function SEOPage() {
       price: '500 €/mes',
       description: t('seo.package.starter.desc'),
       features: [
-        'Keyword research (20 KW)',
-        'On-page optimizacija',
-        'Google My Business setup',
-        'Mesečni izveštaj',
-        'Email podrška'
+        t('seo.package.starter.feature1'),
+        t('seo.package.starter.feature2'),
+        t('seo.package.starter.feature3'),
+        t('seo.package.starter.feature4'),
+        t('seo.package.starter.feature5')
       ],
       popular: false
     },
@@ -96,12 +96,12 @@ export function SEOPage() {
       price: '800 €/mes',
       description: t('seo.package.professional.desc'),
       features: [
-        'Keyword research (50 KW)',
-        'Kompletna on-page optimizacija',
-        'Local SEO optimizacija',
-        'Content strategija',
-        'Bi-weekly izveštaji',
-        'Telefonska podrška'
+        t('seo.package.professional.feature1'),
+        t('seo.package.professional.feature2'),
+        t('seo.package.professional.feature3'),
+        t('seo.package.professional.feature4'),
+        t('seo.package.professional.feature5'),
+        t('seo.package.professional.feature6')
       ],
       popular: true
     },
@@ -110,12 +110,12 @@ export function SEOPage() {
       price: '1.500 €/mes',
       description: t('seo.package.enterprise.desc'),
       features: [
-        'Unlimited keyword research',
-        'Tehnička SEO auditacija',
-        'Konkurentska analiza',
-        'Link building strategija',
-        'Nedeljni izveštaji',
-        'Dedicated SEO manager'
+        t('seo.package.enterprise.feature1'),
+        t('seo.package.enterprise.feature2'),
+        t('seo.package.enterprise.feature3'),
+        t('seo.package.enterprise.feature4'),
+        t('seo.package.enterprise.feature5'),
+        t('seo.package.enterprise.feature6')
       ],
       popular: false
     }
@@ -124,25 +124,25 @@ export function SEOPage() {
   const caseStudies = [
     {
       client: 'Montenegrin Properties',
-      industry: 'Nekretnine',
-      challenge: 'Loša vidljivost u lokalnim pretragama',
-      solution: 'Lokalni SEO + Google My Business optimizacija',
+      industry: t('seo.case.study1.industry'),
+      challenge: t('seo.case.study1.challenge'),
+      solution: t('seo.case.study1.solution'),
       results: [
-        '+280% organskog saobraćaja',
-        '1. pozicija za "nekretnine Podgorica"',
-        '+150% upita preko web stranice'
+        t('seo.case.study1.result1'),
+        t('seo.case.study1.result2'),
+        t('seo.case.study1.result3')
       ],
       image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=400&h=300&fit=crop'
     },
     {
       client: 'Adriatic Adventures',
-      industry: 'Turizam',
-      challenge: 'Konkurencija sa velikim turističkim portalima',
-      solution: 'Content marketing + Long-tail keyword strategija',
+      industry: t('seo.case.study2.industry'),
+      challenge: t('seo.case.study2.challenge'),
+      solution: t('seo.case.study2.solution'),
       results: [
-        '+320% organskog saobraćaja',
-        'Top 3 za 50+ turističkih termina',
-        '+200% online rezervacija'
+        t('seo.case.study2.result1'),
+        t('seo.case.study2.result2'),
+        t('seo.case.study2.result3')
       ],
       image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400&h=300&fit=crop'
     }
