@@ -114,19 +114,63 @@ export function ServiceInquiryForm() {
     }
   }, []);
 
-  const updateFormData = (field: keyof InquiryFormData, value: unknown) => {
+  const [touched, setTouched] = useState<Record<string, boolean>>({});
+
+  const validateField = (
+    field: keyof InquiryFormData,
+    value: unknown
+  ): string => {
+    switch (field) {
+      case 'fullName':
+        return !String(value).trim() ? t('form.required_name') : '';
+      case 'email':
+        if (!String(value).trim()) return t('form.required_email');
+        return /\S+@\S+\.\S+/.test(String(value))
+          ? ''
+          : t('form.invalid_email');
+      case 'company':
+        return !String(value).trim() ? t('form.required_company') : '';
+      case 'projectTypes':
+        return (value as string[]).length === 0
+          ? t('form.required_project_types')
+          : '';
+      case 'currentSituation':
+      case 'projectGoals':
+        return !String(value).trim() ? t('form.required_field') : '';
+      case 'timeline':
+        return !value ? t('form.required_timeline') : '';
+      case 'budget':
+        return !value ? t('form.required_budget') : '';
+      case 'preferredContact':
+        return !value ? t('form.required_contact') : '';
+      default:
+        return '';
+    }
+  };
+
+  const updateFormData = (
+    field: keyof InquiryFormData,
+    value: unknown
+  ) => {
     setFormData(prev => ({
       ...prev,
       [field]: value
     }));
-    
-    // Clear error when user starts typing
-    if (errors[field]) {
-      setErrors(prev => ({
-        ...prev,
-        [field]: ''
-      }));
-    }
+
+    setTouched(prev => ({ ...prev, [field]: true }));
+
+    setErrors(prev => ({
+      ...prev,
+      [field]: validateField(field, value)
+    }));
+  };
+
+  const handleBlur = (field: keyof InquiryFormData) => {
+    setTouched(prev => ({ ...prev, [field]: true }));
+    setErrors(prev => ({
+      ...prev,
+      [field]: validateField(field, formData[field])
+    }));
   };
 
   const validateStep = (step: number): boolean => {
@@ -158,21 +202,19 @@ export function ServiceInquiryForm() {
   };
 
   const handleProjectTypeChange = (projectType: string, checked: boolean) => {
-    setFormData(prev => ({
-      ...prev,
-      projectTypes: checked 
-        ? [...prev.projectTypes, projectType]
-        : prev.projectTypes.filter(type => type !== projectType)
-    }));
+    const newValue = checked
+      ? [...formData.projectTypes, projectType]
+      : formData.projectTypes.filter(type => type !== projectType);
+
+    updateFormData('projectTypes', newValue);
   };
 
   const handleAdditionalServicesChange = (service: string, checked: boolean) => {
-    setFormData(prev => ({
-      ...prev,
-      additionalServices: checked 
-        ? [...prev.additionalServices, service]
-        : prev.additionalServices.filter(s => s !== service)
-    }));
+    const newValue = checked
+      ? [...formData.additionalServices, service]
+      : formData.additionalServices.filter(s => s !== service);
+
+    updateFormData('additionalServices', newValue);
   };
 
   const handleSubmit = async () => {
@@ -395,7 +437,13 @@ export function ServiceInquiryForm() {
                   exit={{ x: -100, opacity: 0 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <Step1 formData={formData} errors={errors} updateFormData={updateFormData} />
+                  <Step1
+                    formData={formData}
+                    errors={errors}
+                    touched={touched}
+                    updateFormData={updateFormData}
+                    handleBlur={handleBlur}
+                  />
                 </motion.div>
               )}
               {currentStep === 2 && (
@@ -409,8 +457,10 @@ export function ServiceInquiryForm() {
                   <Step2
                     formData={formData}
                     errors={errors}
+                    touched={touched}
                     updateFormData={updateFormData}
                     handleProjectTypeChange={handleProjectTypeChange}
+                    handleBlur={handleBlur}
                   />
                 </motion.div>
               )}
@@ -425,8 +475,10 @@ export function ServiceInquiryForm() {
                   <Step3
                     formData={formData}
                     errors={errors}
+                    touched={touched}
                     updateFormData={updateFormData}
                     handleAdditionalServicesChange={handleAdditionalServicesChange}
+                    handleBlur={handleBlur}
                   />
                 </motion.div>
               )}
@@ -438,7 +490,13 @@ export function ServiceInquiryForm() {
                   exit={{ x: -100, opacity: 0 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <Step4 formData={formData} errors={errors} updateFormData={updateFormData} />
+                  <Step4
+                    formData={formData}
+                    errors={errors}
+                    touched={touched}
+                    updateFormData={updateFormData}
+                    handleBlur={handleBlur}
+                  />
                 </motion.div>
               )}
             </AnimatePresence>
