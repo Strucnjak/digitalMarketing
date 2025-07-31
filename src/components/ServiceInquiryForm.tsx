@@ -63,6 +63,7 @@ interface InquiryFormData {
   // Marketing
   howDidYouHear: string;
   newsletter: boolean;
+}
 export function ServiceInquiryForm() {
   const { navigateTo } = useRouter();
   const { t } = useLanguage();
