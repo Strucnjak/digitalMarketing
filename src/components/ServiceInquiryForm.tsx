@@ -145,7 +145,7 @@ export function ServiceInquiryForm() {
     }
   }, []);
 
-  const updateFormData = (field: keyof InquiryFormData, value: any) => {
+  const updateFormData = (field: keyof InquiryFormData, value: unknown) => {
     setFormData(prev => ({
       ...prev,
       [field]: value
@@ -302,10 +302,10 @@ export function ServiceInquiryForm() {
           
           <div className="text-center mb-8">
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-bdigital-navy mb-4">
-              Upit za <span className="text-bdigital-cyan">ponudu</span>
+              {t('inquiry.title')}
             </h1>
             <p className="text-lg text-neutral-gray max-w-2xl mx-auto">
-              Popunite formu ispod da bismo pripremili personalizovanu ponudu za vaš projekat.
+              {t('inquiry.subtitle')}
             </p>
           </div>
 
@@ -371,10 +371,10 @@ export function ServiceInquiryForm() {
             <span className="text-sm text-neutral-gray">{Math.round(progressPercentage)}% završeno</span>
           </div>
           <Progress value={progressPercentage} className="h-2 mb-6" />
-          
+
           {/* Step Indicators */}
           <div className="flex items-center justify-between">
-            {steps.map((step, _index) => {
+            {steps.map((step) => {
               const IconComponent = step.icon;
               const isActive = currentStep === step.id;
               const isCompleted = currentStep > step.id;

@@ -423,5 +423,8 @@
   "branding.package.enterprise.feature2": "Packaging design",
   "branding.package.enterprise.feature3": "Unlimited revisions",
   "branding.package.enterprise.feature4": "Complete identity",
-  "branding.package.enterprise.feature5": "12 months support"
+  "branding.package.enterprise.feature5": "12 months support",
+  "inquiry.title": "Request a quote",
+  "inquiry.subtitle": "Fill out the form below so we can prepare a personalized quote for your project."
 }
+

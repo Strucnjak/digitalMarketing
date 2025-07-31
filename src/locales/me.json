@@ -424,5 +424,8 @@
   "branding.package.enterprise.feature2": "Packaging dizajn",
   "branding.package.enterprise.feature3": "Neograničene revizije",
   "branding.package.enterprise.feature4": "Kompletan identitet",
-  "branding.package.enterprise.feature5": "12 meseci podrška"
+  "branding.package.enterprise.feature5": "12 meseci podrška",
+  "inquiry.title": "Upit za ponudu",
+  "inquiry.subtitle": "Popunite formu ispod da bismo pripremili personalizovanu ponudu za vaš projekat."
 }
+

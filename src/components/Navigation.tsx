@@ -256,7 +256,7 @@ export function Navigation() {
               onClick={() => navigateTo("free-consultation")}
               className="bg-bdigital-cyan text-bdigital-navy hover:bg-bdigital-cyan-light font-semibold px-6 py-2 text-sm shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
             >
-              Besplatna konsultacija
+              {t('web.cta.primary')}
             </Button>
           </div>
 
@@ -389,7 +389,7 @@ export function Navigation() {
                       }}
                       className="w-full bg-bdigital-cyan text-bdigital-navy hover:bg-bdigital-cyan-light font-semibold py-3 text-sm shadow-lg transition-all duration-300"
                     >
-                      Besplatna konsultacija
+                      {t('web.cta.primary')}
                     </Button>
                   </div>
                 </div>
