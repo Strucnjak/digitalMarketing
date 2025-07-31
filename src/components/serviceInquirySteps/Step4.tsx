@@ -27,7 +27,7 @@ export function Step4({
 
   return (
     <div className="space-y-6">
-      <div>
+      <div className="relative z-20">
         <Label className="mb-3 block text-bdigital-navy">
           {t('form.preferred_contact_label')}
         </Label>
@@ -60,7 +60,7 @@ export function Step4({
         </Tooltip>
       </div>
 
-      <div>
+      <div className="relative z-20">
         <Label className="mb-2 block text-bdigital-navy">
           {t('form.how_hear_label')}
         </Label>

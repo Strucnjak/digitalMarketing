@@ -27,7 +27,7 @@ export function Step3({
 
   return (
     <div className="space-y-6">
-      <div>
+      <div className="relative z-20">
         <Label className="flex items-center gap-2 mb-3 text-bdigital-navy">
           <Calendar className="h-4 w-4" />
           {t('form.timeline')}
@@ -57,7 +57,7 @@ export function Step3({
         </Tooltip>
       </div>
 
-      <div>
+      <div className="relative z-20">
         <Label className="flex items-center gap-2 mb-3 text-bdigital-navy">
           <DollarSign className="h-4 w-4" />
           {t('form.budget')}
