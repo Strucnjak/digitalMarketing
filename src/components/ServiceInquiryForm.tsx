@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { Button } from './ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Badge } from './ui/badge';
@@ -385,28 +386,62 @@ export function ServiceInquiryForm() {
             </CardTitle>
           </CardHeader>
           <CardContent className="p-6 lg:p-8">
-            {currentStep === 1 && (
-              <Step1 formData={formData} errors={errors} updateFormData={updateFormData} />
-            )}
-            {currentStep === 2 && (
-              <Step2
-                formData={formData}
-                errors={errors}
-                updateFormData={updateFormData}
-                handleProjectTypeChange={handleProjectTypeChange}
-              />
-            )}
-            {currentStep === 3 && (
-              <Step3
-                formData={formData}
-                errors={errors}
-                updateFormData={updateFormData}
-                handleAdditionalServicesChange={handleAdditionalServicesChange}
-              />
-            )}
-            {currentStep === 4 && (
-              <Step4 formData={formData} errors={errors} updateFormData={updateFormData} />
-            )}
+            <AnimatePresence mode="wait">
+              {currentStep === 1 && (
+                <motion.div
+                  key="step1"
+                  initial={{ x: 100, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  exit={{ x: -100, opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <Step1 formData={formData} errors={errors} updateFormData={updateFormData} />
+                </motion.div>
+              )}
+              {currentStep === 2 && (
+                <motion.div
+                  key="step2"
+                  initial={{ x: 100, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  exit={{ x: -100, opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <Step2
+                    formData={formData}
+                    errors={errors}
+                    updateFormData={updateFormData}
+                    handleProjectTypeChange={handleProjectTypeChange}
+                  />
+                </motion.div>
+              )}
+              {currentStep === 3 && (
+                <motion.div
+                  key="step3"
+                  initial={{ x: 100, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  exit={{ x: -100, opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <Step3
+                    formData={formData}
+                    errors={errors}
+                    updateFormData={updateFormData}
+                    handleAdditionalServicesChange={handleAdditionalServicesChange}
+                  />
+                </motion.div>
+              )}
+              {currentStep === 4 && (
+                <motion.div
+                  key="step4"
+                  initial={{ x: 100, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  exit={{ x: -100, opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <Step4 formData={formData} errors={errors} updateFormData={updateFormData} />
+                </motion.div>
+              )}
+            </AnimatePresence>
 
 
             {/* Navigation Buttons */}
