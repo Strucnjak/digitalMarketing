@@ -509,7 +509,7 @@
   "email.contact.subject": "Nova poruka sa kontakt forme",
   "email.contact.body": "Ime: {name}\\nEmail: {email}\\nKompanija: {company}\\nTelefon: {phone}\\nPoruka: {message}",
   "email.consultation.subject": "Zahtev za konsultaciju",
-  "email.consultation.body": "Ime: {name}\\nEmail: {email}\\nTelefon: {phone}",
+  "email.consultation.body": "Ime: {name}\\nEmail: {email}\\nTelefon: {phone}\\nKompanija: {company}\\nWebsite: {website}\\nTip biznisa: {businessType}\\nTrenutni izazovi: {currentChallenges}\\nCiljevi: {goals}\\nZainteresovane usluge: {interestedServices}\\nPreferirani kontakt: {preferredContact}\\nPreferirano vrijeme: {preferredTime}\\nDodatne informacije: {additionalInfo}\\nNewsletter: {newsletter}",
   "email.inquiry.subject": "Upit za uslugu",
   "email.inquiry.body": "Ime: {name}\\nUsluga: {service}\\nDetalji: {details}"
 }
