@@ -46,7 +46,7 @@ interface ConsultationFormData {
 
 export function FreeConsultationPage() {
   const { navigateTo } = useRouter();
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -124,7 +124,7 @@ export function FreeConsultationPage() {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify({ ...formData, language })
       });
 
       if (!response.ok) {

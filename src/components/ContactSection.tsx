@@ -19,7 +19,7 @@ import { useLanguage } from './LanguageContext';
 import { EMAIL, PHONE, ADDRESS } from '../config/contact';
 
 export function ContactSection() {
-  const { t: _t } = useLanguage();
+  const { t: _t, language } = useLanguage();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -42,7 +42,7 @@ export function ContactSection() {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify({ ...formData, language })
       });
 
       if (!response.ok) {

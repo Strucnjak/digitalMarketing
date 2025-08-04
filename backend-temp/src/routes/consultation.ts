@@ -1,5 +1,6 @@
 import express from 'express';
 import { PrismaClient } from '@prisma/client';
+import { sendConsultationEmail } from '../utils/emailService';
 
 const prisma = new PrismaClient();
 const router = express.Router();
@@ -21,15 +22,30 @@ interface ConsultationFormData {
 }
 
 router.post('/', async (req, res) => {
-  const data = req.body as ConsultationFormData;
+  const { language = 'en', ...data } = req.body as ConsultationFormData & {
+    language?: 'me' | 'en';
+  };
 
   try {
-    await prisma.consultationRequest.create({
+    const formData = await prisma.consultationRequest.create({
       data: {
         ...data,
         interestedServices: data.interestedServices ?? [],
       },
     });
+
+    try {
+      await sendConsultationEmail(
+        {
+          name: formData.fullName,
+          email: formData.email,
+          phone: formData.phone,
+        },
+        language,
+      );
+    } catch (emailErr) {
+      console.error('Failed to send consultation emails', emailErr);
+    }
 
     return res.json({ success: true });
   } catch (error) {

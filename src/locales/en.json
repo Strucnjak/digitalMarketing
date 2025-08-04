@@ -504,6 +504,12 @@
   "branding.package.enterprise.feature4": "Complete identity",
   "branding.package.enterprise.feature5": "12 months support",
   "inquiry.title": "Request a quote",
-  "inquiry.subtitle": "Fill out the form below so we can prepare a personalized quote for your project."
+  "inquiry.subtitle": "Fill out the form below so we can prepare a personalized quote for your project.",
+  "email.contact.subject": "New contact form message",
+  "email.contact.body": "Name: {name}\\nEmail: {email}\\nMessage: {message}",
+  "email.consultation.subject": "Consultation request",
+  "email.consultation.body": "Name: {name}\\nEmail: {email}\\nPhone: {phone}",
+  "email.inquiry.subject": "Service inquiry",
+  "email.inquiry.body": "Name: {name}\\nService: {service}\\nDetails: {details}"
 }
 

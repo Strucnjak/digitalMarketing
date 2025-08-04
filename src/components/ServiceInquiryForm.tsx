@@ -58,7 +58,7 @@ export interface InquiryFormData {
 }
 export function ServiceInquiryForm() {
   const { navigateTo } = useRouter();
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [currentStep, setCurrentStep] = useState(1);
   const serviceInfo: Record<string, { title: string; description: string; icon: string }> = {
     "web-design": { title: t("services.web.title"), description: t("services.web.desc"), icon: "🎨" },
@@ -230,7 +230,7 @@ export function ServiceInquiryForm() {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify({ ...formData, language })
       });
 
       if (!response.ok) {
