@@ -31,6 +31,15 @@ function format(template: string, payload: Payload) {
   return template.replace(/\{(\w+)\}/g, (_, k) => payload[k] ?? "");
 }
 
+function buildHtmlTable(payload: Payload) {
+  return `<table>${Object.entries(payload)
+    .map(([key, value]) => {
+      const v = String(value).replace(/\n/g, "<br/>");
+      return `<tr><td><strong>${key}:</strong></td><td>${v}</td></tr>`;
+    })
+    .join("")}</table>`;
+}
+
 const confirmationLocales = {
   contact: {
     subject: {
@@ -72,12 +81,13 @@ export async function sendContactEmail(payload: Payload, language: Language) {
     phone: payload.phone,
     message: payload.message,
   });
+  const htmlBody = buildHtmlTable(payload);
   await transporter.sendMail({
     from: process.env.EMAIL_FROM,
     to: process.env.EMAIL_TO,
     subject: t(language, "email.contact.subject"),
     text: body,
-    html: body.replace(/\n/g, "<br/>"),
+    html: htmlBody,
   });
   const confirmationBody = confirmationLocales.contact.body[language](payload);
   await transporter.sendMail({
@@ -85,18 +95,19 @@ export async function sendContactEmail(payload: Payload, language: Language) {
     to: payload.email,
     subject: confirmationLocales.contact.subject[language],
     text: confirmationBody,
-    html: `<p>${confirmationBody}</p>`,
+    html: `<p>${confirmationBody}</p>${htmlBody}`,
   });
 }
 
 export async function sendConsultationEmail(payload: Payload, language: Language) {
   const body = format(t(language, "email.consultation.body"), payload);
+  const htmlBody = buildHtmlTable(payload);
   await transporter.sendMail({
     from: process.env.EMAIL_FROM,
     to: process.env.EMAIL_TO,
     subject: t(language, "email.consultation.subject"),
     text: body,
-    html: body.split("\n").map((line) => `<p>${line}</p>`).join(""),
+    html: htmlBody,
   });
   const confirmationBody = confirmationLocales.consultation.body[language](payload);
   await transporter.sendMail({
@@ -104,7 +115,7 @@ export async function sendConsultationEmail(payload: Payload, language: Language
     to: payload.email,
     subject: confirmationLocales.consultation.subject[language],
     text: confirmationBody,
-    html: `<p>${confirmationBody}</p>`,
+    html: `<p>${confirmationBody}</p>${htmlBody}`,
   });
 }
 
@@ -126,14 +137,7 @@ export async function sendServiceInquiryEmail(
   }
 
   const textBody = format(t(language, 'email.inquiry.body'), normalized);
-  const htmlBody = `<table>${textBody
-    .split('\\n')
-    .map((line) => {
-      const [label, ...rest] = line.split(':');
-      const value = rest.join(':').trim();
-      return `<tr><td><strong>${label}:</strong></td><td>${value}</td></tr>`;
-    })
-    .join('')}</table>`;
+  const htmlBody = buildHtmlTable(normalized);
 
   await transporter.sendMail({
     from: process.env.EMAIL_FROM,
@@ -152,6 +156,6 @@ export async function sendServiceInquiryEmail(
     to: normalized.email,
     subject: confirmationLocales.serviceInquiry.subject[language],
     text: confirmationBody,
-    html: `<p>${confirmationBody}</p>`,
+    html: `<p>${confirmationBody}</p>${htmlBody}`,
   });
 }
