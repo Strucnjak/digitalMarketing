@@ -1,0 +1,65 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model ContactMessage {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  company   String?
+  phone     String?
+  message   String
+  createdAt DateTime @default(now())
+}
+
+model ConsultationRequest {
+  id                 Int      @id @default(autoincrement())
+  fullName           String
+  email              String
+  phone              String
+  company            String
+  website            String
+  businessType       String
+  currentChallenges  String
+  goals              String
+  interestedServices Json
+  preferredContact   String
+  preferredTime      String
+  additionalInfo     String
+  newsletter         Boolean
+  createdAt          DateTime @default(now())
+}
+
+model ServiceInquiry {
+  id                 Int      @id @default(autoincrement())
+  fullName           String
+  email              String
+  phone              String
+  company            String
+  website            String
+  selectedService    String
+  selectedPackage    String
+  projectTypes       Json
+  currentSituation   String
+  projectGoals       String
+  targetAudience     String
+  timeline           String
+  budget             String
+  additionalServices Json
+  preferredContact   String
+  additionalInfo     String
+  howDidYouHear      String
+  newsletter         Boolean
+  createdAt          DateTime @default(now())
+}
