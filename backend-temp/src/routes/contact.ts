@@ -1,11 +1,12 @@
 import express from 'express';
 import { PrismaClient } from '@prisma/client';
+import { sendContactEmail } from '../utils/emailService';
 
 const prisma = new PrismaClient();
 const router = express.Router();
 
 router.post('/', async (req, res) => {
-  const { name, email, company, phone, message } = req.body;
+  const { name, email, company, phone, message, language = 'en' } = req.body;
   const errors: Record<string, string> = {};
 
   if (!name) {
@@ -23,9 +24,16 @@ router.post('/', async (req, res) => {
   }
 
   try {
-    await prisma.contactMessage.create({
+    const formData = await prisma.contactMessage.create({
       data: { name, email, company, phone, message },
     });
+
+    try {
+      await sendContactEmail(formData, language);
+    } catch (emailErr) {
+      console.error('Failed to send contact emails', emailErr);
+    }
+
     return res.json({ success: true });
   } catch (err) {
     console.error(err);
