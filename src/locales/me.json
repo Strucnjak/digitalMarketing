@@ -507,7 +507,7 @@
   "inquiry.title": "Upit za ponudu",
   "inquiry.subtitle": "Popunite formu ispod da bismo pripremili personalizovanu ponudu za vaš projekat.",
   "email.contact.subject": "Nova poruka sa kontakt forme",
-  "email.contact.body": "Ime: {name}\\nEmail: {email}\\nPoruka: {message}",
+  "email.contact.body": "Ime: {name}\\nEmail: {email}\\nKompanija: {company}\\nTelefon: {phone}\\nPoruka: {message}",
   "email.consultation.subject": "Zahtev za konsultaciju",
   "email.consultation.body": "Ime: {name}\\nEmail: {email}\\nTelefon: {phone}",
   "email.inquiry.subject": "Upit za uslugu",
