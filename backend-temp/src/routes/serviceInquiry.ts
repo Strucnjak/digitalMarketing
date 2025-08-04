@@ -41,15 +41,7 @@ router.post('/', async (req, res) => {
     });
 
     try {
-      await sendServiceInquiryEmail(
-        {
-          name: formData.fullName,
-          email: formData.email,
-          service: formData.selectedService,
-          details: formData.projectGoals,
-        },
-        language,
-      );
+      await sendServiceInquiryEmail(formData, language);
     } catch (emailErr) {
       console.error('Failed to send service inquiry emails', emailErr);
     }
