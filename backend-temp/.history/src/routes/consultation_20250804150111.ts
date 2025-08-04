@@ -1,6 +1,6 @@
-import express from "express";
-import { PrismaClient } from "@prisma/client";
-import { sendConsultationEmail } from "../utils/emailService";
+import express from 'express';
+import { PrismaClient } from '@prisma/client';
+import { sendConsultationEmail } from '../utils/emailService';
 
 const prisma = new PrismaClient();
 const router = express.Router();
@@ -21,9 +21,9 @@ interface ConsultationFormData {
   newsletter: boolean;
 }
 
-router.post("/", async (req, res) => {
-  const { language = "en", ...data } = req.body as ConsultationFormData & {
-    language?: "me" | "en";
+router.post('/', async (req, res) => {
+  const { language = 'en', ...data } = req.body as ConsultationFormData & {
+    language?: 'me' | 'en';
   };
 
   try {
@@ -45,22 +45,28 @@ router.post("/", async (req, res) => {
           businessType: formData.businessType,
           currentChallenges: formData.currentChallenges,
           goals: formData.goals,
-          interestedServices: Array.isArray(formData.interestedServices) ? formData.interestedServices.join(", ") : "",
+          interestedServices: formData.interestedServices.join(', '),
           preferredContact: formData.preferredContact,
           preferredTime: formData.preferredTime,
           additionalInfo: formData.additionalInfo,
-          newsletter: formData.newsletter ? (language === "me" ? "Da" : "Yes") : language === "me" ? "Ne" : "No",
+          newsletter: formData.newsletter
+            ? language === 'me'
+              ? 'Da'
+              : 'Yes'
+            : language === 'me'
+              ? 'Ne'
+              : 'No',
         },
-        language
+        language,
       );
     } catch (emailErr) {
-      console.error("Failed to send consultation emails", emailErr);
+      console.error('Failed to send consultation emails', emailErr);
     }
 
     return res.json({ success: true });
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ error: "Failed to submit consultation request" });
+    return res.status(500).json({ error: 'Failed to submit consultation request' });
   }
 });
 

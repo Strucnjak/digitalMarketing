@@ -33,7 +33,7 @@ model ConsultationRequest {
   businessType       String
   currentChallenges  String
   goals              String
-  interestedServices String[]
+  interestedServices Json
   preferredContact   String
   preferredTime      String
   additionalInfo     String

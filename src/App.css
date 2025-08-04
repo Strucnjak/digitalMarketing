@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .tooltip-content {
+    @apply bg-white text-sm text-red-600 border border-red-300 rounded shadow-md z-50 px-3 py-2;
+  }
+}
