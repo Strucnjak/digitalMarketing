@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import contactRouter from './routes/contact';
 import serviceInquiryRouter from './routes/serviceInquiry';
+import consultationRouter from './routes/consultation';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -13,6 +14,7 @@ app.use(cors({ origin: allowedOrigin }));
 app.use(express.json());
 app.use('/api/contact', contactRouter);
 app.use('/api/service-inquiries', serviceInquiryRouter);
+app.use('/api/consultations', consultationRouter);
 
 const PORT = process.env.PORT || 3000;
 
