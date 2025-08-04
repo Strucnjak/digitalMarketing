@@ -29,28 +29,49 @@ export function ContactSection() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
-    setIsSubmitted(true);
-    setIsSubmitting(false);
-    
-    // Reset form after 3 seconds
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setFormData({
-        name: '',
-        email: '',
-        company: '',
-        message: '',
-        phone: ''
+    setError(null);
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
       });
-    }, 3000);
+
+      if (!response.ok) {
+        const data = await response.json().catch(() => null);
+        const message = data?.errors
+          ? Object.values(data.errors).join(', ')
+          : 'Failed to send message';
+        throw new Error(message);
+      }
+
+      setIsSubmitted(true);
+
+      // Reset form after 3 seconds
+      setTimeout(() => {
+        setIsSubmitted(false);
+        setFormData({
+          name: '',
+          email: '',
+          company: '',
+          message: '',
+          phone: ''
+        });
+      }, 3000);
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Failed to send message';
+      setError(message);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (field: string, value: string) => {
@@ -230,6 +251,9 @@ export function ContactSection() {
                       </>
                     )}
                   </Button>
+                  {error && (
+                    <p className="text-red-500 text-sm text-center mt-4">{error}</p>
+                  )}
                 </form>
               )}
             </CardContent>

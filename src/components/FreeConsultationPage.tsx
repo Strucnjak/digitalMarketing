@@ -50,6 +50,7 @@ export function FreeConsultationPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const [formData, setFormData] = useState<ConsultationFormData>({
     fullName: '',
@@ -113,14 +114,32 @@ export function FreeConsultationPage() {
 
   const handleSubmit = async () => {
     if (!validateForm()) return;
-    
+
     setIsSubmitting(true);
-    
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
-    setIsSubmitting(false);
-    setIsSubmitted(true);
+    setSubmitError(null);
+
+    try {
+      const response = await fetch('/api/consultations', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      });
+
+      if (!response.ok) {
+        const data = await response.json().catch(() => null);
+        const message = data?.error || 'Failed to submit consultation request';
+        throw new Error(message);
+      }
+
+      setIsSubmitted(true);
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Failed to submit consultation request';
+      setSubmitError(message);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (isSubmitted) {
@@ -557,6 +576,9 @@ export function FreeConsultationPage() {
                 <p className="text-center text-sm text-neutral-gray mt-3">
                   Kontaktiraćemo vas u roku od 24 sata da potvrdimo termin
                 </p>
+                {submitError && (
+                  <p className="text-red-500 text-sm text-center mt-4">{submitError}</p>
+                )}
               </div>
             </div>
           </CardContent>
