@@ -70,6 +70,7 @@ export function ServiceInquiryForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const [formData, setFormData] = useState<InquiryFormData>({
     fullName: '',
@@ -219,18 +220,36 @@ export function ServiceInquiryForm() {
 
   const handleSubmit = async () => {
     if (!validateStep(4)) return;
-    
+
     setIsSubmitting(true);
-    
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
-    setIsSubmitting(false);
-    setIsSubmitted(true);
-    
-    // Clear stored service/package info
-    localStorage.removeItem('selectedService');
-    localStorage.removeItem('selectedPackage');
+    setSubmitError(null);
+
+    try {
+      const response = await fetch('/api/service-inquiries', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      });
+
+      if (!response.ok) {
+        const data = await response.json().catch(() => null);
+        const message = data?.error || 'Failed to submit inquiry';
+        throw new Error(message);
+      }
+
+      setIsSubmitted(true);
+
+      // Clear stored service/package info
+      localStorage.removeItem('selectedService');
+      localStorage.removeItem('selectedPackage');
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Failed to submit inquiry';
+      setSubmitError(message);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const nextStep = () => {
@@ -542,6 +561,9 @@ export function ServiceInquiryForm() {
                 </Button>
               )}
             </div>
+            {submitError && (
+              <p className="text-red-500 text-sm text-center mt-4">{submitError}</p>
+            )}
           </CardContent>
         </Card>
       </div>
