@@ -5,13 +5,9 @@ import path from "path";
 const transporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST,
   port: Number(process.env.SMTP_PORT),
-  secure: true, // if using port 465 (SSL)
   auth: {
     user: process.env.SMTP_USER,
     pass: process.env.SMTP_PASS,
-  },
-  tls: {
-    rejectUnauthorized: false,
   },
 });
 
@@ -48,8 +44,8 @@ const confirmationLocales = {
       en: "Consultation request received",
     },
     body: {
-      me: (p: Payload) => `Poštovani ${p.name}, vaš zahtev za konsultaciju je primljen. Uskoro ćemo vas kontaktirati.`,
-      en: (p: Payload) => `Dear ${p.name}, your consultation request has been received. We will contact you soon.`,
+      me: () => "Vaš zahtev za konsultaciju je primljen. Uskoro ćemo vas kontaktirati.",
+      en: () => "Your consultation request has been received. We will contact you soon.",
     },
   },
   serviceInquiry: {
@@ -58,8 +54,8 @@ const confirmationLocales = {
       en: "Service inquiry received",
     },
     body: {
-      me: (p: Payload) => `Poštovani ${p.name}, vaš upit za uslugu je primljen. Uskoro ćemo vam odgovoriti.`,
-      en: (p: Payload) => `Dear ${p.name}, your service inquiry has been received. We will reply shortly.`,
+      me: () => "Vaš upit za uslugu je primljen. Uskoro ćemo vam odgovoriti.",
+      en: () => "Your service inquiry has been received. We will reply shortly.",
     },
   },
 };
@@ -90,7 +86,7 @@ export async function sendConsultationEmail(payload: Payload, language: Language
     from: process.env.EMAIL_FROM,
     to: payload.email,
     subject: confirmationLocales.consultation.subject[language],
-    text: confirmationLocales.consultation.body[language](payload),
+    text: confirmationLocales.consultation.body[language](),
   });
 }
 
@@ -105,6 +101,6 @@ export async function sendServiceInquiryEmail(payload: Payload, language: Langua
     from: process.env.EMAIL_FROM,
     to: payload.email,
     subject: confirmationLocales.serviceInquiry.subject[language],
-    text: confirmationLocales.serviceInquiry.body[language](payload),
+    text: confirmationLocales.serviceInquiry.body[language](),
   });
 }

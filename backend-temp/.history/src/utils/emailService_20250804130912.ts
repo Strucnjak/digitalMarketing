@@ -5,13 +5,9 @@ import path from "path";
 const transporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST,
   port: Number(process.env.SMTP_PORT),
-  secure: true, // if using port 465 (SSL)
   auth: {
     user: process.env.SMTP_USER,
     pass: process.env.SMTP_PASS,
-  },
-  tls: {
-    rejectUnauthorized: false,
   },
 });
 
@@ -48,8 +44,10 @@ const confirmationLocales = {
       en: "Consultation request received",
     },
     body: {
-      me: (p: Payload) => `Poštovani ${p.name}, vaš zahtev za konsultaciju je primljen. Uskoro ćemo vas kontaktirati.`,
-      en: (p: Payload) => `Dear ${p.name}, your consultation request has been received. We will contact you soon.`,
+      body: {
+        me: (p: Payload) => `Poštovani ${p.name}, vaš zahtev za konsultaciju je primljen. Uskoro ćemo vas kontaktirati.`,
+        en: (p: Payload) => `Dear ${p.name}, your consultation request has been received. We will contact you soon.`,
+      },
     },
   },
   serviceInquiry: {
@@ -58,8 +56,10 @@ const confirmationLocales = {
       en: "Service inquiry received",
     },
     body: {
-      me: (p: Payload) => `Poštovani ${p.name}, vaš upit za uslugu je primljen. Uskoro ćemo vam odgovoriti.`,
-      en: (p: Payload) => `Dear ${p.name}, your service inquiry has been received. We will reply shortly.`,
+      body: {
+        me: (p: Payload) => `Poštovani ${p.name}, vaš upit za uslugu je primljen. Uskoro ćemo vam odgovoriti.`,
+        en: (p: Payload) => `Dear ${p.name}, your service inquiry has been received. We will reply shortly.`,
+      },
     },
   },
 };
