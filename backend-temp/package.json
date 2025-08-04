@@ -1,0 +1,21 @@
+{
+  "name": "backend-temp",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "prisma": "^5.14.0",
+    "@prisma/client": "^5.14.0",
+    "mysql2": "^3.11.4"
+  }
+}
