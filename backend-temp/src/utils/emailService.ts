@@ -65,17 +65,27 @@ const confirmationLocales = {
 };
 
 export async function sendContactEmail(payload: Payload, language: Language) {
+  const body = format(t(language, "email.contact.body"), {
+    name: payload.name,
+    email: payload.email,
+    company: payload.company,
+    phone: payload.phone,
+    message: payload.message,
+  });
   await transporter.sendMail({
     from: process.env.EMAIL_FROM,
     to: process.env.EMAIL_TO,
     subject: t(language, "email.contact.subject"),
-    text: format(t(language, "email.contact.body"), payload),
+    text: body,
+    html: body.replace(/\n/g, "<br/>"),
   });
+  const confirmationBody = confirmationLocales.contact.body[language](payload);
   await transporter.sendMail({
     from: process.env.EMAIL_FROM,
     to: payload.email,
     subject: confirmationLocales.contact.subject[language],
-    text: confirmationLocales.contact.body[language](payload),
+    text: confirmationBody,
+    html: `<p>${confirmationBody}</p>`,
   });
 }
 
