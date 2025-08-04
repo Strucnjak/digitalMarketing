@@ -90,17 +90,21 @@ export async function sendContactEmail(payload: Payload, language: Language) {
 }
 
 export async function sendConsultationEmail(payload: Payload, language: Language) {
+  const body = format(t(language, "email.consultation.body"), payload);
   await transporter.sendMail({
     from: process.env.EMAIL_FROM,
     to: process.env.EMAIL_TO,
     subject: t(language, "email.consultation.subject"),
-    text: format(t(language, "email.consultation.body"), payload),
+    text: body,
+    html: body.split("\n").map((line) => `<p>${line}</p>`).join(""),
   });
+  const confirmationBody = confirmationLocales.consultation.body[language](payload);
   await transporter.sendMail({
     from: process.env.EMAIL_FROM,
     to: payload.email,
     subject: confirmationLocales.consultation.subject[language],
-    text: confirmationLocales.consultation.body[language](payload),
+    text: confirmationBody,
+    html: `<p>${confirmationBody}</p>`,
   });
 }
 

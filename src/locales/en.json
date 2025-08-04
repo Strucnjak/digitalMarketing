@@ -508,7 +508,7 @@
   "email.contact.subject": "New contact form message",
   "email.contact.body": "Name: {name}\\nEmail: {email}\\nCompany: {company}\\nPhone: {phone}\\nMessage: {message}",
   "email.consultation.subject": "Consultation request",
-  "email.consultation.body": "Name: {name}\\nEmail: {email}\\nPhone: {phone}",
+  "email.consultation.body": "Name: {name}\\nEmail: {email}\\nPhone: {phone}\\nCompany: {company}\\nWebsite: {website}\\nBusiness Type: {businessType}\\nCurrent Challenges: {currentChallenges}\\nGoals: {goals}\\nInterested Services: {interestedServices}\\nPreferred Contact: {preferredContact}\\nPreferred Time: {preferredTime}\\nAdditional Info: {additionalInfo}\\nNewsletter: {newsletter}",
   "email.inquiry.subject": "Service inquiry",
   "email.inquiry.body": "Name: {name}\\nService: {service}\\nDetails: {details}"
 }

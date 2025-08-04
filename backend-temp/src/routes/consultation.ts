@@ -40,6 +40,22 @@ router.post('/', async (req, res) => {
           name: formData.fullName,
           email: formData.email,
           phone: formData.phone,
+          company: formData.company,
+          website: formData.website,
+          businessType: formData.businessType,
+          currentChallenges: formData.currentChallenges,
+          goals: formData.goals,
+          interestedServices: formData.interestedServices.join(', '),
+          preferredContact: formData.preferredContact,
+          preferredTime: formData.preferredTime,
+          additionalInfo: formData.additionalInfo,
+          newsletter: formData.newsletter
+            ? language === 'me'
+              ? 'Da'
+              : 'Yes'
+            : language === 'me'
+              ? 'Ne'
+              : 'No',
         },
         language,
       );
