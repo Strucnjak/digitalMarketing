@@ -108,17 +108,50 @@ export async function sendConsultationEmail(payload: Payload, language: Language
   });
 }
 
-export async function sendServiceInquiryEmail(payload: Payload, language: Language) {
+export async function sendServiceInquiryEmail(
+  payload: Record<string, unknown>,
+  language: Language,
+) {
+  const normalized: Payload = {};
+  for (const [key, value] of Object.entries(payload)) {
+    if (Array.isArray(value)) {
+      normalized[key] = value.join(', ');
+    } else if (typeof value === 'boolean') {
+      normalized[key] = value ? 'true' : 'false';
+    } else if (value === null || value === undefined) {
+      normalized[key] = '';
+    } else {
+      normalized[key] = String(value);
+    }
+  }
+
+  const textBody = format(t(language, 'email.inquiry.body'), normalized);
+  const htmlBody = `<table>${textBody
+    .split('\\n')
+    .map((line) => {
+      const [label, ...rest] = line.split(':');
+      const value = rest.join(':').trim();
+      return `<tr><td><strong>${label}:</strong></td><td>${value}</td></tr>`;
+    })
+    .join('')}</table>`;
+
   await transporter.sendMail({
     from: process.env.EMAIL_FROM,
     to: process.env.EMAIL_TO,
-    subject: t(language, "email.inquiry.subject"),
-    text: format(t(language, "email.inquiry.body"), payload),
+    subject: t(language, 'email.inquiry.subject'),
+    text: textBody,
+    html: htmlBody,
   });
+
+  const confirmationPayload = { name: normalized.fullName } as Payload;
+  const confirmationBody = confirmationLocales.serviceInquiry.body[language](
+    confirmationPayload,
+  );
   await transporter.sendMail({
     from: process.env.EMAIL_FROM,
-    to: payload.email,
+    to: normalized.email,
     subject: confirmationLocales.serviceInquiry.subject[language],
-    text: confirmationLocales.serviceInquiry.body[language](payload),
+    text: confirmationBody,
+    html: `<p>${confirmationBody}</p>`,
   });
 }
