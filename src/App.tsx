@@ -3,6 +3,7 @@ import { RouterProvider, useRouter } from "./components/Router";
 import { Navigation } from "./components/Navigation";
 import { HeroSection } from "./components/HeroSection";
 import { ServicesSection } from "./components/ServicesSection";
+import { ScrollVideo } from "./components/ScrollVideo";
 import { PortfolioSection } from "./components/PortfolioSection";
 import { AboutSection } from "./components/AboutSection";
 import { TestimonialsSection } from "./components/TestimonialsSection";
@@ -24,6 +25,12 @@ function HomePage() {
 
       {/* Services Section */}
       <ServicesSection />
+
+      {/* Scroll Video */}
+      <ScrollVideo
+        src="https://www.w3schools.com/html/mov_bbb.mp4"
+        poster="https://peach.blender.org/wp-content/uploads/bbb-splash.png"
+      />
 
       {/* Portfolio Section */}
       <PortfolioSection />
