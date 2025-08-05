@@ -13,13 +13,19 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguage] = useState<Language>('me');
+  const [language, setLanguage] = useState<Language>(
+    (localStorage.getItem('language') as Language) || 'me'
+  );
   const [translations, setTranslations] = useState<Record<string, string>>({});
 
   useEffect(() => {
     import(`../locales/${language}.json`).then((mod) => {
       setTranslations(mod.default);
     });
+  }, [language]);
+
+  useEffect(() => {
+    localStorage.setItem('language', language);
   }, [language]);
 
   const t = (key: string): string => {
