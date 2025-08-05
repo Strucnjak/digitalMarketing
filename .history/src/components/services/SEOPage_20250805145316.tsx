@@ -96,7 +96,7 @@ export function SEOPage() {
     },
     {
       name: t("seo.package.enterprise.name"),
-      price: "1.000 €/mes",
+      price: "1000 €/mes",
       description: t("seo.package.enterprise.desc"),
       features: [
         t("seo.package.enterprise.feature1"),

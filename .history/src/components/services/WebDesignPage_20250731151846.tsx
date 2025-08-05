@@ -1,10 +1,20 @@
-import { Button } from "../ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
-import { Badge } from "../ui/badge";
-import { Monitor, Zap, Search, ShoppingCart, Palette, Code, ArrowRight, CheckCircle, Clock } from "lucide-react";
-import { useLanguage } from "../LanguageContext";
-import { useRouter } from "../Router";
-import { ImageWithFallback } from "../figma/ImageWithFallback";
+import { Button } from '../ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
+import { Badge } from '../ui/badge';
+import { 
+  Monitor,
+  Zap,
+  Search,
+  ShoppingCart,
+  Palette,
+  Code,
+  ArrowRight,
+  CheckCircle,
+  Clock
+} from 'lucide-react';
+import { useLanguage } from '../LanguageContext';
+import { useRouter } from '../Router';
+import { ImageWithFallback } from '../figma/ImageWithFallback';
 
 export function WebDesignPage() {
   const { t } = useLanguage();
@@ -13,138 +23,138 @@ export function WebDesignPage() {
   const features = [
     {
       icon: Monitor,
-      title: t("web.feature.responsive"),
-      description: t("web.feature.responsive_desc"),
+      title: t('web.feature.responsive'),
+      description: t('web.feature.responsive_desc')
     },
     {
       icon: Zap,
-      title: t("web.feature.speed"),
-      description: t("web.feature.speed_desc"),
+      title: t('web.feature.speed'),
+      description: t('web.feature.speed_desc')
     },
     {
       icon: Search,
-      title: t("web.feature.seo"),
-      description: t("web.feature.seo_desc"),
+      title: t('web.feature.seo'),
+      description: t('web.feature.seo_desc')
     },
     {
       icon: ShoppingCart,
-      title: t("web.feature.ecommerce"),
-      description: t("web.feature.ecommerce_desc"),
+      title: t('web.feature.ecommerce'),
+      description: t('web.feature.ecommerce_desc')
     },
     {
       icon: Palette,
-      title: t("web.feature.design"),
-      description: t("web.feature.design_desc"),
+      title: t('web.feature.design'),
+      description: t('web.feature.design_desc')
     },
     {
       icon: Code,
-      title: t("web.feature.clean_code"),
-      description: t("web.feature.clean_code_desc"),
-    },
+      title: t('web.feature.clean_code'),
+      description: t('web.feature.clean_code_desc')
+    }
   ];
 
   const process = [
     {
-      step: "01",
-      title: t("web.process.step1.title"),
-      description: t("web.process.step1.desc"),
-      duration: t("web.process.step1.duration"),
+      step: '01',
+      title: t('web.process.step1.title'),
+      description: t('web.process.step1.desc'),
+      duration: t('web.process.step1.duration')
     },
     {
-      step: "02",
-      title: t("web.process.step2.title"),
-      description: t("web.process.step2.desc"),
-      duration: t("web.process.step2.duration"),
+      step: '02', 
+      title: t('web.process.step2.title'),
+      description: t('web.process.step2.desc'),
+      duration: t('web.process.step2.duration')
     },
     {
-      step: "03",
-      title: t("web.process.step3.title"),
-      description: t("web.process.step3.desc"),
-      duration: t("web.process.step3.duration"),
+      step: '03',
+      title: t('web.process.step3.title'),
+      description: t('web.process.step3.desc'),
+      duration: t('web.process.step3.duration')
     },
     {
-      step: "04",
-      title: t("web.process.step4.title"),
-      description: t("web.process.step4.desc"),
-      duration: t("web.process.step4.duration"),
-    },
+      step: '04',
+      title: t('web.process.step4.title'),
+      description: t('web.process.step4.desc'),
+      duration: t('web.process.step4.duration')
+    }
   ];
 
   const packages = [
     {
-      name: t("web.package.starter.name"),
-      price: "800 €",
-      description: t("web.package.starter.desc"),
+      name: t('web.package.starter.name'),
+      price: '1.200 €',
+      description: t('web.package.starter.desc'),
       features: [
-        t("web.package.starter.feature1"),
-        t("web.package.starter.feature2"),
-        t("web.package.starter.feature3"),
-        t("web.package.starter.feature4"),
-        t("web.package.starter.feature5"),
+        t('web.package.starter.feature1'),
+        t('web.package.starter.feature2'), 
+        t('web.package.starter.feature3'),
+        t('web.package.starter.feature4'),
+        t('web.package.starter.feature5')
       ],
-      popular: false,
+      popular: false
     },
     {
-      name: t("web.package.professional.name"),
-      price: "1.200 €",
-      description: t("web.package.professional.desc"),
+      name: t('web.package.professional.name'),
+      price: '2.500 €',
+      description: t('web.package.professional.desc'),
       features: [
-        t("web.package.professional.feature1"),
-        t("web.package.professional.feature2"),
-        t("web.package.professional.feature3"),
-        t("web.package.professional.feature4"),
-        t("web.package.professional.feature5"),
-        t("web.package.professional.feature6"),
+        t('web.package.professional.feature1'),
+        t('web.package.professional.feature2'),
+        t('web.package.professional.feature3'),
+        t('web.package.professional.feature4'),
+        t('web.package.professional.feature5'),
+        t('web.package.professional.feature6')
       ],
-      popular: true,
+      popular: true
     },
     {
-      name: t("web.package.enterprise.name"),
-      price: "2.000 €+",
-      description: t("web.package.enterprise.desc"),
+      name: t('web.package.enterprise.name'),
+      price: '5.000 €+',
+      description: t('web.package.enterprise.desc'),
       features: [
-        t("web.package.enterprise.feature1"),
-        t("web.package.enterprise.feature2"),
-        t("web.package.enterprise.feature3"),
-        t("web.package.enterprise.feature4"),
-        t("web.package.enterprise.feature5"),
-        t("web.package.enterprise.feature6"),
+        t('web.package.enterprise.feature1'),
+        t('web.package.enterprise.feature2'),
+        t('web.package.enterprise.feature3'),
+        t('web.package.enterprise.feature4'),
+        t('web.package.enterprise.feature5'),
+        t('web.package.enterprise.feature6')
       ],
-      popular: false,
-    },
+      popular: false
+    }
   ];
 
   const portfolio = [
     {
-      title: "Restoran Konoba",
-      category: "Restaurant Website",
-      image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=400&h=300&fit=crop",
-      description: t("web.portfolio.project1.desc"),
+      title: 'Restoran Konoba',
+      category: 'Restaurant Website',
+      image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=400&h=300&fit=crop',
+      description: t('web.portfolio.project1.desc')
     },
     {
-      title: "Montenegro Properties",
-      category: "Real Estate",
-      image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=400&h=300&fit=crop",
-      description: t("web.portfolio.project2.desc"),
+      title: 'Montenegro Properties',
+      category: 'Real Estate',
+      image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=400&h=300&fit=crop',
+      description: t('web.portfolio.project2.desc')
     },
     {
-      title: "Tech Startup",
-      category: "Technology",
-      image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=400&h=300&fit=crop",
-      description: t("web.portfolio.project3.desc"),
-    },
+      title: 'Tech Startup',
+      category: 'Technology',
+      image: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=400&h=300&fit=crop',
+      description: t('web.portfolio.project3.desc')
+    }
   ];
 
   const handlePackageSelect = (packageName: string) => {
-    navigateTo("service-inquiry", {
-      service: "web-design",
-      package: packageName,
+    navigateTo('service-inquiry', {
+      service: 'web-design',
+      package: packageName
     });
   };
 
   const handleConsultation = () => {
-    navigateTo("service-inquiry", {
-      service: "web-design",
+    navigateTo('service-inquiry', {
+      service: 'web-design'
     });
   };
 
@@ -155,28 +165,34 @@ export function WebDesignPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="text-white">
-              <Badge className="bg-bdigital-cyan/20 text-bdigital-cyan border-bdigital-cyan mb-4">{t("web.badge")}</Badge>
+              <Badge className="bg-bdigital-cyan/20 text-bdigital-cyan border-bdigital-cyan mb-4">
+                {t('web.badge')}
+              </Badge>
               <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
-                {t("web.hero.part1")} <span className="text-bdigital-cyan">{t("web.hero.emphasis")}</span> {t("web.hero.part2")}
+                {t('web.hero.part1')}{' '}
+                <span className="text-bdigital-cyan">{t('web.hero.emphasis')}</span>{' '}
+                {t('web.hero.part2')}
               </h1>
-              <p className="text-gray-300 text-lg mb-8 leading-relaxed">{t("web.hero.desc")}</p>
-
+              <p className="text-gray-300 text-lg mb-8 leading-relaxed">
+                {t('web.hero.desc')}
+              </p>
+              
               <div className="flex flex-col sm:flex-row gap-4 mb-8">
                 <Button
                   size="lg"
                   className="bg-bdigital-cyan text-bdigital-navy hover:bg-bdigital-cyan-light px-8 py-3 font-semibold"
                   onClick={handleConsultation}
                 >
-                  {t("web.hero.cta")}
+                  {t('web.hero.cta')}
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
-                <Button
-                  variant="outline"
+                <Button 
+                  variant="outline" 
                   size="lg"
                   className="border-bdigital-cyan text-bdigital-cyan hover:bg-bdigital-cyan hover:text-bdigital-navy px-8 py-3 font-semibold"
-                  onClick={() => navigateTo("home")}
+                  onClick={() => navigateTo('home')}
                 >
-                  {t("general.back_home")}
+                  {t('general.back_home')}
                 </Button>
               </div>
 
@@ -184,7 +200,7 @@ export function WebDesignPage() {
               <div className="grid grid-cols-3 gap-6 pt-8 border-t border-gray-600">
                 <div>
                   <div className="text-2xl font-bold text-bdigital-cyan">50+</div>
-                  <div className="text-gray-400 text-sm">{t("web.stat.sites")}</div>
+                  <div className="text-gray-400 text-sm">{t('web.stat.sites')}</div>
                 </div>
                 <div>
                   <div className="text-2xl font-bold text-bdigital-cyan">99%</div>
@@ -192,11 +208,11 @@ export function WebDesignPage() {
                 </div>
                 <div>
                   <div className="text-2xl font-bold text-bdigital-cyan">24h</div>
-                  <div className="text-gray-400 text-sm">{t("web.stat.support")}</div>
+                  <div className="text-gray-400 text-sm">{t('web.stat.support')}</div>
                 </div>
               </div>
             </div>
-
+            
             <div className="relative">
               <div className="bg-white rounded-2xl p-8 shadow-2xl">
                 <ImageWithFallback
@@ -214,8 +230,12 @@ export function WebDesignPage() {
       <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-bdigital-navy mb-4">{t("web.features.heading")}</h2>
-            <p className="text-lg text-neutral-gray max-w-2xl mx-auto">{t("web.features.desc")}</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-bdigital-navy mb-4">
+              {t('web.features.heading')}
+            </h2>
+            <p className="text-lg text-neutral-gray max-w-2xl mx-auto">
+              {t('web.features.desc')}
+            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -241,8 +261,12 @@ export function WebDesignPage() {
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-bdigital-navy mb-4">{t("web.process.heading")}</h2>
-            <p className="text-lg text-neutral-gray max-w-2xl mx-auto">{t("web.process.desc")}</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-bdigital-navy mb-4">
+              {t('web.process.heading')}
+            </h2>
+            <p className="text-lg text-neutral-gray max-w-2xl mx-auto">
+              {t('web.process.desc')}
+            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -273,19 +297,22 @@ export function WebDesignPage() {
       <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-bdigital-navy mb-4">{t("web.pricing.heading")}</h2>
-            <p className="text-lg text-neutral-gray max-w-2xl mx-auto">{t("web.pricing.desc")}</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-bdigital-navy mb-4">
+              {t('web.pricing.heading')}
+            </h2>
+            <p className="text-lg text-neutral-gray max-w-2xl mx-auto">
+              {t('web.pricing.desc')}
+            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {packages.map((pkg, index) => (
-              <Card
-                key={index}
-                className={`border-0 shadow-lg hover:shadow-xl transition-all duration-300 relative ${pkg.popular ? "ring-2 ring-bdigital-cyan" : ""}`}
-              >
+              <Card key={index} className={`border-0 shadow-lg hover:shadow-xl transition-all duration-300 relative ${pkg.popular ? 'ring-2 ring-bdigital-cyan' : ''}`}>
                 {pkg.popular && (
                   <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                    <Badge className="bg-bdigital-cyan text-bdigital-navy px-4 py-1">{t("packages.most_popular")}</Badge>
+                    <Badge className="bg-bdigital-cyan text-bdigital-navy px-4 py-1">
+                      {t('packages.most_popular')}
+                    </Badge>
                   </div>
                 )}
                 <CardHeader className="text-center pb-4">
@@ -303,11 +330,11 @@ export function WebDesignPage() {
                     ))}
                   </ul>
                   <Button
-                    className={`w-full ${pkg.popular ? "bg-bdigital-cyan text-bdigital-navy hover:bg-bdigital-cyan-light" : "border border-bdigital-cyan text-bdigital-cyan hover:bg-bdigital-cyan hover:text-bdigital-navy"} font-semibold`}
-                    variant={pkg.popular ? "default" : "outline"}
+                    className={`w-full ${pkg.popular ? 'bg-bdigital-cyan text-bdigital-navy hover:bg-bdigital-cyan-light' : 'border border-bdigital-cyan text-bdigital-cyan hover:bg-bdigital-cyan hover:text-bdigital-navy'} font-semibold`}
+                    variant={pkg.popular ? 'default' : 'outline'}
                     onClick={() => handlePackageSelect(pkg.name)}
                   >
-                    {t("packages.select")}
+                    {t('packages.select')}
                   </Button>
                 </CardContent>
               </Card>
@@ -320,8 +347,12 @@ export function WebDesignPage() {
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-bdigital-navy mb-4">{t("web.portfolio.heading")}</h2>
-            <p className="text-lg text-neutral-gray max-w-2xl mx-auto">{t("web.portfolio.desc")}</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-bdigital-navy mb-4">
+              {t('web.portfolio.heading')}
+            </h2>
+            <p className="text-lg text-neutral-gray max-w-2xl mx-auto">
+              {t('web.portfolio.desc')}
+            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -350,15 +381,19 @@ export function WebDesignPage() {
       {/* CTA Section */}
       <section className="py-20 bg-gradient-to-r from-bdigital-navy to-bdigital-dark-navy text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">{t("web.cta.title")}</h2>
-          <p className="text-gray-300 text-lg mb-8 max-w-2xl mx-auto">{t("web.cta.desc")}</p>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            {t('web.cta.title')}
+          </h2>
+          <p className="text-gray-300 text-lg mb-8 max-w-2xl mx-auto">
+            {t('web.cta.desc')}
+          </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
               size="lg"
               className="bg-bdigital-cyan text-bdigital-navy hover:bg-bdigital-cyan-light px-8 py-3 font-semibold"
               onClick={handleConsultation}
             >
-              {t("web.cta.primary")}
+              {t('web.cta.primary')}
             </Button>
             <Button
               variant="outline"
@@ -366,7 +401,7 @@ export function WebDesignPage() {
               className="border-bdigital-cyan text-bdigital-cyan hover:bg-bdigital-cyan hover:text-bdigital-navy px-8 py-3 font-semibold"
               onClick={handleConsultation}
             >
-              {t("web.cta.secondary")}
+              {t('web.cta.secondary')}
             </Button>
           </div>
         </div>

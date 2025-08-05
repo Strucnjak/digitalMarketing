@@ -1,10 +1,21 @@
-import { Button } from "../ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
-import { Badge } from "../ui/badge";
-import { Search, TrendingUp, BarChart3, MapPin, Smartphone, Globe, ArrowRight, CheckCircle, Star, Award } from "lucide-react";
-import { useLanguage } from "../LanguageContext";
-import { useRouter } from "../Router";
-import { ImageWithFallback } from "../figma/ImageWithFallback";
+import { Button } from '../ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
+import { Badge } from '../ui/badge';
+import { 
+  Search,
+  TrendingUp,
+  BarChart3,
+  MapPin,
+  Smartphone,
+  Globe,
+  ArrowRight,
+  CheckCircle,
+  Star,
+  Award
+} from 'lucide-react';
+import { useLanguage } from '../LanguageContext';
+import { useRouter } from '../Router';
+import { ImageWithFallback } from '../figma/ImageWithFallback';
 
 export function SEOPage() {
   const { t } = useLanguage();
@@ -13,132 +24,140 @@ export function SEOPage() {
   const services = [
     {
       icon: Search,
-      title: t("services.seo.feature1"),
-      description: t("seo.service.keyword_desc"),
+      title: t('services.seo.feature1'),
+      description: t('seo.service.keyword_desc')
     },
     {
       icon: TrendingUp,
-      title: t("services.seo.feature2"),
-      description: t("seo.service.onpage_desc"),
+      title: t('services.seo.feature2'),
+      description: t('seo.service.onpage_desc')
     },
     {
       icon: MapPin,
-      title: t("services.seo.feature3"),
-      description: t("seo.service.local_desc"),
+      title: t('services.seo.feature3'),
+      description: t('seo.service.local_desc')
     },
     {
       icon: BarChart3,
-      title: t("services.seo.feature4"),
-      description: t("seo.service.reporting_desc"),
+      title: t('services.seo.feature4'),
+      description: t('seo.service.reporting_desc')
     },
     {
       icon: Smartphone,
-      title: t("seo.feature.mobile"),
-      description: t("seo.feature.mobile_desc"),
+      title: t('seo.feature.mobile'),
+      description: t('seo.feature.mobile_desc')
     },
     {
       icon: Globe,
-      title: t("seo.feature.technical"),
-      description: t("seo.feature.technical_desc"),
-    },
+      title: t('seo.feature.technical'),
+      description: t('seo.feature.technical_desc')
+    }
   ];
 
   const results = [
     {
-      metric: "300%",
-      label: t("seo.result.traffic.label"),
-      description: t("seo.result.traffic.desc"),
+      metric: '300%',
+      label: t('seo.result.traffic.label'),
+      description: t('seo.result.traffic.desc')
     },
     {
-      metric: "#1",
-      label: t("seo.result.position.label"),
-      description: t("seo.result.position.desc"),
+      metric: '#1',
+      label: t('seo.result.position.label'),
+      description: t('seo.result.position.desc')
     },
     {
-      metric: "150%",
-      label: t("seo.result.conversions.label"),
-      description: t("seo.result.conversions.desc"),
+      metric: '150%',
+      label: t('seo.result.conversions.label'),
+      description: t('seo.result.conversions.desc')
     },
     {
-      metric: "50+",
-      label: t("seo.result.clients.label"),
-      description: t("seo.result.clients.desc"),
-    },
+      metric: '50+',
+      label: t('seo.result.clients.label'),
+      description: t('seo.result.clients.desc')
+    }
   ];
 
   const packages = [
     {
-      name: t("seo.package.starter.name"),
-      price: "350 €/mes",
-      description: t("seo.package.starter.desc"),
+      name: t('seo.package.starter.name'),
+      price: '500 €/mes',
+      description: t('seo.package.starter.desc'),
       features: [
-        t("seo.package.starter.feature1"),
-        t("seo.package.starter.feature2"),
-        t("seo.package.starter.feature3"),
-        t("seo.package.starter.feature4"),
-        t("seo.package.starter.feature5"),
+        t('seo.package.starter.feature1'),
+        t('seo.package.starter.feature2'),
+        t('seo.package.starter.feature3'),
+        t('seo.package.starter.feature4'),
+        t('seo.package.starter.feature5')
       ],
-      popular: false,
+      popular: false
     },
     {
-      name: t("seo.package.professional.name"),
-      price: "600 €/mes",
-      description: t("seo.package.professional.desc"),
+      name: t('seo.package.professional.name'),
+      price: '800 €/mes',
+      description: t('seo.package.professional.desc'),
       features: [
-        t("seo.package.professional.feature1"),
-        t("seo.package.professional.feature2"),
-        t("seo.package.professional.feature3"),
-        t("seo.package.professional.feature4"),
-        t("seo.package.professional.feature5"),
-        t("seo.package.professional.feature6"),
+        t('seo.package.professional.feature1'),
+        t('seo.package.professional.feature2'),
+        t('seo.package.professional.feature3'),
+        t('seo.package.professional.feature4'),
+        t('seo.package.professional.feature5'),
+        t('seo.package.professional.feature6')
       ],
-      popular: true,
+      popular: true
     },
     {
-      name: t("seo.package.enterprise.name"),
-      price: "1.000 €/mes",
-      description: t("seo.package.enterprise.desc"),
+      name: t('seo.package.enterprise.name'),
+      price: '1.500 €/mes',
+      description: t('seo.package.enterprise.desc'),
       features: [
-        t("seo.package.enterprise.feature1"),
-        t("seo.package.enterprise.feature2"),
-        t("seo.package.enterprise.feature3"),
-        t("seo.package.enterprise.feature4"),
-        t("seo.package.enterprise.feature5"),
-        t("seo.package.enterprise.feature6"),
+        t('seo.package.enterprise.feature1'),
+        t('seo.package.enterprise.feature2'),
+        t('seo.package.enterprise.feature3'),
+        t('seo.package.enterprise.feature4'),
+        t('seo.package.enterprise.feature5'),
+        t('seo.package.enterprise.feature6')
       ],
-      popular: false,
-    },
+      popular: false
+    }
   ];
 
   const caseStudies = [
     {
-      client: "Montenegrin Properties",
-      industry: t("seo.case.study1.industry"),
-      challenge: t("seo.case.study1.challenge"),
-      solution: t("seo.case.study1.solution"),
-      results: [t("seo.case.study1.result1"), t("seo.case.study1.result2"), t("seo.case.study1.result3")],
-      image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=400&h=300&fit=crop",
+      client: 'Montenegrin Properties',
+      industry: t('seo.case.study1.industry'),
+      challenge: t('seo.case.study1.challenge'),
+      solution: t('seo.case.study1.solution'),
+      results: [
+        t('seo.case.study1.result1'),
+        t('seo.case.study1.result2'),
+        t('seo.case.study1.result3')
+      ],
+      image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=400&h=300&fit=crop'
     },
     {
-      client: "Adriatic Adventures",
-      industry: t("seo.case.study2.industry"),
-      challenge: t("seo.case.study2.challenge"),
-      solution: t("seo.case.study2.solution"),
-      results: [t("seo.case.study2.result1"), t("seo.case.study2.result2"), t("seo.case.study2.result3")],
-      image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400&h=300&fit=crop",
-    },
+      client: 'Adriatic Adventures',
+      industry: t('seo.case.study2.industry'),
+      challenge: t('seo.case.study2.challenge'),
+      solution: t('seo.case.study2.solution'),
+      results: [
+        t('seo.case.study2.result1'),
+        t('seo.case.study2.result2'),
+        t('seo.case.study2.result3')
+      ],
+      image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400&h=300&fit=crop'
+    }
   ];
 
   const handlePackageSelect = (packageName: string) => {
-    navigateTo("service-inquiry", {
-      service: "seo",
-      package: packageName,
+    navigateTo('service-inquiry', {
+      service: 'seo',
+      package: packageName
     });
   };
 
   const handleConsultation = () => {
-    navigateTo("service-inquiry", {
-      service: "seo",
+    navigateTo('service-inquiry', {
+      service: 'seo'
     });
   };
 
@@ -149,28 +168,34 @@ export function SEOPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="text-white">
-              <Badge className="bg-bdigital-cyan/20 text-bdigital-cyan border-bdigital-cyan mb-4">{t("seo.badge")}</Badge>
+              <Badge className="bg-bdigital-cyan/20 text-bdigital-cyan border-bdigital-cyan mb-4">
+                {t('seo.badge')}
+              </Badge>
               <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
-                {t("seo.hero.part1")} <span className="text-bdigital-cyan">{t("seo.hero.emphasis")}</span> {t("seo.hero.part2")}
+                {t('seo.hero.part1')}{' '}
+                <span className="text-bdigital-cyan">{t('seo.hero.emphasis')}</span>{' '}
+                {t('seo.hero.part2')}
               </h1>
-              <p className="text-gray-300 text-lg mb-8 leading-relaxed">{t("seo.hero.desc")}</p>
-
+              <p className="text-gray-300 text-lg mb-8 leading-relaxed">
+                {t('seo.hero.desc')}
+              </p>
+              
               <div className="flex flex-col sm:flex-row gap-4 mb-8">
                 <Button
                   size="lg"
                   className="bg-bdigital-cyan text-bdigital-navy hover:bg-bdigital-cyan-light px-8 py-3 font-semibold"
                   onClick={handleConsultation}
                 >
-                  {t("seo.hero.cta")}
+                  {t('seo.hero.cta')}
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
-                <Button
-                  variant="outline"
+                <Button 
+                  variant="outline" 
                   size="lg"
                   className="border-bdigital-cyan text-bdigital-cyan hover:bg-bdigital-cyan hover:text-bdigital-navy px-8 py-3 font-semibold"
-                  onClick={() => navigateTo("home")}
+                  onClick={() => navigateTo('home')}
                 >
-                  {t("general.back_home")}
+                  {t('general.back_home')}
                 </Button>
               </div>
 
@@ -194,7 +219,7 @@ export function SEOPage() {
                 </div>
               </div>
             </div>
-
+            
             <div className="relative">
               <div className="bg-white rounded-2xl p-8 shadow-2xl">
                 <ImageWithFallback
@@ -212,8 +237,12 @@ export function SEOPage() {
       <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-bdigital-navy mb-4">{t("seo.services.heading")}</h2>
-            <p className="text-lg text-neutral-gray max-w-2xl mx-auto">{t("seo.services.desc")}</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-bdigital-navy mb-4">
+              {t('seo.services.heading')}
+            </h2>
+            <p className="text-lg text-neutral-gray max-w-2xl mx-auto">
+              {t('seo.services.desc')}
+            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -239,8 +268,12 @@ export function SEOPage() {
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-bdigital-navy mb-4">{t("seo.results.heading")}</h2>
-            <p className="text-lg text-neutral-gray max-w-2xl mx-auto">{t("seo.results.desc")}</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-bdigital-navy mb-4">
+              {t('seo.results.heading')}
+            </h2>
+            <p className="text-lg text-neutral-gray max-w-2xl mx-auto">
+              {t('seo.results.desc')}
+            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -263,19 +296,22 @@ export function SEOPage() {
       <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-bdigital-navy mb-4">{t("seo.pricing.heading")}</h2>
-            <p className="text-lg text-neutral-gray max-w-2xl mx-auto">{t("seo.pricing.desc")}</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-bdigital-navy mb-4">
+              {t('seo.pricing.heading')}
+            </h2>
+            <p className="text-lg text-neutral-gray max-w-2xl mx-auto">
+              {t('seo.pricing.desc')}
+            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {packages.map((pkg, index) => (
-              <Card
-                key={index}
-                className={`border-0 shadow-lg hover:shadow-xl transition-all duration-300 relative ${pkg.popular ? "ring-2 ring-bdigital-cyan" : ""}`}
-              >
+              <Card key={index} className={`border-0 shadow-lg hover:shadow-xl transition-all duration-300 relative ${pkg.popular ? 'ring-2 ring-bdigital-cyan' : ''}`}>
                 {pkg.popular && (
                   <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                    <Badge className="bg-bdigital-cyan text-bdigital-navy px-4 py-1">{t("packages.most_popular")}</Badge>
+                    <Badge className="bg-bdigital-cyan text-bdigital-navy px-4 py-1">
+                      {t('packages.most_popular')}
+                    </Badge>
                   </div>
                 )}
                 <CardHeader className="text-center pb-4">
@@ -293,11 +329,11 @@ export function SEOPage() {
                     ))}
                   </ul>
                   <Button
-                    className={`w-full ${pkg.popular ? "bg-bdigital-cyan text-bdigital-navy hover:bg-bdigital-cyan-light" : "border border-bdigital-cyan text-bdigital-cyan hover:bg-bdigital-cyan hover:text-bdigital-navy"} font-semibold`}
-                    variant={pkg.popular ? "default" : "outline"}
+                    className={`w-full ${pkg.popular ? 'bg-bdigital-cyan text-bdigital-navy hover:bg-bdigital-cyan-light' : 'border border-bdigital-cyan text-bdigital-cyan hover:bg-bdigital-cyan hover:text-bdigital-navy'} font-semibold`}
+                    variant={pkg.popular ? 'default' : 'outline'}
                     onClick={() => handlePackageSelect(pkg.name)}
                   >
-                    {t("packages.select")}
+                    {t('packages.select')}
                   </Button>
                 </CardContent>
               </Card>
@@ -310,32 +346,42 @@ export function SEOPage() {
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-bdigital-navy mb-4">{t("seo.case.heading")}</h2>
-            <p className="text-lg text-neutral-gray max-w-2xl mx-auto">{t("seo.case.desc")}</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-bdigital-navy mb-4">
+              {t('seo.case.heading')}
+            </h2>
+            <p className="text-lg text-neutral-gray max-w-2xl mx-auto">
+              {t('seo.case.desc')}
+            </p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {caseStudies.map((study, index) => (
               <Card key={index} className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden">
                 <div className="relative">
-                  <ImageWithFallback src={study.image} alt={study.client} className="w-full h-48 object-cover" />
+                  <ImageWithFallback
+                    src={study.image}
+                    alt={study.client}
+                    className="w-full h-48 object-cover"
+                  />
                   <div className="absolute top-4 left-4">
-                    <Badge className="bg-bdigital-cyan text-bdigital-navy">{study.industry}</Badge>
+                    <Badge className="bg-bdigital-cyan text-bdigital-navy">
+                      {study.industry}
+                    </Badge>
                   </div>
                 </div>
                 <CardContent className="p-6">
                   <h3 className="text-xl font-bold text-bdigital-navy mb-2">{study.client}</h3>
-
+                  
                   <div className="mb-4">
                     <h4 className="font-semibold text-bdigital-navy mb-1">Izazov:</h4>
                     <p className="text-neutral-gray text-sm">{study.challenge}</p>
                   </div>
-
+                  
                   <div className="mb-4">
                     <h4 className="font-semibold text-bdigital-navy mb-1">Rešenje:</h4>
                     <p className="text-neutral-gray text-sm">{study.solution}</p>
                   </div>
-
+                  
                   <div>
                     <h4 className="font-semibold text-bdigital-navy mb-2">Rezultati:</h4>
                     <ul className="space-y-1">
@@ -358,15 +404,19 @@ export function SEOPage() {
       <section className="py-20 bg-gradient-to-r from-bdigital-navy to-bdigital-dark-navy text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <Award className="h-16 w-16 text-bdigital-cyan mx-auto mb-6" />
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">{t("seo.cta.title")}</h2>
-          <p className="text-gray-300 text-lg mb-8 max-w-2xl mx-auto">{t("seo.cta.desc")}</p>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            {t('seo.cta.title')}
+          </h2>
+          <p className="text-gray-300 text-lg mb-8 max-w-2xl mx-auto">
+            {t('seo.cta.desc')}
+          </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
               size="lg"
               className="bg-bdigital-cyan text-bdigital-navy hover:bg-bdigital-cyan-light px-8 py-3 font-semibold"
               onClick={handleConsultation}
             >
-              {t("seo.cta.primary")}
+              {t('seo.cta.primary')}
             </Button>
             <Button
               variant="outline"
@@ -374,7 +424,7 @@ export function SEOPage() {
               className="border-bdigital-cyan text-bdigital-cyan hover:bg-bdigital-cyan hover:text-bdigital-navy px-8 py-3 font-semibold"
               onClick={handleConsultation}
             >
-              {t("seo.cta.secondary")}
+              {t('seo.cta.secondary')}
             </Button>
           </div>
         </div>

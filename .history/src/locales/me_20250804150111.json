@@ -63,9 +63,9 @@
   "services.strategy.feature3": "Optimizacija ROI-a",
   "services.strategy.feature4": "Strategija rasta",
   "web.badge": "Web dizajn i razvoj",
-  "web.hero.part1": "Web sajtovi",
-  "web.hero.emphasis": "koji izgledaju odlično",
-  "web.hero.part2": " i donose rezultate",
+  "web.hero.part1": "Kreiramo",
+  "web.hero.emphasis": "moderne web stranice",
+  "web.hero.part2": "koje prodaju",
   "web.hero.desc": "Od ideje do realizacije - razvijamo web stranice koje kombinuju izuzetan dizajn sa funkcionalnosti koja donosi rezultate.",
   "web.hero.cta": "Započni projekat",
   "web.features.heading": "Što dobijate sa našim web stranicama",
@@ -116,7 +116,7 @@
   "seo.case.heading": "Studije slučaja",
   "seo.case.desc": "Kako smo pomogli našim klijentima da dominiraju Google pretragama",
   "seo.cta.title": "Besplatan SEO audit vašeg sajta",
-  "seo.cta.desc": " Zatražite besplatan pregled vašeg sajta i dobijte PDF izveštaj sa konkretnim predlozima poboljšanja SEO performansi.",
+  "seo.cta.desc": "Saznajte šta možete poboljšati na vašoj web stranici da biste se bolje rangirali na Google pretragama.",
   "seo.cta.primary": "Zatražite besplatan audit",
   "seo.cta.secondary": "Pozovite nas",
   "social.badge": "Social Media Management",
@@ -513,3 +513,4 @@
   "email.inquiry.subject": "Upit za uslugu",
   "email.inquiry.body": "Ime i prezime: {fullName}\\nEmail: {email}\\nTelefon: {phone}\\nKompanija: {company}\\nWebsite: {website}\\nOdabrana usluga: {selectedService}\\nOdabrani paket: {selectedPackage}\\nTipovi projekata: {projectTypes}\\nTrenutna situacija: {currentSituation}\\nCiljevi projekta: {projectGoals}\\nCiljna publika: {targetAudience}\\nVremenski okvir: {timeline}\\nBudžet: {budget}\\nDodatne usluge: {additionalServices}\\nPreferirani kontakt: {preferredContact}\\nDodatne informacije: {additionalInfo}\\nKako ste čuli za nas: {howDidYouHear}\\nNewsletter: {newsletter}"
 }
+

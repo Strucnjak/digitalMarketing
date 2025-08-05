@@ -58,7 +58,7 @@ export function SocialMediaPage() {
     },
     {
       name: t("social.package.enterprise.name"),
-      price: "1.500 €/mes",
+      price: "1500 €/mes",
       features: [
         t("social.package.enterprise.feature1"),
         t("social.package.enterprise.feature2"),
