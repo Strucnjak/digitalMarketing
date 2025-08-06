@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate dev"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.11",
@@ -39,7 +41,9 @@
     "sonner": "^2.0.6",
     "framer-motion": "^11.1.2",
     "tailwind-merge": "^3.3.1",
-    "vaul": "^1.1.2"
+    "vaul": "^1.1.2",
+    "@prisma/client": "^5.20.0",
+    "nodemailer": "^6.9.11"
   },
   "devDependencies": {
     "@eslint/js": "^9.30.1",
@@ -57,6 +61,7 @@
     "tailwindcss": "^3.4.17",
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.35.1",
-    "vite": "^7.0.4"
+    "vite": "^7.0.4",
+    "prisma": "^5.20.0"
   }
 }
