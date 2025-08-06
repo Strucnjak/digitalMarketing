@@ -1,7 +1,7 @@
 // /api/contact.ts
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { PrismaClient } from "@prisma/client";
-import { sendContactEmail } from "../../../vercel/utils/emailService";
+import { sendContactEmail } from "../src/vercel/utils/emailService.js"; // adjust if needed
 
 const prisma = new PrismaClient();
 
