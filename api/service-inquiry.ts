@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { PrismaClient } from "@prisma/client";
-import { sendServiceInquiryEmail } from "../../../vercel/utils/emailService";
+import { sendServiceInquiryEmail } from "../src/vercel/utils/emailService";
 
 interface InquiryFormData {
   fullName: string;
@@ -23,9 +23,10 @@ interface InquiryFormData {
   newsletter: boolean;
 }
 
-const prisma = (globalThis as any).prisma ?? new PrismaClient();
-if (!(globalThis as any).prisma) {
-  (globalThis as any).prisma = prisma;
+const globalForPrisma = globalThis as unknown as { prisma?: PrismaClient };
+const prisma = globalForPrisma.prisma ?? new PrismaClient();
+if (!globalForPrisma.prisma) {
+  globalForPrisma.prisma = prisma;
 }
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {

@@ -1,10 +1,11 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { PrismaClient } from "@prisma/client";
-import { sendConsultationEmail } from "../../../vercel/utils/emailService";
+import { sendConsultationEmail } from "../src/vercel/utils/emailService";
 
-const prisma = (globalThis as any).prisma ?? new PrismaClient();
-if (!(globalThis as any).prisma) {
-  (globalThis as any).prisma = prisma;
+const globalForPrisma = globalThis as unknown as { prisma?: PrismaClient };
+const prisma = globalForPrisma.prisma ?? new PrismaClient();
+if (!globalForPrisma.prisma) {
+  globalForPrisma.prisma = prisma;
 }
 
 interface ConsultationFormData {
