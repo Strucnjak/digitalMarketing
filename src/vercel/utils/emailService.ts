@@ -1,6 +1,6 @@
 import nodemailer from "nodemailer";
-import { readFileSync } from "fs";
-import path from "path";
+import en from "../locales/en.json";
+import me from "../locales/me.json";
 
 const transporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST,
@@ -19,12 +19,8 @@ type Language = "me" | "en";
 type Payload = Record<string, string>;
 
 const translations: Record<Language, Record<string, string>> = {
-  en: JSON.parse(
-    readFileSync(path.join(__dirname, "../locales/en.json"), "utf-8")
-  ),
-  me: JSON.parse(
-    readFileSync(path.join(__dirname, "../locales/me.json"), "utf-8")
-  ),
+  en,
+  me,
 };
 
 function t(language: Language, key: string): string {
