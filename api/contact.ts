@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { PrismaClient } from "@prisma/client";
-import { sendContactEmail } from '../utils/emailService';
+import { sendContactEmail } from '../src/vercel/utils/emailService';
 
 const prisma = (globalThis as any).prisma ?? new PrismaClient();
 if (!(globalThis as any).prisma) {
