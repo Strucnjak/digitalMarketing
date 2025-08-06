@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { PrismaClient } from "@prisma/client";
-import { sendServiceInquiryEmail } from "../utils/emailService";
+import { sendServiceInquiryEmail } from "../utils/emailService.js";
 
 interface InquiryFormData {
   fullName: string;

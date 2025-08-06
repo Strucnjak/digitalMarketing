@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { PrismaClient } from "@prisma/client";
-import { sendServiceInquiryEmail } from "../utils/emailService";
+import { sendServiceInquiryEmail } from '../utils/emailService';
 
 interface InquiryFormData {
   fullName: string;
@@ -28,7 +28,10 @@ if (!(globalThis as any).prisma) {
   (globalThis as any).prisma = prisma;
 }
 
-export default async function handler(req: VercelRequest, res: VercelResponse) {
+export default async function handler(
+  req: VercelRequest,
+  res: VercelResponse
+) {
   if (req.method !== "POST") {
     res.setHeader("Allow", "POST");
     return res.status(405).json({ error: "Method Not Allowed" });
@@ -41,24 +44,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   try {
     const formData = await prisma.serviceInquiry.create({
       data: {
-        fullName: data.fullName,
-        email: data.email,
-        phone: data.phone,
-        company: data.company,
-        website: data.website,
-        selectedService: data.selectedService,
-        selectedPackage: data.selectedPackage,
-        projectTypes: data.projectTypes ?? [],
-        currentSituation: data.currentSituation,
-        projectGoals: data.projectGoals,
-        targetAudience: data.targetAudience,
-        timeline: data.timeline,
-        budget: data.budget,
-        additionalServices: data.additionalServices ?? [],
-        preferredContact: data.preferredContact,
-        additionalInfo: data.additionalInfo,
-        howDidYouHear: data.howDidYouHear,
-        newsletter: data.newsletter,
+        ...data,
+        projectTypes: Array.isArray(data.projectTypes)
+          ? data.projectTypes
+          : [],
+        additionalServices: Array.isArray(data.additionalServices)
+          ? data.additionalServices
+          : [],
       },
     });
 
@@ -68,9 +60,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       console.error("Failed to send service inquiry emails", emailErr);
     }
 
-    return res.status(200).json({ message: "Service inquiry submitted successfully" });
+    return res.json({ message: "Service inquiry submitted successfully" });
   } catch (error) {
-    console.error("Database error:", error);
-    return res.status(500).json({ error: "Failed to submit service inquiry" });
+    console.error(error);
+    return res
+      .status(500)
+      .json({ error: "Failed to submit service inquiry" });
   }
 }
