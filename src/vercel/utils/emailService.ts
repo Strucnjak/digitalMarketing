@@ -1,6 +1,7 @@
 import nodemailer from "nodemailer";
 import en from "../locales/en.json";
 import me from "../locales/me.json";
+import { buildHtmlTable, type Payload } from "./htmlTable";
 
 const transporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST,
@@ -16,7 +17,6 @@ const transporter = nodemailer.createTransport({
 });
 
 type Language = "me" | "en";
-type Payload = Record<string, string>;
 
 const translations: Record<Language, Record<string, string>> = {
   en,
@@ -29,15 +29,6 @@ function t(language: Language, key: string): string {
 
 function format(template: string, payload: Payload) {
   return template.replace(/\{(\w+)\}/g, (_, k) => payload[k] ?? "");
-}
-
-function buildHtmlTable(payload: Payload) {
-  return `<table>${Object.entries(payload)
-    .map(([key, value]) => {
-      const v = String(value).replace(/\n/g, "<br/>");
-      return `<tr><td><strong>${key}:</strong></td><td>${v}</td></tr>`;
-    })
-    .join("")}</table>`;
 }
 
 const confirmationLocales = {
