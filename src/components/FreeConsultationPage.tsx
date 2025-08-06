@@ -119,7 +119,7 @@ export function FreeConsultationPage() {
     setSubmitError(null);
 
     try {
-      const response = await fetch('/api/consultations', {
+      const response = await fetch('/api/consultation', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

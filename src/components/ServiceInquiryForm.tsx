@@ -225,7 +225,7 @@ export function ServiceInquiryForm() {
     setSubmitError(null);
 
     try {
-      const response = await fetch('/api/service-inquiries', {
+      const response = await fetch('/api/service-inquiry', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
