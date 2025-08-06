@@ -1,0 +1,8 @@
+{
+  "email.contact.subject": "New contact message",
+  "email.contact.body": "You have received a new contact message.",
+  "email.consultation.subject": "New consultation request",
+  "email.consultation.body": "You have received a new consultation request.",
+  "email.inquiry.subject": "New service inquiry",
+  "email.inquiry.body": "You have received a new service inquiry."
+}

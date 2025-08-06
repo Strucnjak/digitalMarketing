@@ -1,0 +1,8 @@
+{
+  "email.contact.subject": "Nova kontakt poruka",
+  "email.contact.body": "Primili ste novu kontakt poruku.",
+  "email.consultation.subject": "Novi zahtev za konsultaciju",
+  "email.consultation.body": "Primili ste novi zahtev za konsultaciju.",
+  "email.inquiry.subject": "Novi upit za uslugu",
+  "email.inquiry.body": "Primili ste novi upit za uslugu."
+}
