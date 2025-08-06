@@ -21,21 +21,44 @@
  }
 
  // Model for consultation requests
- model consultationRequest {
-  id        Int      @id @default(autoincrement())
-  name      String
-  email     String
-  phone     String?
-  message   String?
-  createdAt DateTime @default(now())
- }
+model consultationRequest {
+  id                 Int      @id @default(autoincrement())
+  fullName           String
+  email              String
+  phone              String?
+  company            String?
+  website            String?
+  businessType       String?
+  currentChallenges  String?
+  goals              String?
+  interestedServices Json?
+  preferredContact   String?
+  preferredTime      String?
+  additionalInfo     String?
+  newsletter         Boolean  @default(false)
+  createdAt          DateTime @default(now())
+}
 
- // Model for service inquiries
- model serviceInquiry {
-  id        Int      @id @default(autoincrement())
-  name      String
-  email     String
-  service   String?
-  message   String?
-  createdAt DateTime @default(now())
- }
+// Model for service inquiries
+model serviceInquiry {
+  id                Int      @id @default(autoincrement())
+  fullName          String
+  email             String
+  phone             String?
+  company           String?
+  website           String?
+  selectedService   String?
+  selectedPackage   String?
+  projectTypes      Json?
+  currentSituation  String?
+  projectGoals      String?
+  targetAudience    String?
+  timeline          String?
+  budget            String?
+  additionalServices Json?
+  preferredContact  String?
+  additionalInfo    String?
+  howDidYouHear     String?
+  newsletter        Boolean  @default(false)
+  createdAt         DateTime @default(now())
+}
