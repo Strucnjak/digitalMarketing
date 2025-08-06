@@ -34,7 +34,7 @@ export function Step3({ formData, errors, touched, updateFormData, handleAdditio
               >
                 <SelectValue placeholder={t("form.placeholder_timeline")} />
               </SelectTrigger>
-              <SelectContent forceMount className="z-[999] bg-white text-black shadow-lg rounded border border-gray-200">
+              <SelectContent className="z-[999] bg-white text-black shadow-lg rounded border border-gray-200">
                 <SelectItem value="asap">{t("form.timeline_option.asap")}</SelectItem>
                 <SelectItem value="1-month">{t("form.timeline_option.one_month")}</SelectItem>
                 <SelectItem value="2-3-months">{t("form.timeline_option.two_three_months")}</SelectItem>
@@ -61,7 +61,7 @@ export function Step3({ formData, errors, touched, updateFormData, handleAdditio
               >
                 <SelectValue placeholder={t("form.placeholder_budget")} />
               </SelectTrigger>
-              <SelectContent forceMount className="z-[999] bg-white text-black shadow-lg rounded border border-gray-200">
+              <SelectContent className="z-[999] bg-white text-black shadow-lg rounded border border-gray-200">
                 <SelectItem value="under-1000">{t("form.budget_option.under_1000")}</SelectItem>
                 <SelectItem value="1000-2500">{t("form.budget_option.1000_2500")}</SelectItem>
                 <SelectItem value="2500-5000">{t("form.budget_option.2500_5000")}</SelectItem>
