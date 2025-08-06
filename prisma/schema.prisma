@@ -1,0 +1,41 @@
+// Prisma schema for digitalMarketing project
+
+// Data source definition
+ datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+ }
+
+ // Prisma Client generator
+ generator client {
+  provider = "prisma-client-js"
+ }
+
+ // Model for contact form submissions
+ model contactMessage {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  message   String
+  createdAt DateTime @default(now())
+ }
+
+ // Model for consultation requests
+ model consultationRequest {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  phone     String?
+  message   String?
+  createdAt DateTime @default(now())
+ }
+
+ // Model for service inquiries
+ model serviceInquiry {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  service   String?
+  message   String?
+  createdAt DateTime @default(now())
+ }

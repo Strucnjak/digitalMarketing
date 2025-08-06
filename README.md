@@ -70,8 +70,9 @@ export default tseslint.config([
 
 ## Backend Environment Variables
 
-The backend email service uses the following environment variables:
+The project relies on the following environment variables:
 
+- `DATABASE_URL` – database connection string used by Prisma
 - `SMTP_HOST` – SMTP server host
 - `SMTP_PORT` – SMTP server port
 - `SMTP_USER` – SMTP username
