@@ -58,7 +58,7 @@ export function Step4({ formData, errors, touched, updateFormData, handleBlur }:
           <SelectTrigger className="border-gray-300 focus:border-bdigital-cyan">
             <SelectValue placeholder={t("form.placeholder_how_hear")} />
           </SelectTrigger>
-          <SelectContent forceMount className="z-[999] bg-white text-black shadow-lg rounded border border-gray-200">
+          <SelectContent className="z-[999] bg-white text-black shadow-lg rounded border border-gray-200">
             <SelectItem value="google">{t("form.how_hear_option.google")}</SelectItem>
             <SelectItem value="social-media">{t("form.how_hear_option.social_media")}</SelectItem>
             <SelectItem value="referral">{t("form.how_hear_option.referral")}</SelectItem>
