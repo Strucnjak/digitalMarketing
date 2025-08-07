@@ -1,21 +1,31 @@
-import { useState } from "react";
-import { Button } from "./ui/button";
-import { Input } from "./ui/input";
-import { Textarea } from "./ui/textarea";
-import { Card, CardContent } from "./ui/card";
-import { Badge } from "./ui/badge";
-import { Mail, Phone, MapPin, Clock, Send, CheckCircle, MessageSquare, User, Building } from "lucide-react";
-import { useLanguage } from "./LanguageContext";
-import { EMAIL, PHONE, ADDRESS } from "../config/contact";
+import { useState } from 'react';
+import { Button } from './ui/button';
+import { Input } from './ui/input';
+import { Textarea } from './ui/textarea';
+import { Card, CardContent } from './ui/card';
+import { Badge } from './ui/badge';
+import { 
+  Mail, 
+  Phone, 
+  MapPin, 
+  Clock, 
+  Send, 
+  CheckCircle,
+  MessageSquare,
+  User,
+  Building
+} from 'lucide-react';
+import { useLanguage } from './LanguageContext';
+import { EMAIL, PHONE, ADDRESS } from '../config/contact';
 
 export function ContactSection() {
   const { t: _t, language } = useLanguage();
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    company: "",
-    message: "",
-    phone: "",
+    name: '',
+    email: '',
+    company: '',
+    message: '',
+    phone: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -27,17 +37,19 @@ export function ContactSection() {
     setError(null);
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/contact`, {
-        method: "POST",
+      const response = await fetch('/api/contact', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ ...formData, language }),
+        body: JSON.stringify({ ...formData, language })
       });
 
       if (!response.ok) {
         const data = await response.json().catch(() => null);
-        const message = data?.errors ? Object.values(data.errors).join(", ") : "Failed to send message";
+        const message = data?.errors
+          ? Object.values(data.errors).join(', ')
+          : 'Failed to send message';
         throw new Error(message);
       }
 
@@ -47,15 +59,15 @@ export function ContactSection() {
       setTimeout(() => {
         setIsSubmitted(false);
         setFormData({
-          name: "",
-          email: "",
-          company: "",
-          message: "",
-          phone: "",
+          name: '',
+          email: '',
+          company: '',
+          message: '',
+          phone: ''
         });
       }, 3000);
     } catch (err) {
-      const message = err instanceof Error ? err.message : "Failed to send message";
+      const message = err instanceof Error ? err.message : 'Failed to send message';
       setError(message);
     } finally {
       setIsSubmitting(false);
@@ -63,48 +75,48 @@ export function ContactSection() {
   };
 
   const handleChange = (field: string, value: string) => {
-    setFormData((prev) => ({
+    setFormData(prev => ({
       ...prev,
-      [field]: value,
+      [field]: value
     }));
   };
 
   const contactInfo = [
     {
       icon: Mail,
-      title: _t("contact.info.email"),
+      title: _t('contact.info.email'),
       content: EMAIL,
       link: `mailto:${EMAIL}`,
-      description: _t("contact.info.emailDesc"),
+      description: _t('contact.info.emailDesc')
     },
     {
       icon: Phone,
-      title: _t("contact.info.phone"),
+      title: _t('contact.info.phone'),
       content: PHONE,
-      link: `tel:${PHONE.replace(/\s+/g, "")}`,
-      description: _t("contact.info.phoneDesc"),
+      link: `tel:${PHONE.replace(/\s+/g, '')}`,
+      description: _t('contact.info.phoneDesc')
     },
     {
       icon: MapPin,
-      title: _t("contact.info.location"),
+      title: _t('contact.info.location'),
       content: ADDRESS,
-      link: "https://maps.google.com",
-      description: _t("contact.info.locationDesc"),
+      link: 'https://maps.google.com',
+      description: _t('contact.info.locationDesc')
     },
     {
       icon: Clock,
-      title: _t("contact.info.hours"),
-      content: "09:00 - 17:00",
+      title: _t('contact.info.hours'),
+      content: '09:00 - 17:00',
       link: null,
-      description: _t("contact.info.hoursDesc"),
-    },
+      description: _t('contact.info.hoursDesc')
+    }
   ];
 
   const stats = [
-    { value: "24h", label: _t("contact.stats.response") },
-    { value: "100%", label: _t("contact.stats.clients") },
-    { value: "24/7", label: _t("contact.stats.support") },
-    { value: "5+", label: _t("contact.stats.years") },
+    { value: '24h', label: _t('contact.stats.response') },
+    { value: '100%', label: _t('contact.stats.clients') },
+    { value: '24/7', label: _t('contact.stats.support') },
+    { value: '5+', label: _t('contact.stats.years') }
   ];
 
   return (
@@ -112,11 +124,15 @@ export function ContactSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-12 lg:mb-16">
-          <Badge className="bg-bdigital-cyan/10 text-bdigital-cyan border-bdigital-cyan/20 mb-4 px-4 py-2">{_t("contact.badge")}</Badge>
+          <Badge className="bg-bdigital-cyan/10 text-bdigital-cyan border-bdigital-cyan/20 mb-4 px-4 py-2">
+            {_t('contact.badge')}
+          </Badge>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-bdigital-navy mb-4 lg:mb-6">
-            {_t("contact.heading.part1")} <span className="text-bdigital-cyan">{_t("contact.heading.emphasis")}</span>
+            {_t('contact.heading.part1')} <span className="text-bdigital-cyan">{_t('contact.heading.emphasis')}</span>
           </h2>
-          <p className="text-lg lg:text-xl text-neutral-gray max-w-3xl mx-auto leading-relaxed">{_t("contact.description")}</p>
+          <p className="text-lg lg:text-xl text-neutral-gray max-w-3xl mx-auto leading-relaxed">
+            {_t('contact.description')}
+          </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
@@ -125,16 +141,22 @@ export function ContactSection() {
             <CardContent className="p-6 lg:p-8">
               <div className="flex items-center mb-6">
                 <MessageSquare className="h-6 w-6 text-bdigital-cyan mr-3" />
-                <h3 className="text-xl lg:text-2xl font-bold text-bdigital-navy">{_t("contact.form.title")}</h3>
+                <h3 className="text-xl lg:text-2xl font-bold text-bdigital-navy">
+                  {_t('contact.form.title')}
+                </h3>
               </div>
-
+              
               {isSubmitted ? (
                 <div className="text-center py-8 lg:py-12">
                   <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                     <CheckCircle className="h-8 w-8 text-green-600" />
                   </div>
-                  <h4 className="text-lg font-semibold text-bdigital-navy mb-2">{_t("contact.success.title")}</h4>
-                  <p className="text-neutral-gray">{_t("contact.success.desc")}</p>
+                  <h4 className="text-lg font-semibold text-bdigital-navy mb-2">
+                    {_t('contact.success.title')}
+                  </h4>
+                  <p className="text-neutral-gray">
+                    {_t('contact.success.desc')}
+                  </p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-6">
@@ -142,13 +164,13 @@ export function ContactSection() {
                     <div>
                       <label className="flex items-center text-sm font-medium text-bdigital-navy mb-2">
                         <User className="h-4 w-4 mr-2" />
-                        {_t("contact.name")} *
+                        {_t('contact.name')} *
                       </label>
                       <Input
                         type="text"
                         value={formData.name}
-                        onChange={(e) => handleChange("name", e.target.value)}
-                        placeholder={_t("form.placeholder_full_name")}
+                        onChange={(e) => handleChange('name', e.target.value)}
+                        placeholder={_t('form.placeholder_full_name')}
                         required
                         className="border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan"
                       />
@@ -156,13 +178,13 @@ export function ContactSection() {
                     <div>
                       <label className="flex items-center text-sm font-medium text-bdigital-navy mb-2">
                         <Mail className="h-4 w-4 mr-2" />
-                        {_t("contact.email")} *
+                        {_t('contact.email')} *
                       </label>
                       <Input
                         type="email"
                         value={formData.email}
-                        onChange={(e) => handleChange("email", e.target.value)}
-                        placeholder={_t("form.placeholder_email")}
+                        onChange={(e) => handleChange('email', e.target.value)}
+                        placeholder={_t('form.placeholder_email')}
                         required
                         className="border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan"
                       />
@@ -173,26 +195,26 @@ export function ContactSection() {
                     <div>
                       <label className="flex items-center text-sm font-medium text-bdigital-navy mb-2">
                         <Building className="h-4 w-4 mr-2" />
-                        {_t("contact.company")}
+                        {_t('contact.company')}
                       </label>
                       <Input
                         type="text"
                         value={formData.company}
-                        onChange={(e) => handleChange("company", e.target.value)}
-                        placeholder={_t("form.placeholder_company")}
+                        onChange={(e) => handleChange('company', e.target.value)}
+                        placeholder={_t('form.placeholder_company')}
                         className="border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan"
                       />
                     </div>
                     <div>
                       <label className="flex items-center text-sm font-medium text-bdigital-navy mb-2">
                         <Phone className="h-4 w-4 mr-2" />
-                        {_t("contact.phone")}
+                        {_t('contact.phone')}
                       </label>
                       <Input
                         type="tel"
                         value={formData.phone}
-                        onChange={(e) => handleChange("phone", e.target.value)}
-                        placeholder={_t("form.placeholder_phone")}
+                        onChange={(e) => handleChange('phone', e.target.value)}
+                        placeholder={_t('form.placeholder_phone')}
                         className="border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan"
                       />
                     </div>
@@ -201,12 +223,12 @@ export function ContactSection() {
                   <div>
                     <label className="flex items-center text-sm font-medium text-bdigital-navy mb-2">
                       <MessageSquare className="h-4 w-4 mr-2" />
-                      {_t("contact.message")} *
+                        {_t('contact.message')} *
                     </label>
                     <Textarea
                       value={formData.message}
-                      onChange={(e) => handleChange("message", e.target.value)}
-                      placeholder={_t("form.placeholder_additional_info")}
+                      onChange={(e) => handleChange('message', e.target.value)}
+                      placeholder={_t('form.placeholder_additional_info')}
                       required
                       className="min-h-[120px] border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan resize-none"
                     />
@@ -220,16 +242,18 @@ export function ContactSection() {
                     {isSubmitting ? (
                       <>
                         <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-bdigital-navy mr-2"></div>
-                        {_t("contact.sending")}
+                        {_t('contact.sending')}
                       </>
                     ) : (
                       <>
                         <Send className="h-5 w-5 mr-2" />
-                        {_t("contact.send")}
+                        {_t('contact.send')}
                       </>
                     )}
                   </Button>
-                  {error && <p className="text-red-500 text-sm text-center mt-4">{error}</p>}
+                  {error && (
+                    <p className="text-red-500 text-sm text-center mt-4">{error}</p>
+                  )}
                 </form>
               )}
             </CardContent>
@@ -251,7 +275,10 @@ export function ContactSection() {
                         <div className="flex-1">
                           <h4 className="font-semibold text-bdigital-navy mb-1">{item.title}</h4>
                           {item.link ? (
-                            <a href={item.link} className="text-bdigital-cyan hover:text-bdigital-navy font-medium transition-colors duration-200">
+                            <a
+                              href={item.link}
+                              className="text-bdigital-cyan hover:text-bdigital-navy font-medium transition-colors duration-200"
+                            >
                               {item.content}
                             </a>
                           ) : (
@@ -270,7 +297,8 @@ export function ContactSection() {
             <Card className="border-0 shadow-xl bg-gradient-to-r from-bdigital-navy to-bdigital-dark-navy text-white">
               <CardContent className="p-6 lg:p-8">
                 <h4 className="text-xl font-bold mb-6 text-center">
-                  {_t("contact.stats.title.pre")} <span className="text-bdigital-cyan">{_t("contact.stats.title.emphasis")}</span>
+                  {_t('contact.stats.title.pre')}{' '}
+                  <span className="text-bdigital-cyan">{_t('contact.stats.title.emphasis')}</span>
                 </h4>
                 <div className="grid grid-cols-2 gap-4 lg:gap-6">
                   {stats.map((stat, index) => (
@@ -288,20 +316,24 @@ export function ContactSection() {
             {/* Map or Additional Info */}
             <Card className="border-0 shadow-xl">
               <CardContent className="p-6 lg:p-8">
-                <h4 className="text-xl font-bold text-bdigital-navy mb-4">{_t("contact.meeting.title")}</h4>
-                <p className="text-neutral-gray mb-4">{_t("contact.meeting.desc")}</p>
+                <h4 className="text-xl font-bold text-bdigital-navy mb-4">
+                  {_t('contact.meeting.title')}
+                </h4>
+                <p className="text-neutral-gray mb-4">
+                  {_t('contact.meeting.desc')}
+                </p>
                 <div className="space-y-3">
                   <div className="flex items-center text-sm">
                     <Clock className="h-4 w-4 text-bdigital-cyan mr-2" />
-                    <span className="text-neutral-gray">{_t("contact.meeting.flexible")}</span>
+                    <span className="text-neutral-gray">{_t('contact.meeting.flexible')}</span>
                   </div>
                   <div className="flex items-center text-sm">
                     <MapPin className="h-4 w-4 text-bdigital-cyan mr-2" />
-                    <span className="text-neutral-gray">{_t("contact.meeting.location")}</span>
+                    <span className="text-neutral-gray">{_t('contact.meeting.location')}</span>
                   </div>
                   <div className="flex items-center text-sm">
                     <CheckCircle className="h-4 w-4 text-bdigital-cyan mr-2" />
-                    <span className="text-neutral-gray">{_t("contact.meeting.free")}</span>
+                    <span className="text-neutral-gray">{_t('contact.meeting.free')}</span>
                   </div>
                 </div>
               </CardContent>

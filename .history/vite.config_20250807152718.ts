@@ -6,12 +6,12 @@ export default defineConfig(({ mode }: ConfigEnv) => {
 
   return {
     plugins: [react()],
-    server: {
-      ...(isDev && {
-        proxy: {
-          "/api": "http://localhost:3000",
-        },
-      }),
-    },
+    server: isDev
+      ? {
+          proxy: {
+            "/api": "http://localhost:3000",
+          },
+        }
+      : undefined,
   };
 });
