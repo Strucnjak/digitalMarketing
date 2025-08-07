@@ -62,7 +62,7 @@ const SelectContent = React.forwardRef<
     container?: HTMLElement | null;
   }
 >(({ className, children, position = "popper", forceMount, container, ...props }, ref) => (
-  <SelectPrimitive.Portal forceMount={forceMount} container={container}>
+  <SelectPrimitive.Portal container={container}>
     <SelectPrimitive.Content
       ref={ref}
       forceMount={forceMount}
