@@ -133,14 +133,10 @@ export function Navigation() {
               aria-label="BDigital - Početna stranica"
             >
               <div className="w-8 h-8 lg:w-10 lg:h-10 bg-bdigital-cyan rounded-lg flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow duration-300">
-                <img
-                  src="./public/websiteLogo.svg" // or .png
-                  alt="BDigital Logo"
-                  className="w-5 h-5 lg:w-6 lg:h-6 object-contain"
-                />{" "}
+                <span className="text-bdigital-navy text-sm lg:text-base font-bold">B</span>
               </div>
               <span className={`text-lg lg:text-xl font-bold transition-colors duration-300 ${isScrolled ? "text-bdigital-navy" : "text-white"}`}>
-                Digital
+                BDigital
               </span>
             </button>
           </div>

@@ -140,7 +140,7 @@ export function Navigation() {
                 />{" "}
               </div>
               <span className={`text-lg lg:text-xl font-bold transition-colors duration-300 ${isScrolled ? "text-bdigital-navy" : "text-white"}`}>
-                Digital
+                BDigital
               </span>
             </button>
           </div>

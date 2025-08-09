@@ -1,6 +1,13 @@
 import { useState, useEffect, useRef } from "react";
 import { Button } from "./ui/button";
-import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle, SheetDescription } from "./ui/sheet";
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+  SheetHeader,
+  SheetTitle,
+  SheetDescription,
+} from "./ui/sheet";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { useLanguage } from "./LanguageContext";
 import { useRouter, type PageType, servicePageIds } from "./Router";
@@ -120,7 +127,9 @@ export function Navigation() {
   return (
     <nav
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        isScrolled ? "bg-white/95 backdrop-blur-sm shadow-lg border-b border-gray-200/20" : "bg-transparent"
+        isScrolled
+          ? "bg-white/95 backdrop-blur-sm shadow-lg border-b border-gray-200/20"
+          : "bg-transparent"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -133,14 +142,14 @@ export function Navigation() {
               aria-label="BDigital - Početna stranica"
             >
               <div className="w-8 h-8 lg:w-10 lg:h-10 bg-bdigital-cyan rounded-lg flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow duration-300">
-                <img
-                  src="./public/websiteLogo.svg" // or .png
-                  alt="BDigital Logo"
-                  className="w-5 h-5 lg:w-6 lg:h-6 object-contain"
-                />{" "}
+                <span className="text-bdigital-navy text-sm lg:text-base font-bold">
+                  B
+                </span>
               </div>
-              <span className={`text-lg lg:text-xl font-bold transition-colors duration-300 ${isScrolled ? "text-bdigital-navy" : "text-white"}`}>
-                Digital
+              <span
+                className={`text-lg lg:text-xl font-bold transition-colors duration-300 ${isScrolled ? "text-bdigital-navy" : "text-white"}`}
+              >
+                BDigital
               </span>
             </button>
           </div>
@@ -150,17 +159,28 @@ export function Navigation() {
             <button
               onClick={handleHomeClick}
               className={`text-sm font-medium transition-colors duration-300 hover:text-bdigital-cyan ${
-                currentPage === "home" ? "text-bdigital-cyan" : isScrolled ? "text-bdigital-navy" : "text-white"
+                currentPage === "home"
+                  ? "text-bdigital-cyan"
+                  : isScrolled
+                    ? "text-bdigital-navy"
+                    : "text-white"
               }`}
             >
-              {_t("nav.home")}
+              {_t('nav.home')}
             </button>
 
             {/* Services Dropdown */}
-            <div ref={dropdownRef} className="relative" onMouseEnter={handleServicesMouseEnter} onMouseLeave={handleServicesMouseLeave}>
+            <div
+              ref={dropdownRef}
+              className="relative"
+              onMouseEnter={handleServicesMouseEnter}
+              onMouseLeave={handleServicesMouseLeave}
+            >
               <button
                 className={`flex items-center space-x-1 text-sm font-medium transition-colors duration-300 hover:text-bdigital-cyan py-2 ${
-                  servicePageIds.includes(currentPage as (typeof servicePageIds)[number])
+                  servicePageIds.includes(
+                    currentPage as (typeof servicePageIds)[number]
+                  )
                     ? "text-bdigital-cyan"
                     : isScrolled
                       ? "text-bdigital-navy"
@@ -169,14 +189,18 @@ export function Navigation() {
                 aria-expanded={servicesOpen}
                 aria-haspopup="true"
               >
-                <span>{_t("nav.services")}</span>
-                <ChevronDown className={`h-4 w-4 transition-transform duration-300 ${servicesOpen ? "rotate-180" : ""}`} />
+                <span>{_t('nav.services')}</span>
+                <ChevronDown
+                  className={`h-4 w-4 transition-transform duration-300 ${servicesOpen ? "rotate-180" : ""}`}
+                />
               </button>
 
               {/* Dropdown Menu */}
               <div
                 className={`absolute top-full left-0 mt-1 w-80 bg-white rounded-xl shadow-xl border border-gray-200 py-4 transform transition-all duration-300 ${
-                  servicesOpen ? "opacity-100 translate-y-0 pointer-events-auto visible" : "opacity-0 translate-y-2 pointer-events-none invisible"
+                  servicesOpen
+                    ? "opacity-100 translate-y-0 pointer-events-auto visible"
+                    : "opacity-0 translate-y-2 pointer-events-none invisible"
                 }`}
                 onMouseEnter={handleDropdownMouseEnter}
                 onMouseLeave={handleDropdownMouseLeave}
@@ -193,7 +217,9 @@ export function Navigation() {
                     <div className="font-medium text-bdigital-navy text-sm mb-1 group-hover:text-bdigital-cyan group-focus:text-bdigital-cyan transition-colors duration-200">
                       {service.title}
                     </div>
-                    <div className="text-xs text-neutral-gray">{service.description}</div>
+                    <div className="text-xs text-neutral-gray">
+                      {service.description}
+                    </div>
                   </button>
                 ))}
               </div>
@@ -205,7 +231,7 @@ export function Navigation() {
                 isScrolled ? "text-bdigital-navy" : "text-white"
               }`}
             >
-              {_t("nav.contact")}
+              {_t('nav.contact')}
             </button>
 
             {/* Language Switcher */}
@@ -237,7 +263,7 @@ export function Navigation() {
               onClick={() => navigateTo("free-consultation")}
               className="bg-bdigital-cyan text-bdigital-navy hover:bg-bdigital-cyan-light font-semibold px-6 py-2 text-sm shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
             >
-              {_t("web.cta.primary")}
+              {_t('web.cta.primary')}
             </Button>
           </div>
 
@@ -245,23 +271,32 @@ export function Navigation() {
           <div className="lg:hidden">
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
               <SheetTrigger asChild>
-                <Button className={`p-2 ${isScrolled ? "text-bdigital-navy" : "text-white"} hover:bg-bdigital-cyan/20`} aria-label="Otvori meni">
+                <Button
+                  className={`p-2 ${isScrolled ? "text-bdigital-navy" : "text-white"} hover:bg-bdigital-cyan/20`}
+                  aria-label="Otvori meni"
+                >
                   <Menu className="h-6 w-6" />
                 </Button>
               </SheetTrigger>
               <SheetContent side="right" className="w-full sm:w-80 bg-white">
                 <SheetHeader className="sr-only">
                   <SheetTitle>Navigation</SheetTitle>
-                  <SheetDescription>Displays the mobile navigation menu.</SheetDescription>
+                  <SheetDescription>
+                    Displays the mobile navigation menu.
+                  </SheetDescription>
                 </SheetHeader>
                 <div className="flex flex-col h-full">
                   {/* Header */}
                   <div className="flex justify-between items-center py-4 border-b border-gray-200">
                     <div className="flex items-center space-x-2">
                       <div className="w-8 h-8 bg-bdigital-cyan rounded-lg flex items-center justify-center">
-                        <span className="text-bdigital-navy text-sm font-bold">B</span>
+                        <span className="text-bdigital-navy text-sm font-bold">
+                          B
+                        </span>
                       </div>
-                      <span className="text-lg font-bold text-bdigital-navy">BDigital</span>
+                      <span className="text-lg font-bold text-bdigital-navy">
+                        BDigital
+                      </span>
                     </div>
                     <Button
                       variant="ghost"
@@ -279,10 +314,12 @@ export function Navigation() {
                     <button
                       onClick={handleHomeClick}
                       className={`w-full text-left px-4 py-3 text-base font-medium rounded-lg transition-all duration-200 ${
-                        currentPage === "home" ? "bg-bdigital-cyan text-bdigital-navy" : "text-bdigital-navy hover:bg-gray-50"
+                        currentPage === "home"
+                          ? "bg-bdigital-cyan text-bdigital-navy"
+                          : "text-bdigital-navy hover:bg-gray-50"
                       }`}
                     >
-                      {_t("nav.home")}
+                      {_t('nav.home')}
                     </button>
 
                     {/* Services Menu */}
@@ -292,8 +329,10 @@ export function Navigation() {
                         className="w-full flex items-center justify-between px-4 py-3 text-base font-medium text-bdigital-navy hover:bg-gray-50 rounded-lg transition-colors duration-200"
                         aria-expanded={servicesOpen}
                       >
-                        <span>{_t("nav.services")}</span>
-                        <ChevronDown className={`h-4 w-4 transition-transform duration-300 ${servicesOpen ? "rotate-180" : ""}`} />
+                        <span>{_t('nav.services')}</span>
+                        <ChevronDown
+                          className={`h-4 w-4 transition-transform duration-300 ${servicesOpen ? "rotate-180" : ""}`}
+                        />
                       </button>
 
                       {servicesOpen && (
@@ -308,8 +347,12 @@ export function Navigation() {
                                   : "text-neutral-gray hover:bg-gray-50 hover:text-bdigital-navy"
                               }`}
                             >
-                              <div className="font-medium mb-1">{service.title}</div>
-                              <div className="text-xs opacity-70">{service.description}</div>
+                              <div className="font-medium mb-1">
+                                {service.title}
+                              </div>
+                              <div className="text-xs opacity-70">
+                                {service.description}
+                              </div>
                             </button>
                           ))}
                         </div>
@@ -320,7 +363,7 @@ export function Navigation() {
                       onClick={handleContactClick}
                       className="w-full text-left px-4 py-3 text-base font-medium text-bdigital-navy hover:bg-gray-50 rounded-lg transition-colors duration-200"
                     >
-                      {_t("nav.contact")}
+                      {_t('nav.contact')}
                     </button>
                   </div>
 
@@ -332,7 +375,9 @@ export function Navigation() {
                       <button
                         onClick={() => handleLanguageChange("me")}
                         className={`px-3 py-1 text-sm font-medium rounded-lg transition-all duration-200 ${
-                          language === "me" ? "bg-bdigital-cyan text-bdigital-navy" : "text-bdigital-navy hover:bg-gray-100"
+                          language === "me"
+                            ? "bg-bdigital-cyan text-bdigital-navy"
+                            : "text-bdigital-navy hover:bg-gray-100"
                         }`}
                       >
                         Crnogorski
@@ -340,7 +385,9 @@ export function Navigation() {
                       <button
                         onClick={() => handleLanguageChange("en")}
                         className={`px-3 py-1 text-sm font-medium rounded-lg transition-all duration-200 ${
-                          language === "en" ? "bg-bdigital-cyan text-bdigital-navy" : "text-bdigital-navy hover:bg-gray-100"
+                          language === "en"
+                            ? "bg-bdigital-cyan text-bdigital-navy"
+                            : "text-bdigital-navy hover:bg-gray-100"
                         }`}
                       >
                         English
@@ -355,7 +402,7 @@ export function Navigation() {
                       }}
                       className="w-full bg-bdigital-cyan text-bdigital-navy hover:bg-bdigital-cyan-light font-semibold py-3 text-sm shadow-lg transition-all duration-300"
                     >
-                      {_t("web.cta.primary")}
+                      {_t('web.cta.primary')}
                     </Button>
                   </div>
                 </div>
