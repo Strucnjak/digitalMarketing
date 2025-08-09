@@ -79,7 +79,7 @@ export function AboutSection() {
   };
 
   const handlePrimary = () => goAndScroll("home", "contact");
-  const handleSecondary = () => goAndScroll("home", "portfolio");
+  const handleSecondary = () => goAndScroll("home", "services");
 
   return (
     <section id="about" className="py-20 bg-white">

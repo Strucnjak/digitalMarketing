@@ -2,7 +2,6 @@ import { Card, CardContent } from "./ui/card";
 import { Target, Eye, Heart, Users, Award, Clock } from "lucide-react";
 import { useLanguage } from "./LanguageContext";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
-import { useRouter, type PageType } from "./Router";
 
 export function AboutSection() {
   const { t } = useLanguage();
@@ -56,30 +55,44 @@ export function AboutSection() {
     },
   ];
 
-  const { currentPage, navigateTo } = useRouter();
+  const { navigateTo } = useRouter();
 
+  // Smoothly scroll to an element if it's on the page
   const scrollToId = (id: string) => {
-    const el = document.getElementById(id) || document.querySelector(`#${id}`);
+    const el = document.querySelector(id.startsWith("#") ? id : `#${id}`);
     if (!el) return false;
     el.scrollIntoView({ behavior: "smooth", block: "start" });
     return true;
   };
 
-  const goAndScroll = (route: PageType, id: string) => {
+  // Navigate (if needed) then try scrolling until the section exists
+  const goAndScroll = (route: string, id: string) => {
     const tryScroll = () => {
-      if (!scrollToId(id)) setTimeout(tryScroll, 50);
+      if (!scrollToId(id)) {
+        // Retry a few times while the page renders
+        setTimeout(tryScroll, 50);
+      }
     };
 
-    if (currentPage === route) {
+    // If you’re already on the right route, just scroll
+    if (window.location.pathname.endsWith(route)) {
       tryScroll();
     } else {
       navigateTo(route);
+      // Kick the scroll on the next frame(s)
       requestAnimationFrame(tryScroll);
     }
   };
 
-  const handlePrimary = () => goAndScroll("home", "contact");
-  const handleSecondary = () => goAndScroll("home", "portfolio");
+  const handlePrimary = () => {
+    // Same behavior as your nav contact: go to home, then scroll to #contact
+    goAndScroll("home", "contact");
+  };
+
+  const handleSecondary = () => {
+    // Example: scroll to #services on home (change to what you need)
+    goAndScroll("home", "services");
+  };
 
   return (
     <section id="about" className="py-20 bg-white">
