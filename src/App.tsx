@@ -15,27 +15,50 @@ import { BrandingPage } from "./components/services/BrandingPage";
 import { StrategyPage } from "./components/services/StrategyPage";
 import { ServiceInquiryForm } from "./components/ServiceInquiryForm";
 import { FreeConsultationPage } from "./components/FreeConsultationPage";
+import { MobileQuickNav } from "./components/MobileQuickNav";
+import "./styles/mobile-quick-nav.css";
+
+const sections = [
+  { id: "hero", label: "Home" },
+  { id: "services", label: "Services" },
+  { id: "portfolio", label: "Portfolio" },
+  { id: "about", label: "About" },
+  { id: "testimonials", label: "Testimonials" },
+  { id: "contact", label: "Contact" },
+];
 
 function HomePage() {
   return (
     <>
       {/* Hero Section */}
-      <HeroSection />
+      <section id="hero" data-anchor>
+        <HeroSection />
+      </section>
 
       {/* Services Section */}
-      <ServicesSection />
+      <section id="services" data-anchor>
+        <ServicesSection />
+      </section>
 
       {/* Portfolio Section */}
-      <PortfolioSection />
+      <section id="portfolio" data-anchor>
+        <PortfolioSection />
+      </section>
 
       {/* About Section */}
-      <AboutSection />
+      <section id="about" data-anchor>
+        <AboutSection />
+      </section>
 
       {/* Testimonials Section */}
-      <TestimonialsSection />
+      <section id="testimonials" data-anchor>
+        <TestimonialsSection />
+      </section>
 
       {/* Contact Section */}
-      <ContactSection />
+      <section id="contact" data-anchor>
+        <ContactSection />
+      </section>
     </>
   );
 }
@@ -71,7 +94,17 @@ function AppContent() {
       <Navigation />
 
       {/* Main Content */}
-      <main>{renderPage()}</main>
+      <main id="app-content">{renderPage()}</main>
+
+      {/* Mobile Quick Navigation */}
+      {currentPage === "home" && (
+        <MobileQuickNav
+          sections={sections}
+          stickyOffsetPx={64}
+          collisionOffsetPx={16}
+          topThresholdPx={300}
+        />
+      )}
 
       {/* Footer - only show on home page */}
       {currentPage === "home" && <Footer />}
