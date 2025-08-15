@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useLanguage } from "./LanguageContext";
 import { useRouter } from "./Router";
 import { Menu, X, Home, Briefcase, FolderOpen, Users, MessageSquare, Phone, ArrowUp } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { smoothScroll } from "../utils/smoothScroll";
 
 interface MobileQuickNavProps {
   onSectionClick?: (sectionId: string) => void;
@@ -114,27 +115,36 @@ export function MobileQuickNav({ onSectionClick }: MobileQuickNavProps) {
     { id: "contact", label: t.contact, icon: Phone },
   ] as const;
 
+  const HEADER_OFFSET_PX = 80;
+
   const scrollToSection = (sectionId: string) => {
-    if (typeof window !== "undefined" && typeof document !== "undefined") {
-      const element = document.getElementById(sectionId);
-      if (element) {
-        const rect = element.getBoundingClientRect();
-        const headerOffset = 80;
-        const offsetTop = rect.top + window.scrollY - headerOffset;
-        window.scrollTo({
-          top: offsetTop,
-          behavior: prefersReducedMotion ? "auto" : "smooth",
-        });
-      }
+    const el = typeof document !== "undefined" ? document.getElementById(sectionId) : null;
+    if (el) {
+      smoothScroll(el, { offset: HEADER_OFFSET_PX, prefersReducedMotion });
     }
     onSectionClick?.(sectionId);
   };
 
-  const handleSectionClick = (sectionId: string) => {
+  async function waitForElement(id: string, timeoutMs = 2000): Promise<HTMLElement | null> {
+    const start = performance.now();
+    return new Promise((resolve) => {
+      const tick = () => {
+        const el = document.getElementById(id);
+        if (el) return resolve(el);
+        if (performance.now() - start > timeoutMs) return resolve(null);
+        requestAnimationFrame(tick);
+      };
+      tick();
+    });
+  }
+
+  const handleSectionClick = async (sectionId: string) => {
     if (currentPage !== "home") {
-      // Navigate then scroll after the page renders
       navigateTo("home");
-      setTimeout(() => scrollToSection(sectionId), 120);
+      const el = await waitForElement(sectionId, 2000);
+      if (el) {
+        smoothScroll(el, { offset: HEADER_OFFSET_PX, prefersReducedMotion });
+      }
     } else {
       scrollToSection(sectionId);
     }
@@ -142,9 +152,7 @@ export function MobileQuickNav({ onSectionClick }: MobileQuickNavProps) {
   };
 
   const scrollToTop = () => {
-    if (typeof window !== "undefined") {
-      window.scrollTo({ top: 0, behavior: prefersReducedMotion ? "auto" : "smooth" });
-    }
+    smoothScroll({ top: 0, left: 0 }, { prefersReducedMotion });
   };
 
   // Only show on mobile devices

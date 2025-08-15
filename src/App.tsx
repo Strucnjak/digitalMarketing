@@ -18,15 +18,6 @@ import { FreeConsultationPage } from "./components/FreeConsultationPage";
 import { MobileQuickNav } from "./components/MobileQuickNav";
 import "./styles/mobile-quick-nav.css";
 
-const sections = [
-  { id: "hero", label: "Home" },
-  { id: "services", label: "Services" },
-  { id: "portfolio", label: "Portfolio" },
-  { id: "about", label: "About" },
-  { id: "testimonials", label: "Testimonials" },
-  { id: "contact", label: "Contact" },
-];
-
 function HomePage() {
   return (
     <>
@@ -97,14 +88,7 @@ function AppContent() {
       <main id="app-content">{renderPage()}</main>
 
       {/* Mobile Quick Navigation */}
-      {currentPage === "home" && (
-        <MobileQuickNav
-          sections={sections}
-          stickyOffsetPx={64}
-          collisionOffsetPx={16}
-          topThresholdPx={300}
-        />
-      )}
+      {currentPage === "home" && <MobileQuickNav />}
 
       {/* Footer - only show on home page */}
       {currentPage === "home" && <Footer />}
