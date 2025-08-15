@@ -1,0 +1,21 @@
+/* Styles for the mobile quick navigation */
+
+.mqn-backdrop {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+@supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+  .mqn-backdrop {
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    background-color: transparent;
+  }
+}
+
+[data-anchor] {
+  scroll-margin-top: 5rem;
+}
+
+.mqn-layer {
+  transform: translateZ(0);
+}
