@@ -36,7 +36,7 @@ export function BrandingPage() {
   const packages = [
     {
       name: t("branding.package.starter.name"),
-      price: "400 €",
+      price: "500 €",
       features: [
         t("branding.package.starter.feature1"),
         t("branding.package.starter.feature2"),
@@ -47,7 +47,7 @@ export function BrandingPage() {
     },
     {
       name: t("branding.package.professional.name"),
-      price: "700 €",
+      price: "1.700 €",
       features: [
         t("branding.package.professional.feature1"),
         t("branding.package.professional.feature2"),
@@ -59,7 +59,7 @@ export function BrandingPage() {
     },
     {
       name: t("branding.package.enterprise.name"),
-      price: "1.200 €+",
+      price: "2.400 €+",
       features: [
         t("branding.package.enterprise.feature1"),
         t("branding.package.enterprise.feature2"),
@@ -159,7 +159,6 @@ export function BrandingPage() {
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-bdigital-navy mb-4">{t("branding.pricing.heading")}</h2>
           </div>
-
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {packages.map((pkg, index) => (
               <Card
@@ -194,7 +193,9 @@ export function BrandingPage() {
                 </CardContent>
               </Card>
             ))}
-          </div>
+          </div>{" "}
+          {/* Pricing Note */}
+          <p className="mt-8 text-center text-sm text-neutral-gray max-w-2xl mx-auto">{t("web.pricing.note")}</p>
         </div>
       </section>
 
