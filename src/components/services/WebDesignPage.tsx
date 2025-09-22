@@ -313,6 +313,8 @@ export function WebDesignPage() {
               </Card>
             ))}
           </div>
+          {/* Pricing Note */}
+          <p className="mt-8 text-center text-sm text-neutral-gray max-w-2xl mx-auto">{t("web.pricing.note")}</p>
         </div>
       </section>
 

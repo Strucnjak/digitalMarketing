@@ -1,28 +1,28 @@
-import { Button } from './ui/button';
-import { Badge } from './ui/badge';
-import { ArrowRight, CheckCircle, Star, Users, Award } from 'lucide-react';
-import { useLanguage } from './LanguageContext';
-import { useRouter } from './Router';
-import { ImageWithFallback } from './figma/ImageWithFallback';
+import { Button } from "./ui/button";
+import { Badge } from "./ui/badge";
+import { ArrowRight, CheckCircle, Star, Users, Award } from "lucide-react";
+import { useLanguage } from "./LanguageContext";
+import { useRouter } from "./Router";
+import { ImageWithFallback } from "./figma/ImageWithFallback";
 
 export function HeroSection() {
   const { t: _t } = useLanguage();
   const { navigateTo } = useRouter();
 
   const stats = [
-    { icon: Users, value: '100+', label: _t('hero.stats.clients') },
-    { icon: Award, value: '200+', label: _t('hero.stats.projects') },
-    { icon: Star, value: '4.9', label: _t('hero.stats.rating') },
-    { icon: CheckCircle, value: '24h', label: _t('hero.stats.response') }
+    { icon: Users, value: "100+", label: _t("hero.stats.clients") },
+    { icon: Award, value: "200+", label: _t("hero.stats.projects") },
+    { icon: Star, value: "4.9", label: _t("hero.stats.rating") },
+    { icon: CheckCircle, value: "24h", label: _t("hero.stats.response") },
   ];
 
   const handleGetStarted = () => {
-    navigateTo('service-inquiry');
+    navigateTo("service-inquiry");
   };
 
   const handleViewPortfolio = () => {
-    const element = document.querySelector('#portfolio');
-    element?.scrollIntoView({ behavior: 'smooth' });
+    const element = document.querySelector("#portfolio");
+    element?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
@@ -42,7 +42,7 @@ export function HeroSection() {
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
               animationDelay: `${Math.random() * 2}s`,
-              animationDuration: `${2 + Math.random() * 2}s`
+              animationDuration: `${2 + Math.random() * 2}s`,
             }}
           />
         ))}
@@ -55,22 +55,18 @@ export function HeroSection() {
             {/* Badge */}
             <div className="flex justify-center lg:justify-start">
               <Badge className="bg-bdigital-cyan/20 text-bdigital-cyan border-bdigital-cyan/30 px-4 py-2 text-sm font-medium backdrop-blur-sm">
-                {_t('hero.badge')}
+                {_t("hero.badge")}
               </Badge>
             </div>
 
             {/* Main Heading */}
             <div className="space-y-4">
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">
-                {_t('hero.title')}
-              </h1>
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">{_t("hero.title")}</h1>
               <div className="w-20 h-1 bg-bdigital-cyan mx-auto lg:mx-0 rounded-full"></div>
             </div>
 
             {/* Subtitle */}
-            <p className="text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-              {_t('hero.subtitle')}
-            </p>
+            <p className="text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed">{_t("hero.subtitle")}</p>
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4">
@@ -79,7 +75,7 @@ export function HeroSection() {
                 onClick={handleGetStarted}
                 className="bg-bdigital-cyan text-bdigital-navy hover:bg-bdigital-cyan-light font-semibold px-8 py-4 text-base shadow-2xl hover:shadow-bdigital-cyan/25 transition-all duration-300 transform hover:scale-105 group"
               >
-                {_t('hero.cta')}
+                {_t("hero.cta")}
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
               </Button>
               <Button
@@ -88,7 +84,7 @@ export function HeroSection() {
                 onClick={handleViewPortfolio}
                 className="border-2 border-bdigital-cyan text-bdigital-cyan hover:bg-bdigital-cyan hover:text-bdigital-navy font-semibold px-8 py-4 text-base backdrop-blur-sm transition-all duration-300 transform hover:scale-105"
               >
-                {_t('hero.secondary')}
+                {_t("hero.secondary")}
               </Button>
             </div>
 
@@ -105,9 +101,7 @@ export function HeroSection() {
                       <div className="text-2xl lg:text-3xl font-bold text-bdigital-cyan group-hover:scale-110 transition-transform duration-300">
                         {stat.value}
                       </div>
-                      <div className="text-sm text-gray-400 leading-tight">
-                        {stat.label}
-                      </div>
+                      <div className="text-sm text-gray-400 leading-tight">{stat.label}</div>
                     </div>
                   );
                 })}
@@ -132,17 +126,17 @@ export function HeroSection() {
                 <div className="relative overflow-hidden rounded-xl lg:rounded-2xl">
                   <ImageWithFallback
                     src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop&q=80"
-                    alt={_t('hero.image_alt')}
+                    alt={_t("hero.image_alt")}
                     className="w-full h-64 sm:h-80 lg:h-96 object-cover group-hover:scale-105 transition-transform duration-500"
                   />
-                  
+
                   {/* Overlay Stats */}
                   <div className="absolute inset-0 bg-gradient-to-t from-bdigital-navy/20 via-transparent to-transparent">
                     <div className="absolute bottom-4 left-4 right-4">
                       <div className="bg-white/90 backdrop-blur-sm rounded-lg p-3 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
                         <div className="flex items-center justify-between">
                           <div>
-                            <div className="text-sm font-medium text-bdigital-navy">Conversion Rate</div>
+                            <div className="text-sm font-medium text-bdigital-navy">{_t("hero.stats.conversionRate")}</div>
                             <div className="text-2xl font-bold text-bdigital-cyan">+287%</div>
                           </div>
                           <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
