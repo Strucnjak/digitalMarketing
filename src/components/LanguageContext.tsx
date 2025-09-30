@@ -1,7 +1,9 @@
-import { createContext, useContext, useState, useEffect } from 'react';
-import type { ReactNode } from 'react';
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import type { ReactNode } from "react";
+import en from "../locales/en.json";
+import me from "../locales/me.json";
 
-export type Language = 'en' | 'me';
+export type Language = "en" | "me";
 
 interface LanguageContextType {
   language: Language;
@@ -11,26 +13,57 @@ interface LanguageContextType {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
+const TRANSLATIONS: Record<Language, Record<string, string>> = {
+  en,
+  me,
+};
 
-export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguage] = useState<Language>(
-    (localStorage.getItem('language') as Language) || 'me'
-  );
-  const [translations, setTranslations] = useState<Record<string, string>>({});
+interface LanguageProviderProps {
+  children: ReactNode;
+  initialLanguage?: Language;
+}
+
+function resolveStoredLanguage(): Language | null {
+  if (typeof window === "undefined") {
+    return null;
+  }
+  const stored = window.localStorage.getItem("language");
+  if (stored === "en" || stored === "me") {
+    return stored;
+  }
+  return null;
+}
+
+export function LanguageProvider({
+  children,
+  initialLanguage,
+}: LanguageProviderProps) {
+  const [language, setLanguageState] = useState<Language>(() => {
+    if (initialLanguage) {
+      return initialLanguage;
+    }
+    return resolveStoredLanguage() ?? "me";
+  });
 
   useEffect(() => {
-    import(`../locales/${language}.json`).then((mod) => {
-      setTranslations(mod.default);
-    });
-  }, [language]);
+    if (initialLanguage && initialLanguage !== language) {
+      setLanguageState(initialLanguage);
+    }
+  }, [initialLanguage, language]);
 
   useEffect(() => {
-    localStorage.setItem('language', language);
+    if (typeof window !== "undefined") {
+      window.localStorage.setItem("language", language);
+    }
   }, [language]);
 
-  const t = (key: string): string => {
-    return translations[key] ?? key;
+  const translations = useMemo(() => TRANSLATIONS[language], [language]);
+
+  const setLanguage = (lang: Language) => {
+    setLanguageState(lang);
   };
+
+  const t = (key: string): string => translations[key] ?? key;
 
   return (
     <LanguageContext.Provider value={{ language, setLanguage, t }}>
