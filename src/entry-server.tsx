@@ -3,6 +3,7 @@ import { renderToString } from "react-dom/server";
 import { StaticRouter } from "react-router-dom/server";
 import { AppRoutes } from "./routes";
 import { SITE_BASE_URL } from "./config/site";
+import { getSeoMetadata } from "./config/seo-meta";
 import { parsePathname } from "./routing";
 import { buildCanonicalCluster } from "./utils/seo";
 
@@ -29,10 +30,6 @@ export interface RenderOptions {
   manifest?: Manifest;
 }
 
-const TITLE = "BDigital Agency";
-const DESCRIPTION =
-  "BDigital is a full-service digital agency delivering design, marketing, and growth solutions.";
-
 export function render(url: string, options: RenderOptions = {}): RenderResult {
   const app = (
     <StrictMode>
@@ -52,9 +49,11 @@ export function render(url: string, options: RenderOptions = {}): RenderResult {
     siteBaseUrl: SITE_BASE_URL,
   });
 
+  const metadata = getSeoMetadata(locale, page);
+
   const headParts = [
-    `<title>${TITLE}</title>`,
-    `<meta name="description" content="${DESCRIPTION}" />`,
+    `<title>${escapeHtml(metadata.title)}</title>`,
+    `<meta name="description" content="${escapeAttribute(metadata.description)}" />`,
     `<link rel="canonical" href="${escapeAttribute(canonicalCluster.canonical)}">`,
     ...canonicalCluster.alternates.map(
       (alternate) =>
@@ -121,4 +120,8 @@ function renderPreloadLinks(manifest: Manifest, entry: string) {
 
 function escapeAttribute(value: string): string {
   return value.replace(/&/g, "&amp;").replace(/"/g, "&quot;");
+}
+
+function escapeHtml(value: string): string {
+  return value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
