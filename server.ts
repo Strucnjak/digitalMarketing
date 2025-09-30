@@ -68,6 +68,7 @@ async function handleRequest({
 function injectRenderedApp(template: string, rendered: RenderResult) {
   const stateScript = serializeState(rendered.initialState);
   return template
+    .replace("<!--app-lang-->", rendered.htmlLang)
     .replace("<!--app-head-->", `${rendered.head}${rendered.preloadLinks}`)
     .replace("<!--app-html-->", rendered.html)
     .replace("<!--app-state-->", stateScript);

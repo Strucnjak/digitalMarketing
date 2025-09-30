@@ -19,6 +19,7 @@ export interface RenderResult {
   html: string;
   head: string;
   preloadLinks: string;
+  htmlLang: string;
   initialState: {
     locale: string;
   };
@@ -71,6 +72,7 @@ export function render(url: string, options: RenderOptions = {}): RenderResult {
     html,
     head,
     preloadLinks,
+    htmlLang: locale,
     initialState: { locale },
   };
 }
