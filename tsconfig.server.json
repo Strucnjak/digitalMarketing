@@ -17,5 +17,12 @@
       "react-router-dom/server": ["./src/router/react-router-dom-server"]
     }
   },
-  "include": ["server.ts", "scripts/prerender.ts", "src/routing.ts", "types/node-shim.d.ts"]
+  "include": [
+    "server.ts",
+    "scripts/prerender.ts",
+    "scripts/generate-sitemaps.ts",
+    "src/config/site.ts",
+    "src/routing.ts",
+    "types/node-shim.d.ts"
+  ]
 }
