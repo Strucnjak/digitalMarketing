@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { smoothScroll } from "../utils/smoothScroll";
 import { buildLocalizedPath } from "../routing";
 import { useActiveLocale } from "../hooks/useActiveLocale";
+import { useRouteInfo } from "../hooks/useRouteInfo";
 
 interface MobileQuickNavProps {
   onSectionClick?: (sectionId: string) => void;
@@ -38,6 +39,7 @@ export function MobileQuickNav({ onSectionClick }: MobileQuickNavProps) {
   const { language } = useLanguage();
   const navigate = useNavigate();
   const { activeLocale, includeLocalePrefix } = useActiveLocale();
+  const routeInfo = useRouteInfo();
   const isMobile = useIsMobile();
 
   const translations: Record<

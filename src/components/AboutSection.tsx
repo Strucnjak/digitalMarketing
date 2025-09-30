@@ -4,12 +4,14 @@ import { Target, Eye, Heart, Users, Award, Clock } from "lucide-react";
 import { useLanguage } from "./LanguageContext";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { useActiveLocale } from "../hooks/useActiveLocale";
+import { useRouteInfo } from "../hooks/useRouteInfo";
 import { buildLocalizedPath, type PageType } from "../routing";
 
 export function AboutSection() {
   const { t } = useLanguage();
   const navigate = useNavigate();
   const { activeLocale, includeLocalePrefix } = useActiveLocale();
+  const routeInfo = useRouteInfo();
 
   const values = [
     {
