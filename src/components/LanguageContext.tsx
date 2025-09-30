@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import type { ReactNode } from "react";
 import en from "../locales/en.json";
 import me from "../locales/me.json";
+import { defaultLocale } from "../routing";
 
 export type Language = "en" | "me";
 
@@ -21,6 +22,7 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
 interface LanguageProviderProps {
   children: ReactNode;
   initialLanguage?: Language;
+  localeFromRoute?: Language;
 }
 
 function resolveStoredLanguage(): Language | null {
@@ -37,19 +39,27 @@ function resolveStoredLanguage(): Language | null {
 export function LanguageProvider({
   children,
   initialLanguage,
+  localeFromRoute,
 }: LanguageProviderProps) {
   const [language, setLanguageState] = useState<Language>(() => {
+    if (localeFromRoute) {
+      return localeFromRoute;
+    }
+    const stored = resolveStoredLanguage();
+    if (stored) {
+      return stored;
+    }
     if (initialLanguage) {
       return initialLanguage;
     }
-    return resolveStoredLanguage() ?? "me";
+    return defaultLocale;
   });
 
   useEffect(() => {
-    if (initialLanguage && initialLanguage !== language) {
-      setLanguageState(initialLanguage);
+    if (localeFromRoute && localeFromRoute !== language) {
+      setLanguageState(localeFromRoute);
     }
-  }, [initialLanguage, language]);
+  }, [localeFromRoute, language]);
 
   useEffect(() => {
     if (typeof window !== "undefined") {

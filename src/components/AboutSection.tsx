@@ -1,11 +1,19 @@
+import { useNavigate, useParams } from "react-router-dom";
 import { Card, CardContent } from "./ui/card";
 import { Target, Eye, Heart, Users, Award, Clock } from "lucide-react";
 import { useLanguage } from "./LanguageContext";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
-import { useRouter, type PageType } from "./Router";
+import { useRouteInfo } from "../hooks/useRouteInfo";
+import { buildLocalizedPath, defaultLocale, isLocale, type Locale, type PageType } from "../routing";
 
 export function AboutSection() {
   const { t } = useLanguage();
+  const navigate = useNavigate();
+  const routeInfo = useRouteInfo();
+  const params = useParams<{ locale?: string }>();
+  const routeLocale = isLocale(params.locale) ? params.locale : undefined;
+  const activeLocale = (routeLocale ?? routeInfo.locale) as Locale;
+  const includeLocalePrefix = routeLocale != null || activeLocale !== defaultLocale;
 
   const values = [
     {
@@ -56,8 +64,6 @@ export function AboutSection() {
     },
   ];
 
-  const { currentPage, navigateTo } = useRouter();
-
   const scrollToId = (id: string) => {
     const el = document.getElementById(id) || document.querySelector(`#${id}`);
     if (!el) return false;
@@ -70,10 +76,11 @@ export function AboutSection() {
       if (!scrollToId(id)) setTimeout(tryScroll, 50);
     };
 
-    if (currentPage === route) {
+    if (routeInfo.page === route) {
       tryScroll();
     } else {
-      navigateTo(route);
+      const path = buildLocalizedPath(activeLocale, route, { includeLocalePrefix });
+      navigate(path);
       requestAnimationFrame(tryScroll);
     }
   };

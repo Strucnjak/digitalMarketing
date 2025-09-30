@@ -1,0 +1,24 @@
+{
+  "en": {
+    "home": "",
+    "services": "services",
+    "web-design": "web-design",
+    "seo": "seo",
+    "social-media": "social-media",
+    "branding": "branding",
+    "strategy": "strategy",
+    "service-inquiry": "service-inquiry",
+    "free-consultation": "free-consultation"
+  },
+  "me": {
+    "home": "",
+    "services": "usluge",
+    "web-design": "veb-dizajn",
+    "seo": "seo",
+    "social-media": "drustvene-mreze",
+    "branding": "brending",
+    "strategy": "strategija",
+    "service-inquiry": "upit-za-uslugu",
+    "free-consultation": "besplatna-konsultacija"
+  }
+}

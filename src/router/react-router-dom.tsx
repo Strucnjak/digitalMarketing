@@ -192,6 +192,13 @@ interface RouteNode {
   children?: RouteNode[];
 }
 
+export interface RouteObject {
+  path?: string;
+  index?: boolean;
+  element?: ReactNode;
+  children?: RouteObject[];
+}
+
 interface RouteMatch {
   node: RouteNode;
   params: Record<string, string>;
@@ -216,6 +223,15 @@ function createRoutesFromChildren(children?: ReactNode): RouteNode[] {
   });
 
   return routes;
+}
+
+function createRoutesFromObjects(objects: RouteObject[] = []): RouteNode[] {
+  return objects.map((object) => ({
+    path: object.path,
+    index: object.index,
+    element: object.element,
+    children: createRoutesFromObjects(object.children),
+  }));
 }
 
 function matchRoutes(routes: RouteNode[], pathname: string): RouteMatch[] | null {
@@ -348,6 +364,21 @@ function renderMatches(matches: RouteMatch[], index = 0): ReactNode {
 export function Routes({ children }: { children?: ReactNode }) {
   const router = useRouterContext();
   const routes = useMemo(() => createRoutesFromChildren(children), [children]);
+  const matches = useMemo(
+    () => matchRoutes(routes, router.location.pathname),
+    [routes, router.location.pathname]
+  );
+
+  if (!matches) {
+    return null;
+  }
+
+  return <>{renderMatches(matches)}</>;
+}
+
+export function useRoutes(routeObjects: RouteObject[]): ReactNode {
+  const router = useRouterContext();
+  const routes = useMemo(() => createRoutesFromObjects(routeObjects), [routeObjects]);
   const matches = useMemo(
     () => matchRoutes(routes, router.location.pathname),
     [routes, router.location.pathname]

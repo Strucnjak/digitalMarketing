@@ -2,12 +2,19 @@ import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
 import { ArrowRight, CheckCircle, Star, Users, Award } from "lucide-react";
 import { useLanguage } from "./LanguageContext";
-import { useRouter } from "./Router";
+import { useNavigate, useParams } from "react-router-dom";
+import { buildLocalizedPath, defaultLocale, type Locale, isLocale } from "../routing";
+import { useRouteInfo } from "../hooks/useRouteInfo";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 
 export function HeroSection() {
   const { t: _t } = useLanguage();
-  const { navigateTo } = useRouter();
+  const navigate = useNavigate();
+  const routeInfo = useRouteInfo();
+  const params = useParams<{ locale?: string }>();
+  const routeLocale = isLocale(params.locale) ? params.locale : undefined;
+  const activeLocale: Locale = routeLocale ?? routeInfo.locale;
+  const includeLocalePrefix = routeLocale != null || activeLocale !== defaultLocale;
 
   const stats = [
     { icon: Users, value: "100+", label: _t("hero.stats.clients") },
@@ -17,7 +24,8 @@ export function HeroSection() {
   ];
 
   const handleGetStarted = () => {
-    navigateTo("service-inquiry");
+    const path = buildLocalizedPath(activeLocale, "service-inquiry", { includeLocalePrefix });
+    navigate(path);
   };
 
   const handleViewPortfolio = () => {

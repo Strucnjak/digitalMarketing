@@ -1,18 +1,27 @@
 import { useState, useEffect, useRef } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "./ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle, SheetDescription } from "./ui/sheet";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { useLanguage } from "./LanguageContext";
 import {
-  useRouter,
-  type PageType,
+  buildLocalizedPath,
+  defaultLocale,
   servicePageIds,
+  isLocale,
   type Locale,
-} from "./Router";
+  type PageType,
+} from "../routing";
+import { useRouteInfo } from "../hooks/useRouteInfo";
 
 export function Navigation() {
   const { language, setLanguage, t: _t } = useLanguage();
-  const { currentPage, navigateTo } = useRouter();
+  const navigate = useNavigate();
+  const routeInfo = useRouteInfo();
+  const params = useParams<{ locale?: string }>();
+  const routeLocale = isLocale(params.locale) ? params.locale : undefined;
+  const activeLocale: Locale = routeLocale ?? routeInfo.locale ?? (language as Locale);
+  const includeLocalePrefix = routeLocale != null || activeLocale !== defaultLocale;
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
@@ -67,18 +76,21 @@ export function Navigation() {
   ];
 
   const handleServiceClick = (serviceId: PageType) => {
-    navigateTo(serviceId as PageType);
+    const path = buildLocalizedPath(activeLocale, serviceId, { includeLocalePrefix });
+    navigate(path);
     setIsOpen(false);
     setServicesOpen(false);
   };
 
   const handleHomeClick = () => {
-    navigateTo("home");
+    const path = buildLocalizedPath(activeLocale, "home", { includeLocalePrefix });
+    navigate(path);
     setIsOpen(false);
   };
 
   const handleContactClick = () => {
-    navigateTo("home");
+    const path = buildLocalizedPath(activeLocale, "home", { includeLocalePrefix });
+    navigate(path);
     setIsOpen(false);
     setTimeout(() => {
       const element = document.querySelector("#contact");
@@ -88,9 +100,17 @@ export function Navigation() {
 
   const handleLanguageChange = (newLanguage: "en" | "me") => {
     const targetLocale = newLanguage as Locale;
-    navigateTo(currentPage, undefined, { locale: targetLocale, replace: true });
+    const path = buildLocalizedPath(targetLocale, routeInfo.page, {
+      includeLocalePrefix: targetLocale !== defaultLocale || routeLocale != null,
+    });
+    navigate(path, { replace: true });
     setLanguage(newLanguage);
     setIsOpen(false);
+  };
+
+  const navigateToFreeConsultation = () => {
+    const path = buildLocalizedPath(activeLocale, "free-consultation", { includeLocalePrefix });
+    navigate(path);
   };
 
   const handleServicesMouseEnter = () => {
@@ -171,18 +191,22 @@ export function Navigation() {
           <div className="hidden lg:flex items-center space-x-8">
             <button
               onClick={handleHomeClick}
-              className={`text-sm font-medium transition-colors duration-300 hover:text-bdigital-cyan ${
-                currentPage === "home" ? "text-bdigital-cyan" : isScrolled ? "text-bdigital-navy" : "text-white"
-              }`}
-            >
-              {_t("nav.home")}
-            </button>
+                className={`text-sm font-medium transition-colors duration-300 hover:text-bdigital-cyan ${
+                  routeInfo.page === "home"
+                    ? "text-bdigital-cyan"
+                    : isScrolled
+                      ? "text-bdigital-navy"
+                      : "text-white"
+                }`}
+              >
+                {_t("nav.home")}
+              </button>
 
             {/* Services Dropdown */}
             <div ref={dropdownRef} className="relative" onMouseEnter={handleServicesMouseEnter} onMouseLeave={handleServicesMouseLeave}>
               <button
                 className={`flex items-center space-x-1 text-sm font-medium transition-colors duration-300 hover:text-bdigital-cyan py-2 ${
-                  servicePageIds.includes(currentPage as (typeof servicePageIds)[number])
+                  servicePageIds.includes(routeInfo.page as (typeof servicePageIds)[number])
                     ? "text-bdigital-cyan"
                     : isScrolled
                       ? "text-bdigital-navy"
@@ -256,7 +280,7 @@ export function Navigation() {
 
             {/* CTA Button - now links to free consultation */}
             <Button
-              onClick={() => navigateTo("free-consultation")}
+              onClick={navigateToFreeConsultation}
               className="bg-bdigital-cyan text-bdigital-navy hover:bg-bdigital-cyan-light font-semibold px-6 py-2 text-sm shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
             >
               {_t("web.cta.primary")}
@@ -301,7 +325,7 @@ export function Navigation() {
                     <button
                       onClick={handleHomeClick}
                       className={`w-full text-left px-4 py-3 text-base font-medium rounded-lg transition-all duration-200 ${
-                        currentPage === "home" ? "bg-bdigital-cyan text-bdigital-navy" : "text-bdigital-navy hover:bg-gray-50"
+                        routeInfo.page === "home" ? "bg-bdigital-cyan text-bdigital-navy" : "text-bdigital-navy hover:bg-gray-50"
                       }`}
                     >
                       {_t("nav.home")}
@@ -325,7 +349,7 @@ export function Navigation() {
                               key={service.id}
                               onClick={() => handleServiceClick(service.id as PageType)}
                               className={`w-full text-left px-4 py-3 text-sm rounded-lg transition-all duration-200 ${
-                                currentPage === service.id
+                                routeInfo.page === service.id
                                   ? "bg-bdigital-cyan text-bdigital-navy"
                                   : "text-neutral-gray hover:bg-gray-50 hover:text-bdigital-navy"
                               }`}
@@ -372,7 +396,7 @@ export function Navigation() {
                     {/* CTA Button - now links to free consultation */}
                     <Button
                       onClick={() => {
-                        navigateTo("free-consultation");
+                        navigateToFreeConsultation();
                         setIsOpen(false);
                       }}
                       className="w-full bg-bdigital-cyan text-bdigital-navy hover:bg-bdigital-cyan-light font-semibold py-3 text-sm shadow-lg transition-all duration-300"

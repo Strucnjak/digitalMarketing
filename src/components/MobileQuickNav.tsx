@@ -1,9 +1,11 @@
 import { useState, useEffect, useMemo } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { useLanguage } from "./LanguageContext";
-import { useRouter } from "./Router";
 import { Menu, X, Home, Briefcase, FolderOpen, Users, MessageSquare, Phone, ArrowUp } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { smoothScroll } from "../utils/smoothScroll";
+import { buildLocalizedPath, defaultLocale, isLocale, type Locale } from "../routing";
+import { useRouteInfo } from "../hooks/useRouteInfo";
 
 interface MobileQuickNavProps {
   onSectionClick?: (sectionId: string) => void;
@@ -34,7 +36,12 @@ export function MobileQuickNav({ onSectionClick }: MobileQuickNavProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
   const { language } = useLanguage();
-  const { currentPage, navigateTo } = useRouter();
+  const navigate = useNavigate();
+  const routeInfo = useRouteInfo();
+  const params = useParams<{ locale?: string }>();
+  const routeLocale = isLocale(params.locale) ? params.locale : undefined;
+  const activeLocale: Locale = routeLocale ?? routeInfo.locale ?? (language as Locale);
+  const includeLocalePrefix = routeLocale != null || activeLocale !== defaultLocale;
   const isMobile = useIsMobile();
 
   const translations: Record<
@@ -139,8 +146,9 @@ export function MobileQuickNav({ onSectionClick }: MobileQuickNavProps) {
   }
 
   const handleSectionClick = async (sectionId: string) => {
-    if (currentPage !== "home") {
-      navigateTo("home");
+    if (routeInfo.page !== "home") {
+      const path = buildLocalizedPath(activeLocale, "home", { includeLocalePrefix });
+      navigate(path);
       const el = await waitForElement(sectionId, 2000);
       if (el) {
         smoothScroll(el, { offset: HEADER_OFFSET_PX, prefersReducedMotion });

@@ -1,4 +1,5 @@
-import { Navigate, Outlet, Route, Routes, useParams } from "react-router-dom";
+import type { ReactElement } from "react";
+import { Navigate, Outlet, useLocation, useParams, useRoutes, type RouteObject } from "react-router-dom";
 import { LanguageProvider } from "./components/LanguageContext";
 import { Navigation } from "./components/Navigation";
 import { HeroSection } from "./components/HeroSection";
@@ -16,12 +17,13 @@ import { StrategyPage } from "./components/services/StrategyPage";
 import { ServiceInquiryForm } from "./components/ServiceInquiryForm";
 import { FreeConsultationPage } from "./components/FreeConsultationPage";
 import { MobileQuickNav } from "./components/MobileQuickNav";
-import { useRouter } from "./components/Router";
 import {
-  buildPath,
+  buildLocalizedPath,
   defaultLocale,
+  getRoutePattern,
   isLocale,
-  type Locale,
+  parsePathname,
+  type PageType,
 } from "./routing";
 import "./styles/mobile-quick-nav.css";
 
@@ -51,8 +53,8 @@ function HomePage() {
 }
 
 function AppLayout() {
-  const { currentPage } = useRouter();
-  const isHome = currentPage === "home";
+  const location = useLocation();
+  const isHome = parsePathname(location.pathname).page === "home";
 
   return (
     <div className="min-h-screen bg-white">
@@ -66,56 +68,73 @@ function AppLayout() {
   );
 }
 
-function LocaleBoundary({ locale }: { locale: Locale }) {
+function LocalizedLayout() {
+  const params = useParams<{ locale?: string }>();
+  const location = useLocation();
+  const parsed = parsePathname(location.pathname);
+  const routeLocale = isLocale(params.locale) ? params.locale : undefined;
+  const initialLanguage = routeLocale ?? parsed.locale ?? defaultLocale;
+
   return (
-    <LanguageProvider initialLanguage={locale}>
+    <LanguageProvider initialLanguage={initialLanguage} localeFromRoute={routeLocale}>
       <AppLayout />
     </LanguageProvider>
   );
 }
 
-function LocaleRouteBoundary() {
-  const params = useParams<Record<string, string>>();
-  const paramLocale = params.locale;
-  const locale = isLocale(paramLocale) ? paramLocale : defaultLocale;
-  return <LocaleBoundary locale={locale} />;
+const pageElements: Record<PageType, ReactElement> = {
+  home: <HomePage />,
+  "web-design": <WebDesignPage />,
+  seo: <SEOPage />,
+  "social-media": <SocialMediaPage />,
+  branding: <BrandingPage />,
+  strategy: <StrategyPage />,
+  "service-inquiry": <ServiceInquiryForm />,
+  "free-consultation": <FreeConsultationPage />,
+};
+
+function createChildRoutes(): RouteObject[] {
+  const routes: RouteObject[] = [
+    { index: true, element: pageElements.home },
+    { path: ":homeSlug(home)", element: pageElements.home },
+  ];
+
+  (Object.keys(pageElements) as PageType[]).forEach((page) => {
+    if (page === "home") {
+      return;
+    }
+    const pattern = getRoutePattern(page);
+    if (pattern) {
+      routes.push({ path: pattern, element: pageElements[page] });
+    }
+  });
+
+  return routes;
 }
 
-function DefaultLocaleBoundary() {
-  return <LocaleBoundary locale={defaultLocale} />;
-}
+const localizedChildren = createChildRoutes();
+
+export const appRouteObjects: RouteObject[] = [
+  {
+    path: "/",
+    element: <LocalizedLayout />,
+    children: localizedChildren,
+  },
+  {
+    path: "/:locale(en|me)",
+    element: <LocalizedLayout />,
+    children: localizedChildren,
+  },
+  {
+    path: "*",
+    element: (
+      <Navigate to={buildLocalizedPath(defaultLocale, "home", { includeLocalePrefix: false })} replace />
+    ),
+  },
+];
 
 export function AppRoutes() {
-  return (
-    <Routes>
-      <Route element={<DefaultLocaleBoundary />}>
-        <Route index element={<HomePage />} />
-        <Route path="home" element={<HomePage />} />
-        <Route path="web-design" element={<WebDesignPage />} />
-        <Route path="seo" element={<SEOPage />} />
-        <Route path="social-media" element={<SocialMediaPage />} />
-        <Route path="branding" element={<BrandingPage />} />
-        <Route path="strategy" element={<StrategyPage />} />
-        <Route path="service-inquiry" element={<ServiceInquiryForm />} />
-        <Route path="free-consultation" element={<FreeConsultationPage />} />
-      </Route>
-      <Route path=":locale(en|me)" element={<LocaleRouteBoundary />}>
-        <Route index element={<HomePage />} />
-        <Route path="home" element={<HomePage />} />
-        <Route path="web-design" element={<WebDesignPage />} />
-        <Route path="seo" element={<SEOPage />} />
-        <Route path="social-media" element={<SocialMediaPage />} />
-        <Route path="branding" element={<BrandingPage />} />
-        <Route path="strategy" element={<StrategyPage />} />
-        <Route path="service-inquiry" element={<ServiceInquiryForm />} />
-        <Route path="free-consultation" element={<FreeConsultationPage />} />
-      </Route>
-      <Route
-        path="*"
-        element={<Navigate to={buildPath("home", defaultLocale, { includeLocalePrefix: false })} replace />}
-      />
-    </Routes>
-  );
+  return useRoutes(appRouteObjects);
 }
 
 export default AppRoutes;
