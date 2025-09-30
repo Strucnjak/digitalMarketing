@@ -22,6 +22,9 @@ import { SITE_BASE_URL } from "./config/site";
 import {
   STRUCTURED_DATA_ELEMENT_ID,
   buildCanonicalCluster,
+  buildBreadcrumbListJsonLd,
+  buildOrganizationJsonLd,
+  buildWebsiteJsonLd,
   buildWebPageJsonLd,
   serializeJsonLd,
 } from "./utils/seo";
@@ -109,12 +112,30 @@ function SeoMetadataUpdater() {
       }
     }
 
-    const structuredData = buildWebPageJsonLd({
-      locale,
-      title,
-      description,
-      url: canonicalCluster?.canonical ?? canonicalUrl,
-    });
+    const structuredData = [
+      buildWebPageJsonLd({
+        locale,
+        title,
+        description,
+        url: canonicalUrl,
+      }),
+      buildOrganizationJsonLd({
+        locale,
+        siteBaseUrl: SITE_BASE_URL,
+        logoPath: "/logo.svg",
+      }),
+      buildWebsiteJsonLd({
+        locale,
+        siteBaseUrl: SITE_BASE_URL,
+      }),
+      buildBreadcrumbListJsonLd({
+        locale,
+        page: parsed.page,
+        siteBaseUrl: SITE_BASE_URL,
+        canonicalUrl,
+        pageTitle: title,
+      }),
+    ];
 
     let structuredDataTag = document.getElementById(
       STRUCTURED_DATA_ELEMENT_ID,

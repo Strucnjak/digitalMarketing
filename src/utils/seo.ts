@@ -1,6 +1,8 @@
 import {
   buildLocalizedPath,
   defaultLocale,
+  getPageSegments,
+  parsePathname,
   locales,
   type Locale,
   type PageType,
@@ -32,6 +34,42 @@ export interface WebPageJsonLdOptions {
 }
 
 export const STRUCTURED_DATA_ELEMENT_ID = "seo-structured-data";
+
+const ORGANIZATION_NAMES: Record<Locale, string> = {
+  en: "BDigital Agency",
+  me: "BDigital agencija",
+};
+
+const HOME_BREADCRUMB_LABELS: Record<Locale, string> = {
+  en: "Home",
+  me: "Početna",
+};
+
+export const ORGANIZATION_SOCIAL_LINKS = [
+  "https://www.facebook.com/BDigitalAgency",
+  "https://www.instagram.com/bdigitalagency",
+  "https://www.linkedin.com/company/bdigital-agency",
+];
+
+export interface BuildOrganizationJsonLdOptions {
+  locale: Locale;
+  siteBaseUrl: string;
+  logoPath: string;
+  socialProfiles?: string[];
+}
+
+export interface BuildWebsiteJsonLdOptions {
+  locale: Locale;
+  siteBaseUrl: string;
+}
+
+export interface BuildBreadcrumbListJsonLdOptions {
+  locale: Locale;
+  page: PageType;
+  siteBaseUrl: string;
+  canonicalUrl: string;
+  pageTitle: string;
+}
 
 export function buildCanonicalCluster({
   currentUrl,
@@ -89,6 +127,133 @@ export function buildWebPageJsonLd({
   };
 }
 
+export function buildOrganizationJsonLd({
+  locale,
+  siteBaseUrl,
+  logoPath,
+  socialProfiles = ORGANIZATION_SOCIAL_LINKS,
+}: BuildOrganizationJsonLdOptions) {
+  const base = normalizeSiteBase(siteBaseUrl);
+  const organizationName = ORGANIZATION_NAMES[locale] ?? ORGANIZATION_NAMES[defaultLocale];
+  const logoUrl = new URL(logoPath, base).href;
+  const sameAs = socialProfiles.filter((profile) => profile && profile.trim().length > 0);
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    inLanguage: locale,
+    name: organizationName,
+    url: base.href,
+    logo: logoUrl,
+    ...(sameAs.length ? { sameAs } : {}),
+  };
+}
+
+export function buildWebsiteJsonLd({
+  locale,
+  siteBaseUrl,
+}: BuildWebsiteJsonLdOptions) {
+  const base = normalizeSiteBase(siteBaseUrl);
+  const homePath = buildLocalizedPath(locale, "home", {
+    includeLocalePrefix: locale !== defaultLocale,
+  });
+  const homeUrl = new URL(homePath || "/", base).href;
+  const searchQueryDelimiter = homeUrl.includes("?") ? "&" : "?";
+  const localeQuery = locale !== defaultLocale ? `&lang=${locale}` : "";
+  const searchTarget = `${homeUrl}${searchQueryDelimiter}s={search_term_string}${localeQuery}`;
+  const name = ORGANIZATION_NAMES[locale] ?? ORGANIZATION_NAMES[defaultLocale];
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    inLanguage: locale,
+    name,
+    url: homeUrl,
+    potentialAction: {
+      "@type": "SearchAction",
+      target: searchTarget,
+      "query-input": "required name=search_term_string",
+    },
+  };
+}
+
+export function buildBreadcrumbListJsonLd({
+  locale,
+  page,
+  siteBaseUrl,
+  canonicalUrl,
+  pageTitle,
+}: BuildBreadcrumbListJsonLdOptions) {
+  const base = normalizeSiteBase(siteBaseUrl);
+  const canonical = new URL(canonicalUrl, base);
+  const localizedSegments = getPageSegments(locale, page).filter((segment) => segment.length > 0);
+  const canonicalSegments = canonical.pathname
+    .split("/")
+    .map((segment) => segment.trim())
+    .filter((segment) => segment.length > 0);
+  const localePrefixSegments = canonicalSegments.slice(
+    0,
+    Math.max(0, canonicalSegments.length - localizedSegments.length),
+  );
+
+  const items: Array<{
+    "@type": "ListItem";
+    position: number;
+    name: string;
+    item: string;
+  }> = [];
+
+  const homeName = HOME_BREADCRUMB_LABELS[locale] ?? HOME_BREADCRUMB_LABELS[defaultLocale];
+  const homePath = localePrefixSegments.length ? `/${localePrefixSegments.join("/")}` : "/";
+  const homeUrl = new URL(homePath, base).href;
+  items.push({
+    "@type": "ListItem",
+    position: items.length + 1,
+    name: homeName,
+    item: homeUrl,
+  });
+
+  if (!localizedSegments.length) {
+    return {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      inLanguage: locale,
+      itemListElement: items,
+    };
+  }
+
+  const accumulatedSegments: string[] = [];
+  for (const [index, segment] of localizedSegments.entries()) {
+    accumulatedSegments.push(segment);
+    const isLast = index === localizedSegments.length - 1;
+    const pathSegments = [...localePrefixSegments, ...accumulatedSegments];
+    const path = `/${pathSegments.join("/")}`;
+    const parsedPartial = parsePathname(path);
+    const expectedPath = buildLocalizedPath(parsedPartial.locale, parsedPartial.page, {
+      includeLocalePrefix: parsedPartial.hasLocalePrefix,
+    });
+
+    if (!isLast && expectedPath !== path) {
+      continue;
+    }
+
+    const itemUrl = isLast ? canonical.href : new URL(path, base).href;
+    items.push({
+      "@type": "ListItem",
+      position: items.length + 1,
+      name: isLast ? pageTitle : formatBreadcrumbSegment(segment, locale),
+      item: itemUrl,
+    });
+  }
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    inLanguage: locale,
+    itemListElement: items,
+  };
+}
+
 export function serializeJsonLd(data: unknown): string {
   return JSON.stringify(data)
     .replace(/</g, "\\u003c")
@@ -131,4 +296,16 @@ function dedupeAlternates(alternates: AlternateHref[]): AlternateHref[] {
     });
   }
   return result;
+}
+
+function formatBreadcrumbSegment(segment: string, locale: Locale): string {
+  const decoded = decodeURIComponent(segment);
+  return decoded
+    .split("-")
+    .map((part) =>
+      part.length > 0
+        ? part.charAt(0).toLocaleUpperCase(locale) + part.slice(1)
+        : part,
+    )
+    .join(" ");
 }

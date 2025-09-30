@@ -8,6 +8,9 @@ import { locales, parsePathname } from "./routing";
 import {
   STRUCTURED_DATA_ELEMENT_ID,
   buildCanonicalCluster,
+  buildBreadcrumbListJsonLd,
+  buildOrganizationJsonLd,
+  buildWebsiteJsonLd,
   buildWebPageJsonLd,
   serializeJsonLd,
 } from "./utils/seo";
@@ -58,12 +61,30 @@ export function render(url: string, options: RenderOptions = {}): RenderResult {
 
   const metadata = getSeoMetadata(locale, page);
 
-  const structuredData = buildWebPageJsonLd({
-    locale,
-    title: metadata.title,
-    description: metadata.description,
-    url: canonicalCluster.canonical,
-  });
+  const structuredData = [
+    buildWebPageJsonLd({
+      locale,
+      title: metadata.title,
+      description: metadata.description,
+      url: canonicalCluster.canonical,
+    }),
+    buildOrganizationJsonLd({
+      locale,
+      siteBaseUrl: SITE_BASE_URL,
+      logoPath: "/logo.svg",
+    }),
+    buildWebsiteJsonLd({
+      locale,
+      siteBaseUrl: SITE_BASE_URL,
+    }),
+    buildBreadcrumbListJsonLd({
+      locale,
+      page,
+      siteBaseUrl: SITE_BASE_URL,
+      canonicalUrl: canonicalCluster.canonical,
+      pageTitle: metadata.title,
+    }),
+  ];
 
   const jsonLdScript = `<script id="${STRUCTURED_DATA_ELEMENT_ID}" type="application/ld+json">${serializeJsonLd(
     structuredData,
