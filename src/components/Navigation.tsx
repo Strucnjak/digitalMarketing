@@ -3,7 +3,12 @@ import { Button } from "./ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle, SheetDescription } from "./ui/sheet";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { useLanguage } from "./LanguageContext";
-import { useRouter, type PageType, servicePageIds } from "./Router";
+import {
+  useRouter,
+  type PageType,
+  servicePageIds,
+  type Locale,
+} from "./Router";
 
 export function Navigation() {
   const { language, setLanguage, t: _t } = useLanguage();
@@ -89,6 +94,8 @@ export function Navigation() {
   };
 
   const handleLanguageChange = (newLanguage: "en" | "me") => {
+    const targetLocale = newLanguage as Locale;
+    navigateTo(currentPage, undefined, { locale: targetLocale, replace: true });
     setLanguage(newLanguage);
     setIsOpen(false);
   };

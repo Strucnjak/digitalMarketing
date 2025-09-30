@@ -1,7 +1,9 @@
-import { createContext, useContext, useState, useEffect } from 'react';
-import type { ReactNode } from 'react';
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import type { ReactNode } from "react";
+import en from "../locales/en.json";
+import me from "../locales/me.json";
 
-export type Language = 'en' | 'me';
+export type Language = "en" | "me";
 
 interface LanguageContextType {
   language: Language;
@@ -11,37 +13,51 @@ interface LanguageContextType {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
+const TRANSLATIONS: Record<Language, Record<string, string>> = {
+  en,
+  me,
+};
+
 interface LanguageProviderProps {
   children: ReactNode;
-  initialLanguage?: Language;
+  initialLanguage?: Language; // can be provided by SSR
+}
+
+function getStoredLanguage(): Language | null {
+  if (typeof window === "undefined") return null;
+  const stored = window.localStorage.getItem("language");
+  return stored === "en" || stored === "me" ? stored : null;
 }
 
 export function LanguageProvider({ children, initialLanguage }: LanguageProviderProps) {
-  const [language, setLanguage] = useState<Language>(() => {
-    if (typeof window === 'undefined') {
-      return initialLanguage ?? 'me';
-    }
-    const storedLanguage = window.localStorage.getItem('language') as Language | null;
-    return storedLanguage ?? initialLanguage ?? 'me';
+  // Prefer SSR-provided initialLanguage, then localStorage (client), then default "me"
+  const [language, setLanguageState] = useState<Language>(() => {
+    return initialLanguage ?? getStoredLanguage() ?? "me";
   });
-  const [translations, setTranslations] = useState<Record<string, string>>({});
 
+  // If the server later provides a different initialLanguage (route change), sync it
   useEffect(() => {
-    import(`../locales/${language}.json`).then((mod) => {
-      setTranslations(mod.default);
-    });
-  }, [language]);
-
-  useEffect(() => {
-    if (typeof window === 'undefined') {
-      return;
+    if (initialLanguage && initialLanguage !== language) {
+      setLanguageState(initialLanguage);
     }
-    window.localStorage.setItem('language', language);
+  }, [initialLanguage, language]);
+
+  // Persist selection in the browser
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      window.localStorage.setItem("language", language);
+    }
   }, [language]);
 
-  const t = (key: string): string => {
-    return translations[key] ?? key;
+  const translations = useMemo(() => TRANSLATIONS[language], [language]);
+
+  const setLanguage = (lang: Language) => {
+    setLanguageState(lang);
   };
+
+  const t = useMemo<(key: string) => string>(() => {
+    return (key: string) => translations[key] ?? key;
+  }, [translations]);
 
   return (
     <LanguageContext.Provider value={{ language, setLanguage, t }}>
@@ -54,7 +70,7 @@ export function LanguageProvider({ children, initialLanguage }: LanguageProvider
 export function useLanguage() {
   const context = useContext(LanguageContext);
   if (context === undefined) {
-    throw new Error('useLanguage must be used within a LanguageProvider');
+    throw new Error("useLanguage must be used within a LanguageProvider");
   }
   return context;
 }

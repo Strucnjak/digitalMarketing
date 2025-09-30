@@ -5,7 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && npm run build:client && npm run build:ssr && npm run ssg",
+    "build:client": "vite build --outDir dist/client --ssrManifest",
+    "build:ssr": "vite build --ssr src/entry-server.tsx --outDir dist/server && tsc --project tsconfig.server.json",
+    "ssr:serve": "NODE_ENV=production node dist/server/server.js",
+    "ssg": "node dist/server/scripts/prerender.js",
     "lint": "eslint .",
     "preview": "vite preview"
   },
@@ -34,6 +38,7 @@
     "react": "^19.1.0",
     "react-day-picker": "^9.8.1",
     "react-dom": "^19.1.0",
+    "react-router-dom": "file:src/router",
     "react-hook-form": "^7.61.1",
     "react-resizable-panels": "^3.0.3",
     "recharts": "^3.1.0",
