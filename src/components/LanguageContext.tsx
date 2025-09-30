@@ -11,11 +11,19 @@ interface LanguageContextType {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
+interface LanguageProviderProps {
+  children: ReactNode;
+  initialLanguage?: Language;
+}
 
-export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguage] = useState<Language>(
-    (localStorage.getItem('language') as Language) || 'me'
-  );
+export function LanguageProvider({ children, initialLanguage }: LanguageProviderProps) {
+  const [language, setLanguage] = useState<Language>(() => {
+    if (typeof window === 'undefined') {
+      return initialLanguage ?? 'me';
+    }
+    const storedLanguage = window.localStorage.getItem('language') as Language | null;
+    return storedLanguage ?? initialLanguage ?? 'me';
+  });
   const [translations, setTranslations] = useState<Record<string, string>>({});
 
   useEffect(() => {
@@ -25,7 +33,10 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   }, [language]);
 
   useEffect(() => {
-    localStorage.setItem('language', language);
+    if (typeof window === 'undefined') {
+      return;
+    }
+    window.localStorage.setItem('language', language);
   }, [language]);
 
   const t = (key: string): string => {

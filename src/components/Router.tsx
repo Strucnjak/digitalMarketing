@@ -48,17 +48,19 @@ export function RouterProvider({ children }: RouterProviderProps) {
     }
   };
 
-  const [currentPage, setCurrentPage] = useState<PageType>(() =>
-    getPageFromPath(window.location.pathname)
-  );
+  const [currentPage, setCurrentPage] = useState<PageType>('home');
 
   const navigateTo = (page: PageType, params?: Record<string, string>) => {
     setCurrentPage(page);
-    
+
+    if (typeof window === 'undefined') {
+      return;
+    }
+
     // Update URL without page reload
     const url = new URL(window.location.href);
     url.pathname = page === 'home' ? '/' : `/${page}`;
-    
+
     // Clear existing params and add new ones
     url.search = '';
     if (params) {
@@ -66,13 +68,25 @@ export function RouterProvider({ children }: RouterProviderProps) {
         url.searchParams.set(key, value);
       });
     }
-    
-    window.history.pushState({}, '', url.toString());
+
+    if (typeof window.history?.pushState === 'function') {
+      window.history.pushState({}, '', url.toString());
+    }
   };
 
   useEffect(() => {
-    const handlePopState = () => {
+    if (typeof window === 'undefined') {
+      return;
+    }
+
+    const syncCurrentPage = () => {
       setCurrentPage(getPageFromPath(window.location.pathname));
+    };
+
+    syncCurrentPage();
+
+    const handlePopState = () => {
+      syncCurrentPage();
     };
     window.addEventListener('popstate', handlePopState);
     return () => {
@@ -81,6 +95,9 @@ export function RouterProvider({ children }: RouterProviderProps) {
   }, []);
 
   const getQueryParams = () => {
+    if (typeof window === 'undefined') {
+      return new URLSearchParams();
+    }
     return new URLSearchParams(window.location.search);
   };
 

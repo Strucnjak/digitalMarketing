@@ -11,6 +11,14 @@ export function useActiveSection(sectionIds: string[], offset: number = 0) {
   const [activeId, setActiveId] = useState<string | null>(null);
 
   useEffect(() => {
+    if (typeof window === "undefined" || typeof document === "undefined") {
+      return;
+    }
+
+    if (typeof IntersectionObserver === "undefined") {
+      return;
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {

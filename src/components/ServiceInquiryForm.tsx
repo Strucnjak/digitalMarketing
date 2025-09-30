@@ -12,6 +12,29 @@ import { Step2 } from "./serviceInquirySteps/Step2";
 import { Step3 } from "./serviceInquirySteps/Step3";
 import { Step4 } from "./serviceInquirySteps/Step4";
 
+const browserStorage = {
+  getItem(key: string) {
+    if (typeof window === "undefined") {
+      return null;
+    }
+    try {
+      return window.localStorage.getItem(key);
+    } catch {
+      return null;
+    }
+  },
+  removeItem(key: string) {
+    if (typeof window === "undefined") {
+      return;
+    }
+    try {
+      window.localStorage.removeItem(key);
+    } catch {
+      // Ignore storage errors in non-browser environments
+    }
+  },
+};
+
 export interface InquiryFormData {
   // Contact Information
   fullName: string;
@@ -45,7 +68,14 @@ export interface InquiryFormData {
   howDidYouHear: string;
   newsletter: boolean;
 }
-export function ServiceInquiryForm() {
+export interface ServiceInquiryFormProps {
+  initialSelections?: {
+    service?: string;
+    package?: string;
+  };
+}
+
+export function ServiceInquiryForm({ initialSelections }: ServiceInquiryFormProps = {}) {
   const { navigateTo } = useRouter();
   const { t, language } = useLanguage();
   const [currentStep, setCurrentStep] = useState(1);
@@ -61,14 +91,17 @@ export function ServiceInquiryForm() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitError, setSubmitError] = useState<string | null>(null);
 
+  const initialService = initialSelections?.service ?? "";
+  const initialPackage = initialSelections?.package ?? "";
+
   const [formData, setFormData] = useState<InquiryFormData>({
     fullName: "",
     email: "",
     phone: "",
     company: "",
     website: "",
-    selectedService: "",
-    selectedPackage: "",
+    selectedService: initialService,
+    selectedPackage: initialPackage,
     projectTypes: [],
     currentSituation: "",
     projectGoals: "",
@@ -91,18 +124,40 @@ export function ServiceInquiryForm() {
 
   // Get service and package from URL params or local storage
   useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
     const urlParams = new URLSearchParams(window.location.search);
-    const service = urlParams.get("service") || localStorage.getItem("selectedService") || "";
-    const packageName = urlParams.get("package") || localStorage.getItem("selectedPackage") || "";
+    const service =
+      urlParams.get("service") ??
+      browserStorage.getItem("selectedService") ??
+      initialService;
+    const packageName =
+      urlParams.get("package") ??
+      browserStorage.getItem("selectedPackage") ??
+      initialPackage;
 
     if (service || packageName) {
       setFormData((prev) => ({
         ...prev,
-        selectedService: service,
-        selectedPackage: packageName,
+        selectedService: service || prev.selectedService,
+        selectedPackage: packageName || prev.selectedPackage,
       }));
     }
-  }, []);
+  }, [initialService, initialPackage]);
+
+  useEffect(() => {
+    if (!initialService && !initialPackage) {
+      return;
+    }
+
+    setFormData((prev) => ({
+      ...prev,
+      selectedService: initialService || prev.selectedService,
+      selectedPackage: initialPackage || prev.selectedPackage,
+    }));
+  }, [initialService, initialPackage]);
 
   const [touched, setTouched] = useState<Record<string, boolean>>({});
 
@@ -217,8 +272,8 @@ export function ServiceInquiryForm() {
       setIsSubmitted(true);
 
       // Clear stored service/package info
-      localStorage.removeItem("selectedService");
-      localStorage.removeItem("selectedPackage");
+      browserStorage.removeItem("selectedService");
+      browserStorage.removeItem("selectedPackage");
     } catch (err) {
       const message = err instanceof Error ? err.message : "Failed to submit inquiry";
       setSubmitError(message);
