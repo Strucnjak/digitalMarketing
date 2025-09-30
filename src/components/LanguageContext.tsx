@@ -67,6 +67,12 @@ export function LanguageProvider({
     }
   }, [language]);
 
+  useEffect(() => {
+    if (typeof document !== "undefined") {
+      document.documentElement.lang = language;
+    }
+  }, [language]);
+
   const translations = useMemo(() => TRANSLATIONS[language], [language]);
 
   const setLanguage = (lang: Language) => {
