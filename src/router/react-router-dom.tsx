@@ -2,9 +2,11 @@ import {
   Children,
   createContext,
   isValidElement,
+  useCallback,
   useContext,
   useEffect,
   useMemo,
+  useRef,
   useSyncExternalStore,
   type ReactNode,
 } from "react";
@@ -93,11 +95,25 @@ export function BrowserRouter({ children }: { children?: ReactNode }) {
     throw new Error("BrowserRouter can only be used in the browser");
   }
 
+  const initialLocationRef = useRef<Location | null>(null);
+  if (initialLocationRef.current === null) {
+    initialLocationRef.current = createBrowserLocation();
+  }
+
+  const getServerSnapshot = useCallback(
+    () => initialLocationRef.current as Location,
+    []
+  );
+
   const location = useSyncExternalStore(
     subscribeToHistory,
     createBrowserLocation,
-    createBrowserLocation
+    getServerSnapshot
   );
+
+  useEffect(() => {
+    initialLocationRef.current = location;
+  }, [location]);
 
   const navigator = useMemo(() => createBrowserNavigator(), []);
 
