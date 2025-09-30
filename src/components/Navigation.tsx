@@ -1,27 +1,18 @@
 import { useState, useEffect, useRef } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Button } from "./ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle, SheetDescription } from "./ui/sheet";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { useLanguage } from "./LanguageContext";
-import {
-  buildLocalizedPath,
-  defaultLocale,
-  servicePageIds,
-  isLocale,
-  type Locale,
-  type PageType,
-} from "../routing";
+import { buildLocalizedPath, defaultLocale, servicePageIds, type Locale, type PageType } from "../routing";
 import { useRouteInfo } from "../hooks/useRouteInfo";
+import { useActiveLocale } from "../hooks/useActiveLocale";
 
 export function Navigation() {
   const { language, setLanguage, t: _t } = useLanguage();
   const navigate = useNavigate();
   const routeInfo = useRouteInfo();
-  const params = useParams<{ locale?: string }>();
-  const routeLocale = isLocale(params.locale) ? params.locale : undefined;
-  const activeLocale: Locale = routeLocale ?? routeInfo.locale ?? (language as Locale);
-  const includeLocalePrefix = routeLocale != null || activeLocale !== defaultLocale;
+  const { activeLocale, includeLocalePrefix, routeLocale } = useActiveLocale();
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
