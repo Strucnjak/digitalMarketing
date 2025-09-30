@@ -2,7 +2,7 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import type { Manifest, RenderResult } from "../src/entry-server";
-import { allPages, buildPath, defaultLocale, locales } from "../src/routing.js";
+import { enumerateStaticPaths } from "../src/routing.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const serverDir = path.resolve(__dirname, "..");
@@ -33,17 +33,7 @@ async function main() {
 }
 
 function collectRoutes() {
-  const paths = new Set<string>();
-  for (const locale of locales) {
-    for (const page of allPages) {
-      paths.add(buildPath(page, locale, { includeLocalePrefix: true }));
-      if (locale === defaultLocale) {
-        paths.add(buildPath(page, locale, { includeLocalePrefix: false }));
-      }
-    }
-  }
-  paths.add("/");
-  return Array.from(paths);
+  return enumerateStaticPaths();
 }
 
 function injectRenderedApp(template: string, rendered: RenderResult) {

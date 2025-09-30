@@ -1,3 +1,4 @@
+import { useNavigate, useParams } from 'react-router-dom';
 import { Button } from './ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Badge } from './ui/badge';
@@ -14,11 +15,17 @@ import {
   Award
 } from 'lucide-react';
 import { useLanguage } from './LanguageContext';
-import { useRouter, type PageType } from './Router';
+import { useRouteInfo } from '../hooks/useRouteInfo';
+import { buildLocalizedPath, defaultLocale, isLocale, type PageType, type Locale } from '../routing';
 
 export function ServicesSection() {
   const { t } = useLanguage();
-  const { navigateTo } = useRouter();
+  const navigate = useNavigate();
+  const routeInfo = useRouteInfo();
+  const params = useParams<{ locale?: string }>();
+  const routeLocale = isLocale(params.locale) ? params.locale : undefined;
+  const activeLocale: Locale = routeLocale ?? routeInfo.locale;
+  const includeLocalePrefix = routeLocale != null || activeLocale !== defaultLocale;
 
   const services = [
     {
@@ -94,11 +101,13 @@ export function ServicesSection() {
   ];
 
   const handleServiceClick = (serviceId: PageType) => {
-    navigateTo(serviceId as PageType);
+    const path = buildLocalizedPath(activeLocale, serviceId, { includeLocalePrefix });
+    navigate(path);
   };
 
   const handleViewAll = () => {
-    navigateTo('service-inquiry');
+    const path = buildLocalizedPath(activeLocale, 'service-inquiry', { includeLocalePrefix });
+    navigate(path);
   };
 
   return (

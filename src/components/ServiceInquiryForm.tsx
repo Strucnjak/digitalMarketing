@@ -1,16 +1,18 @@
 import { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "./ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Badge } from "./ui/badge";
 import { Progress } from "./ui/progress";
 import { ArrowLeft, Send, CheckCircle, User, DollarSign, Target, ChevronRight, Check, Package, Star } from "lucide-react";
-import { useRouter } from "./Router";
 import { useLanguage } from "./LanguageContext";
 import { Step1 } from "./serviceInquirySteps/Step1";
 import { Step2 } from "./serviceInquirySteps/Step2";
 import { Step3 } from "./serviceInquirySteps/Step3";
 import { Step4 } from "./serviceInquirySteps/Step4";
+import { useRouteInfo } from "../hooks/useRouteInfo";
+import { buildLocalizedPath, defaultLocale, isLocale, type Locale } from "../routing";
 
 export interface InquiryFormData {
   // Contact Information
@@ -46,7 +48,12 @@ export interface InquiryFormData {
   newsletter: boolean;
 }
 export function ServiceInquiryForm() {
-  const { navigateTo } = useRouter();
+  const navigate = useNavigate();
+  const routeInfo = useRouteInfo();
+  const params = useParams<{ locale?: string }>();
+  const routeLocale = isLocale(params.locale) ? params.locale : undefined;
+  const activeLocale: Locale = routeLocale ?? routeInfo.locale;
+  const includeLocalePrefix = routeLocale != null || activeLocale !== defaultLocale;
   const { t, language } = useLanguage();
   const [currentStep, setCurrentStep] = useState(1);
   const serviceInfo: Record<string, { title: string; description: string; icon: string }> = {
@@ -263,7 +270,10 @@ export function ServiceInquiryForm() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button
-                  onClick={() => navigateTo("home")}
+                  onClick={() => {
+                    const path = buildLocalizedPath(activeLocale, "home", { includeLocalePrefix });
+                    navigate(path);
+                  }}
                   className="bg-bdigital-cyan text-bdigital-navy hover:bg-bdigital-cyan-light font-semibold px-8 py-3"
                 >
                   {t("general.back_home")}
@@ -311,7 +321,14 @@ export function ServiceInquiryForm() {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-8">
-          <Button variant="ghost" onClick={() => navigateTo("home")} className="text-bdigital-navy hover:text-bdigital-cyan mb-6 -ml-2">
+          <Button
+            variant="ghost"
+            onClick={() => {
+              const path = buildLocalizedPath(activeLocale, "home", { includeLocalePrefix });
+              navigate(path);
+            }}
+            className="text-bdigital-navy hover:text-bdigital-cyan mb-6 -ml-2"
+          >
             <ArrowLeft className="h-4 w-4 mr-2" />
             {t("general.back_home")}
           </Button>

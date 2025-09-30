@@ -1,13 +1,20 @@
+import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "../ui/button";
 import { Card, CardContent } from "../ui/card";
 import { Badge } from "../ui/badge";
 import { TrendingUp, Target, BarChart3, Users, ArrowRight, CheckCircle } from "lucide-react";
-import { useRouter } from "../Router";
 import { ImageWithFallback } from "../figma/ImageWithFallback";
 import { useLanguage } from "../LanguageContext";
+import { useRouteInfo } from "../../hooks/useRouteInfo";
+import { buildLocalizedPath, defaultLocale, isLocale, type Locale } from "../../routing";
 
 export function StrategyPage() {
-  const { navigateTo } = useRouter();
+  const navigate = useNavigate();
+  const routeInfo = useRouteInfo();
+  const params = useParams<{ locale?: string }>();
+  const routeLocale = isLocale(params.locale) ? params.locale : undefined;
+  const activeLocale: Locale = routeLocale ?? routeInfo.locale;
+  const includeLocalePrefix = routeLocale != null || activeLocale !== defaultLocale;
   const { t } = useLanguage();
 
   const services = [
@@ -71,16 +78,15 @@ export function StrategyPage() {
   ];
 
   const handlePackageSelect = (packageName: string) => {
-    navigateTo("service-inquiry", {
-      service: "strategy",
-      package: packageName,
-    });
+    const path = buildLocalizedPath(activeLocale, "service-inquiry", { includeLocalePrefix });
+    const search = new URLSearchParams({ service: "strategy", package: packageName });
+    navigate(`${path}?${search.toString()}`);
   };
 
   const handleConsultation = () => {
-    navigateTo("service-inquiry", {
-      service: "strategy",
-    });
+    const path = buildLocalizedPath(activeLocale, "service-inquiry", { includeLocalePrefix });
+    const search = new URLSearchParams({ service: "strategy" });
+    navigate(`${path}?${search.toString()}`);
   };
 
   return (
@@ -109,7 +115,10 @@ export function StrategyPage() {
                   variant="outline"
                   size="lg"
                   className="border-bdigital-cyan text-bdigital-cyan hover:bg-bdigital-cyan hover:text-bdigital-navy px-8 py-3 font-semibold"
-                  onClick={() => navigateTo("home")}
+                  onClick={() => {
+                    const path = buildLocalizedPath(activeLocale, "home", { includeLocalePrefix });
+                    navigate(path);
+                  }}
                 >
                   {t("general.back_home")}
                 </Button>

@@ -1,11 +1,13 @@
 import { useState, useMemo } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import type { Project } from "../types";
 import { Button } from "./ui/button";
 import { Card, CardContent } from "./ui/card";
 import { Badge } from "./ui/badge";
 import { ExternalLink, Calendar, ChevronLeft, ChevronRight } from "lucide-react";
 import { useLanguage } from "./LanguageContext";
-import { useRouter } from "./Router";
+import { useRouteInfo } from "../hooks/useRouteInfo";
+import { buildLocalizedPath, defaultLocale, isLocale, type Locale } from "../routing";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 
 /** Allow projects to specify categories as a string (single or comma-separated) or string[] */
@@ -27,7 +29,12 @@ function normalizeCategories(input: unknown): string[] {
 
 export function PortfolioSection() {
   const { t: _t } = useLanguage();
-  const { navigateTo } = useRouter();
+  const navigate = useNavigate();
+  const routeInfo = useRouteInfo();
+  const params = useParams<{ locale?: string }>();
+  const routeLocale = isLocale(params.locale) ? params.locale : undefined;
+  const activeLocale: Locale = routeLocale ?? routeInfo.locale;
+  const includeLocalePrefix = routeLocale != null || activeLocale !== defaultLocale;
   const [activeFilter, setActiveFilter] = useState("all");
   const [currentSlide, setCurrentSlide] = useState(0);
 
@@ -283,7 +290,10 @@ export function PortfolioSection() {
             <h3 className="text-2xl lg:text-3xl font-bold mb-4">{_t("portfolio.cta.title")}</h3>
             <p className="text-gray-300 text-lg mb-6 lg:mb-8 max-w-2xl mx-auto">{_t("portfolio.cta.desc")}</p>
             <Button
-              onClick={() => navigateTo("service-inquiry")}
+              onClick={() => {
+                const path = buildLocalizedPath(activeLocale, "service-inquiry", { includeLocalePrefix });
+                navigate(path);
+              }}
               className="bg-bdigital-cyan text-bdigital-navy hover:bg-bdigital-cyan-light font-semibold px-8 py-3 transform hover:scale-105 transition-all duration-300 shadow-xl"
             >
               {_t("portfolio.cta.primary")}

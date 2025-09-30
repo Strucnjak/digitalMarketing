@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "./ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Input } from "./ui/input";
@@ -25,8 +26,9 @@ import {
   Users,
   TrendingUp,
 } from "lucide-react";
-import { useRouter } from "./Router";
 import { useLanguage } from "./LanguageContext";
+import { useRouteInfo } from "../hooks/useRouteInfo";
+import { buildLocalizedPath, defaultLocale, isLocale, type Locale } from "../routing";
 
 interface ConsultationFormData {
   fullName: string;
@@ -45,7 +47,12 @@ interface ConsultationFormData {
 }
 
 export function FreeConsultationPage() {
-  const { navigateTo } = useRouter();
+  const navigate = useNavigate();
+  const routeInfo = useRouteInfo();
+  const params = useParams<{ locale?: string }>();
+  const routeLocale = isLocale(params.locale) ? params.locale : undefined;
+  const activeLocale: Locale = routeLocale ?? routeInfo.locale;
+  const includeLocalePrefix = routeLocale != null || activeLocale !== defaultLocale;
   const { t, language } = useLanguage();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -174,7 +181,10 @@ export function FreeConsultationPage() {
               </div>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button
-                  onClick={() => navigateTo("home")}
+                  onClick={() => {
+                    const path = buildLocalizedPath(activeLocale, "home", { includeLocalePrefix });
+                    navigate(path);
+                  }}
                   className="bg-bdigital-cyan text-bdigital-navy hover:bg-bdigital-cyan-light font-semibold px-8 py-3"
                 >
                   {t("general.back_home")}
@@ -216,7 +226,14 @@ export function FreeConsultationPage() {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-8">
-          <Button variant="ghost" onClick={() => navigateTo("home")} className="text-bdigital-navy hover:text-bdigital-cyan mb-6 -ml-2">
+          <Button
+            variant="ghost"
+            onClick={() => {
+              const path = buildLocalizedPath(activeLocale, "home", { includeLocalePrefix });
+              navigate(path);
+            }}
+            className="text-bdigital-navy hover:text-bdigital-cyan mb-6 -ml-2"
+          >
             <ArrowLeft className="h-4 w-4 mr-2" />
             {t("general.back_home")}
           </Button>
