@@ -16,6 +16,10 @@ export function Navigation() {
 
   // Handle scroll effect
   useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
@@ -76,6 +80,9 @@ export function Navigation() {
     navigateTo("home");
     setIsOpen(false);
     setTimeout(() => {
+      if (typeof document === "undefined") {
+        return;
+      }
       const element = document.querySelector("#contact");
       element?.scrollIntoView({ behavior: "smooth" });
     }, 100);

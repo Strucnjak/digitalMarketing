@@ -14,10 +14,12 @@ function useIsMobile() {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
     const checkIsMobile = () => {
-      if (typeof window !== "undefined") {
-        setIsMobile(window.innerWidth < 768);
-      }
+      setIsMobile(window.innerWidth < 768);
     };
     checkIsMobile();
     window.addEventListener("resize", checkIsMobile, { passive: true });
@@ -78,14 +80,16 @@ export function MobileQuickNav({ onSectionClick }: MobileQuickNavProps) {
 
   // Show scroll to top button when user scrolls down (tiny throttle)
   useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
     let ticking = false;
     const onScroll = () => {
       if (ticking) return;
       ticking = true;
       requestAnimationFrame(() => {
-        if (typeof window !== "undefined") {
-          setShowScrollTop(window.scrollY > 300);
-        }
+        setShowScrollTop(window.scrollY > 300);
         ticking = false;
       });
     };
@@ -95,6 +99,10 @@ export function MobileQuickNav({ onSectionClick }: MobileQuickNavProps) {
 
   // Close menu when user scrolls
   useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
     if (!isOpen) return;
     const onScrollClose = () => setIsOpen(false);
     window.addEventListener("scroll", onScrollClose, { passive: true });
@@ -126,12 +134,17 @@ export function MobileQuickNav({ onSectionClick }: MobileQuickNavProps) {
   };
 
   async function waitForElement(id: string, timeoutMs = 2000): Promise<HTMLElement | null> {
-    const start = performance.now();
+    if (typeof document === "undefined" || typeof window === "undefined") {
+      return null;
+    }
+
+    const start = typeof performance !== "undefined" ? performance.now() : Date.now();
     return new Promise((resolve) => {
       const tick = () => {
         const el = document.getElementById(id);
         if (el) return resolve(el);
-        if (performance.now() - start > timeoutMs) return resolve(null);
+        const now = typeof performance !== "undefined" ? performance.now() : Date.now();
+        if (now - start > timeoutMs) return resolve(null);
         requestAnimationFrame(tick);
       };
       tick();
