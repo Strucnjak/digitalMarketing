@@ -11,7 +11,8 @@
     "ssr:serve": "NODE_ENV=production node dist/server/server.js",
     "ssg": "node dist/server/scripts/prerender.js",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "tsc -p tsconfig.tests.json && node --loader ./tests/esm-loader.mjs .test-dist/tests/seo-regression.test.js"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.11",

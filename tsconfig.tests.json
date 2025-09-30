@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "types": [],
+    "outDir": ".test-dist",
+    "rootDir": ".",
+    "strict": false
+  },
+  "include": [
+    "src/config/site.ts",
+    "src/routing.ts",
+    "src/utils/seo.ts",
+    "tests/seo-regression.test.ts",
+    "src/locales/routes.json"
+  ]
+}

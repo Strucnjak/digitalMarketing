@@ -47,9 +47,11 @@ export function render(url: string, options: RenderOptions = {}): RenderResult {
   const html = renderToString(app);
 
   const requestUrl = new URL(url, SITE_BASE_URL);
-  const { locale, page } = parsePathname(requestUrl.pathname);
+  const { locale, page, hasLocalePrefix } = parsePathname(requestUrl.pathname);
   const canonicalCluster = buildCanonicalCluster({
     currentUrl: requestUrl,
+    hasLocalePrefix,
+    locale,
     page,
     siteBaseUrl: SITE_BASE_URL,
   });
