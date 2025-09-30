@@ -2,7 +2,9 @@ import { StrictMode } from "react";
 import { renderToString } from "react-dom/server";
 import { StaticRouter } from "react-router-dom/server";
 import { AppRoutes } from "./routes";
+import { SITE_BASE_URL } from "./config/site";
 import { parsePathname } from "./routing";
+import { buildCanonicalCluster } from "./utils/seo";
 
 export interface ManifestEntry {
   file: string;
@@ -41,12 +43,25 @@ export function render(url: string, options: RenderOptions = {}): RenderResult {
 
   const html = renderToString(app);
 
-  const { locale } = parsePathname(new URL(url, "http://localhost").pathname);
+  const requestUrl = new URL(url, SITE_BASE_URL);
+  const { locale, page } = parsePathname(requestUrl.pathname);
+  const canonicalCluster = buildCanonicalCluster({
+    currentUrl: requestUrl,
+    page,
+    siteBaseUrl: SITE_BASE_URL,
+  });
 
-  const head = `
-    <title>${TITLE}</title>
-    <meta name="description" content="${DESCRIPTION}" />
-  `;
+  const headParts = [
+    `<title>${TITLE}</title>`,
+    `<meta name="description" content="${DESCRIPTION}" />`,
+    `<link rel="canonical" href="${escapeAttribute(canonicalCluster.canonical)}">`,
+    ...canonicalCluster.alternates.map(
+      (alternate) =>
+        `<link rel="alternate" hreflang="${alternate.hreflang}" href="${escapeAttribute(alternate.href)}">`,
+    ),
+  ];
+
+  const head = headParts.join("\n");
 
   const preloadLinks = options.manifest
     ? renderPreloadLinks(options.manifest, "src/entry-client.tsx")
@@ -100,4 +115,8 @@ function renderPreloadLinks(manifest: Manifest, entry: string) {
 
   traverse(entry);
   return links;
+}
+
+function escapeAttribute(value: string): string {
+  return value.replace(/&/g, "&amp;").replace(/"/g, "&quot;");
 }
