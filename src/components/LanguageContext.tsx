@@ -25,35 +25,24 @@ interface LanguageProviderProps {
   localeFromRoute?: Language;
 }
 
-function resolveStoredLanguage(): Language | null {
-  if (typeof window === "undefined") {
-    return null;
-  }
-  const stored = window.localStorage.getItem("language");
-  if (stored === "en" || stored === "me") {
-    return stored;
-  }
-  return null;
-}
-
 export function LanguageProvider({
   children,
   initialLanguage,
   localeFromRoute,
 }: LanguageProviderProps) {
-  const [language, setLanguageState] = useState<Language>(() => {
-    if (localeFromRoute) {
-      return localeFromRoute;
+  const [language, setLanguageState] = useState<Language>(
+    () => localeFromRoute ?? initialLanguage ?? defaultLocale,
+  );
+
+  useEffect(() => {
+    if (localeFromRoute || typeof window === "undefined") {
+      return;
     }
-    const stored = resolveStoredLanguage();
-    if (stored) {
-      return stored;
+    const stored = window.localStorage.getItem("language");
+    if ((stored === "en" || stored === "me") && stored !== language) {
+      setLanguageState(stored);
     }
-    if (initialLanguage) {
-      return initialLanguage;
-    }
-    return defaultLocale;
-  });
+  }, [localeFromRoute, language]);
 
   useEffect(() => {
     if (localeFromRoute && localeFromRoute !== language) {
