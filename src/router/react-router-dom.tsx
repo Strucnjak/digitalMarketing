@@ -4,7 +4,6 @@ import {
   isValidElement,
   useCallback,
   useContext,
-  useEffect,
   useMemo,
   useRef,
   useSyncExternalStore,
@@ -83,10 +82,17 @@ function createBrowserNavigator(): Navigator {
   };
 }
 
-function subscribeToHistory(onChange: () => void) {
-  window.addEventListener("popstate", onChange);
+function subscribeToHistory(
+  onChange: () => void,
+  updateLocation: (location: Location) => void
+) {
+  const handler = () => {
+    updateLocation(createBrowserLocation());
+    onChange();
+  };
+  window.addEventListener("popstate", handler);
   return () => {
-    window.removeEventListener("popstate", onChange);
+    window.removeEventListener("popstate", handler);
   };
 }
 
@@ -95,25 +101,30 @@ export function BrowserRouter({ children }: { children?: ReactNode }) {
     throw new Error("BrowserRouter can only be used in the browser");
   }
 
-  const initialLocationRef = useRef<Location | null>(null);
-  if (initialLocationRef.current === null) {
-    initialLocationRef.current = createBrowserLocation();
+  const locationRef = useRef<Location | null>(null);
+  if (locationRef.current === null) {
+    locationRef.current = createBrowserLocation();
   }
 
+  const subscribe = useCallback(
+    (onStoreChange: () => void) =>
+      subscribeToHistory(onStoreChange, (nextLocation) => {
+        locationRef.current = nextLocation;
+      }),
+    [locationRef]
+  );
+
+  const getSnapshot = useCallback(
+    () => locationRef.current as Location,
+    [locationRef]
+  );
+
   const getServerSnapshot = useCallback(
-    () => initialLocationRef.current as Location,
-    []
+    () => locationRef.current as Location,
+    [locationRef]
   );
 
-  const location = useSyncExternalStore(
-    subscribeToHistory,
-    createBrowserLocation,
-    getServerSnapshot
-  );
-
-  useEffect(() => {
-    initialLocationRef.current = location;
-  }, [location]);
+  const location = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
   const navigator = useMemo(() => createBrowserNavigator(), []);
 
