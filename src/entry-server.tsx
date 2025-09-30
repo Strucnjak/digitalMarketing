@@ -5,7 +5,12 @@ import { AppRoutes } from "./routes";
 import { SITE_BASE_URL } from "./config/site";
 import { getSeoMetadata } from "./config/seo-meta";
 import { locales, parsePathname } from "./routing";
-import { buildCanonicalCluster } from "./utils/seo";
+import {
+  STRUCTURED_DATA_ELEMENT_ID,
+  buildCanonicalCluster,
+  buildWebPageJsonLd,
+  serializeJsonLd,
+} from "./utils/seo";
 
 export interface ManifestEntry {
   file: string;
@@ -51,6 +56,17 @@ export function render(url: string, options: RenderOptions = {}): RenderResult {
 
   const metadata = getSeoMetadata(locale, page);
 
+  const structuredData = buildWebPageJsonLd({
+    locale,
+    title: metadata.title,
+    description: metadata.description,
+    url: canonicalCluster.canonical,
+  });
+
+  const jsonLdScript = `<script id="${STRUCTURED_DATA_ELEMENT_ID}" type="application/ld+json">${serializeJsonLd(
+    structuredData,
+  )}</script>`;
+
   const headParts = [
     `<title>${escapeHtml(metadata.title)}</title>`,
     `<meta name="description" content="${escapeAttribute(metadata.description)}" />`,
@@ -75,6 +91,7 @@ export function render(url: string, options: RenderOptions = {}): RenderResult {
       `<meta property="og:image" content="${escapeAttribute(imageUrl)}">`,
       `<meta name="twitter:image" content="${escapeAttribute(imageUrl)}">`,
     ]),
+    jsonLdScript,
   ];
 
   const head = headParts.join("\n");
