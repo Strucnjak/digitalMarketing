@@ -1,81 +1,39 @@
-# React + TypeScript + Vite
+# BDigital Marketing Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project contains the marketing site for BDigital, built with React, TypeScript, Tailwind CSS, and Vite. The application supports static-site generation (SSG) for production deployment and localized routing for Montenegrin (`me`) and English (`en`).
 
-Currently, two official plugins are available:
+## Local Development
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Production Build Pipeline
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run build
 ```
 
-## Backend Environment Variables
+`npm run build` performs the following steps:
 
-The backend email service uses the following environment variables:
+1. Type-checks the project with `tsc -b`.
+2. Builds the client and server bundles with Vite.
+3. Runs the SSG prerenderer (`npm run ssg`).
+4. Generates locale-aware XML sitemaps (`npm run sitemap`).
 
-- `SMTP_HOST` – SMTP server host
-- `SMTP_PORT` – SMTP server port
-- `SMTP_USER` – SMTP username
-- `SMTP_PASS` – SMTP password
-- `EMAIL_FROM` – sender address used in emails
-- `EMAIL_TO` – destination address for form submissions
+The sitemap script also writes the XML files to `public/` so they are available when running the Vite dev server. You can re-run the sitemap step independently with:
 
+```bash
+npm run sitemap
+```
+
+## Search Engine Sitemaps
+
+Sitemaps are generated during the production build and emitted to both `dist/client/` and `public/`. Submit the following URLs to Google Search Console and Bing Webmaster Tools:
+
+- `https://bdigital.me/sitemap-index.xml`
+- `https://bdigital.me/sitemap-me.xml`
+- `https://bdigital.me/sitemap-en.xml`
+
+The sitemap files include `<xhtml:link>` elements so each page references its localized alternates, and the sitemap index aggregates the per-locale files for easier discovery by search engines.

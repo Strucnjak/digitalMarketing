@@ -5,11 +5,12 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && npm run build:client && npm run build:ssr && npm run ssg",
+    "build": "tsc -b && npm run build:client && npm run build:ssr && npm run ssg && npm run sitemap",
     "build:client": "vite build --outDir dist/client --ssrManifest",
     "build:ssr": "vite build --ssr src/entry-server.tsx --outDir dist/server && tsc --project tsconfig.server.json",
     "ssr:serve": "NODE_ENV=production node dist/server/server.js",
     "ssg": "node dist/server/scripts/prerender.js",
+    "sitemap": "node dist/server/scripts/generate-sitemaps.js",
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "tsc -p tsconfig.tests.json && node --loader ./tests/esm-loader.mjs .test-dist/tests/seo-regression.test.js"
