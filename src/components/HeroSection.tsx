@@ -7,6 +7,20 @@ import { buildLocalizedPath } from "../routing";
 import { useActiveLocale } from "../hooks/useActiveLocale";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 
+const PARTICLE_CONFIGS = Array.from({ length: 20 }, (_, index) => {
+  const left = 5 + ((index * 37) % 90);
+  const top = 5 + ((index * 53) % 90);
+  const animationDelay = (index % 5) * 0.35;
+  const animationDuration = 2.4 + (index % 4) * 0.45;
+
+  return {
+    left: `${left.toFixed(2)}%`,
+    top: `${top.toFixed(2)}%`,
+    animationDelay: `${animationDelay.toFixed(2)}s`,
+    animationDuration: `${animationDuration.toFixed(2)}s`,
+  } as const;
+});
+
 export function HeroSection() {
   const { t: _t } = useLanguage();
   const navigate = useNavigate();
@@ -38,15 +52,15 @@ export function HeroSection() {
 
       {/* Animated Background Particles */}
       <div className="absolute inset-0 overflow-hidden">
-        {[...Array(20)].map((_, i) => (
+        {PARTICLE_CONFIGS.map((particle, i) => (
           <div
             key={i}
             className="absolute w-1 h-1 bg-bdigital-cyan/20 rounded-full animate-pulse"
             style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 2}s`,
-              animationDuration: `${2 + Math.random() * 2}s`,
+              left: particle.left,
+              top: particle.top,
+              animationDelay: particle.animationDelay,
+              animationDuration: particle.animationDuration,
             }}
           />
         ))}
