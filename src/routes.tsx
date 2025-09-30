@@ -19,6 +19,11 @@ import { FreeConsultationPage } from "./components/FreeConsultationPage";
 import { MobileQuickNav } from "./components/MobileQuickNav";
 import { getSeoMetadata } from "./config/seo-meta";
 import {
+  STRUCTURED_DATA_ELEMENT_ID,
+  buildWebPageJsonLd,
+  serializeJsonLd,
+} from "./utils/seo";
+import {
   buildLocalizedPath,
   defaultLocale,
   getRoutePattern,
@@ -33,7 +38,7 @@ function SeoMetadataUpdater() {
   const { language } = useLanguage();
 
   useEffect(() => {
-    if (typeof document === "undefined") {
+    if (typeof document === "undefined" || typeof window === "undefined") {
       return;
     }
 
@@ -50,7 +55,40 @@ function SeoMetadataUpdater() {
       document.head.appendChild(descriptionTag);
     }
     descriptionTag.setAttribute("content", description);
-  }, [language, location.pathname]);
+
+    const canonicalTag = document.querySelector('link[rel="canonical"]');
+    const canonicalHref = canonicalTag?.getAttribute("href") ?? window.location.href;
+    let canonicalUrl = canonicalHref;
+    try {
+      const resolved = new URL(canonicalHref, window.location.origin);
+      resolved.search = "";
+      resolved.hash = "";
+      canonicalUrl = resolved.href;
+    } catch {
+      // Ignore URL parsing errors and fall back to the original href
+    }
+
+    const structuredData = buildWebPageJsonLd({
+      locale,
+      title,
+      description,
+      url: canonicalUrl,
+    });
+
+    let structuredDataTag = document.getElementById(
+      STRUCTURED_DATA_ELEMENT_ID,
+    ) as HTMLScriptElement | null;
+
+    if (!structuredDataTag || structuredDataTag.tagName !== "SCRIPT") {
+      structuredDataTag = document.createElement("script");
+      structuredDataTag.id = STRUCTURED_DATA_ELEMENT_ID;
+      structuredDataTag.type = "application/ld+json";
+      document.head.appendChild(structuredDataTag);
+    }
+
+    structuredDataTag.type = "application/ld+json";
+    structuredDataTag.textContent = serializeJsonLd(structuredData);
+  }, [language, location.pathname, location.search, location.hash]);
 
   return null;
 }

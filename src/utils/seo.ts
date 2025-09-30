@@ -16,6 +16,15 @@ export interface BuildCanonicalClusterOptions {
   siteBaseUrl: string;
 }
 
+export interface WebPageJsonLdOptions {
+  locale: Locale;
+  title: string;
+  description: string;
+  url: string;
+}
+
+export const STRUCTURED_DATA_ELEMENT_ID = "seo-structured-data";
+
 export function buildCanonicalCluster({
   currentUrl,
   page,
@@ -42,6 +51,29 @@ export function buildCanonicalCluster({
     canonical,
     alternates: dedupeAlternates(alternates),
   };
+}
+
+export function buildWebPageJsonLd({
+  locale,
+  title,
+  description,
+  url,
+}: WebPageJsonLdOptions) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    inLanguage: locale,
+    name: title,
+    description,
+    url,
+  };
+}
+
+export function serializeJsonLd(data: unknown): string {
+  return JSON.stringify(data)
+    .replace(/</g, "\\u003c")
+    .replace(/>/g, "\\u003e")
+    .replace(/&/g, "\\u0026");
 }
 
 function buildAbsoluteLocalizedHref(
