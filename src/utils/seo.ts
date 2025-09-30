@@ -22,7 +22,10 @@ export function buildCanonicalCluster({
   siteBaseUrl,
 }: BuildCanonicalClusterOptions): CanonicalCluster {
   const base = normalizeSiteBase(siteBaseUrl);
-  const canonical = currentUrl.href;
+  const canonicalUrl = new URL(currentUrl.href);
+  canonicalUrl.search = "";
+  canonicalUrl.hash = "";
+  const canonical = canonicalUrl.href;
 
   const alternates: AlternateHref[] = locales.map((locale) => ({
     hreflang: locale,
