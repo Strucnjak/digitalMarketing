@@ -1,6 +1,6 @@
-import type { ReactElement } from "react";
+import { useEffect, type ReactElement } from "react";
 import { Navigate, Outlet, useLocation, useParams, useRoutes, type RouteObject } from "react-router-dom";
-import { LanguageProvider } from "./components/LanguageContext";
+import { LanguageProvider, useLanguage } from "./components/LanguageContext";
 import { Navigation } from "./components/Navigation";
 import { HeroSection } from "./components/HeroSection";
 import { ServicesSection } from "./components/ServicesSection";
@@ -17,6 +17,7 @@ import { StrategyPage } from "./components/services/StrategyPage";
 import { ServiceInquiryForm } from "./components/ServiceInquiryForm";
 import { FreeConsultationPage } from "./components/FreeConsultationPage";
 import { MobileQuickNav } from "./components/MobileQuickNav";
+import { getSeoMetadata } from "./config/seo-meta";
 import {
   buildLocalizedPath,
   defaultLocale,
@@ -26,6 +27,33 @@ import {
   type PageType,
 } from "./routing";
 import "./styles/mobile-quick-nav.css";
+
+function SeoMetadataUpdater() {
+  const location = useLocation();
+  const { language } = useLanguage();
+
+  useEffect(() => {
+    if (typeof document === "undefined") {
+      return;
+    }
+
+    const parsed = parsePathname(location.pathname);
+    const locale = parsed.locale ?? language ?? defaultLocale;
+    const { title, description } = getSeoMetadata(locale, parsed.page);
+
+    document.title = title;
+
+    let descriptionTag = document.querySelector('meta[name="description"]');
+    if (!descriptionTag) {
+      descriptionTag = document.createElement("meta");
+      descriptionTag.setAttribute("name", "description");
+      document.head.appendChild(descriptionTag);
+    }
+    descriptionTag.setAttribute("content", description);
+  }, [language, location.pathname]);
+
+  return null;
+}
 
 function HomePage() {
   return (
@@ -77,6 +105,7 @@ function LocalizedLayout() {
 
   return (
     <LanguageProvider initialLanguage={initialLanguage} localeFromRoute={routeLocale}>
+      <SeoMetadataUpdater />
       <AppLayout />
     </LanguageProvider>
   );
