@@ -1,4 +1,10 @@
-import { buildLocalizedPath, defaultLocale, locales, type Locale, type PageType } from "../routing";
+import {
+  buildLocalizedPath,
+  defaultLocale,
+  locales,
+  type Locale,
+  type PageType,
+} from "../routing";
 
 export interface CanonicalCluster {
   canonical: string;
@@ -12,6 +18,8 @@ export interface AlternateHref {
 
 export interface BuildCanonicalClusterOptions {
   currentUrl: URL;
+  hasLocalePrefix: boolean;
+  locale: Locale;
   page: PageType;
   siteBaseUrl: string;
 }
@@ -27,19 +35,31 @@ export const STRUCTURED_DATA_ELEMENT_ID = "seo-structured-data";
 
 export function buildCanonicalCluster({
   currentUrl,
+  hasLocalePrefix,
+  locale,
   page,
   siteBaseUrl,
 }: BuildCanonicalClusterOptions): CanonicalCluster {
-  const base = normalizeSiteBase(siteBaseUrl);
-  const canonicalUrl = new URL(currentUrl.href);
+  const requestOrigin = new URL(currentUrl.href).origin;
+  const base = normalizeSiteBase(siteBaseUrl || requestOrigin);
+  const shouldDropDefaultLocalePrefix = locale === defaultLocale && hasLocalePrefix;
+  const canonicalPath = shouldDropDefaultLocalePrefix
+    ? buildLocalizedPath(locale, page, { includeLocalePrefix: false })
+    : buildLocalizedPath(locale, page, { includeLocalePrefix: locale !== defaultLocale });
+  const canonicalUrl = new URL(canonicalPath, base);
   canonicalUrl.search = "";
   canonicalUrl.hash = "";
   const canonical = canonicalUrl.href;
 
-  const alternates: AlternateHref[] = locales.map((locale) => ({
-    hreflang: locale,
-    href: buildAbsoluteLocalizedHref(locale, page, base),
+  const alternates: AlternateHref[] = locales.map((alternateLocale) => ({
+    hreflang: alternateLocale,
+    href: buildAbsoluteLocalizedHref(alternateLocale, page, base),
   }));
+
+  const activeLocaleIndex = alternates.findIndex((alternate) => alternate.hreflang === locale);
+  if (activeLocaleIndex >= 0) {
+    alternates[activeLocaleIndex] = { hreflang: locale, href: canonical };
+  }
 
   const xDefaultHref = buildAbsoluteLocalizedHref(defaultLocale, page, base, {
     includeLocalePrefix: false,

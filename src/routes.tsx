@@ -18,8 +18,10 @@ import { ServiceInquiryForm } from "./components/ServiceInquiryForm";
 import { FreeConsultationPage } from "./components/FreeConsultationPage";
 import { MobileQuickNav } from "./components/MobileQuickNav";
 import { getSeoMetadata } from "./config/seo-meta";
+import { SITE_BASE_URL } from "./config/site";
 import {
   STRUCTURED_DATA_ELEMENT_ID,
+  buildCanonicalCluster,
   buildWebPageJsonLd,
   serializeJsonLd,
 } from "./utils/seo";
@@ -46,6 +48,19 @@ function SeoMetadataUpdater() {
     const locale = parsed.locale ?? language ?? defaultLocale;
     const { title, description } = getSeoMetadata(locale, parsed.page);
 
+    let canonicalCluster: ReturnType<typeof buildCanonicalCluster> | null = null;
+    try {
+      canonicalCluster = buildCanonicalCluster({
+        currentUrl: new URL(window.location.href),
+        hasLocalePrefix: parsed.hasLocalePrefix,
+        locale,
+        page: parsed.page,
+        siteBaseUrl: SITE_BASE_URL,
+      });
+    } catch {
+      // Ignore URL parsing errors and fall back to existing canonical metadata
+    }
+
     document.title = title;
 
     let descriptionTag = document.querySelector('meta[name="description"]');
@@ -56,23 +71,49 @@ function SeoMetadataUpdater() {
     }
     descriptionTag.setAttribute("content", description);
 
-    const canonicalTag = document.querySelector('link[rel="canonical"]');
-    const canonicalHref = canonicalTag?.getAttribute("href") ?? window.location.href;
-    let canonicalUrl = canonicalHref;
+    let canonicalTag = document.querySelector('link[rel="canonical"]');
+    if (!canonicalTag) {
+      canonicalTag = document.createElement("link");
+      canonicalTag.setAttribute("rel", "canonical");
+      document.head.appendChild(canonicalTag);
+    }
+
+    let fallbackCanonicalHref = canonicalTag.getAttribute("href") ?? window.location.href;
     try {
-      const resolved = new URL(canonicalHref, window.location.origin);
+      const resolved = new URL(fallbackCanonicalHref, window.location.origin);
       resolved.search = "";
       resolved.hash = "";
-      canonicalUrl = resolved.href;
+      fallbackCanonicalHref = resolved.href;
     } catch {
       // Ignore URL parsing errors and fall back to the original href
+    }
+
+    const canonicalUrl = canonicalCluster?.canonical ?? fallbackCanonicalHref;
+
+    if (canonicalCluster) {
+      canonicalTag.setAttribute("href", canonicalCluster.canonical);
+
+      const existingAlternateTags = Array.from(
+        document.querySelectorAll('link[rel="alternate"][hreflang]'),
+      );
+      for (const tag of existingAlternateTags) {
+        tag.remove();
+      }
+
+      for (const alternate of canonicalCluster.alternates) {
+        const linkTag = document.createElement("link");
+        linkTag.setAttribute("rel", "alternate");
+        linkTag.setAttribute("hreflang", alternate.hreflang);
+        linkTag.setAttribute("href", alternate.href);
+        document.head.appendChild(linkTag);
+      }
     }
 
     const structuredData = buildWebPageJsonLd({
       locale,
       title,
       description,
-      url: canonicalUrl,
+      url: canonicalCluster?.canonical ?? canonicalUrl,
     });
 
     let structuredDataTag = document.getElementById(
