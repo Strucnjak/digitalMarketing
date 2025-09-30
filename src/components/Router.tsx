@@ -5,6 +5,7 @@ import {
   buildPath,
   defaultLocale,
   parsePathname,
+  servicePageIds,
   type Locale,
   type PageType,
 } from "../routing";
@@ -18,6 +19,27 @@ interface NavigateOptions {
 
 export { servicePageIds, type PageType } from "../routing";
 export type { Locale } from "../routing";
+
+export function getPageFromPath(path: string): PageType {
+  const cleanPath = path.replace(/^\/+|\/+$/g, "");
+
+  if (cleanPath.length === 0 || cleanPath === "home") {
+    return "home";
+  }
+
+  const servicePageId = cleanPath as (typeof servicePageIds)[number];
+  if (servicePageIds.includes(servicePageId)) {
+    return servicePageId;
+  }
+
+  switch (cleanPath) {
+    case "service-inquiry":
+    case "free-consultation":
+      return cleanPath;
+    default:
+      return "home";
+  }
+}
 
 export function useRouter() {
   const location = useLocation();
