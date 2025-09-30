@@ -13,6 +13,10 @@ export function useFocusTrap<T extends HTMLElement = HTMLElement>(active = true)
 
   useEffect(() => {
     const container = containerRef.current;
+    if (typeof document === "undefined") {
+      return;
+    }
+
     if (!active || !container) {
       return;
     }

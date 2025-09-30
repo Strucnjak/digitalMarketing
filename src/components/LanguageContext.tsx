@@ -20,37 +20,29 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
 
 interface LanguageProviderProps {
   children: ReactNode;
-  initialLanguage?: Language;
+  initialLanguage?: Language; // can be provided by SSR
 }
 
-function resolveStoredLanguage(): Language | null {
-  if (typeof window === "undefined") {
-    return null;
-  }
+function getStoredLanguage(): Language | null {
+  if (typeof window === "undefined") return null;
   const stored = window.localStorage.getItem("language");
-  if (stored === "en" || stored === "me") {
-    return stored;
-  }
-  return null;
+  return stored === "en" || stored === "me" ? stored : null;
 }
 
-export function LanguageProvider({
-  children,
-  initialLanguage,
-}: LanguageProviderProps) {
+export function LanguageProvider({ children, initialLanguage }: LanguageProviderProps) {
+  // Prefer SSR-provided initialLanguage, then localStorage (client), then default "me"
   const [language, setLanguageState] = useState<Language>(() => {
-    if (initialLanguage) {
-      return initialLanguage;
-    }
-    return resolveStoredLanguage() ?? "me";
+    return initialLanguage ?? getStoredLanguage() ?? "me";
   });
 
+  // If the server later provides a different initialLanguage (route change), sync it
   useEffect(() => {
     if (initialLanguage && initialLanguage !== language) {
       setLanguageState(initialLanguage);
     }
   }, [initialLanguage, language]);
 
+  // Persist selection in the browser
   useEffect(() => {
     if (typeof window !== "undefined") {
       window.localStorage.setItem("language", language);
@@ -63,7 +55,9 @@ export function LanguageProvider({
     setLanguageState(lang);
   };
 
-  const t = (key: string): string => translations[key] ?? key;
+  const t = useMemo<(key: string) => string>(() => {
+    return (key: string) => translations[key] ?? key;
+  }, [translations]);
 
   return (
     <LanguageContext.Provider value={{ language, setLanguage, t }}>
@@ -76,7 +70,7 @@ export function LanguageProvider({
 export function useLanguage() {
   const context = useContext(LanguageContext);
   if (context === undefined) {
-    throw new Error('useLanguage must be used within a LanguageProvider');
+    throw new Error("useLanguage must be used within a LanguageProvider");
   }
   return context;
 }

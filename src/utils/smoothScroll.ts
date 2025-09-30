@@ -7,6 +7,10 @@ export function smoothScroll(target: SmoothScrollPoint, options?: { offset?: num
 
 /** Smoothly scroll to an element or a viewport point. */
 export function smoothScroll(target: HTMLElement | SmoothScrollPoint, options: { offset?: number; prefersReducedMotion?: boolean } = {}): void {
+  if (typeof window === "undefined") {
+    return;
+  }
+
   const { offset = 0, prefersReducedMotion = false } = options;
 
   let top = 0;

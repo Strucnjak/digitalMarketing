@@ -12,6 +12,10 @@ export function useScrollDir() {
   const ticking = useRef(false);
 
   useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
     lastScrollY.current = window.scrollY;
     latestScrollY.current = window.scrollY;
 

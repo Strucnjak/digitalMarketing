@@ -8,6 +8,7 @@ import {
   servicePageIds,
   type Locale,
   type PageType,
+  servicePageIds,
 } from "../routing";
 
 interface NavigateOptions {
