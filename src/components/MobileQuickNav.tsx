@@ -1,11 +1,11 @@
 import { useState, useEffect, useMemo } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useLanguage } from "./LanguageContext";
 import { Menu, X, Home, Briefcase, FolderOpen, Users, MessageSquare, Phone, ArrowUp } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { smoothScroll } from "../utils/smoothScroll";
-import { buildLocalizedPath, defaultLocale, isLocale, type Locale } from "../routing";
-import { useRouteInfo } from "../hooks/useRouteInfo";
+import { buildLocalizedPath } from "../routing";
+import { useActiveLocale } from "../hooks/useActiveLocale";
 
 interface MobileQuickNavProps {
   onSectionClick?: (sectionId: string) => void;
@@ -37,11 +37,7 @@ export function MobileQuickNav({ onSectionClick }: MobileQuickNavProps) {
   const [showScrollTop, setShowScrollTop] = useState(false);
   const { language } = useLanguage();
   const navigate = useNavigate();
-  const routeInfo = useRouteInfo();
-  const params = useParams<{ locale?: string }>();
-  const routeLocale = isLocale(params.locale) ? params.locale : undefined;
-  const activeLocale: Locale = routeLocale ?? routeInfo.locale ?? (language as Locale);
-  const includeLocalePrefix = routeLocale != null || activeLocale !== defaultLocale;
+  const { activeLocale, includeLocalePrefix } = useActiveLocale();
   const isMobile = useIsMobile();
 
   const translations: Record<

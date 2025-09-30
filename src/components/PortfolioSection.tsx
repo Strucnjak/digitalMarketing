@@ -1,13 +1,13 @@
 import { useState, useMemo } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import type { Project } from "../types";
 import { Button } from "./ui/button";
 import { Card, CardContent } from "./ui/card";
 import { Badge } from "./ui/badge";
 import { ExternalLink, Calendar, ChevronLeft, ChevronRight } from "lucide-react";
 import { useLanguage } from "./LanguageContext";
-import { useRouteInfo } from "../hooks/useRouteInfo";
-import { buildLocalizedPath, defaultLocale, isLocale, type Locale } from "../routing";
+import { useActiveLocale } from "../hooks/useActiveLocale";
+import { buildLocalizedPath } from "../routing";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 
 /** Allow projects to specify categories as a string (single or comma-separated) or string[] */
@@ -30,11 +30,7 @@ function normalizeCategories(input: unknown): string[] {
 export function PortfolioSection() {
   const { t: _t } = useLanguage();
   const navigate = useNavigate();
-  const routeInfo = useRouteInfo();
-  const params = useParams<{ locale?: string }>();
-  const routeLocale = isLocale(params.locale) ? params.locale : undefined;
-  const activeLocale: Locale = routeLocale ?? routeInfo.locale;
-  const includeLocalePrefix = routeLocale != null || activeLocale !== defaultLocale;
+  const { activeLocale, includeLocalePrefix } = useActiveLocale();
   const [activeFilter, setActiveFilter] = useState("all");
   const [currentSlide, setCurrentSlide] = useState(0);
 

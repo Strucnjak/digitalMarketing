@@ -1,19 +1,15 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Card, CardContent } from "./ui/card";
 import { Target, Eye, Heart, Users, Award, Clock } from "lucide-react";
 import { useLanguage } from "./LanguageContext";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
-import { useRouteInfo } from "../hooks/useRouteInfo";
-import { buildLocalizedPath, defaultLocale, isLocale, type Locale, type PageType } from "../routing";
+import { useActiveLocale } from "../hooks/useActiveLocale";
+import { buildLocalizedPath, type PageType } from "../routing";
 
 export function AboutSection() {
   const { t } = useLanguage();
   const navigate = useNavigate();
-  const routeInfo = useRouteInfo();
-  const params = useParams<{ locale?: string }>();
-  const routeLocale = isLocale(params.locale) ? params.locale : undefined;
-  const activeLocale = (routeLocale ?? routeInfo.locale) as Locale;
-  const includeLocalePrefix = routeLocale != null || activeLocale !== defaultLocale;
+  const { activeLocale, includeLocalePrefix } = useActiveLocale();
 
   const values = [
     {

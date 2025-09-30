@@ -1,21 +1,17 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Button } from "../ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { Badge } from "../ui/badge";
 import { Search, TrendingUp, BarChart3, MapPin, Smartphone, Globe, ArrowRight, CheckCircle, Star, Award } from "lucide-react";
 import { useLanguage } from "../LanguageContext";
 import { ImageWithFallback } from "../figma/ImageWithFallback";
-import { useRouteInfo } from "../../hooks/useRouteInfo";
-import { buildLocalizedPath, defaultLocale, isLocale, type Locale } from "../../routing";
+import { useActiveLocale } from "../../hooks/useActiveLocale";
+import { buildLocalizedPath } from "../../routing";
 
 export function SEOPage() {
   const { t } = useLanguage();
   const navigate = useNavigate();
-  const routeInfo = useRouteInfo();
-  const params = useParams<{ locale?: string }>();
-  const routeLocale = isLocale(params.locale) ? params.locale : undefined;
-  const activeLocale: Locale = routeLocale ?? routeInfo.locale;
-  const includeLocalePrefix = routeLocale != null || activeLocale !== defaultLocale;
+  const { activeLocale, includeLocalePrefix } = useActiveLocale();
 
   const services = [
     {

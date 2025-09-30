@@ -1,20 +1,16 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Button } from "../ui/button";
 import { Card, CardContent } from "../ui/card";
 import { Badge } from "../ui/badge";
 import { Instagram, Facebook, TrendingUp, Camera, ArrowRight, CheckCircle } from "lucide-react";
 import { ImageWithFallback } from "../figma/ImageWithFallback";
 import { useLanguage } from "../LanguageContext";
-import { useRouteInfo } from "../../hooks/useRouteInfo";
-import { buildLocalizedPath, defaultLocale, isLocale, type Locale } from "../../routing";
+import { useActiveLocale } from "../../hooks/useActiveLocale";
+import { buildLocalizedPath } from "../../routing";
 
 export function SocialMediaPage() {
   const navigate = useNavigate();
-  const routeInfo = useRouteInfo();
-  const params = useParams<{ locale?: string }>();
-  const routeLocale = isLocale(params.locale) ? params.locale : undefined;
-  const activeLocale: Locale = routeLocale ?? routeInfo.locale;
-  const includeLocalePrefix = routeLocale != null || activeLocale !== defaultLocale;
+  const { activeLocale, includeLocalePrefix } = useActiveLocale();
   const { t } = useLanguage();
 
   const services = [

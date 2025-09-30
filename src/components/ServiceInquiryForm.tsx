@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Button } from "./ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Badge } from "./ui/badge";
@@ -11,8 +11,8 @@ import { Step1 } from "./serviceInquirySteps/Step1";
 import { Step2 } from "./serviceInquirySteps/Step2";
 import { Step3 } from "./serviceInquirySteps/Step3";
 import { Step4 } from "./serviceInquirySteps/Step4";
-import { useRouteInfo } from "../hooks/useRouteInfo";
-import { buildLocalizedPath, defaultLocale, isLocale, type Locale } from "../routing";
+import { useActiveLocale } from "../hooks/useActiveLocale";
+import { buildLocalizedPath } from "../routing";
 
 export interface InquiryFormData {
   // Contact Information
@@ -49,11 +49,7 @@ export interface InquiryFormData {
 }
 export function ServiceInquiryForm() {
   const navigate = useNavigate();
-  const routeInfo = useRouteInfo();
-  const params = useParams<{ locale?: string }>();
-  const routeLocale = isLocale(params.locale) ? params.locale : undefined;
-  const activeLocale: Locale = routeLocale ?? routeInfo.locale;
-  const includeLocalePrefix = routeLocale != null || activeLocale !== defaultLocale;
+  const { activeLocale, includeLocalePrefix } = useActiveLocale();
   const { t, language } = useLanguage();
   const [currentStep, setCurrentStep] = useState(1);
   const serviceInfo: Record<string, { title: string; description: string; icon: string }> = {
