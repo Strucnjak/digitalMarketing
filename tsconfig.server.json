@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "jsx": "react-jsx",
+    "outDir": "./dist/server",
+    "rootDir": "./",
+    "strict": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "types": ["vite/client"],
+    "paths": {
+      "react-router-dom": ["./src/router/react-router-dom"],
+      "react-router-dom/server": ["./src/router/react-router-dom-server"]
+    }
+  },
+  "include": ["server.ts", "scripts/prerender.ts", "src/routing.ts", "types/node-shim.d.ts"]
+}

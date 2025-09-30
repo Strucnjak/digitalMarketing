@@ -14,6 +14,11 @@
     "moduleDetection": "force",
     "noEmit": true,
     "jsx": "react-jsx",
+    "resolveJsonModule": true,
+    "paths": {
+      "react-router-dom": ["./src/router/react-router-dom"],
+      "react-router-dom/server": ["./src/router/react-router-dom-server"]
+    },
 
     /* Linting */
     "strict": true,

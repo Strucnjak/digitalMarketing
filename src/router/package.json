@@ -1,0 +1,12 @@
+{
+  "name": "react-router-dom",
+  "version": "0.0.0-local",
+  "type": "module",
+  "main": "./react-router-dom.tsx",
+  "module": "./react-router-dom.tsx",
+  "types": "./react-router-dom.tsx",
+  "exports": {
+    ".": "./react-router-dom.tsx",
+    "./server": "./react-router-dom-server.tsx"
+  }
+}
