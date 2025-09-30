@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f97316" />
+      <stop offset="1" stop-color="#ef4444" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)" rx="32" />
+  <text x="80" y="210" fill="#fff7ed" font-family="'Inter', 'Segoe UI', sans-serif" font-size="72" font-weight="700">
+    BDigital agencija
+  </text>
+  <text x="80" y="310" fill="#ffedd5" font-family="'Inter', 'Segoe UI', sans-serif" font-size="42">
+    Digitalni marketing koji radi
+  </text>
+  <text x="80" y="410" fill="#7c2d12" font-family="'Inter', 'Segoe UI', sans-serif" font-size="30" font-weight="600" opacity="0.85">
+    Rješenja za rast biznisa u Crnoj Gori
+  </text>
+</svg>

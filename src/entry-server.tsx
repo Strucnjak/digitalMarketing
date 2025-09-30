@@ -4,7 +4,7 @@ import { StaticRouter } from "react-router-dom/server";
 import { AppRoutes } from "./routes";
 import { SITE_BASE_URL } from "./config/site";
 import { getSeoMetadata } from "./config/seo-meta";
-import { parsePathname } from "./routing";
+import { locales, parsePathname } from "./routing";
 import { buildCanonicalCluster } from "./utils/seo";
 
 export interface ManifestEntry {
@@ -54,11 +54,27 @@ export function render(url: string, options: RenderOptions = {}): RenderResult {
   const headParts = [
     `<title>${escapeHtml(metadata.title)}</title>`,
     `<meta name="description" content="${escapeAttribute(metadata.description)}" />`,
+    `<meta property="og:title" content="${escapeAttribute(metadata.title)}">`,
+    `<meta property="og:description" content="${escapeAttribute(metadata.description)}">`,
+    `<meta name="twitter:title" content="${escapeAttribute(metadata.title)}">`,
+    `<meta name="twitter:description" content="${escapeAttribute(metadata.description)}">`,
+    `<meta property="og:locale" content="${escapeAttribute(locale)}">`,
+    ...locales
+      .filter((supportedLocale) => supportedLocale !== locale)
+      .map(
+        (alternateLocale) =>
+          `<meta property="og:locale:alternate" content="${escapeAttribute(alternateLocale)}">`,
+      ),
+    `<meta name="twitter:card" content="summary_large_image">`,
     `<link rel="canonical" href="${escapeAttribute(canonicalCluster.canonical)}">`,
     ...canonicalCluster.alternates.map(
       (alternate) =>
         `<link rel="alternate" hreflang="${alternate.hreflang}" href="${escapeAttribute(alternate.href)}">`,
     ),
+    ...(metadata.images ?? []).flatMap((imageUrl) => [
+      `<meta property="og:image" content="${escapeAttribute(imageUrl)}">`,
+      `<meta name="twitter:image" content="${escapeAttribute(imageUrl)}">`,
+    ]),
   ];
 
   const head = headParts.join("\n");

@@ -1,14 +1,22 @@
 import { defaultLocale, type Locale, type PageType } from "../routing";
+import { SITE_BASE_URL } from "./site";
 
 export interface SeoMetadata {
   title: string;
   description: string;
+  images?: string[];
 }
+
+const SOCIAL_IMAGE_BY_LOCALE: Record<Locale, string[]> = {
+  me: [`${SITE_BASE_URL}/social-share-me.svg`],
+  en: [`${SITE_BASE_URL}/social-share-en.svg`],
+};
 
 const DEFAULT_SEO_METADATA: SeoMetadata = {
   title: "BDigital Agency",
   description:
     "BDigital is a full-service digital agency delivering design, marketing, and growth solutions.",
+  images: SOCIAL_IMAGE_BY_LOCALE[defaultLocale],
 };
 
 const SEO_METADATA: Record<Locale, Partial<Record<PageType, SeoMetadata>>> = {
@@ -101,15 +109,23 @@ const SEO_METADATA: Record<Locale, Partial<Record<PageType, SeoMetadata>>> = {
 export function getSeoMetadata(locale: Locale, page: PageType): SeoMetadata {
   const localized = SEO_METADATA[locale]?.[page];
   if (localized) {
-    return localized;
+    return withSeoDefaults(locale, localized);
   }
 
   const fallback = SEO_METADATA[defaultLocale]?.[page];
   if (fallback) {
-    return fallback;
+    return withSeoDefaults(locale, fallback);
   }
 
-  return DEFAULT_SEO_METADATA;
+  return withSeoDefaults(locale, DEFAULT_SEO_METADATA);
+}
+
+function withSeoDefaults(locale: Locale, metadata: SeoMetadata): SeoMetadata {
+  const localeImages = SOCIAL_IMAGE_BY_LOCALE[locale] ?? SOCIAL_IMAGE_BY_LOCALE[defaultLocale] ?? [];
+  return {
+    ...metadata,
+    images: metadata.images ?? localeImages,
+  };
 }
 
 export { DEFAULT_SEO_METADATA, SEO_METADATA };
