@@ -39,7 +39,7 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
-  
+
   /* BDigital specific colors matching the logo */
   --bdigital-navy: #1e3a5f;
   --bdigital-dark-navy: #142838;
@@ -48,7 +48,7 @@
   --bdigital-cyan-dark: #007a99;
   --neutral-gray: #6b7280;
   --light-gray: #9ca3af;
-  --dark-gray: #374151;
+  --dark-gray: #2e3644;
 }
 
 .dark {
@@ -127,7 +127,7 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
-  
+
   /* BDigital custom color utilities */
   --color-bdigital-navy: var(--bdigital-navy);
   --color-bdigital-dark-navy: var(--bdigital-dark-navy);
@@ -146,7 +146,13 @@
 
   body {
     @apply bg-background text-foreground;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-family:
+      "Inter",
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Roboto,
+      sans-serif;
   }
 }
 
@@ -214,7 +220,7 @@ html {
   .text-bdigital-navy {
     color: var(--color-bdigital-navy);
   }
-  
+
   .text-bdigital-cyan {
     color: var(--color-bdigital-cyan);
   }
@@ -224,19 +230,19 @@ html {
   .border-bdigital-cyan-dark {
     border-color: var(--color-bdigital-cyan-dark);
   }
-  
+
   .bg-bdigital-navy {
     background-color: var(--color-bdigital-navy);
   }
-  
+
   .bg-bdigital-cyan {
     background-color: var(--color-bdigital-cyan);
   }
-  
+
   .border-bdigital-cyan {
     border-color: var(--color-bdigital-cyan);
   }
-  
+
   .bg-bdigital-dark-navy {
     background-color: var(--color-bdigital-dark-navy);
   }
