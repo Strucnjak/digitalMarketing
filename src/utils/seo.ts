@@ -45,6 +45,32 @@ const HOME_BREADCRUMB_LABELS: Record<Locale, string> = {
   me: "Početna",
 };
 
+export interface LocalePresentation {
+  hreflang: string;
+  htmlLang: string;
+  ogLocale: string;
+  schemaLanguage: string;
+}
+
+const LOCALE_PRESENTATION: Record<Locale, LocalePresentation> = {
+  en: {
+    hreflang: "en",
+    htmlLang: "en",
+    ogLocale: "en_US",
+    schemaLanguage: "en",
+  },
+  me: {
+    hreflang: "sr-Latn-ME",
+    htmlLang: "sr-Latn-ME",
+    ogLocale: "sr_ME",
+    schemaLanguage: "sr-Latn-ME",
+  },
+};
+
+export function getLocalePresentation(locale: Locale): LocalePresentation {
+  return LOCALE_PRESENTATION[locale] ?? LOCALE_PRESENTATION[defaultLocale];
+}
+
 export const ORGANIZATION_SOCIAL_LINKS = [
   "https://www.facebook.com/BDigitalAgency",
   "https://www.instagram.com/bdigitalagency",
@@ -89,14 +115,20 @@ export function buildCanonicalCluster({
   canonicalUrl.hash = "";
   const canonical = canonicalUrl.href;
 
-  const alternates: AlternateHref[] = locales.map((alternateLocale) => ({
-    hreflang: alternateLocale,
-    href: buildAbsoluteLocalizedHref(alternateLocale, page, base),
-  }));
+  const alternates: AlternateHref[] = locales.map((alternateLocale) => {
+    const presentation = getLocalePresentation(alternateLocale);
+    return {
+      hreflang: presentation.hreflang,
+      href: buildAbsoluteLocalizedHref(alternateLocale, page, base),
+    };
+  });
 
-  const activeLocaleIndex = alternates.findIndex((alternate) => alternate.hreflang === locale);
+  const activePresentation = getLocalePresentation(locale);
+  const activeLocaleIndex = alternates.findIndex(
+    (alternate) => alternate.hreflang === activePresentation.hreflang,
+  );
   if (activeLocaleIndex >= 0) {
-    alternates[activeLocaleIndex] = { hreflang: locale, href: canonical };
+    alternates[activeLocaleIndex] = { hreflang: activePresentation.hreflang, href: canonical };
   }
 
   const xDefaultHref = buildAbsoluteLocalizedHref(defaultLocale, page, base, {
@@ -117,10 +149,12 @@ export function buildWebPageJsonLd({
   description,
   url,
 }: WebPageJsonLdOptions) {
+  const { schemaLanguage } = getLocalePresentation(locale);
+
   return {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    inLanguage: locale,
+    inLanguage: schemaLanguage,
     name: title,
     description,
     url,
@@ -133,6 +167,7 @@ export function buildOrganizationJsonLd({
   logoPath,
   socialProfiles = ORGANIZATION_SOCIAL_LINKS,
 }: BuildOrganizationJsonLdOptions) {
+  const { schemaLanguage } = getLocalePresentation(locale);
   const base = normalizeSiteBase(siteBaseUrl);
   const organizationName = ORGANIZATION_NAMES[locale] ?? ORGANIZATION_NAMES[defaultLocale];
   const logoUrl = new URL(logoPath, base).href;
@@ -141,7 +176,7 @@ export function buildOrganizationJsonLd({
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
-    inLanguage: locale,
+    inLanguage: schemaLanguage,
     name: organizationName,
     url: base.href,
     logo: logoUrl,
@@ -153,6 +188,7 @@ export function buildWebsiteJsonLd({
   locale,
   siteBaseUrl,
 }: BuildWebsiteJsonLdOptions) {
+  const { schemaLanguage } = getLocalePresentation(locale);
   const base = normalizeSiteBase(siteBaseUrl);
   const homePath = buildLocalizedPath(locale, "home", {
     includeLocalePrefix: locale !== defaultLocale,
@@ -166,7 +202,7 @@ export function buildWebsiteJsonLd({
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    inLanguage: locale,
+    inLanguage: schemaLanguage,
     name,
     url: homeUrl,
     potentialAction: {
@@ -184,6 +220,7 @@ export function buildBreadcrumbListJsonLd({
   canonicalUrl,
   pageTitle,
 }: BuildBreadcrumbListJsonLdOptions) {
+  const { schemaLanguage } = getLocalePresentation(locale);
   const base = normalizeSiteBase(siteBaseUrl);
   const canonical = new URL(canonicalUrl, base);
   const localizedSegments = getPageSegments(locale, page).filter((segment) => segment.length > 0);
@@ -217,7 +254,7 @@ export function buildBreadcrumbListJsonLd({
     return {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
-      inLanguage: locale,
+      inLanguage: schemaLanguage,
       itemListElement: items,
     };
   }
@@ -249,7 +286,7 @@ export function buildBreadcrumbListJsonLd({
   return {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    inLanguage: locale,
+    inLanguage: schemaLanguage,
     itemListElement: items,
   };
 }

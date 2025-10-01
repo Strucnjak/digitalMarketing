@@ -13,6 +13,7 @@ import {
   buildOrganizationJsonLd,
   buildWebsiteJsonLd,
   buildWebPageJsonLd,
+  getLocalePresentation,
   serializeJsonLd,
 } from "./utils/seo";
 
@@ -43,6 +44,7 @@ export interface RenderOptions {
 export function render(url: string, options: RenderOptions = {}): RenderResult {
   const requestUrl = new URL(url, SITE_BASE_URL);
   const { locale, page, hasLocalePrefix } = parsePathname(requestUrl.pathname);
+  const localePresentation = getLocalePresentation(locale);
   const footerYear = new Date().getFullYear();
   const initialState: InitialAppState = { locale, footerYear };
 
@@ -68,6 +70,13 @@ export function render(url: string, options: RenderOptions = {}): RenderResult {
   });
 
   const metadata = getSeoMetadata(locale, page);
+  const alternateOgLocales = Array.from(
+    new Set(
+      locales
+        .map((supportedLocale) => getLocalePresentation(supportedLocale).ogLocale)
+        .filter((supportedOgLocale) => supportedOgLocale !== localePresentation.ogLocale),
+    ),
+  );
 
   const structuredData = [
     buildWebPageJsonLd({
@@ -105,13 +114,11 @@ export function render(url: string, options: RenderOptions = {}): RenderResult {
     `<meta property="og:description" content="${escapeAttribute(metadata.description)}">`,
     `<meta name="twitter:title" content="${escapeAttribute(metadata.title)}">`,
     `<meta name="twitter:description" content="${escapeAttribute(metadata.description)}">`,
-    `<meta property="og:locale" content="${escapeAttribute(locale)}">`,
-    ...locales
-      .filter((supportedLocale) => supportedLocale !== locale)
-      .map(
-        (alternateLocale) =>
-          `<meta property="og:locale:alternate" content="${escapeAttribute(alternateLocale)}">`,
-      ),
+    `<meta property="og:locale" content="${escapeAttribute(localePresentation.ogLocale)}">`,
+    ...alternateOgLocales.map(
+      (alternateOgLocale) =>
+        `<meta property="og:locale:alternate" content="${escapeAttribute(alternateOgLocale)}">`,
+    ),
     `<meta name="twitter:card" content="summary_large_image">`,
     `<link rel="canonical" href="${escapeAttribute(canonicalCluster.canonical)}">`,
     ...canonicalCluster.alternates.map(
@@ -136,7 +143,7 @@ export function render(url: string, options: RenderOptions = {}): RenderResult {
     html: cleanedHtml,
     head,
     preloadLinks,
-    htmlLang: locale,
+    htmlLang: localePresentation.htmlLang,
     initialState,
   };
 }
