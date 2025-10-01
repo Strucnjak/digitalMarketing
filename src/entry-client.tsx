@@ -2,21 +2,21 @@ import { StrictMode } from "react";
 import { hydrateRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import { AppRoutes } from "./routes";
-import { defaultLocale, type Locale, isLocale } from "./routing";
+import { defaultLocale, isLocale } from "./routing";
+import { InitialStateProvider, type InitialAppState } from "./components/InitialStateContext";
 import "./index.css";
 
 declare global {
   interface Window {
-    __INITIAL_STATE__?: {
-      locale?: Locale;
-    };
+    __INITIAL_STATE__?: InitialAppState;
   }
 }
 
 const container = document.getElementById("root");
 
 if (container) {
-  const initialLocale = window.__INITIAL_STATE__?.locale;
+  const initialState: InitialAppState | undefined = window.__INITIAL_STATE__;
+  const initialLocale = initialState?.locale;
   const storageKey = "language";
 
   if (typeof window !== "undefined") {
@@ -48,9 +48,11 @@ if (container) {
   hydrateRoot(
     container,
     <StrictMode>
-      <BrowserRouter>
-        <AppRoutes />
-      </BrowserRouter>
+      <InitialStateProvider value={initialState}>
+        <BrowserRouter>
+          <AppRoutes />
+        </BrowserRouter>
+      </InitialStateProvider>
     </StrictMode>
   );
 }

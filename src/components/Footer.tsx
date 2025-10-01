@@ -2,10 +2,14 @@ import { Separator } from "./ui/separator";
 import { Facebook, Instagram, Linkedin, Mail, Phone, MapPin } from "lucide-react";
 import { useLanguage } from "./LanguageContext";
 
-export function Footer() {
+interface FooterProps {
+  initialYear?: string;
+}
+
+export function Footer({ initialYear }: FooterProps) {
   const { t } = useLanguage();
 
-  const currentYear = new Date().getFullYear();
+  const displayYear = initialYear ?? "2024";
 
   const services = ["Web dizajn i razvoj", "SEO optimizacija", "Upravljanje društvenim mrežama", "Brendiranje", "Digitalna strategija"];
 
@@ -160,7 +164,7 @@ export function Footer() {
         {/* Bottom Footer */}
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-gray-400 text-sm">
-            © {currentYear} BDigital. {t("footer.rights")}
+            © {displayYear} BDigital. {t("footer.rights")}
           </p>
           <div className="flex gap-6 text-sm text-gray-400">
             <a href="#" className="hover:text-bdigital-cyan transition-colors duration-200">

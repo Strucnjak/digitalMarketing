@@ -17,6 +17,7 @@ import { StrategyPage } from "./components/services/StrategyPage";
 import { ServiceInquiryForm } from "./components/ServiceInquiryForm";
 import { FreeConsultationPage } from "./components/FreeConsultationPage";
 import { MobileQuickNav } from "./components/MobileQuickNav";
+import { useInitialState } from "./components/InitialStateContext";
 import { getSeoMetadata } from "./config/seo-meta";
 import { SITE_BASE_URL } from "./config/site";
 import {
@@ -183,6 +184,8 @@ function HomePage() {
 function AppLayout() {
   const location = useLocation();
   const isHome = parsePathname(location.pathname).page === "home";
+  const initialState = useInitialState();
+  const footerYear = initialState?.footerYear ? String(initialState.footerYear) : undefined;
 
   return (
     <div className="min-h-screen bg-white">
@@ -191,7 +194,7 @@ function AppLayout() {
         <Outlet />
       </main>
       {isHome && <MobileQuickNav />}
-      {isHome && <Footer />}
+      {isHome && <Footer initialYear={footerYear} />}
     </div>
   );
 }
