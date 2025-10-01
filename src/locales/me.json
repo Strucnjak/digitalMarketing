@@ -513,5 +513,11 @@
   "email.consultation.subject": "Zahtjev za konsultaciju",
   "email.consultation.body": "Ime: {name}\\nEmail: {email}\\nTelefon: {phone}\\nKompanija: {company}\\nWebsite: {website}\\nTip biznisa: {businessType}\\nTrenutni izazovi: {currentChallenges}\\nCiljevi: {goals}\\nZainteresovane usluge: {interestedServices}\\nPreferirani kontakt: {preferredContact}\\nPreferirano vrijeme: {preferredTime}\\nDodatne informacije: {additionalInfo}\\nNewsletter: {newsletter}",
   "email.inquiry.subject": "Upit za uslugu",
-  "email.inquiry.body": "Ime i prezime: {fullName}\\nEmail: {email}\\nTelefon: {phone}\\nKompanija: {company}\\nWebsite: {website}\\nOdabrana usluga: {selectedService}\\nOdabrani paket: {selectedPackage}\\nTipovi projekata: {projectTypes}\\nTrenutna situacija: {currentSituation}\\nCiljevi projekta: {projectGoals}\\nCiljna publika: {targetAudience}\\nVremenski okvir: {timeline}\\nBudžet: {budget}\\nDodatne usluge: {additionalServices}\\nPreferirani kontakt: {preferredContact}\\nDodatne informacije: {additionalInfo}\\nKako ste čuli za nas: {howDidYouHear}\\nNewsletter: {newsletter}"
+  "email.inquiry.body": "Ime i prezime: {fullName}\\nEmail: {email}\\nTelefon: {phone}\\nKompanija: {company}\\nWebsite: {website}\\nOdabrana usluga: {selectedService}\\nOdabrani paket: {selectedPackage}\\nTipovi projekata: {projectTypes}\\nTrenutna situacija: {currentSituation}\\nCiljevi projekta: {projectGoals}\\nCiljna publika: {targetAudience}\\nVremenski okvir: {timeline}\\nBudžet: {budget}\\nDodatne usluge: {additionalServices}\\nPreferirani kontakt: {preferredContact}\\nDodatne informacije: {additionalInfo}\\nKako ste čuli za nas: {howDidYouHear}\\nNewsletter: {newsletter}",
+  "footer.newsletter.submit": "Pošaljite email",
+  "footer.social.title": "Društvene mreže",
+  "footer.social.facebook": "Facebook",
+  "footer.social.instagram": "Instagram",
+  "footer.social.linkedin": "LinkedIn",
+  "portfolio.slide_list": "Slajdovi projekta"
 }

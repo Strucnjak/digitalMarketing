@@ -112,9 +112,9 @@ export function ContactSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-12 lg:mb-16">
-          <Badge className="bg-bdigital-cyan/10 text-bdigital-cyan border-bdigital-cyan/20 mb-4 px-4 py-2">{_t("contact.badge")}</Badge>
+          <Badge className="bg-bdigital-cyan/10 text-bdigital-cyan-dark border-bdigital-cyan-dark/20 mb-4 px-4 py-2">{_t("contact.badge")}</Badge>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-bdigital-navy mb-4 lg:mb-6">
-            {_t("contact.heading.part1")} <span className="text-bdigital-cyan">{_t("contact.heading.emphasis")}</span>
+            {_t("contact.heading.part1")} <span className="text-bdigital-cyan-dark">{_t("contact.heading.emphasis")}</span>
           </h2>
           <p className="text-lg lg:text-xl text-neutral-gray max-w-3xl mx-auto leading-relaxed">{_t("contact.description")}</p>
         </div>
@@ -251,11 +251,11 @@ export function ContactSection() {
                         <div className="flex-1">
                           <h4 className="font-semibold text-bdigital-navy mb-1">{item.title}</h4>
                           {item.link ? (
-                            <a href={item.link} className="text-bdigital-cyan hover:text-bdigital-navy font-medium transition-colors duration-200">
+                            <a href={item.link} className="text-bdigital-cyan-dark hover:text-bdigital-navy font-medium transition-colors duration-200">
                               {item.content}
                             </a>
                           ) : (
-                            <p className="text-bdigital-cyan font-medium">{item.content}</p>
+                            <p className="text-bdigital-cyan-dark font-medium">{item.content}</p>
                           )}
                           <p className="text-sm text-neutral-gray mt-1">{item.description}</p>
                         </div>
@@ -270,7 +270,7 @@ export function ContactSection() {
             <Card className="border-0 shadow-xl bg-gradient-to-r from-bdigital-navy to-bdigital-dark-navy text-white">
               <CardContent className="p-6 lg:p-8">
                 <h4 className="text-xl font-bold mb-6 text-center">
-                  {_t("contact.stats.title.pre")} <span className="text-bdigital-cyan">{_t("contact.stats.title.emphasis")}</span>
+                  {_t("contact.stats.title.pre")} <span className="text-bdigital-cyan-dark">{_t("contact.stats.title.emphasis")}</span>
                 </h4>
                 <div className="grid grid-cols-2 gap-4 lg:gap-6">
                   {stats.map((stat, index) => (

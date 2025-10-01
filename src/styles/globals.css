@@ -45,7 +45,7 @@
   --bdigital-dark-navy: #142838;
   --bdigital-cyan: #00d4ff;
   --bdigital-cyan-light: #33e0ff;
-  --bdigital-cyan-dark: #00b8e6;
+  --bdigital-cyan-dark: #007a99;
   --neutral-gray: #6b7280;
   --light-gray: #9ca3af;
   --dark-gray: #374151;
@@ -217,6 +217,12 @@ html {
   
   .text-bdigital-cyan {
     color: var(--color-bdigital-cyan);
+  }
+  .text-bdigital-cyan-dark {
+    color: var(--color-bdigital-cyan-dark);
+  }
+  .border-bdigital-cyan-dark {
+    border-color: var(--color-bdigital-cyan-dark);
   }
   
   .bg-bdigital-navy {

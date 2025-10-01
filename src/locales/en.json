@@ -512,5 +512,11 @@
   "email.consultation.subject": "Consultation request",
   "email.consultation.body": "Name: {name}\\nEmail: {email}\\nPhone: {phone}\\nCompany: {company}\\nWebsite: {website}\\nBusiness Type: {businessType}\\nCurrent Challenges: {currentChallenges}\\nGoals: {goals}\\nInterested Services: {interestedServices}\\nPreferred Contact: {preferredContact}\\nPreferred Time: {preferredTime}\\nAdditional Info: {additionalInfo}\\nNewsletter: {newsletter}",
   "email.inquiry.subject": "Service inquiry",
-  "email.inquiry.body": "Full Name: {fullName}\\nEmail: {email}\\nPhone: {phone}\\nCompany: {company}\\nWebsite: {website}\\nSelected Service: {selectedService}\\nSelected Package: {selectedPackage}\\nProject Types: {projectTypes}\\nCurrent Situation: {currentSituation}\\nProject Goals: {projectGoals}\\nTarget Audience: {targetAudience}\\nTimeline: {timeline}\\nBudget: {budget}\\nAdditional Services: {additionalServices}\\nPreferred Contact: {preferredContact}\\nAdditional Info: {additionalInfo}\\nHow Did You Hear: {howDidYouHear}\\nNewsletter: {newsletter}"
+  "email.inquiry.body": "Full Name: {fullName}\\nEmail: {email}\\nPhone: {phone}\\nCompany: {company}\\nWebsite: {website}\\nSelected Service: {selectedService}\\nSelected Package: {selectedPackage}\\nProject Types: {projectTypes}\\nCurrent Situation: {currentSituation}\\nProject Goals: {projectGoals}\\nTarget Audience: {targetAudience}\\nTimeline: {timeline}\\nBudget: {budget}\\nAdditional Services: {additionalServices}\\nPreferred Contact: {preferredContact}\\nAdditional Info: {additionalInfo}\\nHow Did You Hear: {howDidYouHear}\\nNewsletter: {newsletter}",
+  "footer.newsletter.submit": "Submit email",
+  "footer.social.title": "Social media",
+  "footer.social.facebook": "Facebook",
+  "footer.social.instagram": "Instagram",
+  "footer.social.linkedin": "LinkedIn",
+  "portfolio.slide_list": "Project slides"
 }

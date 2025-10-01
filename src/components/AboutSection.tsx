@@ -161,7 +161,7 @@ export function AboutSection() {
                   />
                 </div>
                 <h4 className="text-xl font-bold text-bdigital-navy mb-2">{member.name}</h4>
-                <p className="text-bdigital-cyan font-medium mb-4">{member.role}</p>
+                <p className="text-bdigital-cyan-dark font-medium mb-4">{member.role}</p>
                 <p className="text-neutral-gray text-sm leading-relaxed">{member.description}</p>
               </CardContent>
             </Card>
@@ -184,7 +184,7 @@ export function AboutSection() {
             <button
               type="button"
               onClick={handleSecondary}
-              className="border border-bdigital-cyan text-bdigital-cyan px-8 py-3 rounded-lg font-semibold hover:bg-bdigital-cyan hover:text-bdigital-navy transition-colors"
+              className="border border-bdigital-cyan-dark text-bdigital-cyan-dark px-8 py-3 rounded-lg font-semibold hover:bg-bdigital-cyan hover:text-bdigital-navy transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bdigital-cyan-dark"
             >
               {t("about.cta.secondary")}
             </button>

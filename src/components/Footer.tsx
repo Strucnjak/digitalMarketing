@@ -68,25 +68,38 @@ export function Footer({ initialYear }: FooterProps) {
             <p className="text-gray-300 leading-relaxed">{t("footer.description")}</p>
 
             {/* Social Links */}
-            <div className="flex space-x-4">
-              <a
-                href="#"
-                className="w-10 h-10 bg-bdigital-dark-navy rounded-lg flex items-center justify-center hover:bg-bdigital-cyan hover:text-bdigital-navy transition-all duration-300 group"
-              >
-                <Facebook className="h-5 w-5 group-hover:scale-110 transition-transform duration-300" />
-              </a>
-              <a
-                href="#"
-                className="w-10 h-10 bg-bdigital-dark-navy rounded-lg flex items-center justify-center hover:bg-bdigital-cyan hover:text-bdigital-navy transition-all duration-300 group"
-              >
-                <Instagram className="h-5 w-5 group-hover:scale-110 transition-transform duration-300" />
-              </a>
-              <a
-                href="#"
-                className="w-10 h-10 bg-bdigital-dark-navy rounded-lg flex items-center justify-center hover:bg-bdigital-cyan hover:text-bdigital-navy transition-all duration-300 group"
-              >
-                <Linkedin className="h-5 w-5 group-hover:scale-110 transition-transform duration-300" />
-              </a>
+            <div className="flex space-x-4" role="list" aria-label={t("footer.social.title") ?? "Social media"}>
+              {[
+                {
+                  href: "https://www.facebook.com/BDigitalAgency",
+                  label: t("footer.social.facebook") ?? "Facebook",
+                  Icon: Facebook,
+                },
+                {
+                  href: "https://www.instagram.com/bdigitalagency",
+                  label: t("footer.social.instagram") ?? "Instagram",
+                  Icon: Instagram,
+                },
+                {
+                  href: "https://www.linkedin.com/company/bdigital-agency",
+                  label: t("footer.social.linkedin") ?? "LinkedIn",
+                  Icon: Linkedin,
+                },
+              ].map(({ href, label, Icon }) => (
+                <a
+                  key={label}
+                  href={href}
+                  aria-label={label}
+                  title={label}
+                  className="w-10 h-10 bg-bdigital-dark-navy rounded-lg flex items-center justify-center hover:bg-bdigital-cyan hover:text-bdigital-navy transition-all duration-300 group focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bdigital-cyan"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  role="listitem"
+                >
+                  <Icon className="h-5 w-5 group-hover:scale-110 transition-transform duration-300" aria-hidden="true" />
+                  <span className="sr-only">{label}</span>
+                </a>
+              ))}
             </div>
           </div>
 
@@ -151,8 +164,13 @@ export function Footer({ initialYear }: FooterProps) {
                   placeholder={t("footer.newsletter.placeholder")}
                   className="flex-1 px-3 py-2 bg-bdigital-dark-navy border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-bdigital-cyan transition-colors duration-200"
                 />
-                <button className="bg-bdigital-cyan hover:bg-bdigital-cyan-light text-bdigital-navy px-4 py-2 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl">
-                  <Mail className="h-4 w-4" />
+                <button
+                  type="button"
+                  className="bg-bdigital-cyan hover:bg-bdigital-cyan-light text-bdigital-navy px-4 py-2 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bdigital-cyan"
+                  aria-label={t("footer.newsletter.submit") ?? "Submit email"}
+                >
+                  <Mail className="h-4 w-4" aria-hidden="true" />
+                  <span className="sr-only">{t("footer.newsletter.submit") ?? "Submit email"}</span>
                 </button>
               </div>
             </div>
