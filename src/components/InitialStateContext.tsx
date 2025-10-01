@@ -2,7 +2,7 @@ import { createContext, useContext, type ReactNode } from "react";
 import type { Locale } from "../routing";
 
 export interface InitialAppState {
-  locale?: Locale;
+  locale: Locale;
   footerYear?: number;
 }
 
