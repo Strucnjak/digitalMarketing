@@ -57,6 +57,7 @@ export function render(url: string, options: RenderOptions = {}): RenderResult {
   );
 
   const html = renderToString(app);
+  const { cleanedHtml, linkTags } = extractLinkTags(html);
 
   const canonicalCluster = buildCanonicalCluster({
     currentUrl: requestUrl,
@@ -121,6 +122,7 @@ export function render(url: string, options: RenderOptions = {}): RenderResult {
       `<meta property="og:image" content="${escapeAttribute(imageUrl)}">`,
       `<meta name="twitter:image" content="${escapeAttribute(imageUrl)}">`,
     ]),
+    ...linkTags,
     jsonLdScript,
   ];
 
@@ -131,7 +133,7 @@ export function render(url: string, options: RenderOptions = {}): RenderResult {
     : "";
 
   return {
-    html,
+    html: cleanedHtml,
     head,
     preloadLinks,
     htmlLang: locale,
@@ -179,6 +181,16 @@ function renderPreloadLinks(manifest: Manifest, entry: string) {
 
   traverse(entry);
   return links;
+}
+
+function extractLinkTags(html: string): { cleanedHtml: string; linkTags: string[] } {
+  const linkRegex = /<link\b[^>]*>/gi;
+  const linkTags: string[] = [];
+  const cleanedHtml = html.replace(linkRegex, (match) => {
+    linkTags.push(match);
+    return "";
+  });
+  return { cleanedHtml, linkTags };
 }
 
 function escapeAttribute(value: string): string {

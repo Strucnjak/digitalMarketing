@@ -9,7 +9,7 @@ interface FooterProps {
 export function Footer({ initialYear }: FooterProps) {
   const { t } = useLanguage();
 
-  const displayYear = initialYear ?? "2024";
+  const displayYear = initialYear ?? String(new Date().getFullYear());
 
   const services = ["Web dizajn i razvoj", "SEO optimizacija", "Upravljanje društvenim mrežama", "Brendiranje", "Digitalna strategija"];
 

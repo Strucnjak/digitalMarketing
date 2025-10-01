@@ -15,8 +15,17 @@ declare global {
 const container = document.getElementById("root");
 
 if (container) {
-  const initialState: InitialAppState | undefined = window.__INITIAL_STATE__;
-  const initialLocale = initialState?.locale;
+  const initialStateFromServer: InitialAppState | undefined = window.__INITIAL_STATE__;
+  const fallbackInitialState: InitialAppState = {
+    locale: initialStateFromServer?.locale ?? defaultLocale,
+    footerYear: initialStateFromServer?.footerYear ?? new Date().getFullYear(),
+  };
+  const initialState: InitialAppState = initialStateFromServer ?? fallbackInitialState;
+  if (!initialStateFromServer) {
+    window.__INITIAL_STATE__ = initialState;
+  }
+
+  const initialLocale = initialState.locale;
   const storageKey = "language";
 
   if (typeof window !== "undefined") {
