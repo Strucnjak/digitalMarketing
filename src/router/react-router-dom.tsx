@@ -434,14 +434,18 @@ export interface NavigateOptions {
 }
 
 export function useNavigate() {
-  const router = useRouterContext();
-  return (to: string, options: NavigateOptions = {}) => {
-    if (options.replace) {
-      router.navigator.replace(to, options.state);
-    } else {
-      router.navigator.push(to, options.state);
-    }
-  };
+  const { navigator } = useRouterContext();
+
+  return useCallback(
+    (to: string, options: NavigateOptions = {}) => {
+      if (options.replace) {
+        navigator.replace(to, options.state);
+      } else {
+        navigator.push(to, options.state);
+      }
+    },
+    [navigator],
+  );
 }
 
 export function useLocation(): Location {
@@ -471,6 +475,7 @@ export interface NavigateProps {
 export function Navigate({ to, replace = false, state }: NavigateProps) {
   const navigate = useNavigate();
   const router = useRouterContext();
+  const { pathname, search, hash } = router.location;
 
   if (router.static && router.staticContext) {
     if (replace) {
@@ -483,8 +488,16 @@ export function Navigate({ to, replace = false, state }: NavigateProps) {
   }
 
   useEffect(() => {
+    const target = parseLocation(to);
+    if (
+      pathname === target.pathname &&
+      search === target.search &&
+      hash === target.hash
+    ) {
+      return;
+    }
     navigate(to, { replace, state });
-  }, [navigate, to, replace, state]);
+  }, [navigate, to, replace, state, pathname, search, hash]);
 
   return null;
 }
