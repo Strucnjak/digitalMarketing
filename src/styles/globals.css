@@ -40,7 +40,7 @@
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
 
-  /* BDigital specific colors matching the logo */
+  /* DIAL Digital specific colors matching the logo */
   --bdigital-navy: #1e3a5f;
   --bdigital-dark-navy: #142838;
   --bdigital-cyan: #00d4ff;
@@ -128,7 +128,7 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
-  /* BDigital custom color utilities */
+  /* DIAL Digital custom color utilities */
   --color-bdigital-navy: var(--bdigital-navy);
   --color-bdigital-dark-navy: var(--bdigital-dark-navy);
   --color-bdigital-cyan: var(--bdigital-cyan);
@@ -215,7 +215,7 @@ html {
   font-size: var(--font-size);
 }
 
-/* Custom utilities for BDigital */
+/* Custom utilities for DIAL Digital */
 @layer utilities {
   .text-bdigital-navy {
     color: var(--color-bdigital-navy);

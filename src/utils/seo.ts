@@ -36,8 +36,8 @@ export interface WebPageJsonLdOptions {
 export const STRUCTURED_DATA_ELEMENT_ID = "seo-structured-data";
 
 const ORGANIZATION_NAMES: Record<Locale, string> = {
-  en: "BDigital Agency",
-  me: "BDigital agencija",
+  en: "DIAL Digital Agency",
+  me: "DIAL Digital agencija",
 };
 
 const HOME_BREADCRUMB_LABELS: Record<Locale, string> = {

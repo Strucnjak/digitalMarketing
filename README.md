@@ -1,6 +1,6 @@
-# BDigital Marketing Website
+# DIAL Digital Marketing Website
 
-This project contains the marketing site for BDigital, built with React, TypeScript, Tailwind CSS, and Vite. The application supports static-site generation (SSG) for production deployment and localized routing for Montenegrin (`me`) and English (`en`).
+This project contains the marketing site for DIAL Digital, built with React, TypeScript, Tailwind CSS, and Vite. The application supports static-site generation (SSG) for production deployment and localized routing for Montenegrin (`me`) and English (`en`).
 
 ## Local Development
 
