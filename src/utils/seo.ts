@@ -60,7 +60,12 @@ const LOCALE_PRESENTATION: Record<Locale, LocalePresentation> = {
     schemaLanguage: "en",
   },
   me: {
-    hreflang: "sr-Latn-ME",
+    // Google Search prefers that the hreflang value matches the locale
+    // identifier used in the URL structure ("me" in our case). We still keep
+    // the full BCP-47 tag for other consumers like the <html lang> attribute
+    // and structured data, but ensure the alternate link tags reflect the
+    // locale slug expected by the tests and search engines.
+    hreflang: "me",
     htmlLang: "sr-Latn-ME",
     ogLocale: "sr_ME",
     schemaLanguage: "sr-Latn-ME",
