@@ -1,27 +1,33 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
-  <title id="title">DIAL Digital Logo</title>
-  <desc id="desc">Interlocking letter D monogram for DIAL Digital agency</desc>
-  <defs>
-    <linearGradient id="dialGradient" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#ff4f4f" />
-      <stop offset="45%" stop-color="#ff4f4f" />
-      <stop offset="100%" stop-color="#0a7cff" />
-    </linearGradient>
-  </defs>
-  <path
-    d="M26 16h46c22 0 40 18 40 40s-18 40-40 40H26Z"
-    fill="none"
-    stroke="url(#dialGradient)"
-    stroke-width="18"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-  />
-  <path
-    d="M46 32h28c14 0 26 12 26 26s-12 26-26 26H46Z"
-    fill="none"
-    stroke="#0a7cff"
-    stroke-width="12"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-  />
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 160 160" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <g id="Objects" transform="matrix(0.992978,0,0,0.992978,-168.244556,-98.862189)">
+        <g transform="matrix(0,141.585342,141.585342,0,249.999924,109.428925)">
+            <path d="M0.002,-0.3L0.818,-0.3L0.818,-0.015C0.818,0.16 0.676,0.301 0.502,0.301C0.327,0.301 0.185,0.16 0.185,-0.015L0.185,-0.111L0.282,-0.111L0.282,-0.015C0.282,0.106 0.381,0.205 0.502,0.205C0.623,0.205 0.721,0.106 0.721,-0.015L0.721,-0.203L0.098,-0.203L0.098,0C0.098,0.221 0.278,0.401 0.499,0.401C0.72,0.401 0.9,0.221 0.9,0L0.9,-0.401L0.278,-0.401L0.278,-0.348L0.182,-0.348L0.182,-0.498L0.997,-0.498L0.997,0C0.997,0.275 0.773,0.498 0.499,0.498C0.225,0.498 0.002,0.275 0.002,0L0.002,-0.3Z" style="fill:rgb(0,117,255);fill-rule:nonzero;"/>
+        </g>
+        <g transform="matrix(0,100.869636,100.869636,0,190.192465,138.561157)">
+            <defs>
+                <mask id="Mask">
+                
+                    <g transform="matrix(-0,0.009984,0.009984,-0,-0.386636,-0.205792)"><image id="_Image1" width="160px" height="160px" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKAAAACgCAAAAACupDjxAAAACXBIWXMAAA7EAAAOxAGVKw4bAAABSElEQVR4nO3aS24CQRAEUWP7Tr6a7+qT+AtLz6KhJUIiK6WIbW2eqqcRaDidn2b3nAbsEkgTSBNIE0gTSBNIE0gTSBNIE0gTSBNIE0gTSBNIE0gbD3zdzN8/HsK40fl2b2nf+CMeDzw8gzNfSOyAcXX9BuPVA+Pq+g3GE0jzktAE0uqBcXX9BuPVA+Pq+g3GE0jzktAE0uqBcXX9BuPVA+Pq+g3GE0jzktAE0nwGaQJp9cC4un6D8QTSvCS08cCm/838rubxtR6AP6v5JOD3aj4JuDzieB4xrWmDAu9KIG0HjFe/QYG7BNLqgfGaNujXrbtq2qA/O++q6YjHb7ATGK9+gwJ3CaQ1fVB/reYCd+2Af4+CXKt+g+OBHvGuA/BzNY8DT/+Cl9U8fsQH4CnIuN74t50CaQJpAmkCaQJpAmkCaQJpAmnjgRfyhrpAyMBUzwAAAABJRU5ErkJggg=="/>
+                    </g>
+                </mask>
+            </defs>
+            <g mask="url(#Mask)">
+                <path d="M-0.034,-0.106L1.111,-0.106L1.111,0.03L0.102,0.03L0.102,0.106L-0.034,0.106L-0.034,-0.106Z" style="fill:rgb(255,54,50);fill-rule:nonzero;"/>
+            </g>
+        </g>
+        <g transform="matrix(0,71.624695,71.624695,0,250.124626,138.561157)">
+            <defs>
+                <mask id="Mask1">
+                
+                    <g transform="matrix(-0,0.01406,0.01406,-0,-0.544503,-1.126572)"><image id="_Image2" width="160px" height="160px" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKAAAACgCAAAAACupDjxAAAACXBIWXMAAA7EAAAOxAGVKw4bAAABOklEQVR4nO3ay43CQBQFURsRKKkRHlvWgIngmZYKy1f96qwtKPWPZoZ1W7Jdzg74xUDKQMpAykDKQMpAykDKQMpAykDKQMpAykDKQMpAykAqPvB63ls/niNPref9jfp2H3kqforjAwfX4PuAtx5bXGOBW3rg8gIhFUeQ+gw9NcsmiR9BN0lpkk3ScwTj12CrXexBXZtkig8Zwfg1+NeDuuUIxq9BL6xU/GXBKaZaTbE36po36lr8CMavQaeY6jWC6YF+J6l53aq12sVOcc0R3HnRoac8qHdedOgp12DNg5rqNcWOYGmSTeIX99osH3Xxgd5mSh7UNT/qqPhjxv+TUL02yXm/V4//obeBlIGUgZSBlIGUgZSBlIGUgZSBlIGUgZSBlIGUgZSBlIGUgZSBlIGUgZSBlIGUgdQX9FS0LUdUsBgAAAAASUVORK5CYII="/>
+                    </g>
+                </mask>
+            </defs>
+            <g mask="url(#Mask1)">
+                <path d="M-0.04,-0.22L0.151,-0.22L0.151,-0.031C0.151,0.208 0.346,0.403 0.585,0.403C0.824,0.403 1.019,0.208 1.019,-0.031L1.019,-0.594L1.21,-0.594L1.21,-0.031C1.21,0.314 0.93,0.594 0.585,0.594C0.24,0.594 -0.04,0.314 -0.04,-0.031L-0.04,-0.22Z" style="fill:rgb(255,54,50);fill-rule:nonzero;"/>
+            </g>
+        </g>
+    </g>
 </svg>
