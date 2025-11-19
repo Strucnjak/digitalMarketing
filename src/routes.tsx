@@ -187,6 +187,22 @@ function AppLayout() {
   const initialState = useInitialState();
   const footerYear = initialState?.footerYear ? String(initialState.footerYear) : undefined;
 
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    if (location.hash) {
+      const target = document.querySelector(location.hash);
+      if (target instanceof HTMLElement) {
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+        return;
+      }
+    }
+
+    window.scrollTo({ top: 0, behavior: "auto" });
+  }, [location.pathname, location.hash]);
+
   return (
     <div className="min-h-screen bg-white">
       <Navigation />
