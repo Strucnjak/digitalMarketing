@@ -73,9 +73,22 @@ export function Navigation() {
     setServicesOpen(false);
   };
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   const handleHomeClick = () => {
     const path = buildLocalizedPath(activeLocale, "home", { includeLocalePrefix });
-    navigate(path);
+    const isAlreadyHome = routeInfo.page === "home";
+
+    if (isAlreadyHome) {
+      scrollToTop();
+    } else {
+      navigate(path);
+      // Ensure we land at the top after navigation completes
+      setTimeout(scrollToTop, 100);
+    }
+
     setIsOpen(false);
   };
 
