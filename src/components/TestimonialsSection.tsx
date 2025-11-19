@@ -10,7 +10,7 @@ export function TestimonialsSection() {
     {
       name: 'Marko Petrović',
       role: 'Vlasnik restorana "Konoba Stari Grad"',
-      content: 'BDigital je kreirao fantastičnu web stranicu za naš restoran. Broj online rezervacija se udvostručio u prva tri meseca!',
+      content: 'DIAL Digital je kreirao fantastičnu web stranicu za naš restoran. Broj online rezervacija se udvostručio u prva tri meseca!',
       avatar: 'MP',
       rating: 5
     },
@@ -24,7 +24,7 @@ export function TestimonialsSection() {
     {
       name: 'Stefan Jovanović',
       role: 'Osnivač "TechStart ME"',
-      content: 'Profesionalni pristup, kreativna rešenja i odličan rezultat. Preporučujem BDigital svim kompanijama koje žele rast.',
+      content: 'Profesionalni pristup, kreativna rešenja i odličan rezultat. Preporučujem DIAL Digital svim kompanijama koje žele rast.',
       avatar: 'SJ',
       rating: 5
     }
@@ -32,7 +32,7 @@ export function TestimonialsSection() {
     {
       name: 'Mark Petrovic',
       role: 'Owner of "Konoba Stari Grad" Restaurant',
-      content: 'BDigital created a fantastic website for our restaurant. Online reservations doubled in the first three months!',
+      content: 'DIAL Digital created a fantastic website for our restaurant. Online reservations doubled in the first three months!',
       avatar: 'MP',
       rating: 5
     },
@@ -46,7 +46,7 @@ export function TestimonialsSection() {
     {
       name: 'Stefan Jovanovic',
       role: 'Founder of "TechStart ME"',
-      content: 'Professional approach, creative solutions and excellent results. I recommend BDigital to all companies that want growth.',
+      content: 'Professional approach, creative solutions and excellent results. I recommend DIAL Digital to all companies that want growth.',
       avatar: 'SJ',
       rating: 5
     }

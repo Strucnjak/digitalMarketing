@@ -148,32 +148,20 @@ export function Navigation() {
             <button
               onClick={handleHomeClick}
               className="flex items-center space-x-2 group transition-all duration-300 hover:scale-105"
-              aria-label="BDigital - Početna stranica"
+              aria-label="DIAL Digital - Početna stranica"
             >
-              <div className="w-8 h-8 lg:w-10 lg:h-10 bg-bdigital-cyan rounded-lg flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow duration-300">
-                <div className="w-6 h-6 relative">
-                  {/* Pixel-style B made with divs */}
-                  <div className="absolute inset-0 grid grid-cols-3 grid-rows-5 gap-px">
-                    <div className="bg-bdigital-navy"></div>
-                    <div className="bg-bdigital-navy"></div>
-                    <div className="bg-transparent"></div>
-                    <div className="bg-bdigital-navy"></div>
-                    <div className="bg-transparent"></div>
-                    <div className="bg-bdigital-navy"></div>
-                    <div className="bg-bdigital-navy"></div>
-                    <div className="bg-bdigital-navy"></div>
-                    <div className="bg-transparent"></div>
-                    <div className="bg-bdigital-navy"></div>
-                    <div className="bg-transparent"></div>
-                    <div className="bg-bdigital-navy"></div>
-                    <div className="bg-bdigital-navy"></div>
-                    <div className="bg-bdigital-navy"></div>
-                    <div className="bg-transparent"></div>
-                  </div>
-                </div>
+              <div className="w-8 h-8 lg:w-10 lg:h-10 bg-white rounded-lg flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow duration-300">
+                <img
+                  src="/logo.svg"
+                  alt="DIAL Digital logo"
+                  className="w-7 h-7 lg:w-8 lg:h-8"
+                  loading="lazy"
+                />
               </div>
-              <span className={`text-lg lg:text-xl font-bold transition-colors duration-300 ${isScrolled ? "text-bdigital-navy" : "text-white"}`}>
-                Digital
+              <span
+                className={`text-lg lg:text-xl font-bold transition-colors duration-300 ${isScrolled ? "text-bdigital-navy" : "text-white"}`}
+              >
+                DIAL Digital
               </span>
             </button>
           </div>
@@ -295,10 +283,10 @@ export function Navigation() {
                   {/* Header */}
                   <div className="flex justify-between items-center py-4 border-b border-gray-200">
                     <div className="flex items-center space-x-2">
-                      <div className="w-8 h-8 bg-bdigital-cyan rounded-lg flex items-center justify-center">
-                        <span className="text-bdigital-navy text-sm font-bold">B</span>
+                      <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center shadow">
+                        <img src="/logo.svg" alt="DIAL Digital logo" className="w-6 h-6" loading="lazy" />
                       </div>
-                      <span className="text-lg font-bold text-bdigital-navy">BDigital</span>
+                      <span className="text-lg font-bold text-bdigital-navy">DIAL Digital</span>
                     </div>
                     <Button
                       variant="ghost"

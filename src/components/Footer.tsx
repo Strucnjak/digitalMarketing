@@ -35,33 +35,19 @@ export function Footer({ initialYear }: FooterProps) {
             <div className="flex items-center space-x-3">
               {/* Logo matching the nav */}
               <div className="relative">
-                <div className="w-10 h-10 bg-bdigital-cyan rounded-md flex items-center justify-center shadow-lg">
-                  <div className="w-6 h-6 relative">
-                    {/* Pixel-style B made with divs */}
-                    <div className="absolute inset-0 grid grid-cols-3 grid-rows-5 gap-px">
-                      <div className="bg-bdigital-navy"></div>
-                      <div className="bg-bdigital-navy"></div>
-                      <div className="bg-transparent"></div>
-                      <div className="bg-bdigital-navy"></div>
-                      <div className="bg-transparent"></div>
-                      <div className="bg-bdigital-navy"></div>
-                      <div className="bg-bdigital-navy"></div>
-                      <div className="bg-bdigital-navy"></div>
-                      <div className="bg-transparent"></div>
-                      <div className="bg-bdigital-navy"></div>
-                      <div className="bg-transparent"></div>
-                      <div className="bg-bdigital-navy"></div>
-                      <div className="bg-bdigital-navy"></div>
-                      <div className="bg-bdigital-navy"></div>
-                      <div className="bg-transparent"></div>
-                    </div>
-                  </div>
+                <div className="w-10 h-10 bg-white rounded-md flex items-center justify-center shadow-lg">
+                  <img
+                    src="/logo.svg"
+                    alt="DIAL Digital logo"
+                    className="w-7 h-7"
+                    loading="lazy"
+                  />
                 </div>
                 {/* Glow effect */}
                 <div className="absolute inset-0 w-10 h-10 bg-bdigital-cyan rounded-md blur-sm opacity-30 -z-10"></div>
               </div>
               <div className="flex flex-col">
-                <span className="text-xl font-bold text-white leading-tight">BDigital</span>
+                <span className="text-xl font-bold text-white leading-tight">DIAL Digital</span>
                 <span className="text-xs text-bdigital-cyan leading-tight">Digital Agency</span>
               </div>
             </div>
@@ -182,7 +168,7 @@ export function Footer({ initialYear }: FooterProps) {
         {/* Bottom Footer */}
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-gray-400 text-sm">
-            © {displayYear} BDigital. {t("footer.rights")}
+            © {displayYear} DIAL Digital. {t("footer.rights")}
           </p>
           <div className="flex gap-6 text-sm text-gray-400">
             <a href="#" className="hover:text-bdigital-cyan transition-colors duration-200">

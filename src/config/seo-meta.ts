@@ -13,93 +13,93 @@ const SOCIAL_IMAGE_BY_LOCALE: Record<Locale, string[]> = {
 };
 
 const DEFAULT_SEO_METADATA: SeoMetadata = {
-  title: "BDigital Agency",
+  title: "DIAL Digital Agency",
   description:
-    "BDigital is a full-service digital agency delivering design, marketing, and growth solutions.",
+    "DIAL Digital is a full-service digital agency delivering design, marketing, and growth solutions.",
   images: SOCIAL_IMAGE_BY_LOCALE[defaultLocale],
 };
 
 const SEO_METADATA: Record<Locale, Partial<Record<PageType, SeoMetadata>>> = {
   me: {
     home: {
-      title: "BDigital agencija | Digitalni marketing i web dizajn",
+      title: "DIAL Digital agencija | Digitalni marketing i web dizajn",
       description:
-        "BDigital je full-service digitalna agencija iz Crne Gore koja isporučuje dizajn, marketing i strategije rasta.",
+        "DIAL Digital je full-service digitalna agencija iz Crne Gore koja isporučuje dizajn, marketing i strategije rasta.",
     },
     "web-design": {
-      title: "Web dizajn i development | BDigital agencija",
+      title: "Web dizajn i development | DIAL Digital agencija",
       description:
         "Pravimo moderne, responzivne sajtove optimizovane za konverzije i rast vašeg biznisa.",
     },
     seo: {
-      title: "SEO usluge u Crnoj Gori | BDigital agencija",
+      title: "SEO usluge u Crnoj Gori | DIAL Digital agencija",
       description:
         "Povećajte vidljivost na pretraživačima i osvojite više klijenata uz naš SEO tim.",
     },
     "social-media": {
-      title: "Upravljanje društvenim mrežama | BDigital agencija",
+      title: "Upravljanje društvenim mrežama | DIAL Digital agencija",
       description:
         "Gradimo vašu zajednicu i povećavamo angažman kroz kreativne kampanje na društvenim mrežama.",
     },
     branding: {
-      title: "Brending i grafički dizajn | BDigital agencija",
+      title: "Brending i grafički dizajn | DIAL Digital agencija",
       description:
         "Razvijamo prepoznatljiv vizuelni identitet i profesionalne marketinške materijale za vaš brend.",
     },
     strategy: {
-      title: "Digitalna strategija i konsalting | BDigital agencija",
+      title: "Digitalna strategija i konsalting | DIAL Digital agencija",
       description:
         "Planovi zasnovani na podacima koji ubrzavaju rast i prodaju vašeg poslovanja.",
     },
     "service-inquiry": {
-      title: "Zatražite ponudu | BDigital agencija",
+      title: "Zatražite ponudu | DIAL Digital agencija",
       description:
         "Pošaljite detalje projekta i dobićete personalizovanu ponudu u roku od 24 sata.",
     },
     "free-consultation": {
-      title: "Besplatne konsultacije | BDigital agencija",
+      title: "Besplatne konsultacije | DIAL Digital agencija",
       description:
         "Rezervišite besplatan razgovor sa našim timom digitalnog marketinga i saznajte kako možemo pomoći.",
     },
   },
   en: {
     home: {
-      title: "BDigital Agency | Digital Marketing & Web Design in Montenegro",
+      title: "DIAL Digital Agency | Digital Marketing & Web Design in Montenegro",
       description:
-        "BDigital is a full-service digital agency delivering design, marketing, and growth solutions across Montenegro.",
+        "DIAL Digital is a full-service digital agency delivering design, marketing, and growth solutions across Montenegro.",
     },
     "web-design": {
-      title: "Web Design & Development | BDigital Agency",
+      title: "Web Design & Development | DIAL Digital Agency",
       description:
         "We craft modern, responsive websites that are optimized for conversions and business growth.",
     },
     seo: {
-      title: "SEO Services in Montenegro | BDigital Agency",
+      title: "SEO Services in Montenegro | DIAL Digital Agency",
       description:
         "Increase your search visibility and win more clients with our comprehensive SEO services.",
     },
     "social-media": {
-      title: "Social Media Marketing Services | BDigital Agency",
+      title: "Social Media Marketing Services | DIAL Digital Agency",
       description:
         "Grow your brand community and engagement with data-driven social media strategies.",
     },
     branding: {
-      title: "Branding & Graphic Design | BDigital Agency",
+      title: "Branding & Graphic Design | DIAL Digital Agency",
       description:
         "Build a memorable visual identity with bespoke branding and design solutions from our creative team.",
     },
     strategy: {
-      title: "Digital Strategy & Consulting | BDigital Agency",
+      title: "Digital Strategy & Consulting | DIAL Digital Agency",
       description:
         "Develop a data-driven digital strategy that accelerates growth and delivers measurable results.",
     },
     "service-inquiry": {
-      title: "Request a Project Quote | BDigital Agency",
+      title: "Request a Project Quote | DIAL Digital Agency",
       description:
-        "Tell us about your project and receive a tailored proposal from the BDigital team within 24 hours.",
+        "Tell us about your project and receive a tailored proposal from the DIAL Digital team within 24 hours.",
     },
     "free-consultation": {
-      title: "Book a Free Consultation | BDigital Agency",
+      title: "Book a Free Consultation | DIAL Digital Agency",
       description:
         "Schedule a free consultation with our digital experts to discover growth opportunities for your business.",
     },

@@ -187,7 +187,7 @@ export function ServicesSection() {
             <div>
               <h3 className="text-2xl lg:text-3xl font-bold mb-4 lg:mb-6">
                 {t('services.why.title.pre')}{' '}
-                <span className="text-bdigital-cyan-dark">BDigital</span>
+                <span className="text-bdigital-cyan-dark">DIAL Digital</span>
                 {t('services.why.title.post')}
               </h3>
               <p className="text-gray-300 text-lg leading-relaxed mb-6 lg:mb-8">
