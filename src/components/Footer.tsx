@@ -1,6 +1,9 @@
 import { Separator } from "./ui/separator";
 import { Facebook, Instagram, Linkedin, Mail, Phone, MapPin } from "lucide-react";
 import { useLanguage } from "./LanguageContext";
+import { useActiveLocale } from "../hooks/useActiveLocale";
+import { buildLocalizedPath, type PageType } from "../routing";
+import { Link } from "react-router-dom";
 
 interface FooterProps {
   initialYear?: string;
@@ -8,10 +11,17 @@ interface FooterProps {
 
 export function Footer({ initialYear }: FooterProps) {
   const { t } = useLanguage();
+  const { activeLocale, includeLocalePrefix } = useActiveLocale();
 
   const displayYear = initialYear ?? String(new Date().getFullYear());
 
-  const services = ["Web dizajn i razvoj", "SEO optimizacija", "Upravljanje društvenim mrežama", "Brendiranje", "Digitalna strategija"];
+  const services: { id: PageType; label: string }[] = [
+    { id: "web-design", label: t("services.web.title") ?? "Web dizajn i razvoj" },
+    { id: "seo", label: t("services.seo.title") ?? "SEO optimizacija" },
+    { id: "social-media", label: t("services.social.title") ?? "Upravljanje društvenim mrežama" },
+    { id: "branding", label: t("services.branding.title") ?? "Brendiranje" },
+    { id: "strategy", label: t("services.strategy.title") ?? "Digitalna strategija" },
+  ];
 
   const company = ["O nama", "Portfolio", "Karijera", "Kontakt"];
 
@@ -88,16 +98,19 @@ export function Footer({ initialYear }: FooterProps) {
           <div>
             <h3 className="text-lg font-semibold mb-6 text-bdigital-cyan">{t("footer.services")}</h3>
             <ul className="space-y-3">
-              {services.map((service, index) => (
-                <li key={index}>
-                  <a
-                    href="#"
-                    className="text-gray-300 hover:text-bdigital-cyan transition-colors duration-200 hover:translate-x-1 transform inline-block"
-                  >
-                    {service}
-                  </a>
-                </li>
-              ))}
+              {services.map(({ id, label }) => {
+                const path = buildLocalizedPath(activeLocale, id, { includeLocalePrefix });
+                return (
+                  <li key={id}>
+                    <Link
+                      to={path}
+                      className="text-gray-300 hover:text-bdigital-cyan transition-colors duration-200 hover:translate-x-1 transform inline-block"
+                    >
+                      {label}
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
           </div>
 
