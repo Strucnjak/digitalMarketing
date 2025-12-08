@@ -269,7 +269,7 @@ export const appRouteObjects: RouteObject[] = [
     children: localizedChildren,
   },
   {
-    path: "/:locale(en|me)",
+    path: "/:locale(en|me|fr)",
     element: <LocalizedLayout />,
     children: localizedChildren,
   },
