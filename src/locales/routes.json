@@ -20,5 +20,16 @@
     "strategy": "strategija",
     "service-inquiry": "upit-za-uslugu",
     "free-consultation": "besplatna-konsultacija"
+  },
+  "fr": {
+    "home": "",
+    "services": "services",
+    "web-design": "creation-site-web",
+    "seo": "referencement",
+    "social-media": "reseaux-sociaux",
+    "branding": "identite-de-marque",
+    "strategy": "strategie-digitale",
+    "service-inquiry": "demande-de-service",
+    "free-consultation": "consultation-gratuite"
   }
 }

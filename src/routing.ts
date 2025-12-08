@@ -21,7 +21,7 @@ export const allPages: PageType[] = [
   "free-consultation",
 ];
 
-export const locales = ["en", "me"] as const;
+export const locales = ["en", "me", "fr"] as const;
 export type Locale = (typeof locales)[number];
 export const defaultLocale: Locale = "me";
 

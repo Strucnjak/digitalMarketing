@@ -38,11 +38,13 @@ export const STRUCTURED_DATA_ELEMENT_ID = "seo-structured-data";
 const ORGANIZATION_NAMES: Record<Locale, string> = {
   en: "DIAL Digital Agency",
   me: "DIAL Digital agencija",
+  fr: "Agence DIAL Digital",
 };
 
 const HOME_BREADCRUMB_LABELS: Record<Locale, string> = {
   en: "Home",
   me: "Početna",
+  fr: "Accueil",
 };
 
 export interface LocalePresentation {
@@ -69,6 +71,12 @@ const LOCALE_PRESENTATION: Record<Locale, LocalePresentation> = {
     htmlLang: "sr-Latn-ME",
     ogLocale: "sr_ME",
     schemaLanguage: "sr-Latn-ME",
+  },
+  fr: {
+    hreflang: "fr",
+    htmlLang: "fr",
+    ogLocale: "fr_FR",
+    schemaLanguage: "fr",
   },
 };
 
