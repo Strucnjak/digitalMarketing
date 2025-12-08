@@ -1,22 +1,7 @@
-import { useEffect, type ReactElement } from "react";
+import { Suspense, lazy, useEffect, type ReactElement, type ReactNode } from "react";
 import { Navigate, Outlet, useLocation, useParams, useRoutes, type RouteObject } from "react-router-dom";
 import { LanguageProvider, useLanguage } from "./components/LanguageContext";
 import { Navigation } from "./components/Navigation";
-import { HeroSection } from "./components/HeroSection";
-import { ServicesSection } from "./components/ServicesSection";
-import { PortfolioSection } from "./components/PortfolioSection";
-import { AboutSection } from "./components/AboutSection";
-import { TestimonialsSection } from "./components/TestimonialsSection";
-import { ContactSection } from "./components/ContactSection";
-import { Footer } from "./components/Footer";
-import { WebDesignPage } from "./components/services/WebDesignPage";
-import { SEOPage } from "./components/services/SEOPage";
-import { SocialMediaPage } from "./components/services/SocialMediaPage";
-import { BrandingPage } from "./components/services/BrandingPage";
-import { StrategyPage } from "./components/services/StrategyPage";
-import { ServiceInquiryForm } from "./components/ServiceInquiryForm";
-import { FreeConsultationPage } from "./components/FreeConsultationPage";
-import { MobileQuickNav } from "./components/MobileQuickNav";
 import { useInitialState } from "./components/InitialStateContext";
 import { getSeoMetadata } from "./config/seo-meta";
 import { SITE_BASE_URL } from "./config/site";
@@ -38,6 +23,62 @@ import {
   type PageType,
 } from "./routing";
 import "./styles/mobile-quick-nav.css";
+
+const HeroSection = lazy(() => import("./components/HeroSection").then((mod) => ({ default: mod.HeroSection })));
+const ServicesSection = lazy(() =>
+  import("./components/ServicesSection").then((mod) => ({ default: mod.ServicesSection })),
+);
+const PortfolioSection = lazy(() =>
+  import("./components/PortfolioSection").then((mod) => ({ default: mod.PortfolioSection })),
+);
+const AboutSection = lazy(() => import("./components/AboutSection").then((mod) => ({ default: mod.AboutSection })));
+const TestimonialsSection = lazy(() =>
+  import("./components/TestimonialsSection").then((mod) => ({ default: mod.TestimonialsSection })),
+);
+const ContactSection = lazy(() => import("./components/ContactSection").then((mod) => ({ default: mod.ContactSection })));
+const Footer = lazy(() => import("./components/Footer").then((mod) => ({ default: mod.Footer })));
+const MobileQuickNav = lazy(() => import("./components/MobileQuickNav").then((mod) => ({ default: mod.MobileQuickNav })));
+const WebDesignPage = lazy(() =>
+  import("./components/services/WebDesignPage").then((mod) => ({ default: mod.WebDesignPage })),
+);
+const SEOPage = lazy(() => import("./components/services/SEOPage").then((mod) => ({ default: mod.SEOPage })));
+const SocialMediaPage = lazy(() =>
+  import("./components/services/SocialMediaPage").then((mod) => ({ default: mod.SocialMediaPage })),
+);
+const BrandingPage = lazy(() =>
+  import("./components/services/BrandingPage").then((mod) => ({ default: mod.BrandingPage })),
+);
+const StrategyPage = lazy(() => import("./components/services/StrategyPage").then((mod) => ({ default: mod.StrategyPage })));
+const ServiceInquiryForm = lazy(() =>
+  import("./components/ServiceInquiryForm").then((mod) => ({ default: mod.ServiceInquiryForm })),
+);
+const FreeConsultationPage = lazy(() =>
+  import("./components/FreeConsultationPage").then((mod) => ({ default: mod.FreeConsultationPage })),
+);
+
+function PageLoader() {
+  return (
+    <div className="flex min-h-[50vh] items-center justify-center bg-slate-50 text-slate-500" aria-busy="true">
+      <span className="animate-pulse">Loading...</span>
+    </div>
+  );
+}
+
+function SectionLoader({ label }: { label: string }) {
+  return (
+    <div className="flex min-h-[280px] items-center justify-center bg-slate-50/60 text-slate-500" aria-busy="true">
+      <span className="animate-pulse">Loading {label}…</span>
+    </div>
+  );
+}
+
+function SuspenseSection({ children, fallback }: { children: ReactNode; fallback: ReactNode }) {
+  return <Suspense fallback={fallback}>{children}</Suspense>;
+}
+
+function withPageSuspense(element: ReactElement, fallback?: ReactNode) {
+  return <Suspense fallback={fallback ?? <PageLoader />}>{element}</Suspense>;
+}
 
 function SeoMetadataUpdater() {
   const location = useLocation();
@@ -160,22 +201,34 @@ function HomePage() {
   return (
     <>
       <section id="hero" data-anchor>
-        <HeroSection />
+        <SuspenseSection fallback={<SectionLoader label="Hero" />}>
+          <HeroSection />
+        </SuspenseSection>
       </section>
       <section id="services" data-anchor>
-        <ServicesSection />
+        <SuspenseSection fallback={<SectionLoader label="Services" />}>
+          <ServicesSection />
+        </SuspenseSection>
       </section>
       <section id="portfolio" data-anchor>
-        <PortfolioSection />
+        <SuspenseSection fallback={<SectionLoader label="Portfolio" />}>
+          <PortfolioSection />
+        </SuspenseSection>
       </section>
       <section id="about" data-anchor>
-        <AboutSection />
+        <SuspenseSection fallback={<SectionLoader label="About" />}>
+          <AboutSection />
+        </SuspenseSection>
       </section>
       <section id="testimonials" data-anchor>
-        <TestimonialsSection />
+        <SuspenseSection fallback={<SectionLoader label="Testimonials" />}>
+          <TestimonialsSection />
+        </SuspenseSection>
       </section>
       <section id="contact" data-anchor>
-        <ContactSection />
+        <SuspenseSection fallback={<SectionLoader label="Contact" />}>
+          <ContactSection />
+        </SuspenseSection>
       </section>
     </>
   );
@@ -209,8 +262,16 @@ function AppLayout() {
       <main id="app-content">
         <Outlet />
       </main>
-      {isHome && <MobileQuickNav />}
-      {isHome && <Footer initialYear={footerYear} />}
+      {isHome && (
+        <Suspense fallback={null}>
+          <MobileQuickNav />
+        </Suspense>
+      )}
+      {isHome && (
+        <Suspense fallback={null}>
+          <Footer initialYear={footerYear} />
+        </Suspense>
+      )}
     </div>
   );
 }
@@ -231,14 +292,14 @@ function LocalizedLayout() {
 }
 
 const pageElements: Record<PageType, ReactElement> = {
-  home: <HomePage />,
-  "web-design": <WebDesignPage />,
-  seo: <SEOPage />,
-  "social-media": <SocialMediaPage />,
-  branding: <BrandingPage />,
-  strategy: <StrategyPage />,
-  "service-inquiry": <ServiceInquiryForm />,
-  "free-consultation": <FreeConsultationPage />,
+  home: withPageSuspense(<HomePage />),
+  "web-design": withPageSuspense(<WebDesignPage />),
+  seo: withPageSuspense(<SEOPage />),
+  "social-media": withPageSuspense(<SocialMediaPage />),
+  branding: withPageSuspense(<BrandingPage />),
+  strategy: withPageSuspense(<StrategyPage />),
+  "service-inquiry": withPageSuspense(<ServiceInquiryForm />),
+  "free-consultation": withPageSuspense(<FreeConsultationPage />),
 };
 
 function createChildRoutes(): RouteObject[] {
@@ -282,7 +343,9 @@ export const appRouteObjects: RouteObject[] = [
 ];
 
 export function AppRoutes() {
-  return useRoutes(appRouteObjects);
+  const element = useRoutes(appRouteObjects);
+
+  return <Suspense fallback={<PageLoader />}>{element}</Suspense>;
 }
 
 export default AppRoutes;
