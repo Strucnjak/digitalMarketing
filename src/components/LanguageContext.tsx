@@ -1,10 +1,11 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import type { ReactNode } from "react";
 import en from "../locales/en.json";
+import fr from "../locales/fr.json";
 import me from "../locales/me.json";
 import { defaultLocale } from "../routing";
 
-export type Language = "en" | "me";
+export type Language = "en" | "me" | "fr";
 
 interface LanguageContextType {
   language: Language;
@@ -16,6 +17,7 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 
 const TRANSLATIONS: Record<Language, Record<string, string>> = {
   en,
+  fr,
   me,
 };
 
@@ -39,7 +41,7 @@ export function LanguageProvider({
       return;
     }
     const stored = window.localStorage.getItem("language");
-    if ((stored === "en" || stored === "me") && stored !== language) {
+    if ((stored === "en" || stored === "me" || stored === "fr") && stored !== language) {
       setLanguageState(stored);
     }
   }, [localeFromRoute, language]);

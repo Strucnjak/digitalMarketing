@@ -102,7 +102,7 @@ export function Navigation() {
     }, 100);
   };
 
-  const handleLanguageChange = (newLanguage: "en" | "me") => {
+  const handleLanguageChange = (newLanguage: "en" | "me" | "fr") => {
     const targetLocale = newLanguage as Locale;
     const path = buildLocalizedPath(targetLocale, routeInfo.page, {
       includeLocalePrefix: targetLocale !== defaultLocale || routeLocale != null,
@@ -268,6 +268,16 @@ export function Navigation() {
               >
                 EN
               </button>
+              <button
+                onClick={() => handleLanguageChange("fr")}
+                className={`px-2 py-1 text-xs font-medium rounded transition-all duration-300 ${
+                  language === "fr"
+                    ? "bg-bdigital-cyan text-bdigital-navy"
+                    : `hover:bg-bdigital-cyan/20 ${isScrolled ? "text-bdigital-navy" : "text-white"}`
+                }`}
+              >
+                FR
+              </button>
             </div>
 
             {/* CTA Button - now links to free consultation */}
@@ -366,7 +376,7 @@ export function Navigation() {
                   <div className="border-t border-gray-200 pt-6 space-y-4">
                     {/* Language Switcher */}
                     <div className="flex items-center justify-center space-x-2">
-                      <span className="text-sm text-neutral-gray">Jezik:</span>
+                      <span className="text-sm text-neutral-gray">Langue :</span>
                       <button
                         onClick={() => handleLanguageChange("me")}
                         className={`px-3 py-1 text-sm font-medium rounded-lg transition-all duration-200 ${
@@ -382,6 +392,14 @@ export function Navigation() {
                         }`}
                       >
                         English
+                      </button>
+                      <button
+                        onClick={() => handleLanguageChange("fr")}
+                        className={`px-3 py-1 text-sm font-medium rounded-lg transition-all duration-200 ${
+                          language === "fr" ? "bg-bdigital-cyan text-bdigital-navy" : "text-bdigital-navy hover:bg-gray-100"
+                        }`}
+                      >
+                        Français
                       </button>
                     </div>
 

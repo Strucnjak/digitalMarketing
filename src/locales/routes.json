@@ -10,6 +10,17 @@
     "service-inquiry": "service-inquiry",
     "free-consultation": "free-consultation"
   },
+  "fr": {
+    "home": "",
+    "services": "services",
+    "web-design": "creation-site-web",
+    "seo": "seo",
+    "social-media": "reseaux-sociaux",
+    "branding": "branding",
+    "strategy": "strategie",
+    "service-inquiry": "demande-service",
+    "free-consultation": "consultation-gratuite"
+  },
   "me": {
     "home": "",
     "services": "usluge",
