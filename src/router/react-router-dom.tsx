@@ -2,9 +2,11 @@ import {
   Children,
   createContext,
   isValidElement,
+  type AnchorHTMLAttributes,
   useCallback,
   useEffect,
   useContext,
+  type MouseEvent,
   useMemo,
   useRef,
   useSyncExternalStore,
@@ -450,6 +452,42 @@ export function useNavigate() {
 
 export function useLocation(): Location {
   return useRouterContext().location;
+}
+
+export interface LinkProps
+  extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "href"> {
+  to: string;
+  replace?: boolean;
+  state?: unknown;
+}
+
+export function Link({ to, replace, state, onClick, ...rest }: LinkProps) {
+  const navigate = useNavigate();
+  const { navigator } = useRouterContext();
+
+  const handleClick = useCallback(
+    (event: MouseEvent<HTMLAnchorElement>) => {
+      onClick?.(event);
+
+      if (
+        event.defaultPrevented ||
+        event.button !== 0 ||
+        rest.target === "_blank" ||
+        event.metaKey ||
+        event.altKey ||
+        event.ctrlKey ||
+        event.shiftKey
+      ) {
+        return;
+      }
+
+      event.preventDefault();
+      navigate(to, { replace, state });
+    },
+    [navigate, to, replace, state, onClick, rest.target],
+  );
+
+  return <a {...rest} href={navigator.createHref(to)} onClick={handleClick} />;
 }
 
 export function useParams<T extends Record<string, string> = Record<string, string>>(): T {
