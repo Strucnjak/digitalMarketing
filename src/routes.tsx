@@ -267,11 +267,9 @@ function AppLayout() {
           <MobileQuickNav />
         </Suspense>
       )}
-      {isHome && (
-        <Suspense fallback={null}>
-          <Footer initialYear={footerYear} />
-        </Suspense>
-      )}
+      <Suspense fallback={null}>
+        <Footer initialYear={footerYear} />
+      </Suspense>
     </div>
   );
 }
