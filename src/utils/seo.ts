@@ -37,11 +37,13 @@ export const STRUCTURED_DATA_ELEMENT_ID = "seo-structured-data";
 
 const ORGANIZATION_NAMES: Record<Locale, string> = {
   en: "DIAL Digital Agency",
+  fr: "Agence digitale DIAL",
   me: "DIAL Digital agencija",
 };
 
 const HOME_BREADCRUMB_LABELS: Record<Locale, string> = {
   en: "Home",
+  fr: "Accueil",
   me: "Početna",
 };
 
@@ -58,6 +60,12 @@ const LOCALE_PRESENTATION: Record<Locale, LocalePresentation> = {
     htmlLang: "en",
     ogLocale: "en_US",
     schemaLanguage: "en",
+  },
+  fr: {
+    hreflang: "fr",
+    htmlLang: "fr",
+    ogLocale: "fr_FR",
+    schemaLanguage: "fr",
   },
   me: {
     // Google Search prefers that the hreflang value matches the locale
