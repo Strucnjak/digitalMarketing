@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "./ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle, SheetDescription } from "./ui/sheet";
 import { Menu, X, ChevronDown } from "lucide-react";
-import { useLanguage } from "./LanguageContext";
+import { useLanguage, type Language } from "./LanguageContext";
 import { buildLocalizedPath, defaultLocale, servicePageIds, type Locale, type PageType } from "../routing";
 import { useRouteInfo } from "../hooks/useRouteInfo";
 import { useActiveLocale } from "../hooks/useActiveLocale";
@@ -102,7 +102,7 @@ export function Navigation() {
     }, 100);
   };
 
-  const handleLanguageChange = (newLanguage: "en" | "me") => {
+  const handleLanguageChange = (newLanguage: Language) => {
     const targetLocale = newLanguage as Locale;
     const path = buildLocalizedPath(targetLocale, routeInfo.page, {
       includeLocalePrefix: targetLocale !== defaultLocale || routeLocale != null,
@@ -268,6 +268,16 @@ export function Navigation() {
               >
                 EN
               </button>
+              <button
+                onClick={() => handleLanguageChange("fr")}
+                className={`px-2 py-1 text-xs font-medium rounded transition-all duration-300 ${
+                  language === "fr"
+                    ? "bg-bdigital-cyan text-bdigital-navy"
+                    : `hover:bg-bdigital-cyan/20 ${isScrolled ? "text-bdigital-navy" : "text-white"}`
+                }`}
+              >
+                FR
+              </button>
             </div>
 
             {/* CTA Button - now links to free consultation */}
@@ -382,6 +392,14 @@ export function Navigation() {
                         }`}
                       >
                         English
+                      </button>
+                      <button
+                        onClick={() => handleLanguageChange("fr")}
+                        className={`px-3 py-1 text-sm font-medium rounded-lg transition-all duration-200 ${
+                          language === "fr" ? "bg-bdigital-cyan text-bdigital-navy" : "text-bdigital-navy hover:bg-gray-100"
+                        }`}
+                      >
+                        Français
                       </button>
                     </div>
 
