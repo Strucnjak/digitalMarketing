@@ -9,6 +9,7 @@ export interface SeoMetadata {
 
 const SOCIAL_IMAGE_BY_LOCALE: Record<Locale, string[]> = {
   me: [`${SITE_BASE_URL}/social-share-me.svg`],
+  fr: [`${SITE_BASE_URL}/social-share-en.svg`],
   en: [`${SITE_BASE_URL}/social-share-en.svg`],
 };
 
@@ -60,6 +61,48 @@ const SEO_METADATA: Record<Locale, Partial<Record<PageType, SeoMetadata>>> = {
       title: "Besplatne konsultacije | DIAL Digital agencija",
       description:
         "Rezervišite besplatan razgovor sa našim timom digitalnog marketinga i saznajte kako možemo pomoći.",
+    },
+  },
+  fr: {
+    home: {
+      title: "Agence DIAL Digital | Marketing digital et conception web au Monténégro",
+      description:
+        "DIAL Digital est une agence full-service qui fournit des solutions de design, de marketing et de croissance au Monténégro.",
+    },
+    "web-design": {
+      title: "Conception et développement web | Agence DIAL Digital",
+      description:
+        "Nous créons des sites modernes et responsives, optimisés pour la conversion et la croissance de votre entreprise.",
+    },
+    seo: {
+      title: "Services SEO au Monténégro | Agence DIAL Digital",
+      description:
+        "Améliorez votre visibilité sur les moteurs de recherche et gagnez plus de clients grâce à notre équipe SEO.",
+    },
+    "social-media": {
+      title: "Marketing des réseaux sociaux | Agence DIAL Digital",
+      description:
+        "Développez votre communauté et l'engagement grâce à des campagnes créatives sur les réseaux sociaux.",
+    },
+    branding: {
+      title: "Branding et design graphique | Agence DIAL Digital",
+      description:
+        "Nous élaborons une identité visuelle distinctive et des supports marketing professionnels pour votre marque.",
+    },
+    strategy: {
+      title: "Stratégie digitale et conseil | Agence DIAL Digital",
+      description:
+        "Des plans fondés sur les données qui accélèrent la croissance et les ventes de votre entreprise.",
+    },
+    "service-inquiry": {
+      title: "Demander une proposition | Agence DIAL Digital",
+      description:
+        "Envoyez les détails de votre projet et recevez une proposition personnalisée en 24 heures.",
+    },
+    "free-consultation": {
+      title: "Réservez une consultation gratuite | Agence DIAL Digital",
+      description:
+        "Planifiez un appel gratuit avec notre équipe marketing pour découvrir comment nous pouvons vous aider.",
     },
   },
   en: {
