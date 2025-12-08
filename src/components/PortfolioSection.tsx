@@ -27,101 +27,107 @@ function normalizeCategories(input: unknown): string[] {
   return [];
 }
 
+const PROJECTS: Project[] = [
+  {
+    id: 1,
+    title: "Montenegrin Properties",
+    category: "web-design",
+    categoryLabel: "Web Design",
+    description:
+      "Elegantna web stranica za jednu od vodećih agencija za nekretnine u Crnoj Gori sa naprednim sistemom pretrage nekretnina.",
+    image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&h=400&fit=crop&q=80",
+    technologies: ["React", "Node.js", "MongoDB", "Tailwind CSS"],
+    results: ["+280% organskog saobraćaja", "+150% upita", "Top 3 za lokalne pretrage"],
+    year: "2024",
+    client: "Montenegro Properties",
+    duration: "3 meseca",
+    link: "#",
+  },
+  {
+    id: 2,
+    title: "Adriatic Adventures",
+    category: "ecommerce",
+    categoryLabel: "E-commerce",
+    description:
+      "Kompletan e-commerce sajt za turističku agenciju sa online rezervacijama i payment gateway integracijom.",
+    image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&h=400&fit=crop&q=80",
+    technologies: ["Shopify", "React", "Stripe", "SEO"],
+    results: ["+320% online rezervacija", "+200% konverzija", "50+ partnera"],
+    year: "2024",
+    client: "Adriatic Adventures",
+    duration: "4 meseca",
+    link: "#",
+  },
+  {
+    id: 3,
+    title: "Cafe Central",
+    category: "web-design",
+    categoryLabel: "Web Design",
+    description:
+      "Moderna web stranica za restoran sa online menijem, rezervacijama i food delivery integracijom.",
+    image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&h=400&fit=crop&q=80",
+    technologies: ["WordPress", "Custom PHP", "MySQL", "Responsive"],
+    results: ["+400% online rezervacija", "+180% delivery narudžbi", "5★ Google rating"],
+    year: "2023",
+    client: "Cafe Central",
+    duration: "2 meseca",
+    link: "#",
+  },
+  {
+    id: 4,
+    title: "TechStart Montenegro",
+    category: "branding",
+    categoryLabel: "Branding",
+    description:
+      "Kompletna rebrand strategija za tehnološki startup uključujući logo, brand guidelines i marketing materijale.",
+    image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=600&h=400&fit=crop&q=80",
+    technologies: ["Adobe Creative Suite", "Figma", "Brand Strategy"],
+    results: ["+500% brand recognition", "€2M funding raised", "Award winning design"],
+    year: "2023",
+    client: "TechStart Montenegro",
+    duration: "6 meseci",
+    link: "#",
+  },
+  {
+    id: 5,
+    title: "Wellness Spa Centar",
+    category: "seo",
+    categoryLabel: "SEO",
+    description:
+      "SEO optimizacija za wellness centar koja je rezultovala dramatičnim povećanjem lokalnih pretaga i rezervacija.",
+    image: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=600&h=400&fit=crop&q=80",
+    technologies: ["Technical SEO", "Local SEO", "Content Marketing"],
+    results: ["+600% lokalnih pretaga", "+250% rezervacija", '#1 za "spa Podgorica"'],
+    year: "2023",
+    client: "Wellness Spa Centar",
+    duration: "8 meseci",
+    link: "#",
+  },
+  {
+    id: 6,
+    title: "Fashion Boutique",
+    // multiple categories accepted (comma-separated here; array also works)
+    category: "ecommerce, seo",
+    categoryLabel: "E-commerce, SEO",
+    description:
+      "Luksuzan online shop za modnu butiku sa naprednim filterima, wishlist funkcionalnostima i VIP programom.",
+    image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=600&h=400&fit=crop&q=80",
+    technologies: ["WooCommerce", "React", "PayPal", "Custom Design"],
+    results: ["+350% online prodaja", "+180% repeat customers", "Premium UX award"],
+    year: "2024",
+    client: "Fashion Boutique",
+    duration: "3 meseca",
+    link: "#",
+  },
+];
+
 export function PortfolioSection() {
   const { t: _t } = useLanguage();
   const navigate = useNavigate();
   const { activeLocale, includeLocalePrefix } = useActiveLocale();
   const [activeFilter, setActiveFilter] = useState("all");
   const [currentSlide, setCurrentSlide] = useState(0);
-
-  // ---- Data (your original projects; note project 6 has multiple categories) ----
-  const projects: Project[] = [
-    {
-      id: 1,
-      title: "Montenegrin Properties",
-      category: "web-design",
-      categoryLabel: "Web Design",
-      description: "Elegantna web stranica za jednu od vodećih agencija za nekretnine u Crnoj Gori sa naprednim sistemom pretrage nekretnina.",
-      image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&h=400&fit=crop&q=80",
-      technologies: ["React", "Node.js", "MongoDB", "Tailwind CSS"],
-      results: ["+280% organskog saobraćaja", "+150% upita", "Top 3 za lokalne pretrage"],
-      year: "2024",
-      client: "Montenegro Properties",
-      duration: "3 meseca",
-      link: "#",
-    },
-    {
-      id: 2,
-      title: "Adriatic Adventures",
-      category: "ecommerce",
-      categoryLabel: "E-commerce",
-      description: "Kompletan e-commerce sajt za turističku agenciju sa online rezervacijama i payment gateway integracijom.",
-      image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&h=400&fit=crop&q=80",
-      technologies: ["Shopify", "React", "Stripe", "SEO"],
-      results: ["+320% online rezervacija", "+200% konverzija", "50+ partnera"],
-      year: "2024",
-      client: "Adriatic Adventures",
-      duration: "4 meseca",
-      link: "#",
-    },
-    {
-      id: 3,
-      title: "Cafe Central",
-      category: "web-design",
-      categoryLabel: "Web Design",
-      description: "Moderna web stranica za restoran sa online menijem, rezervacijama i food delivery integracijom.",
-      image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&h=400&fit=crop&q=80",
-      technologies: ["WordPress", "Custom PHP", "MySQL", "Responsive"],
-      results: ["+400% online rezervacija", "+180% delivery narudžbi", "5★ Google rating"],
-      year: "2023",
-      client: "Cafe Central",
-      duration: "2 meseca",
-      link: "#",
-    },
-    {
-      id: 4,
-      title: "TechStart Montenegro",
-      category: "branding",
-      categoryLabel: "Branding",
-      description: "Kompletna rebrand strategija za tehnološki startup uključujući logo, brand guidelines i marketing materijale.",
-      image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=600&h=400&fit=crop&q=80",
-      technologies: ["Adobe Creative Suite", "Figma", "Brand Strategy"],
-      results: ["+500% brand recognition", "€2M funding raised", "Award winning design"],
-      year: "2023",
-      client: "TechStart Montenegro",
-      duration: "6 meseci",
-      link: "#",
-    },
-    {
-      id: 5,
-      title: "Wellness Spa Centar",
-      category: "seo",
-      categoryLabel: "SEO",
-      description: "SEO optimizacija za wellness centar koja je rezultovala dramatičnim povećanjem lokalnih pretaga i rezervacija.",
-      image: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=600&h=400&fit=crop&q=80",
-      technologies: ["Technical SEO", "Local SEO", "Content Marketing"],
-      results: ["+600% lokalnih pretaga", "+250% rezervacija", '#1 za "spa Podgorica"'],
-      year: "2023",
-      client: "Wellness Spa Centar",
-      duration: "8 meseci",
-      link: "#",
-    },
-    {
-      id: 6,
-      title: "Fashion Boutique",
-      // multiple categories accepted (comma-separated here; array also works)
-      category: "ecommerce, seo",
-      categoryLabel: "E-commerce, SEO",
-      description: "Luksuzan online shop za modnu butiku sa naprednim filterima, wishlist funkcionalnostima i VIP programom.",
-      image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=600&h=400&fit=crop&q=80",
-      technologies: ["WooCommerce", "React", "PayPal", "Custom Design"],
-      results: ["+350% online prodaja", "+180% repeat customers", "Premium UX award"],
-      year: "2024",
-      client: "Fashion Boutique",
-      duration: "3 meseca",
-      link: "#",
-    },
-  ];
+  const projects = PROJECTS;
 
   // Map category keys -> localized labels
   const categoryKeyToLabel: Record<string, string> = {
@@ -154,7 +160,7 @@ export function PortfolioSection() {
     const filtered = activeFilter === "all" ? projects : projects.filter((p) => normalizeCategories((p as any).category).includes(activeFilter));
 
     return { filters: builtFilters, filteredProjects: filtered };
-  }, [projects, activeFilter, _t]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [activeFilter, _t]);
 
   // ---- Pagination/slider logic ----
   const projectsPerPage = 3;
@@ -333,6 +339,8 @@ function ProjectCard({ project }: { project: Project }) {
           src={project.image}
           alt={project.title}
           className="w-full h-48 lg:h-56 object-cover transition-transform duration-700 group-hover:scale-110"
+          loading="lazy"
+          decoding="async"
         />
 
         {/* Category Badge */}

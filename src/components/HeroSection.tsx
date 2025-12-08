@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
 import { ArrowRight, CheckCircle, Star, Users, Award } from "lucide-react";
@@ -21,10 +22,29 @@ const PARTICLE_CONFIGS = Array.from({ length: 20 }, (_, index) => {
   } as const;
 });
 
+function usePrefersReducedMotion() {
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined" || !window.matchMedia) return;
+
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const updatePreference = () => setPrefersReducedMotion(mediaQuery.matches);
+
+    updatePreference();
+    mediaQuery.addEventListener("change", updatePreference);
+
+    return () => mediaQuery.removeEventListener("change", updatePreference);
+  }, []);
+
+  return prefersReducedMotion;
+}
+
 export function HeroSection() {
   const { t: _t } = useLanguage();
   const navigate = useNavigate();
   const { activeLocale, includeLocalePrefix } = useActiveLocale();
+  const prefersReducedMotion = usePrefersReducedMotion();
 
   const stats = [
     { icon: Users, value: "100+", label: _t("hero.stats.clients") },
@@ -51,20 +71,22 @@ export function HeroSection() {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(0,212,255,0.05),transparent_50%)]"></div>
 
       {/* Animated Background Particles */}
-      <div className="absolute inset-0 overflow-hidden">
-        {PARTICLE_CONFIGS.map((particle, i) => (
-          <div
-            key={i}
-            className="absolute w-1 h-1 bg-bdigital-cyan/20 rounded-full animate-pulse"
-            style={{
-              left: particle.left,
-              top: particle.top,
-              animationDelay: particle.animationDelay,
-              animationDuration: particle.animationDuration,
-            }}
-          />
-        ))}
-      </div>
+      {!prefersReducedMotion && (
+        <div className="absolute inset-0 overflow-hidden">
+          {PARTICLE_CONFIGS.map((particle, i) => (
+            <div
+              key={i}
+              className="absolute w-1 h-1 bg-bdigital-cyan/20 rounded-full animate-pulse"
+              style={{
+                left: particle.left,
+                top: particle.top,
+                animationDelay: particle.animationDelay,
+                animationDuration: particle.animationDuration,
+              }}
+            />
+          ))}
+        </div>
+      )}
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-12 lg:pb-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center min-h-[calc(100vh-5rem)]">
@@ -133,10 +155,18 @@ export function HeroSection() {
               {/* Main Image Container */}
               <div className="relative bg-white rounded-2xl lg:rounded-3xl p-4 lg:p-8 shadow-2xl transform hover:scale-105 transition-all duration-500 group">
                 {/* Floating Elements */}
-                <div className="absolute -top-4 -right-4 w-8 h-8 bg-bdigital-cyan rounded-full flex items-center justify-center shadow-lg animate-bounce">
+                <div
+                  className={`absolute -top-4 -right-4 w-8 h-8 bg-bdigital-cyan rounded-full flex items-center justify-center shadow-lg ${
+                    prefersReducedMotion ? "" : "animate-bounce"
+                  }`}
+                >
                   <Star className="h-4 w-4 text-bdigital-navy" />
                 </div>
-                <div className="absolute -bottom-4 -left-4 w-12 h-12 bg-gradient-to-br from-bdigital-cyan to-bdigital-cyan-light rounded-full flex items-center justify-center shadow-lg animate-pulse">
+                <div
+                  className={`absolute -bottom-4 -left-4 w-12 h-12 bg-gradient-to-br from-bdigital-cyan to-bdigital-cyan-light rounded-full flex items-center justify-center shadow-lg ${
+                    prefersReducedMotion ? "" : "animate-pulse"
+                  }`}
+                >
                   <CheckCircle className="h-6 w-6 text-bdigital-navy" />
                 </div>
 
@@ -146,6 +176,9 @@ export function HeroSection() {
                     src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop&q=80"
                     alt={_t("hero.image_alt")}
                     className="w-full h-64 sm:h-80 lg:h-96 object-cover group-hover:scale-105 transition-transform duration-500"
+                    loading="eager"
+                    decoding="async"
+                    fetchPriority="high"
                   />
 
                   {/* Overlay Stats */}
@@ -175,9 +208,17 @@ export function HeroSection() {
         </div>
 
         {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+        <div
+          className={`absolute bottom-8 left-1/2 transform -translate-x-1/2 ${
+            prefersReducedMotion ? "" : "animate-bounce"
+          }`}
+        >
           <div className="w-6 h-10 border-2 border-bdigital-cyan rounded-full flex justify-center">
-            <div className="w-1 h-3 bg-bdigital-cyan rounded-full mt-2 animate-pulse"></div>
+            <div
+              className={`w-1 h-3 bg-bdigital-cyan rounded-full mt-2 ${
+                prefersReducedMotion ? "" : "animate-pulse"
+              }`}
+            ></div>
           </div>
         </div>
       </div>
