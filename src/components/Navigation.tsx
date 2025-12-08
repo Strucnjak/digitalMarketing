@@ -163,17 +163,10 @@ export function Navigation() {
               className="flex items-center space-x-2 group transition-all duration-300 hover:scale-105"
               aria-label="DIAL Digital - Početna stranica"
             >
-              <div className="w-8 h-8 lg:w-10 lg:h-10 bg-white rounded-lg flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow duration-300">
-                <img
-                  src="/logo.svg"
-                  alt="DIAL Digital logo"
-                  className="w-7 h-7 lg:w-8 lg:h-8"
-                  loading="lazy"
-                />
+              <div className="w-8 h-8 lg:w-10 lg:h-10 bg-bdigital-cyan-dark rounded-lg flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow duration-300">
+                <img src="/logo.svg" alt="DIAL Digital logo" className="w-7 h-7 lg:w-8 lg:h-8" loading="lazy" />
               </div>
-              <span
-                className={`text-lg lg:text-xl font-bold transition-colors duration-300 ${isScrolled ? "text-bdigital-navy" : "text-white"}`}
-              >
+              <span className={`text-lg lg:text-xl font-bold transition-colors duration-300 ${isScrolled ? "text-bdigital-navy" : "text-white"}`}>
                 DIAL Digital
               </span>
             </button>
@@ -183,16 +176,12 @@ export function Navigation() {
           <div className="hidden lg:flex items-center space-x-8">
             <button
               onClick={handleHomeClick}
-                className={`text-sm font-medium transition-colors duration-300 hover:text-bdigital-cyan ${
-                  routeInfo.page === "home"
-                    ? "text-bdigital-cyan"
-                    : isScrolled
-                      ? "text-bdigital-navy"
-                      : "text-white"
-                }`}
-              >
-                {_t("nav.home")}
-              </button>
+              className={`text-sm font-medium transition-colors duration-300 hover:text-bdigital-cyan ${
+                routeInfo.page === "home" ? "text-bdigital-cyan" : isScrolled ? "text-bdigital-navy" : "text-white"
+              }`}
+            >
+              {_t("nav.home")}
+            </button>
 
             {/* Services Dropdown */}
             <div ref={dropdownRef} className="relative" onMouseEnter={handleServicesMouseEnter} onMouseLeave={handleServicesMouseLeave}>

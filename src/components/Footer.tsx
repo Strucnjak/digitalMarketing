@@ -35,13 +35,8 @@ export function Footer({ initialYear }: FooterProps) {
             <div className="flex items-center space-x-3">
               {/* Logo matching the nav */}
               <div className="relative">
-                <div className="w-10 h-10 bg-white rounded-md flex items-center justify-center shadow-lg">
-                  <img
-                    src="/logo.svg"
-                    alt="DIAL Digital logo"
-                    className="w-7 h-7"
-                    loading="lazy"
-                  />
+                <div className="w-10 h-10 bg-bdigital-cyan-dark rounded-md flex items-center justify-center shadow-lg">
+                  <img src="/logo.svg" alt="DIAL Digital logo" className="w-7 h-7" loading="lazy" />
                 </div>
                 {/* Glow effect */}
                 <div className="absolute inset-0 w-10 h-10 bg-bdigital-cyan rounded-md blur-sm opacity-30 -z-10"></div>
