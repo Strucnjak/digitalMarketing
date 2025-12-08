@@ -158,19 +158,19 @@ export function FreeConsultationPage() {
                 <h3 className="text-lg font-semibold text-bdigital-navy mb-3">Šta možete očekivati na konsultaciji:</h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-bdigital-navy">
                   <div className="flex items-center gap-2">
-                    <Target className="h-4 w-4 text-bdigital-cyan" />
+                    <Target className="h-4 w-4 text-bdigital-cyan-dark" />
                     <span>Analiza trenutnog stanja</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <TrendingUp className="h-4 w-4 text-bdigital-cyan" />
+                    <TrendingUp className="h-4 w-4 text-bdigital-cyan-dark" />
                     <span>Strategija za rast</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Zap className="h-4 w-4 text-bdigital-cyan" />
+                    <Zap className="h-4 w-4 text-bdigital-cyan-dark" />
                     <span>Konkretni saveti</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Users className="h-4 w-4 text-bdigital-cyan" />
+                    <Users className="h-4 w-4 text-bdigital-cyan-dark" />
                     <span>Personalizovana ponuda</span>
                   </div>
                 </div>
@@ -205,7 +205,7 @@ export function FreeConsultationPage() {
                       newsletter: false,
                     });
                   }}
-                  className="border-bdigital-cyan text-bdigital-cyan hover:bg-bdigital-cyan hover:text-bdigital-navy font-semibold px-8 py-3"
+                  className="border-bdigital-cyan-dark text-bdigital-cyan-dark hover:bg-bdigital-cyan hover:text-bdigital-navy font-semibold px-8 py-3"
                 >
                   {t("form.new_consultation")}
                 </Button>
@@ -228,7 +228,7 @@ export function FreeConsultationPage() {
               const path = buildLocalizedPath(activeLocale, "home", { includeLocalePrefix });
               navigate(path);
             }}
-            className="text-bdigital-navy hover:text-bdigital-cyan mb-6 -ml-2"
+            className="text-bdigital-navy hover:text-bdigital-cyan-dark mb-6 -ml-2"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
             {t("general.back_home")}
@@ -237,10 +237,10 @@ export function FreeConsultationPage() {
           <div className="text-center mb-8">
             <div className="flex items-center justify-center gap-3 mb-6">
               <div className="w-16 h-16 bg-bdigital-cyan/10 rounded-2xl flex items-center justify-center">
-                <Gift className="h-8 w-8 text-bdigital-cyan" />
+                <Gift className="h-8 w-8 text-bdigital-cyan-dark" />
               </div>
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-bdigital-navy">
-                <span className="text-bdigital-cyan">Besplatna</span> konsultacija
+                <span className="text-bdigital-cyan-dark">Besplatna</span> konsultacija
               </h1>
             </div>
             <p className="text-xl text-neutral-gray max-w-3xl mx-auto leading-relaxed mb-8">
@@ -252,21 +252,21 @@ export function FreeConsultationPage() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
               <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-100">
                 <div className="w-12 h-12 bg-bdigital-cyan/10 rounded-xl flex items-center justify-center mx-auto mb-4">
-                  <Clock className="h-6 w-6 text-bdigital-cyan" />
+                  <Clock className="h-6 w-6 text-bdigital-cyan-dark" />
                 </div>
                 <h3 className="font-semibold text-bdigital-navy mb-2">45 minuta</h3>
                 <p className="text-sm text-neutral-gray">Detaljne analize i konkretni saveti</p>
               </div>
               <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-100">
                 <div className="w-12 h-12 bg-bdigital-cyan/10 rounded-xl flex items-center justify-center mx-auto mb-4">
-                  <Target className="h-6 w-6 text-bdigital-cyan" />
+                  <Target className="h-6 w-6 text-bdigital-cyan-dark" />
                 </div>
                 <h3 className="font-semibold text-bdigital-navy mb-2">Personalizovano</h3>
                 <p className="text-sm text-neutral-gray">Strategija prilagođena vašem biznisu</p>
               </div>
               <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-100">
                 <div className="w-12 h-12 bg-bdigital-cyan/10 rounded-xl flex items-center justify-center mx-auto mb-4">
-                  <Gift className="h-6 w-6 text-bdigital-cyan" />
+                  <Gift className="h-6 w-6 text-bdigital-cyan-dark" />
                 </div>
                 <h3 className="font-semibold text-bdigital-navy mb-2">100% besplatno</h3>
                 <p className="text-sm text-neutral-gray">Bez skrivenih troškova ili obaveza</p>

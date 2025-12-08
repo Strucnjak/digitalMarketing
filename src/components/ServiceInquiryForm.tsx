@@ -300,7 +300,7 @@ export function ServiceInquiryForm() {
                       newsletter: false,
                     });
                   }}
-                  className="border-bdigital-cyan text-bdigital-cyan hover:bg-bdigital-cyan hover:text-bdigital-navy font-semibold px-8 py-3"
+                  className="border-bdigital-cyan-dark text-bdigital-cyan-dark hover:bg-bdigital-cyan hover:text-bdigital-navy font-semibold px-8 py-3"
                 >
                   {t("form.new_quote")}
                 </Button>
@@ -323,7 +323,7 @@ export function ServiceInquiryForm() {
               const path = buildLocalizedPath(activeLocale, "home", { includeLocalePrefix });
               navigate(path);
             }}
-            className="text-bdigital-navy hover:text-bdigital-cyan mb-6 -ml-2"
+            className="text-bdigital-navy hover:text-bdigital-cyan-dark mb-6 -ml-2"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
             {t("general.back_home")}
@@ -497,7 +497,7 @@ export function ServiceInquiryForm() {
                 variant="outline"
                 onClick={prevStep}
                 disabled={currentStep === 1}
-                className="border-bdigital-cyan text-bdigital-cyan hover:bg-bdigital-cyan hover:text-bdigital-navy disabled:opacity-50 disabled:cursor-not-allowed"
+                className="border-bdigital-cyan-dark text-bdigital-cyan-dark hover:bg-bdigital-cyan hover:text-bdigital-navy disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <ArrowLeft className="h-4 w-4 mr-2" />
                 {t("general.back")}
