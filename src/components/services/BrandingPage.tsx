@@ -178,18 +178,18 @@ export function BrandingPage() {
                 <CardContent className="p-6">
                   <div className="text-center mb-6">
                     <h3 className="text-xl font-bold text-bdigital-navy mb-2">{pkg.name}</h3>
-                    <div className="text-3xl font-bold text-bdigital-cyan">{pkg.price}</div>
+                    <div className="text-3xl font-bold text-bdigital-cyan-dark">{pkg.price}</div>
                   </div>
                   <ul className="space-y-3 mb-6">
                     {pkg.features.map((feature, idx) => (
                       <li key={idx} className="flex items-center text-sm">
-                        <CheckCircle className="h-4 w-4 text-bdigital-cyan mr-3 flex-shrink-0" />
+                        <CheckCircle className="h-4 w-4 text-bdigital-cyan-dark mr-3 flex-shrink-0" />
                         <span className="text-neutral-gray">{feature}</span>
                       </li>
                     ))}
                   </ul>
                   <Button
-                    className={`w-full ${pkg.popular ? "bg-bdigital-cyan text-bdigital-navy hover:bg-bdigital-cyan-light" : "border border-bdigital-cyan text-bdigital-cyan hover:bg-bdigital-cyan hover:text-bdigital-navy"} font-semibold`}
+                    className={`w-full ${pkg.popular ? "bg-bdigital-cyan text-bdigital-navy hover:bg-bdigital-cyan-light" : "border border-bdigital-cyan-dark text-bdigital-cyan-dark hover:bg-bdigital-cyan hover:text-bdigital-navy"} font-semibold`}
                     variant={pkg.popular ? "default" : "outline"}
                     onClick={() => handlePackageSelect(pkg.name)}
                   >

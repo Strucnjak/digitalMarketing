@@ -252,7 +252,7 @@ export function SEOPage() {
             {results.map((result, index) => (
               <Card key={index} className="border-0 shadow-lg text-center hover:shadow-xl transition-all duration-300 group">
                 <CardContent className="p-6">
-                  <div className="text-4xl font-bold text-bdigital-cyan mb-2 group-hover:scale-110 transition-transform duration-300">
+                  <div className="text-4xl font-bold text-bdigital-cyan-dark mb-2 group-hover:scale-110 transition-transform duration-300">
                     {result.metric}
                   </div>
                   <h3 className="font-bold text-bdigital-navy mb-2">{result.label}</h3>
@@ -284,20 +284,20 @@ export function SEOPage() {
                 )}
                 <CardHeader className="text-center pb-4">
                   <CardTitle className="text-xl text-bdigital-navy">{pkg.name}</CardTitle>
-                  <div className="text-3xl font-bold text-bdigital-cyan mb-2">{pkg.price}</div>
+                  <div className="text-3xl font-bold text-bdigital-cyan-dark mb-2">{pkg.price}</div>
                   <p className="text-neutral-gray text-sm">{pkg.description}</p>
                 </CardHeader>
                 <CardContent>
                   <ul className="space-y-3 mb-6">
                     {pkg.features.map((feature, idx) => (
                       <li key={idx} className="flex items-center text-sm">
-                        <CheckCircle className="h-4 w-4 text-bdigital-cyan mr-3 flex-shrink-0" />
+                        <CheckCircle className="h-4 w-4 text-bdigital-cyan-dark mr-3 flex-shrink-0" />
                         <span className="text-neutral-gray">{feature}</span>
                       </li>
                     ))}
                   </ul>
                   <Button
-                    className={`w-full ${pkg.popular ? "bg-bdigital-cyan text-bdigital-navy hover:bg-bdigital-cyan-light" : "border border-bdigital-cyan text-bdigital-cyan hover:bg-bdigital-cyan hover:text-bdigital-navy"} font-semibold`}
+                    className={`w-full ${pkg.popular ? "bg-bdigital-cyan text-bdigital-navy hover:bg-bdigital-cyan-light" : "border border-bdigital-cyan-dark text-bdigital-cyan-dark hover:bg-bdigital-cyan hover:text-bdigital-navy"} font-semibold`}
                     variant={pkg.popular ? "default" : "outline"}
                     onClick={() => handlePackageSelect(pkg.name)}
                   >

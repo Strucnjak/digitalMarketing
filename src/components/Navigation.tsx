@@ -179,8 +179,16 @@ export function Navigation() {
           <div className="hidden lg:flex items-center space-x-8">
             <button
               onClick={handleHomeClick}
-              className={`text-sm font-medium transition-colors duration-300 hover:text-bdigital-cyan ${
-                routeInfo.page === "home" ? "text-bdigital-cyan" : isScrolled ? "text-bdigital-navy" : "text-white"
+              className={`text-sm font-medium transition-colors duration-300 ${
+                isScrolled ? "hover:text-bdigital-cyan-dark" : "hover:text-bdigital-cyan"
+              } ${
+                routeInfo.page === "home"
+                  ? isScrolled
+                    ? "text-bdigital-cyan-dark"
+                    : "text-bdigital-cyan"
+                  : isScrolled
+                    ? "text-bdigital-navy"
+                    : "text-white"
               }`}
             >
               {_t("nav.home")}
@@ -189,9 +197,13 @@ export function Navigation() {
             {/* Services Dropdown */}
             <div ref={dropdownRef} className="relative" onMouseEnter={handleServicesMouseEnter} onMouseLeave={handleServicesMouseLeave}>
               <button
-                className={`flex items-center space-x-1 text-sm font-medium transition-colors duration-300 hover:text-bdigital-cyan py-2 ${
+                className={`flex items-center space-x-1 text-sm font-medium transition-colors duration-300 ${
+                  isScrolled ? "hover:text-bdigital-cyan-dark" : "hover:text-bdigital-cyan"
+                } py-2 ${
                   servicePageIds.includes(routeInfo.page as (typeof servicePageIds)[number])
-                    ? "text-bdigital-cyan"
+                    ? isScrolled
+                      ? "text-bdigital-cyan-dark"
+                      : "text-bdigital-cyan"
                     : isScrolled
                       ? "text-bdigital-navy"
                       : "text-white"
@@ -220,7 +232,7 @@ export function Navigation() {
                     onClick={() => handleServiceClick(service.id as PageType)}
                     className="w-full px-4 py-3 text-left hover:bg-gray-50 transition-colors duration-200 group focus:bg-gray-50 focus:outline-none"
                   >
-                    <div className="font-medium text-bdigital-navy text-sm mb-1 group-hover:text-bdigital-cyan group-focus:text-bdigital-cyan transition-colors duration-200">
+                    <div className="font-medium text-bdigital-navy text-sm mb-1 group-hover:text-bdigital-cyan-dark group-focus:text-bdigital-cyan-dark transition-colors duration-200">
                       {service.title}
                     </div>
                     <div className="text-xs text-neutral-gray">{service.description}</div>
@@ -231,9 +243,9 @@ export function Navigation() {
 
             <button
               onClick={handleContactClick}
-              className={`text-sm font-medium transition-colors duration-300 hover:text-bdigital-cyan ${
-                isScrolled ? "text-bdigital-navy" : "text-white"
-              }`}
+              className={`text-sm font-medium transition-colors duration-300 ${
+                isScrolled ? "hover:text-bdigital-cyan-dark" : "hover:text-bdigital-cyan"
+              } ${isScrolled ? "text-bdigital-navy" : "text-white"}`}
             >
               {_t("nav.contact")}
             </button>

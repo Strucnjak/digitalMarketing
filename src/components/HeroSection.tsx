@@ -188,7 +188,7 @@ export function HeroSection() {
                         <div className="flex items-center justify-between">
                           <div>
                             <div className="text-sm font-medium text-bdigital-navy">{_t("hero.stats.conversionRate")}</div>
-                            <div className="text-2xl font-bold text-bdigital-cyan">+287%</div>
+                            <div className="text-2xl font-bold text-bdigital-cyan-dark">+287%</div>
                           </div>
                           <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
                             <div className="text-green-600 text-xs">↗</div>
