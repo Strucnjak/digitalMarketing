@@ -1,55 +1,67 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { AdminPanel } from "./AdminPanel";
 import { Button } from "./ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
+import { clearAdminAccess, hasAdminAccess, persistAdminAccess } from "../utils/adminAccess";
 
 const ACCESS_KEY = import.meta.env.VITE_ADMIN_ACCESS_KEY ?? "bdigital-admin";
-const ACCESS_STORAGE_KEY = "bdigital-admin-access";
+
+function normalizeKey(value: string | null) {
+  return value?.trim() ?? "";
+}
 
 function useAdminAccess(searchParams: URLSearchParams) {
   const [authorized, setAuthorized] = useState(() => {
-    if (typeof window === "undefined") return false;
-
-    const stored = window.sessionStorage.getItem(ACCESS_STORAGE_KEY);
-    return stored === "true";
+    return hasAdminAccess();
   });
 
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    const key = searchParams.get("key");
+    const key = normalizeKey(searchParams.get("key"));
     if (key && key === ACCESS_KEY) {
-      window.sessionStorage.setItem(ACCESS_STORAGE_KEY, "true");
+      persistAdminAccess();
       setAuthorized(true);
     }
   }, [searchParams]);
 
-  const authorize = (value: string) => {
+  const authorize = useCallback((value: string) => {
     if (value === ACCESS_KEY) {
-      if (typeof window !== "undefined") {
-        window.sessionStorage.setItem(ACCESS_STORAGE_KEY, "true");
-      }
+      persistAdminAccess();
       setAuthorized(true);
       return true;
     }
     return false;
-  };
+  }, []);
 
-  return useMemo(() => ({ authorized, authorize }), [authorized]);
+  const revokeAuthorization = useCallback(() => {
+    clearAdminAccess();
+    setAuthorized(false);
+  }, []);
+
+  return useMemo(
+    () => ({
+      authorized,
+      authorize,
+      revokeAuthorization,
+    }),
+    [authorize, authorized, revokeAuthorization],
+  );
 }
 
 export function AdminAccessGate() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const { authorized, authorize } = useAdminAccess(searchParams);
+  const { authorized, authorize, revokeAuthorization } = useAdminAccess(searchParams);
   const [code, setCode] = useState(searchParams.get("key") ?? "");
   const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const success = authorize(code.trim());
+    const sanitizedCode = normalizeKey(code);
+    const success = authorize(sanitizedCode);
 
     if (!success) {
       setError("Netačan pristupni kod. Pokušajte ponovo.");
@@ -59,7 +71,17 @@ export function AdminAccessGate() {
     setError(null);
     setSearchParams((current) => {
       const updated = new URLSearchParams(current);
-      updated.set("key", code.trim());
+      updated.delete("key");
+      return updated;
+    });
+  };
+
+  const handleClear = () => {
+    revokeAuthorization();
+    setCode("");
+    setSearchParams((current) => {
+      const updated = new URLSearchParams(current);
+      updated.delete("key");
       return updated;
     });
   };
@@ -89,8 +111,15 @@ export function AdminAccessGate() {
                 autoComplete="off"
                 placeholder="Unesite kod"
                 required
+                minLength={6}
+                aria-invalid={Boolean(error)}
+                aria-describedby={error ? "admin-code-error" : undefined}
               />
-              {error ? <p className="text-sm text-red-600">{error}</p> : null}
+              {error ? (
+                <p id="admin-code-error" className="text-sm text-red-600" aria-live="polite">
+                  {error}
+                </p>
+              ) : null}
             </div>
             <Button type="submit" className="w-full">
               Otključaj
@@ -98,6 +127,9 @@ export function AdminAccessGate() {
             <p className="text-xs text-neutral-gray text-center">
               Savjet: dodajte <code>?key=vaš-kod</code> na link za direktan pristup.
             </p>
+            <Button type="button" variant="ghost" className="w-full" onClick={handleClear}>
+              Očisti memorisani pristup
+            </Button>
           </form>
         </CardContent>
       </Card>

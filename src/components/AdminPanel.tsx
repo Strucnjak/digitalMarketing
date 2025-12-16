@@ -8,6 +8,7 @@ import { Switch } from "./ui/switch";
 import { Textarea } from "./ui/textarea";
 import { useAdminData, type ServiceKey, type TeamMember, type Testimonial } from "./AdminDataContext";
 import { servicePageIds } from "../routing";
+import { clearAdminAccess } from "../utils/adminAccess";
 
 const serviceLabels: Record<ServiceKey, string> = {
   "web-design": "Web dizajn",
@@ -35,6 +36,7 @@ export function AdminPanel() {
     setShowTestimonials,
     notifications,
     clearNotifications,
+    resetState,
   } = useAdminData();
 
   const [newMember, setNewMember] = useState<TeamMember>({
@@ -57,17 +59,50 @@ export function AdminPanel() {
     [notifications],
   );
 
+  const canCreateMember = newMember.name.trim().length > 0 && newMember.role.trim().length > 0;
+  const canCreateTestimonial =
+    newTestimonial.name.trim().length > 0 && newTestimonial.content.trim().length > 0;
+
+  const handleResetState = () => {
+    if (typeof window === "undefined") return;
+
+    const confirmed = window.confirm(
+      "Resetovanjem brišete lokalno sačuvane podatke o cijenama, timu i recenzijama. Nastavi?",
+    );
+
+    if (confirmed) {
+      resetState();
+    }
+  };
+
+  const handleLogout = () => {
+    if (typeof window === "undefined") return;
+
+    clearAdminAccess();
+    window.location.href = "/admin";
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 py-10">
       <div className="max-w-6xl mx-auto px-4 space-y-8">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-wrap items-start justify-between gap-4">
           <div>
             <h1 className="text-3xl font-bold text-bdigital-navy">Admin panel</h1>
-            <p className="text-neutral-gray">Upravljajte cijenama, timom, recenzijama i obavještenjima.</p>
+            <p className="text-neutral-gray">
+              Upravljajte cijenama, timom, recenzijama i obavještenjima. Koristite akcije desno za sigurnost.
+            </p>
           </div>
-          <Button asChild variant="outline">
-            <Link to="/">⬅ Povratak na sajt</Link>
-          </Button>
+          <div className="flex flex-wrap gap-2">
+            <Button variant="outline" onClick={handleResetState}>
+              Resetuj lokalne podatke
+            </Button>
+            <Button variant="destructive" onClick={handleLogout}>
+              Odjavi se
+            </Button>
+            <Button asChild variant="outline">
+              <Link to="/">⬅ Povratak na sajt</Link>
+            </Button>
+          </div>
         </div>
 
         <Card>
@@ -141,6 +176,7 @@ export function AdminPanel() {
                   <div className="space-y-2">
                     <Label>URL fotografije</Label>
                     <Input
+                      type="url"
                       value={member.image}
                       onChange={(e) => updateTeamMember(index, { image: e.target.value })}
                       placeholder="https://..."
@@ -174,6 +210,7 @@ export function AdminPanel() {
                   placeholder="Kratak opis"
                 />
                 <Input
+                  type="url"
                   value={newMember.image}
                   onChange={(e) => setNewMember({ ...newMember, image: e.target.value })}
                   placeholder="URL fotografije"
@@ -185,9 +222,11 @@ export function AdminPanel() {
                   addTeamMember(newMember);
                   setNewMember({ name: "", role: "", description: "", image: "" });
                 }}
+                disabled={!canCreateMember}
               >
                 Sačuvaj člana
               </Button>
+              <p className="text-sm text-neutral-gray">Ime i uloga su obavezni, a link fotografije je opcionalan.</p>
             </div>
           </CardContent>
         </Card>
@@ -236,6 +275,7 @@ export function AdminPanel() {
                       type="number"
                       min={1}
                       max={5}
+                      inputMode="numeric"
                       value={testimonial.rating}
                       onChange={(e) => updateTestimonial(index, { rating: Number(e.target.value) })}
                     />
@@ -279,6 +319,7 @@ export function AdminPanel() {
                   type="number"
                   min={1}
                   max={5}
+                  inputMode="numeric"
                   value={newTestimonial.rating}
                   onChange={(e) => setNewTestimonial({ ...newTestimonial, rating: Number(e.target.value) })}
                 />
@@ -296,9 +337,13 @@ export function AdminPanel() {
                   addTestimonial(newTestimonial);
                   setNewTestimonial({ name: "", role: "", avatar: "", rating: 5, content: "" });
                 }}
+                disabled={!canCreateTestimonial}
               >
                 Sačuvaj recenziju
               </Button>
+              <p className="text-sm text-neutral-gray">
+                Popunite ime i sadržaj recenzije. Ocjena van opsega 1-5 će biti automatski korigovana.
+              </p>
             </div>
           </CardContent>
         </Card>
@@ -312,7 +357,9 @@ export function AdminPanel() {
           </CardHeader>
           <CardContent className="space-y-3">
             {sortedNotifications.length === 0 ? (
-              <p className="text-neutral-gray">Nema novih obavještenja.</p>
+              <p className="text-neutral-gray" role="status" aria-live="polite">
+                Nema novih obavještenja.
+              </p>
             ) : (
               sortedNotifications.map((notification) => (
                 <div key={notification.id} className="border border-gray-100 rounded-lg p-3 bg-white shadow-sm">

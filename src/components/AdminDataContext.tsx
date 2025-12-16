@@ -51,6 +51,7 @@ interface AdminDataContextValue extends AdminDataState {
   setShowTestimonials: (value: boolean) => void;
   addNotification: (notification: FormNotification) => void;
   clearNotifications: () => void;
+  resetState: () => void;
 }
 
 const defaultServicePrices: Record<ServiceKey, string[]> = {
@@ -112,6 +113,13 @@ const defaultTestimonials: Testimonial[] = [
 const AdminDataContext = createContext<AdminDataContextValue | undefined>(undefined);
 
 const storageKey = "admin-panel-data";
+
+function clampRating(rating?: number): number | undefined {
+  if (typeof rating === "undefined") return undefined;
+
+  const value = Number.isNaN(rating) ? 1 : rating;
+  return Math.min(5, Math.max(1, Math.round(value)));
+}
 
 function cloneServicePrices(source: Partial<Record<ServiceKey, string[]>> = {}) {
   return Object.entries(defaultServicePrices).reduce<Record<ServiceKey, string[]>>(
@@ -203,14 +211,28 @@ export function AdminDataProvider({ children }: { children: ReactNode }) {
     updateTestimonial: (index, testimonial) =>
       setState((prev) => ({
         ...prev,
-        testimonials: prev.testimonials.map((existing, i) =>
-          i === index ? { ...existing, ...testimonial } : existing,
-        ),
+        testimonials: prev.testimonials.map((existing, i) => {
+          if (i !== index) return existing;
+
+          const rating = clampRating(testimonial.rating);
+
+          return {
+            ...existing,
+            ...testimonial,
+            ...(rating !== undefined ? { rating } : {}),
+          };
+        }),
       })),
     addTestimonial: (testimonial) =>
       setState((prev) => ({
         ...prev,
-        testimonials: [...prev.testimonials, testimonial],
+        testimonials: [
+          ...prev.testimonials,
+          {
+            ...testimonial,
+            rating: clampRating(testimonial.rating) ?? 5,
+          },
+        ],
       })),
     removeTestimonial: (index) =>
       setState((prev) => ({
@@ -224,6 +246,12 @@ export function AdminDataProvider({ children }: { children: ReactNode }) {
         notifications: [notification, ...prev.notifications].slice(0, 50),
       })),
     clearNotifications: () => setState((prev) => ({ ...prev, notifications: [] })),
+    resetState: () => {
+      if (typeof window !== "undefined") {
+        localStorage.removeItem(storageKey);
+      }
+      setState(getInitialState());
+    },
   }), [state]);
 
   return <AdminDataContext.Provider value={value}>{children}</AdminDataContext.Provider>;
