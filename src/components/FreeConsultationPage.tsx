@@ -29,6 +29,7 @@ import {
 import { useLanguage } from "./LanguageContext";
 import { useActiveLocale } from "../hooks/useActiveLocale";
 import { buildLocalizedPath } from "../routing";
+import { useAdminData } from "./AdminDataContext";
 
 interface ConsultationFormData {
   fullName: string;
@@ -50,10 +51,15 @@ export function FreeConsultationPage() {
   const navigate = useNavigate();
   const { activeLocale, includeLocalePrefix } = useActiveLocale();
   const { t, language } = useLanguage();
+  const { addNotification } = useAdminData();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const createNotificationId = () =>
+    typeof crypto !== "undefined" && "randomUUID" in crypto
+      ? crypto.randomUUID()
+      : `notify-${Date.now()}-${Math.random().toString(16).slice(2)}`;
 
   const [formData, setFormData] = useState<ConsultationFormData>({
     fullName: "",
@@ -132,6 +138,14 @@ export function FreeConsultationPage() {
       }
 
       setIsSubmitted(true);
+
+      addNotification({
+        id: createNotificationId(),
+        type: "consultation",
+        createdAt: Date.now(),
+        details: `${formData.fullName || "Posjetilac"} je tražio konsultaciju (${formData.businessType || "biznis"}).`,
+        payload: formData,
+      });
     } catch (err) {
       const message = err instanceof Error ? err.message : "Failed to submit consultation request";
       setSubmitError(message);

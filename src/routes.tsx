@@ -55,6 +55,7 @@ const ServiceInquiryForm = lazy(() =>
 const FreeConsultationPage = lazy(() =>
   import("./components/FreeConsultationPage").then((mod) => ({ default: mod.FreeConsultationPage })),
 );
+const AdminPanel = lazy(() => import("./components/AdminPanel").then((mod) => ({ default: mod.AdminPanel })));
 
 function PageLoader() {
   return (
@@ -331,6 +332,10 @@ export const appRouteObjects: RouteObject[] = [
     path: "/:locale(en|me|fr)",
     element: <LocalizedLayout />,
     children: localizedChildren,
+  },
+  {
+    path: "/admin",
+    element: withPageSuspense(<AdminPanel />),
   },
   {
     path: "*",
