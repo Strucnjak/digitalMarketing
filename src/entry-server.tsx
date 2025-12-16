@@ -1,7 +1,7 @@
 import { StrictMode } from "react";
 import { renderToString } from "react-dom/server";
 import { StaticRouter } from "react-router-dom/server";
-import { AppRoutes } from "./routes";
+import { AppRoutes, preloadRouteComponents } from "./routes";
 import { SITE_BASE_URL } from "./config/site";
 import { getSeoMetadata } from "./config/seo-meta";
 import { locales, parsePathname } from "./routing";
@@ -42,12 +42,14 @@ export interface RenderOptions {
   manifest?: Manifest;
 }
 
-export function render(url: string, options: RenderOptions = {}): RenderResult {
+export async function render(url: string, options: RenderOptions = {}): Promise<RenderResult> {
   const requestUrl = new URL(url, SITE_BASE_URL);
   const { locale, page, hasLocalePrefix } = parsePathname(requestUrl.pathname);
   const localePresentation = getLocalePresentation(locale);
   const footerYear = new Date().getFullYear();
   const initialState: InitialAppState = { locale, footerYear };
+
+  await preloadRouteComponents();
 
   const app = (
     <StrictMode>
