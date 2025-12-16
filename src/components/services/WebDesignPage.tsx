@@ -263,8 +263,8 @@ export function WebDesignPage() {
                   </div>
                   <h3 className="text-lg font-bold text-bdigital-navy mb-2">{step.title}</h3>
                   <p className="text-neutral-gray text-sm mb-2">{step.description}</p>
-                  <div className="flex items-center justify-center gap-1 text-bdigital-cyan text-sm">
-                    <Clock className="h-4 w-4" />
+                  <div className="flex items-center justify-center gap-1 text-bdigital-cyan-dark text-sm">
+                    <Clock className="h-4 w-4 text-bdigital-cyan-dark" />
                     <span>{step.duration}</span>
                   </div>
                 </div>
