@@ -1,56 +1,16 @@
-import { Card, CardContent } from './ui/card';
-import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
-import { Star } from 'lucide-react';
-import { useLanguage } from './LanguageContext';
+import { Card, CardContent } from "./ui/card";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { Star } from "lucide-react";
+import { useLanguage } from "./LanguageContext";
+import { useAdminData } from "./AdminDataContext";
 
 export function TestimonialsSection() {
-  const { t, language } = useLanguage();
+  const { t } = useLanguage();
+  const { testimonials, showTestimonials } = useAdminData();
 
-  const testimonials = language === 'me' ? [
-    {
-      name: 'Marko Petrović',
-      role: 'Vlasnik restorana "Konoba Stari Grad"',
-      content: 'DIAL Digital je kreirao fantastičnu web stranicu za naš restoran. Broj online rezervacija se udvostručio u prva tri meseca!',
-      avatar: 'MP',
-      rating: 5
-    },
-    {
-      name: 'Ana Nikolić',
-      role: 'Direktorka "Montenegrin Properties"',
-      content: 'Njihov SEO je potpuno transformisao naše online prisustvo. Sada smo prvi u Google pretragama za nekretnine u Podgorici.',
-      avatar: 'AN',
-      rating: 5
-    },
-    {
-      name: 'Stefan Jovanović',
-      role: 'Osnivač "TechStart ME"',
-      content: 'Profesionalni pristup, kreativna rešenja i odličan rezultat. Preporučujem DIAL Digital svim kompanijama koje žele rast.',
-      avatar: 'SJ',
-      rating: 5
-    }
-  ] : [
-    {
-      name: 'Mark Petrovic',
-      role: 'Owner of "Konoba Stari Grad" Restaurant',
-      content: 'DIAL Digital created a fantastic website for our restaurant. Online reservations doubled in the first three months!',
-      avatar: 'MP',
-      rating: 5
-    },
-    {
-      name: 'Ana Nikolic',
-      role: 'Director of "Montenegrin Properties"',
-      content: 'Their SEO completely transformed our online presence. We\'re now first in Google searches for real estate in Podgorica.',
-      avatar: 'AN',
-      rating: 5
-    },
-    {
-      name: 'Stefan Jovanovic',
-      role: 'Founder of "TechStart ME"',
-      content: 'Professional approach, creative solutions and excellent results. I recommend DIAL Digital to all companies that want growth.',
-      avatar: 'SJ',
-      rating: 5
-    }
-  ];
+  if (!showTestimonials) {
+    return null;
+  }
 
   return (
     <section className="py-20 bg-gray-50">
@@ -67,37 +27,41 @@ export function TestimonialsSection() {
 
         {/* Testimonials Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {testimonials.map((testimonial, index) => (
-            <Card key={index} className="bg-white border-0 shadow-lg hover:shadow-xl transition-shadow duration-300">
-              <CardContent className="p-6">
-                {/* Rating Stars */}
-                <div className="flex items-center mb-4">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                  ))}
-                </div>
+          {testimonials.map((testimonial, index) => {
+            const ratingStars = Math.max(1, Math.min(5, Math.round(testimonial.rating || 0)));
 
-                {/* Testimonial Content */}
-                <p className="text-neutral-gray mb-6 italic leading-relaxed">
-                  "{testimonial.content}"
-                </p>
-
-                {/* Client Info */}
-                <div className="flex items-center">
-                  <Avatar className="h-12 w-12 mr-4">
-                    <AvatarImage src="" alt={testimonial.name} />
-                    <AvatarFallback className="bg-digital-blue text-white">
-                      {testimonial.avatar}
-                    </AvatarFallback>
-                  </Avatar>
-                  <div>
-                    <h4 className="font-semibold text-dark-gray">{testimonial.name}</h4>
-                    <p className="text-sm text-neutral-gray">{testimonial.role}</p>
+            return (
+              <Card key={index} className="bg-white border-0 shadow-lg hover:shadow-xl transition-shadow duration-300">
+                <CardContent className="p-6">
+                  {/* Rating Stars */}
+                  <div className="flex items-center mb-4">
+                    {Array.from({ length: ratingStars }).map((_, i) => (
+                      <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                    ))}
                   </div>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
+
+                  {/* Testimonial Content */}
+                  <p className="text-neutral-gray mb-6 italic leading-relaxed">
+                    "{testimonial.content}"
+                  </p>
+
+                  {/* Client Info */}
+                  <div className="flex items-center">
+                    <Avatar className="h-12 w-12 mr-4">
+                      <AvatarImage src="" alt={testimonial.name} />
+                      <AvatarFallback className="bg-digital-blue text-white">
+                        {testimonial.avatar}
+                      </AvatarFallback>
+                    </Avatar>
+                    <div>
+                      <h4 className="font-semibold text-dark-gray">{testimonial.name}</h4>
+                      <p className="text-sm text-neutral-gray">{testimonial.role}</p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            );
+          })}
         </div>
 
         {/* Additional Trust Indicators */}

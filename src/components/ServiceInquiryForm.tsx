@@ -13,6 +13,7 @@ import { Step3 } from "./serviceInquirySteps/Step3";
 import { Step4 } from "./serviceInquirySteps/Step4";
 import { useActiveLocale } from "../hooks/useActiveLocale";
 import { buildLocalizedPath } from "../routing";
+import { useAdminData } from "./AdminDataContext";
 
 export interface InquiryFormData {
   // Contact Information
@@ -51,6 +52,7 @@ export function ServiceInquiryForm() {
   const navigate = useNavigate();
   const { activeLocale, includeLocalePrefix } = useActiveLocale();
   const { t, language } = useLanguage();
+  const { addNotification } = useAdminData();
   const [currentStep, setCurrentStep] = useState(1);
   const serviceInfo: Record<string, { title: string; description: string; icon: string }> = {
     "web-design": { title: t("services.web.title"), description: t("services.web.desc"), icon: "🎨" },
@@ -63,6 +65,11 @@ export function ServiceInquiryForm() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitError, setSubmitError] = useState<string | null>(null);
+
+  const createNotificationId = () =>
+    typeof crypto !== "undefined" && "randomUUID" in crypto
+      ? crypto.randomUUID()
+      : `notify-${Date.now()}-${Math.random().toString(16).slice(2)}`;
 
   const [formData, setFormData] = useState<InquiryFormData>({
     fullName: "",
@@ -218,6 +225,16 @@ export function ServiceInquiryForm() {
       }
 
       setIsSubmitted(true);
+
+      addNotification({
+        id: createNotificationId(),
+        type: "service-inquiry",
+        createdAt: Date.now(),
+        details: `${formData.fullName || "Posjetilac"} je poslao upit za ${
+          formData.selectedService || "uslugu"
+        } (${formData.selectedPackage || "paket"}).`,
+        payload: formData,
+      });
 
       // Clear stored service/package info
       localStorage.removeItem("selectedService");

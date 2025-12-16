@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { Card, CardContent } from "./ui/card";
 import { Target, Eye, Heart, Users, Award, Clock } from "lucide-react";
 import { useLanguage } from "./LanguageContext";
+import { useAdminData } from "./AdminDataContext";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { useActiveLocale } from "../hooks/useActiveLocale";
 import { useRouteInfo } from "../hooks/useRouteInfo";
@@ -12,6 +13,7 @@ export function AboutSection() {
   const navigate = useNavigate();
   const { activeLocale, includeLocalePrefix } = useActiveLocale();
   const routeInfo = useRouteInfo();
+  const { teamMembers } = useAdminData();
 
   const values = [
     {
@@ -41,26 +43,7 @@ export function AboutSection() {
     { icon: Target, number: "98%", label: t("about.stats.success_rate") },
   ];
 
-  const team = [
-    {
-      name: "Marko Petrović",
-      role: "CEO & Creative Director",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&face",
-      description: "Vodi kreativni tim sa više od 5 godina iskustva u digitalnom marketingu.",
-    },
-    {
-      name: "Ana Nikolić",
-      role: "Lead Developer",
-      image: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=300&h=300&fit=crop&face",
-      description: "Ekspert za web tehnologije i UX/UI dizajn sa strašću za inovacije.",
-    },
-    {
-      name: "Stefan Jovanović",
-      role: "SEO Specialist",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&face",
-      description: "Specijalizovan za SEO optimizaciju i digitalne strategije.",
-    },
-  ];
+  const team = teamMembers;
 
   const scrollToId = (id: string) => {
     const el = document.getElementById(id) || document.querySelector(`#${id}`);

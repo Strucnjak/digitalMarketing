@@ -1,6 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
+import { AdminDataProvider } from "./components/AdminDataContext";
 import { AppRoutes } from "./routes";
 import "./index.css";
 
@@ -10,7 +11,9 @@ if (container) {
   createRoot(container).render(
     <StrictMode>
       <BrowserRouter>
-        <AppRoutes />
+        <AdminDataProvider>
+          <AppRoutes />
+        </AdminDataProvider>
       </BrowserRouter>
     </StrictMode>
   );

@@ -6,6 +6,7 @@ import { SITE_BASE_URL } from "./config/site";
 import { getSeoMetadata } from "./config/seo-meta";
 import { locales, parsePathname } from "./routing";
 import { InitialStateProvider, type InitialAppState } from "./components/InitialStateContext";
+import { AdminDataProvider } from "./components/AdminDataContext";
 import {
   STRUCTURED_DATA_ELEMENT_ID,
   buildCanonicalCluster,
@@ -52,7 +53,9 @@ export function render(url: string, options: RenderOptions = {}): RenderResult {
     <StrictMode>
       <InitialStateProvider value={initialState}>
         <StaticRouter location={url}>
-          <AppRoutes />
+          <AdminDataProvider>
+            <AppRoutes />
+          </AdminDataProvider>
         </StaticRouter>
       </InitialStateProvider>
     </StrictMode>
