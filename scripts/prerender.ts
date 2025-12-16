@@ -1,7 +1,7 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
-import type { Manifest, RenderResult } from "../src/entry-server";
+import type { Manifest, RenderOptions, RenderResult } from "../src/entry-server";
 import { enumerateStaticPaths } from "../src/routing.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -18,8 +18,10 @@ async function main() {
   const entryModule = (await import(
     pathToFileURL(path.resolve(serverDir, "entry-server.js")).href
   )) as typeof import("../src/entry-server");
-  const render: (url: string, options: { manifest: Manifest }) => RenderResult =
-    entryModule.render;
+  const render: (
+    url: string,
+    options: RenderOptions & { manifest: Manifest }
+  ) => Promise<RenderResult> = entryModule.render;
 
   const routes = collectRoutes();
 
