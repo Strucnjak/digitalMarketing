@@ -24,40 +24,71 @@ import {
 } from "./routing";
 import "./styles/mobile-quick-nav.css";
 
-const HeroSection = lazy(() => import("./components/HeroSection").then((mod) => ({ default: mod.HeroSection })));
-const ServicesSection = lazy(() =>
-  import("./components/ServicesSection").then((mod) => ({ default: mod.ServicesSection })),
-);
-const PortfolioSection = lazy(() =>
-  import("./components/PortfolioSection").then((mod) => ({ default: mod.PortfolioSection })),
-);
-const AboutSection = lazy(() => import("./components/AboutSection").then((mod) => ({ default: mod.AboutSection })));
-const TestimonialsSection = lazy(() =>
-  import("./components/TestimonialsSection").then((mod) => ({ default: mod.TestimonialsSection })),
-);
-const ContactSection = lazy(() => import("./components/ContactSection").then((mod) => ({ default: mod.ContactSection })));
-const Footer = lazy(() => import("./components/Footer").then((mod) => ({ default: mod.Footer })));
-const MobileQuickNav = lazy(() => import("./components/MobileQuickNav").then((mod) => ({ default: mod.MobileQuickNav })));
-const WebDesignPage = lazy(() =>
-  import("./components/services/WebDesignPage").then((mod) => ({ default: mod.WebDesignPage })),
-);
-const SEOPage = lazy(() => import("./components/services/SEOPage").then((mod) => ({ default: mod.SEOPage })));
-const SocialMediaPage = lazy(() =>
-  import("./components/services/SocialMediaPage").then((mod) => ({ default: mod.SocialMediaPage })),
-);
-const BrandingPage = lazy(() =>
-  import("./components/services/BrandingPage").then((mod) => ({ default: mod.BrandingPage })),
-);
-const StrategyPage = lazy(() => import("./components/services/StrategyPage").then((mod) => ({ default: mod.StrategyPage })));
-const ServiceInquiryForm = lazy(() =>
-  import("./components/ServiceInquiryForm").then((mod) => ({ default: mod.ServiceInquiryForm })),
-);
-const FreeConsultationPage = lazy(() =>
-  import("./components/FreeConsultationPage").then((mod) => ({ default: mod.FreeConsultationPage })),
-);
-const AdminAccessGate = lazy(() =>
-  import("./components/AdminAccessGate").then((mod) => ({ default: mod.AdminAccessGate })),
-);
+const loadHeroSection = () => import("./components/HeroSection").then((mod) => ({ default: mod.HeroSection }));
+const loadServicesSection = () =>
+  import("./components/ServicesSection").then((mod) => ({ default: mod.ServicesSection }));
+const loadPortfolioSection = () =>
+  import("./components/PortfolioSection").then((mod) => ({ default: mod.PortfolioSection }));
+const loadAboutSection = () => import("./components/AboutSection").then((mod) => ({ default: mod.AboutSection }));
+const loadTestimonialsSection = () =>
+  import("./components/TestimonialsSection").then((mod) => ({ default: mod.TestimonialsSection }));
+const loadContactSection = () => import("./components/ContactSection").then((mod) => ({ default: mod.ContactSection }));
+const loadFooter = () => import("./components/Footer").then((mod) => ({ default: mod.Footer }));
+const loadMobileQuickNav = () =>
+  import("./components/MobileQuickNav").then((mod) => ({ default: mod.MobileQuickNav }));
+const loadWebDesignPage = () =>
+  import("./components/services/WebDesignPage").then((mod) => ({ default: mod.WebDesignPage }));
+const loadSEOPage = () => import("./components/services/SEOPage").then((mod) => ({ default: mod.SEOPage }));
+const loadSocialMediaPage = () =>
+  import("./components/services/SocialMediaPage").then((mod) => ({ default: mod.SocialMediaPage }));
+const loadBrandingPage = () =>
+  import("./components/services/BrandingPage").then((mod) => ({ default: mod.BrandingPage }));
+const loadStrategyPage = () =>
+  import("./components/services/StrategyPage").then((mod) => ({ default: mod.StrategyPage }));
+const loadServiceInquiryForm = () =>
+  import("./components/ServiceInquiryForm").then((mod) => ({ default: mod.ServiceInquiryForm }));
+const loadFreeConsultationPage = () =>
+  import("./components/FreeConsultationPage").then((mod) => ({ default: mod.FreeConsultationPage }));
+const loadAdminAccessGate = () =>
+  import("./components/AdminAccessGate").then((mod) => ({ default: mod.AdminAccessGate }));
+
+const HeroSection = lazy(loadHeroSection);
+const ServicesSection = lazy(loadServicesSection);
+const PortfolioSection = lazy(loadPortfolioSection);
+const AboutSection = lazy(loadAboutSection);
+const TestimonialsSection = lazy(loadTestimonialsSection);
+const ContactSection = lazy(loadContactSection);
+const Footer = lazy(loadFooter);
+const MobileQuickNav = lazy(loadMobileQuickNav);
+const WebDesignPage = lazy(loadWebDesignPage);
+const SEOPage = lazy(loadSEOPage);
+const SocialMediaPage = lazy(loadSocialMediaPage);
+const BrandingPage = lazy(loadBrandingPage);
+const StrategyPage = lazy(loadStrategyPage);
+const ServiceInquiryForm = lazy(loadServiceInquiryForm);
+const FreeConsultationPage = lazy(loadFreeConsultationPage);
+const AdminAccessGate = lazy(loadAdminAccessGate);
+
+export async function preloadRouteComponents() {
+  await Promise.all([
+    loadHeroSection(),
+    loadServicesSection(),
+    loadPortfolioSection(),
+    loadAboutSection(),
+    loadTestimonialsSection(),
+    loadContactSection(),
+    loadFooter(),
+    loadMobileQuickNav(),
+    loadWebDesignPage(),
+    loadSEOPage(),
+    loadSocialMediaPage(),
+    loadBrandingPage(),
+    loadStrategyPage(),
+    loadServiceInquiryForm(),
+    loadFreeConsultationPage(),
+    loadAdminAccessGate(),
+  ]);
+}
 
 function PageLoader() {
   return (
