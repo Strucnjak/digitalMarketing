@@ -164,7 +164,7 @@ export function Navigation() {
             <button
               onClick={handleHomeClick}
               className="flex items-center space-x-2 group transition-all duration-300 hover:scale-105"
-              aria-label="DIAL Digital - Početna stranica"
+              aria-label={`DIAL Digital · ${_t("nav.home")}`}
             >
               <div className="w-8 h-8 lg:w-10 lg:h-10 bg-bdigital-cyan-dark rounded-lg flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow duration-300">
                 <img src="/logo.svg" alt="DIAL Digital logo" className="w-7 h-7 lg:w-8 lg:h-8" loading="lazy" />

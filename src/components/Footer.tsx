@@ -59,7 +59,7 @@ export function Footer({ initialYear }: FooterProps) {
             <p className="text-gray-300 leading-relaxed">{t("footer.description")}</p>
 
             {/* Social Links */}
-            <div className="flex space-x-4" role="list" aria-label={t("footer.social.title") ?? "Social media"}>
+            <ul className="flex space-x-4" aria-label={t("footer.social.title") ?? "Social media"}>
               {[
                 {
                   href: "https://www.facebook.com/BDigitalAgency",
@@ -77,21 +77,21 @@ export function Footer({ initialYear }: FooterProps) {
                   Icon: Linkedin,
                 },
               ].map(({ href, label, Icon }) => (
-                <a
-                  key={label}
-                  href={href}
-                  aria-label={label}
-                  title={label}
-                  className="w-10 h-10 bg-bdigital-dark-navy rounded-lg flex items-center justify-center hover:bg-bdigital-cyan hover:text-bdigital-navy transition-all duration-300 group focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bdigital-cyan"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  role="listitem"
-                >
-                  <Icon className="h-5 w-5 group-hover:scale-110 transition-transform duration-300" aria-hidden="true" />
-                  <span className="sr-only">{label}</span>
-                </a>
+                <li key={label}>
+                  <a
+                    href={href}
+                    aria-label={label}
+                    title={label}
+                    className="w-10 h-10 bg-bdigital-dark-navy rounded-lg flex items-center justify-center hover:bg-bdigital-cyan hover:text-bdigital-navy transition-all duration-300 group focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bdigital-cyan"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Icon className="h-5 w-5 group-hover:scale-110 transition-transform duration-300" aria-hidden="true" />
+                    <span className="sr-only">{label}</span>
+                  </a>
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
 
           {/* Services */}
