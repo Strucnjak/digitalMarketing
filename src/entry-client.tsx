@@ -3,6 +3,7 @@ import { hydrateRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import { AppRoutes } from "./routes";
 import { defaultLocale, isLocale } from "./routing";
+import { AdminDataProvider } from "./components/AdminDataContext";
 import { InitialStateProvider, type InitialAppState } from "./components/InitialStateContext";
 import "./index.css";
 
@@ -59,7 +60,9 @@ if (container) {
     <StrictMode>
       <InitialStateProvider value={initialState}>
         <BrowserRouter>
-          <AppRoutes />
+          <AdminDataProvider>
+            <AppRoutes />
+          </AdminDataProvider>
         </BrowserRouter>
       </InitialStateProvider>
     </StrictMode>
