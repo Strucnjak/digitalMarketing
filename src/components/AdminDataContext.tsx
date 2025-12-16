@@ -113,52 +113,64 @@ const AdminDataContext = createContext<AdminDataContextValue | undefined>(undefi
 
 const storageKey = "admin-panel-data";
 
-const getInitialState = (): AdminDataState => {
-  if (typeof window === "undefined") {
-    return {
-      pricesEnabled: true,
-      servicePrices: defaultServicePrices,
-      teamMembers: defaultTeamMembers,
-      testimonials: defaultTestimonials,
-      showTestimonials: true,
-      notifications: [],
-    };
-  }
+function cloneServicePrices(source: Partial<Record<ServiceKey, string[]>> = {}) {
+  return Object.entries(defaultServicePrices).reduce<Record<ServiceKey, string[]>>(
+    (acc, [key, prices]) => {
+      const serviceKey = key as ServiceKey;
+      acc[serviceKey] = [...(source[serviceKey] ?? prices)];
+      return acc;
+    },
+    {} as Record<ServiceKey, string[]>,
+  );
+}
 
+function createStateFromPartial(parsed?: Partial<AdminDataState>): AdminDataState {
+  return {
+    pricesEnabled: parsed?.pricesEnabled ?? true,
+    servicePrices: cloneServicePrices(parsed?.servicePrices),
+    teamMembers: parsed?.teamMembers?.length
+      ? parsed.teamMembers.map((member) => ({ ...member }))
+      : [...defaultTeamMembers],
+    testimonials: parsed?.testimonials?.length
+      ? parsed.testimonials.map((testimonial) => ({ ...testimonial }))
+      : [...defaultTestimonials],
+    showTestimonials: parsed?.showTestimonials ?? true,
+    notifications: parsed?.notifications ?? [],
+  };
+}
+
+function getStoredState(): Partial<AdminDataState> | undefined {
   try {
     const stored = localStorage.getItem(storageKey);
     if (stored) {
-      const parsed = JSON.parse(stored) as Partial<AdminDataState>;
-      return {
-        pricesEnabled: parsed.pricesEnabled ?? true,
-        servicePrices: { ...defaultServicePrices, ...parsed.servicePrices },
-        teamMembers: parsed.teamMembers?.length ? parsed.teamMembers : defaultTeamMembers,
-        testimonials: parsed.testimonials?.length ? parsed.testimonials : defaultTestimonials,
-        showTestimonials: parsed.showTestimonials ?? true,
-        notifications: parsed.notifications ?? [],
-      };
+      return JSON.parse(stored) as Partial<AdminDataState>;
     }
   } catch (error) {
     console.error("Failed to parse admin panel data", error);
   }
+  return undefined;
+}
 
-  return {
-    pricesEnabled: true,
-    servicePrices: defaultServicePrices,
-    teamMembers: defaultTeamMembers,
-    testimonials: defaultTestimonials,
-    showTestimonials: true,
-    notifications: [],
-  };
-};
+const getInitialState = (): AdminDataState => createStateFromPartial();
 
 export function AdminDataProvider({ children }: { children: ReactNode }) {
   const [state, setState] = useState<AdminDataState>(() => getInitialState());
+  const [hasHydratedFromStorage, setHasHydratedFromStorage] = useState(false);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
+
+    const storedState = getStoredState();
+    if (storedState) {
+      setState(createStateFromPartial(storedState));
+    }
+    setHasHydratedFromStorage(true);
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === "undefined" || !hasHydratedFromStorage) return;
     localStorage.setItem(storageKey, JSON.stringify(state));
-  }, [state]);
+  }, [state, hasHydratedFromStorage]);
 
   const value = useMemo<AdminDataContextValue>(() => ({
     ...state,
