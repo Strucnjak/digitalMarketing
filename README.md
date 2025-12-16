@@ -37,3 +37,12 @@ Sitemaps are generated during the production build and emitted to both `dist/cli
 - `https://bdigital.me/sitemap-en.xml`
 
 The sitemap files include `<xhtml:link>` elements so each page references its localized alternates, and the sitemap index aggregates the per-locale files for easier discovery by search engines.
+
+## Admin Panel Access
+
+- The admin interface is available at `/admin`.
+- Access requires a passcode configured via the `VITE_ADMIN_ACCESS_KEY` environment variable (defaults to `bdigital-admin` in development).
+- You can unlock the panel by either:
+  - Visiting `/admin?key=<your-passcode>` to auto-unlock for the session, or
+  - Opening `/admin`, entering the passcode in the prompt, and clicking **Otključaj**.
+- After a successful unlock, access is stored in `sessionStorage` for the current browser session.
