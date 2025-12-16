@@ -5,6 +5,7 @@ import { Badge } from "../ui/badge";
 import { Search, TrendingUp, BarChart3, MapPin, Smartphone, Globe, ArrowRight, CheckCircle, Star, Award } from "lucide-react";
 import { useLanguage } from "../LanguageContext";
 import { ImageWithFallback } from "../figma/ImageWithFallback";
+import { useAdminData } from "../AdminDataContext";
 import { useActiveLocale } from "../../hooks/useActiveLocale";
 import { buildLocalizedPath } from "../../routing";
 
@@ -12,6 +13,9 @@ export function SEOPage() {
   const { t } = useLanguage();
   const navigate = useNavigate();
   const { activeLocale, includeLocalePrefix } = useActiveLocale();
+  const { pricesEnabled, servicePrices } = useAdminData();
+  const packagePrices = servicePrices.seo ?? [];
+  const hiddenPriceText = "Cijene su trenutno deaktivirane";
 
   const services = [
     {
@@ -272,41 +276,47 @@ export function SEOPage() {
             <p className="text-lg text-neutral-gray max-w-2xl mx-auto">{t("seo.pricing.desc")}</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {packages.map((pkg, index) => (
-              <Card
-                key={index}
-                className={`border-0 shadow-lg hover:shadow-xl transition-all duration-300 relative ${pkg.popular ? "ring-2 ring-bdigital-cyan" : ""}`}
-              >
-                {pkg.popular && (
-                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                    <Badge className="bg-bdigital-cyan text-bdigital-navy px-4 py-1">{t("packages.most_popular")}</Badge>
-                  </div>
-                )}
-                <CardHeader className="text-center pb-4">
-                  <CardTitle className="text-xl text-bdigital-navy">{pkg.name}</CardTitle>
-                  <div className="text-3xl font-bold text-bdigital-cyan-dark mb-2">{pkg.price}</div>
-                  <p className="text-neutral-gray text-sm">{pkg.description}</p>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-3 mb-6">
-                    {pkg.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-center text-sm">
-                        <CheckCircle className="h-4 w-4 text-bdigital-cyan-dark mr-3 flex-shrink-0" />
-                        <span className="text-neutral-gray">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <Button
-                    className={`w-full ${pkg.popular ? "bg-bdigital-cyan text-bdigital-navy hover:bg-bdigital-cyan-light" : "border border-bdigital-cyan-dark text-bdigital-cyan-dark hover:bg-bdigital-cyan hover:text-bdigital-navy"} font-semibold`}
-                    variant={pkg.popular ? "default" : "outline"}
-                    onClick={() => handlePackageSelect(pkg.name)}
-                  >
-                    {t("packages.select")}
-                  </Button>
-                </CardContent>
-              </Card>
-            ))}
-          </div>{" "}
+            {packages.map((pkg, index) => {
+              const displayPrice = pricesEnabled
+                ? packagePrices[index] ?? pkg.price
+                : hiddenPriceText;
+
+              return (
+                <Card
+                  key={index}
+                  className={`border-0 shadow-lg hover:shadow-xl transition-all duration-300 relative ${pkg.popular ? "ring-2 ring-bdigital-cyan" : ""}`}
+                >
+                  {pkg.popular && (
+                    <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                      <Badge className="bg-bdigital-cyan text-bdigital-navy px-4 py-1">{t("packages.most_popular")}</Badge>
+                    </div>
+                  )}
+                  <CardHeader className="text-center pb-4">
+                    <CardTitle className="text-xl text-bdigital-navy">{pkg.name}</CardTitle>
+                    <div className="text-3xl font-bold text-bdigital-cyan-dark mb-2">{displayPrice}</div>
+                    <p className="text-neutral-gray text-sm">{pkg.description}</p>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="space-y-3 mb-6">
+                      {pkg.features.map((feature, idx) => (
+                        <li key={idx} className="flex items-center text-sm">
+                          <CheckCircle className="h-4 w-4 text-bdigital-cyan-dark mr-3 flex-shrink-0" />
+                          <span className="text-neutral-gray">{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <Button
+                      className={`w-full ${pkg.popular ? "bg-bdigital-cyan text-bdigital-navy hover:bg-bdigital-cyan-light" : "border border-bdigital-cyan-dark text-bdigital-cyan-dark hover:bg-bdigital-cyan hover:text-bdigital-navy"} font-semibold`}
+                      variant={pkg.popular ? "default" : "outline"}
+                      onClick={() => handlePackageSelect(pkg.name)}
+                    >
+                      {t("packages.select")}
+                    </Button>
+                  </CardContent>
+                </Card>
+              );
+            })}
+          </div>
           {/* Pricing Note */}
           <p className="mt-8 text-center text-sm text-neutral-gray max-w-2xl mx-auto">{t("web.pricing.note")}</p>
         </div>

@@ -5,6 +5,7 @@ import { Badge } from "../ui/badge";
 import { Monitor, Zap, Search, ShoppingCart, Palette, Code, ArrowRight, CheckCircle, Clock } from "lucide-react";
 import { useLanguage } from "../LanguageContext";
 import { ImageWithFallback } from "../figma/ImageWithFallback";
+import { useAdminData } from "../AdminDataContext";
 import { useActiveLocale } from "../../hooks/useActiveLocale";
 import { buildLocalizedPath } from "../../routing";
 
@@ -12,6 +13,9 @@ export function WebDesignPage() {
   const { t } = useLanguage();
   const navigate = useNavigate();
   const { activeLocale, includeLocalePrefix } = useActiveLocale();
+  const { pricesEnabled, servicePrices } = useAdminData();
+  const packagePrices = servicePrices["web-design"] ?? [];
+  const hiddenPriceText = "Cijene su trenutno deaktivirane";
 
   const features = [
     {
@@ -283,7 +287,12 @@ export function WebDesignPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {packages.map((pkg, index) => (
+            {packages.map((pkg, index) => {
+              const displayPrice = pricesEnabled
+                ? packagePrices[index] ?? pkg.price
+                : hiddenPriceText;
+
+              return (
               <Card
                 key={index}
                 className={`border-0 shadow-lg hover:shadow-xl transition-all duration-300 relative ${pkg.popular ? "ring-2 ring-bdigital-cyan" : ""}`}
@@ -295,7 +304,7 @@ export function WebDesignPage() {
                 )}
                 <CardHeader className="text-center pb-4">
                   <CardTitle className="text-xl text-bdigital-navy">{pkg.name}</CardTitle>
-                  <div className="text-3xl font-bold text-bdigital-cyan-dark mb-2">{pkg.price}</div>
+                  <div className="text-3xl font-bold text-bdigital-cyan-dark mb-2">{displayPrice}</div>
                   <p className="text-neutral-gray text-sm">{pkg.description}</p>
                 </CardHeader>
                 <CardContent>
@@ -316,7 +325,8 @@ export function WebDesignPage() {
                   </Button>
                 </CardContent>
               </Card>
-            ))}
+            );
+          })}
           </div>
           {/* Pricing Note */}
           <p className="mt-8 text-center text-sm text-neutral-gray max-w-2xl mx-auto">{t("web.pricing.note")}</p>
