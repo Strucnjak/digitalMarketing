@@ -27,7 +27,7 @@ export interface FormNotification {
   type: "service-inquiry" | "consultation";
   createdAt: number;
   details: string;
-  payload?: Record<string, unknown>;
+  payload?: unknown;
 }
 
 interface AdminDataState {
