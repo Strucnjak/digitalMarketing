@@ -55,7 +55,9 @@ const ServiceInquiryForm = lazy(() =>
 const FreeConsultationPage = lazy(() =>
   import("./components/FreeConsultationPage").then((mod) => ({ default: mod.FreeConsultationPage })),
 );
-const AdminPanel = lazy(() => import("./components/AdminPanel").then((mod) => ({ default: mod.AdminPanel })));
+const AdminAccessGate = lazy(() =>
+  import("./components/AdminAccessGate").then((mod) => ({ default: mod.AdminAccessGate })),
+);
 
 function PageLoader() {
   return (
@@ -335,7 +337,7 @@ export const appRouteObjects: RouteObject[] = [
   },
   {
     path: "/admin",
-    element: withPageSuspense(<AdminPanel />),
+    element: withPageSuspense(<AdminAccessGate />),
   },
   {
     path: "*",
