@@ -454,6 +454,42 @@ export function useLocation(): Location {
   return useRouterContext().location;
 }
 
+export type SetSearchParamsInit =
+  | URLSearchParams
+  | string
+  | ((prev: URLSearchParams) => URLSearchParams);
+
+export function useSearchParams() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const searchParams = useMemo(
+    () => new URLSearchParams(location.search),
+    [location.search],
+  );
+
+  const setSearchParams = useCallback(
+    (nextInit: SetSearchParamsInit) => {
+      const nextParams =
+        typeof nextInit === "function"
+          ? nextInit(new URLSearchParams(location.search))
+          : typeof nextInit === "string"
+            ? new URLSearchParams(nextInit)
+            : new URLSearchParams(nextInit);
+
+      const searchString = nextParams.toString();
+      const newSearch = searchString ? `?${searchString}` : "";
+
+      navigate(`${location.pathname}${newSearch}${location.hash ?? ""}`, {
+        replace: true,
+      });
+    },
+    [navigate, location.pathname, location.search, location.hash],
+  );
+
+  return [searchParams, setSearchParams] as const;
+}
+
 export interface LinkProps
   extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "href"> {
   to: string;
