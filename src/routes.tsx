@@ -1,4 +1,4 @@
-import { Navigate, Outlet, Route, Routes, useLocation } from "react-router-dom";
+import { Navigate, Outlet, Route, Routes, matchPath, useLocation } from "react-router-dom";
 import { AppLayout } from "./components/admin/AppLayout";
 import { DashboardPage } from "./pages/DashboardPage";
 import { ContactMessagesPage } from "./pages/ContactMessagesPage";
@@ -8,12 +8,24 @@ import { SettingsPage } from "./pages/SettingsPage";
 import { LoginPage } from "./pages/LoginPage";
 import { useApiKey } from "./providers/apiKey";
 
+const ADMIN_ROUTES = ["/", "/contact-messages", "/consultations", "/service-inquiries", "/settings"] as const;
+
 function RequireAuth() {
   const { apiKey } = useApiKey();
   const location = useLocation();
+
+  const isAdminRoute = ADMIN_ROUTES.some((route) =>
+    matchPath({ path: route, end: route === "/" }, location.pathname),
+  );
+
+  if (!isAdminRoute) {
+    return <Outlet />;
+  }
+
   if (!apiKey) {
     return <Navigate to={`/login?returnTo=${encodeURIComponent(location.pathname + location.search)}`} replace />;
   }
+
   return <Outlet />;
 }
 
