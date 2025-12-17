@@ -12,6 +12,50 @@ import { useAdminData, type SectionVisibility, type ServiceKey, type TeamMember,
 import { servicePageIds } from "../routing";
 import { clearAdminAccess } from "../utils/adminAccess";
 
+type NotificationPayload = Partial<{
+  fullName: string;
+  email: string;
+  phone: string;
+  company: string;
+  selectedService: string;
+  selectedPackage: string;
+  website: string;
+  businessType: string;
+}>;
+
+const notificationPayloadKeys: (keyof NotificationPayload)[] = [
+  "fullName",
+  "email",
+  "phone",
+  "company",
+  "selectedService",
+  "selectedPackage",
+  "website",
+  "businessType",
+];
+
+const formatPayloadValue = (value: unknown): string | undefined => {
+  if (value === null || value === undefined) return undefined;
+  if (typeof value === "string") return value;
+  if (typeof value === "number" || typeof value === "boolean") return String(value);
+
+  return undefined;
+};
+
+const getNotificationPayload = (payload: unknown): NotificationPayload | undefined => {
+  if (!payload || typeof payload !== "object") return undefined;
+
+  const parsedPayload = notificationPayloadKeys.reduce<NotificationPayload>((acc, key) => {
+    const normalizedValue = formatPayloadValue((payload as Record<string, unknown>)[key]);
+    if (normalizedValue !== undefined) {
+      acc[key] = normalizedValue;
+    }
+    return acc;
+  }, {});
+
+  return Object.keys(parsedPayload).length > 0 ? parsedPayload : undefined;
+};
+
 const serviceLabels: Record<ServiceKey, string> = {
   "web-design": "Web dizajn",
   seo: "SEO",
@@ -470,10 +514,7 @@ export function AdminPanel() {
               </p>
             ) : (
               sortedNotifications.map((notification) => {
-                const payload =
-                  notification.payload && typeof notification.payload === "object"
-                    ? (notification.payload as Record<string, unknown>)
-                    : undefined;
+                const payload = getNotificationPayload(notification.payload);
                 const responseDraft = responseDrafts[notification.id] ?? notification.response ?? "";
                 const isExpanded = expandedNotificationId === notification.id;
 
