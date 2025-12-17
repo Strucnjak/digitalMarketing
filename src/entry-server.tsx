@@ -7,6 +7,7 @@ import { getSeoMetadata } from "./config/seo-meta";
 import { locales, parsePathname } from "./routing";
 import { InitialStateProvider, type InitialAppState } from "./components/InitialStateContext";
 import { AdminDataProvider } from "./components/AdminDataContext";
+import { ApiKeyProvider } from "./providers/ApiKeyProvider";
 import {
   STRUCTURED_DATA_ELEMENT_ID,
   buildCanonicalCluster,
@@ -56,7 +57,9 @@ export async function render(url: string, options: RenderOptions = {}): Promise<
       <InitialStateProvider value={initialState}>
         <StaticRouter location={url}>
           <AdminDataProvider>
-            <AppRoutes />
+            <ApiKeyProvider>
+              <AppRoutes />
+            </ApiKeyProvider>
           </AdminDataProvider>
         </StaticRouter>
       </InitialStateProvider>
