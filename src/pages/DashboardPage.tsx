@@ -1,7 +1,6 @@
 import { Database, Mail, MessagesSquare, Sparkles } from "lucide-react";
 import { useMemo } from "react";
 import { format, formatDistanceToNow } from "date-fns";
-import { useQuery } from "@tanstack/react-query";
 import { getContactMessages, getConsultations, getDatabaseStatus, getServiceInquiries } from "../lib/api";
 import { useApiKey } from "../providers/ApiKeyProvider";
 import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
@@ -9,6 +8,7 @@ import { Badge } from "../components/ui/badge";
 import { Skeleton } from "../components/ui/skeleton";
 import { Alert, AlertDescription } from "../components/ui/alert";
 import type { ContactMessage, Consultation, ServiceInquiry } from "../types/admin";
+import { useSimpleQuery } from "../hooks/useSimpleQuery";
 function StatusPill({ status }: { status: "ok" | "error" | "loading" }) {
   const color = status === "ok" ? "bg-green-100 text-green-700" : status === "loading" ? "bg-amber-100 text-amber-700" : "bg-red-100 text-red-700";
   const label = status === "ok" ? "Connected" : status === "loading" ? "Checking" : "Error";
@@ -31,7 +31,7 @@ function SummaryTile({ label, value, icon: Icon }: { label: string; value: numbe
 
 export function DashboardPage() {
   const { apiKey } = useApiKey();
-  const statusQuery = useQuery<{ status: string; message?: string }>({
+  const statusQuery = useSimpleQuery<{ status: string; message?: string }>({
     queryKey: ["database-status", apiKey],
     queryFn: () => getDatabaseStatus(apiKey ?? ""),
     enabled: Boolean(apiKey),
@@ -39,17 +39,17 @@ export function DashboardPage() {
     refetchInterval: 60_000,
   });
 
-  const contactQuery = useQuery<ContactMessage[]>({
+  const contactQuery = useSimpleQuery<ContactMessage[]>({
     queryKey: ["contact-messages", apiKey],
     queryFn: () => getContactMessages(apiKey ?? ""),
     enabled: Boolean(apiKey),
   });
-  const consultationQuery = useQuery<Consultation[]>({
+  const consultationQuery = useSimpleQuery<Consultation[]>({
     queryKey: ["consultations", apiKey],
     queryFn: () => getConsultations(apiKey ?? ""),
     enabled: Boolean(apiKey),
   });
-  const serviceInquiryQuery = useQuery<ServiceInquiry[]>({
+  const serviceInquiryQuery = useSimpleQuery<ServiceInquiry[]>({
     queryKey: ["service-inquiries", apiKey],
     queryFn: () => getServiceInquiries(apiKey ?? ""),
     enabled: Boolean(apiKey),
@@ -57,13 +57,13 @@ export function DashboardPage() {
 
   const recentItems = useMemo(() => {
     const normalized: { id: string; name: string; type: string; createdAt: string }[] = [];
-    (contactQuery.data ?? []).forEach((item) =>
+    (contactQuery.data ?? []).forEach((item: ContactMessage) =>
       normalized.push({ id: item.id, name: item.name, type: "Contact", createdAt: item.createdAt }),
     );
-    (consultationQuery.data ?? []).forEach((item) =>
+    (consultationQuery.data ?? []).forEach((item: Consultation) =>
       normalized.push({ id: item.id, name: item.fullName, type: "Consultation", createdAt: item.createdAt }),
     );
-    (serviceInquiryQuery.data ?? []).forEach((item) =>
+    (serviceInquiryQuery.data ?? []).forEach((item: ServiceInquiry) =>
       normalized.push({ id: item.id, name: item.fullName, type: "Service inquiry", createdAt: item.createdAt }),
     );
     return normalized.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()).slice(0, 5);

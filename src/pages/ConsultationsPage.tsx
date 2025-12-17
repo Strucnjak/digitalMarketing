@@ -1,6 +1,5 @@
 import { useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
 import { format, formatDistanceToNow } from "date-fns";
 import { getConsultations } from "../lib/api";
 import { useApiKey } from "../providers/ApiKeyProvider";
@@ -15,6 +14,7 @@ import { Badge } from "../components/ui/badge";
 import { Search } from "lucide-react";
 import type { Consultation } from "../types/admin";
 import { logAuditEvent } from "../lib/audit";
+import { useSimpleQuery } from "../hooks/useSimpleQuery";
 
 function parseServices(value?: string) {
   if (!value) return [] as string[];
@@ -31,7 +31,7 @@ export function ConsultationsPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [selected, setSelected] = useState<Consultation | null>(null);
 
-  const query = useQuery<Consultation[]>({
+  const query = useSimpleQuery<Consultation[]>({
     queryKey: ["consultations", apiKey],
     queryFn: () => getConsultations(apiKey ?? ""),
     enabled: Boolean(apiKey),
