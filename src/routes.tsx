@@ -1,4 +1,4 @@
-import { Navigate, Outlet, Route, Routes, matchPath, useLocation } from "react-router-dom";
+import { Navigate, Outlet, Route, Routes, useLocation } from "react-router-dom";
 import { AppLayout } from "./components/admin/AppLayout";
 import { DashboardPage } from "./pages/DashboardPage";
 import { ContactMessagesPage } from "./pages/ContactMessagesPage";
@@ -15,7 +15,9 @@ function RequireAuth() {
   const location = useLocation();
 
   const isAdminRoute = ADMIN_ROUTES.some((route) =>
-    matchPath({ path: route, end: route === "/" }, location.pathname),
+    route === "/"
+      ? location.pathname === "/"
+      : location.pathname.startsWith(route),
   );
 
   if (!isAdminRoute) {
