@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { format, formatDistanceToNow } from "date-fns";
-import { useQuery } from "@tanstack/react-query";
 import { getContactMessages } from "../lib/api";
 import { useApiKey } from "../providers/ApiKeyProvider";
 import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
@@ -13,10 +12,10 @@ import { Alert, AlertDescription } from "../components/ui/alert";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../components/ui/dialog";
 import { CopyButton } from "../components/admin/CopyButton";
 import { CalendarRange, Download, Search } from "lucide-react";
-import { unparse } from "papaparse";
 import { toast } from "sonner";
 import { logAuditEvent } from "../lib/audit";
 import type { ContactMessage } from "../types/admin";
+import { useSimpleQuery } from "../hooks/useSimpleQuery";
 
 const REVIEW_KEY = "contact_reviewed";
 
@@ -33,7 +32,7 @@ export function ContactMessagesPage() {
     }
   });
 
-  const query = useQuery<ContactMessage[]>({
+  const query = useSimpleQuery<ContactMessage[]>({
     queryKey: ["contact-messages", apiKey],
     queryFn: () => getContactMessages(apiKey ?? ""),
     enabled: Boolean(apiKey),
@@ -77,24 +76,33 @@ export function ContactMessagesPage() {
     localStorage.setItem(REVIEW_KEY, JSON.stringify(reviewed));
   }, [reviewed]);
 
-    const updateParam = (key: string, value: string | null) => {
-      const next = new URLSearchParams(searchParams.toString());
-      if (value) next.set(key, value);
-      else next.delete(key);
-      setSearchParams(next);
-      logAuditEvent("table_filter_change", { route: "/contact-messages", key, value });
-    };
+  const updateParam = (key: string, value: string | null) => {
+    const next = new URLSearchParams(searchParams.toString());
+    if (value) next.set(key, value);
+    else next.delete(key);
+    setSearchParams(next);
+    logAuditEvent("table_filter_change", { route: "/contact-messages", key, value });
+  };
 
   const handleExport = () => {
-    const csv = unparse(sorted.map((item) => ({
-      id: item.id,
-      name: item.name,
-      email: item.email,
-      company: item.company ?? "",
-      phone: item.phone ?? "",
-      message: item.message,
-      createdAt: item.createdAt,
-    })));
+    const encode = (value: string) => `"${value.replace(/"/g, '""')}"`;
+    const headers = ["id", "name", "email", "company", "phone", "message", "createdAt"].map(encode).join(",");
+    const rows = sorted
+      .map((item) =>
+        [
+          item.id,
+          item.name,
+          item.email,
+          item.company ?? "",
+          item.phone ?? "",
+          item.message,
+          item.createdAt,
+        ]
+          .map((value) => encode(String(value)))
+          .join(","),
+      )
+      .join("\n");
+    const csv = `${headers}\n${rows}`;
     const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
@@ -192,7 +200,7 @@ export function ContactMessagesPage() {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {paged.map((row) => (
+                  {paged.map((row: ContactMessage) => (
                     <TableRow key={row.id} className="hover:bg-slate-50">
                       <TableCell className="font-medium">{row.name}</TableCell>
                       <TableCell>

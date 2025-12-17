@@ -1,6 +1,5 @@
 import { useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
 import { format, formatDistanceToNow } from "date-fns";
 import { getServiceInquiries } from "../lib/api";
 import { useApiKey } from "../providers/ApiKeyProvider";
@@ -15,6 +14,7 @@ import { Badge } from "../components/ui/badge";
 import { Search } from "lucide-react";
 import type { ServiceInquiry } from "../types/admin";
 import { logAuditEvent } from "../lib/audit";
+import { useSimpleQuery } from "../hooks/useSimpleQuery";
 
 function normalizeList(value?: string[] | string) {
   if (!value) return [] as string[];
@@ -32,7 +32,7 @@ export function ServiceInquiriesPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [selected, setSelected] = useState<ServiceInquiry | null>(null);
 
-  const query = useQuery<ServiceInquiry[]>({
+  const query = useSimpleQuery<ServiceInquiry[]>({
     queryKey: ["service-inquiries", apiKey],
     queryFn: () => getServiceInquiries(apiKey ?? ""),
     enabled: Boolean(apiKey),
