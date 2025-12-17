@@ -77,13 +77,13 @@ export function ContactMessagesPage() {
     localStorage.setItem(REVIEW_KEY, JSON.stringify(reviewed));
   }, [reviewed]);
 
-  const updateParam = (key: string, value: string | null) => {
-    const next = new URLSearchParams(searchParams.toString());
-    if (value) next.set(key, value);
-    else next.delete(key);
-    setSearchParams(next, { replace: true });
-    logAuditEvent("table_filter_change", { route: "/contact-messages", key, value });
-  };
+    const updateParam = (key: string, value: string | null) => {
+      const next = new URLSearchParams(searchParams.toString());
+      if (value) next.set(key, value);
+      else next.delete(key);
+      setSearchParams(next);
+      logAuditEvent("table_filter_change", { route: "/contact-messages", key, value });
+    };
 
   const handleExport = () => {
     const csv = unparse(sorted.map((item) => ({

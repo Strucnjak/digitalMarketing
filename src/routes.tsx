@@ -34,3 +34,7 @@ export function AppRoutes() {
     </Routes>
   );
 }
+
+export async function preloadRouteComponents() {
+  return Promise.resolve();
+}

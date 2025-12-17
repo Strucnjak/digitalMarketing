@@ -107,7 +107,7 @@ export function ServiceInquiriesPage() {
     const next = new URLSearchParams(searchParams.toString());
     if (value) next.set(key, value);
     else next.delete(key);
-    setSearchParams(next, { replace: true });
+    setSearchParams(next);
     logAuditEvent("table_filter_change", { route: "/service-inquiries", key, value });
   };
 
