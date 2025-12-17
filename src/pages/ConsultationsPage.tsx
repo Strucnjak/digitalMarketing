@@ -31,7 +31,7 @@ export function ConsultationsPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [selected, setSelected] = useState<Consultation | null>(null);
 
-  const query = useQuery({
+  const query = useQuery<Consultation[]>({
     queryKey: ["consultations", apiKey],
     queryFn: () => getConsultations(apiKey ?? ""),
     enabled: Boolean(apiKey),
@@ -48,7 +48,7 @@ export function ConsultationsPage() {
   };
 
   const filtered = useMemo(() => {
-    return (query.data ?? []).filter((item) => {
+    return (query.data ?? []).filter((item: Consultation) => {
       const createdAt = new Date(item.createdAt).getTime();
       const matchesFrom = filters.from ? createdAt >= new Date(filters.from).getTime() : true;
       const matchesTo = filters.to ? createdAt <= new Date(filters.to).getTime() : true;

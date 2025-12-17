@@ -8,6 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card"
 import { Badge } from "../components/ui/badge";
 import { Skeleton } from "../components/ui/skeleton";
 import { Alert, AlertDescription } from "../components/ui/alert";
+import type { ContactMessage, Consultation, ServiceInquiry } from "../types/admin";
 function StatusPill({ status }: { status: "ok" | "error" | "loading" }) {
   const color = status === "ok" ? "bg-green-100 text-green-700" : status === "loading" ? "bg-amber-100 text-amber-700" : "bg-red-100 text-red-700";
   const label = status === "ok" ? "Connected" : status === "loading" ? "Checking" : "Error";
@@ -30,7 +31,7 @@ function SummaryTile({ label, value, icon: Icon }: { label: string; value: numbe
 
 export function DashboardPage() {
   const { apiKey } = useApiKey();
-  const statusQuery = useQuery({
+  const statusQuery = useQuery<{ status: string; message?: string }>({
     queryKey: ["database-status", apiKey],
     queryFn: () => getDatabaseStatus(apiKey ?? ""),
     enabled: Boolean(apiKey),
@@ -38,17 +39,17 @@ export function DashboardPage() {
     refetchInterval: 60_000,
   });
 
-  const contactQuery = useQuery({
+  const contactQuery = useQuery<ContactMessage[]>({
     queryKey: ["contact-messages", apiKey],
     queryFn: () => getContactMessages(apiKey ?? ""),
     enabled: Boolean(apiKey),
   });
-  const consultationQuery = useQuery({
+  const consultationQuery = useQuery<Consultation[]>({
     queryKey: ["consultations", apiKey],
     queryFn: () => getConsultations(apiKey ?? ""),
     enabled: Boolean(apiKey),
   });
-  const serviceInquiryQuery = useQuery({
+  const serviceInquiryQuery = useQuery<ServiceInquiry[]>({
     queryKey: ["service-inquiries", apiKey],
     queryFn: () => getServiceInquiries(apiKey ?? ""),
     enabled: Boolean(apiKey),

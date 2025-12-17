@@ -32,7 +32,7 @@ export function ServiceInquiriesPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [selected, setSelected] = useState<ServiceInquiry | null>(null);
 
-  const query = useQuery({
+  const query = useQuery<ServiceInquiry[]>({
     queryKey: ["service-inquiries", apiKey],
     queryFn: () => getServiceInquiries(apiKey ?? ""),
     enabled: Boolean(apiKey),
@@ -52,7 +52,7 @@ export function ServiceInquiriesPage() {
   };
 
   const filtered = useMemo(() => {
-    return (query.data ?? []).filter((item) => {
+    return (query.data ?? []).filter((item: ServiceInquiry) => {
       const createdAt = new Date(item.createdAt).getTime();
       const matchesFrom = filters.from ? createdAt >= new Date(filters.from).getTime() : true;
       const matchesTo = filters.to ? createdAt <= new Date(filters.to).getTime() : true;

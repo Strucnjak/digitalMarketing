@@ -33,7 +33,7 @@ export function ContactMessagesPage() {
     }
   });
 
-  const query = useQuery({
+  const query = useQuery<ContactMessage[]>({
     queryKey: ["contact-messages", apiKey],
     queryFn: () => getContactMessages(apiKey ?? ""),
     enabled: Boolean(apiKey),
@@ -51,7 +51,7 @@ export function ContactMessagesPage() {
 
   const filtered = useMemo(() => {
     const items = query.data ?? [];
-    return items.filter((item) => {
+    return items.filter((item: ContactMessage) => {
       const createdAt = new Date(item.createdAt).getTime();
       const matchesFrom = filters.from ? createdAt >= new Date(filters.from).getTime() : true;
       const matchesTo = filters.to ? createdAt <= new Date(filters.to).getTime() : true;
