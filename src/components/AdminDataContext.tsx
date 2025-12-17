@@ -28,18 +28,33 @@ export interface FormNotification {
   createdAt: number;
   details: string;
   payload?: unknown;
+  status: NotificationStatus;
+  response?: string;
 }
+
+export type NotificationStatus = "new" | "read" | "responded";
+
+export type SectionVisibility = {
+  hero: boolean;
+  services: boolean;
+  portfolio: boolean;
+  about: boolean;
+  testimonials: boolean;
+  contact: boolean;
+};
 
 interface AdminDataState {
   pricesEnabled: boolean;
   servicePrices: Record<ServiceKey, string[]>;
   teamMembers: TeamMember[];
   testimonials: Testimonial[];
-  showTestimonials: boolean;
+  sectionVisibility: SectionVisibility;
   notifications: FormNotification[];
 }
 
 interface AdminDataContextValue extends AdminDataState {
+  showTestimonials: boolean;
+  setSectionVisibility: (section: keyof SectionVisibility, value: boolean) => void;
   updateServicePrice: (service: ServiceKey, index: number, value: string) => void;
   setPricesEnabled: (value: boolean) => void;
   updateTeamMember: (index: number, member: Partial<TeamMember>) => void;
@@ -50,6 +65,9 @@ interface AdminDataContextValue extends AdminDataState {
   removeTestimonial: (index: number) => void;
   setShowTestimonials: (value: boolean) => void;
   addNotification: (notification: FormNotification) => void;
+  updateNotificationStatus: (id: string, status: NotificationStatus) => void;
+  saveNotificationResponse: (id: string, response: string) => void;
+  removeNotification: (id: string) => void;
   clearNotifications: () => void;
   resetState: () => void;
 }
@@ -114,6 +132,17 @@ const AdminDataContext = createContext<AdminDataContextValue | undefined>(undefi
 
 const storageKey = "admin-panel-data";
 
+type StoredAdminState = Partial<AdminDataState & { showTestimonials?: boolean }>;
+
+const defaultSectionVisibility: SectionVisibility = {
+  hero: true,
+  services: true,
+  portfolio: true,
+  about: true,
+  testimonials: true,
+  contact: true,
+};
+
 function clampRating(rating?: number): number | undefined {
   if (typeof rating === "undefined") return undefined;
 
@@ -132,7 +161,21 @@ function cloneServicePrices(source: Partial<Record<ServiceKey, string[]>> = {}) 
   );
 }
 
-function createStateFromPartial(parsed?: Partial<AdminDataState>): AdminDataState {
+function createStateFromPartial(parsed?: StoredAdminState): AdminDataState {
+  const sectionVisibility = {
+    ...defaultSectionVisibility,
+    ...(parsed?.sectionVisibility ?? {}),
+  } satisfies SectionVisibility;
+
+  if (!parsed?.sectionVisibility && typeof parsed?.showTestimonials === "boolean") {
+    sectionVisibility.testimonials = Boolean(parsed?.showTestimonials);
+  }
+
+  const normalizedNotifications = (parsed?.notifications ?? []).map((notification) => ({
+    ...notification,
+    status: notification.status ?? "new",
+  }));
+
   return {
     pricesEnabled: parsed?.pricesEnabled ?? true,
     servicePrices: cloneServicePrices(parsed?.servicePrices),
@@ -142,12 +185,12 @@ function createStateFromPartial(parsed?: Partial<AdminDataState>): AdminDataStat
     testimonials: parsed?.testimonials?.length
       ? parsed.testimonials.map((testimonial) => ({ ...testimonial }))
       : [...defaultTestimonials],
-    showTestimonials: parsed?.showTestimonials ?? true,
-    notifications: parsed?.notifications ?? [],
+    sectionVisibility,
+    notifications: normalizedNotifications,
   };
 }
 
-function getStoredState(): Partial<AdminDataState> | undefined {
+function getStoredState(): StoredAdminState | undefined {
   try {
     const stored = localStorage.getItem(storageKey);
     if (stored) {
@@ -182,6 +225,15 @@ export function AdminDataProvider({ children }: { children: ReactNode }) {
 
   const value = useMemo<AdminDataContextValue>(() => ({
     ...state,
+    showTestimonials: state.sectionVisibility.testimonials,
+    setSectionVisibility: (section, value) =>
+      setState((prev) => ({
+        ...prev,
+        sectionVisibility: {
+          ...prev.sectionVisibility,
+          [section]: value,
+        },
+      })),
     updateServicePrice: (service, index, value) => {
       setState((prev) => ({
         ...prev,
@@ -239,11 +291,45 @@ export function AdminDataProvider({ children }: { children: ReactNode }) {
         ...prev,
         testimonials: prev.testimonials.filter((_, i) => i !== index),
       })),
-    setShowTestimonials: (value) => setState((prev) => ({ ...prev, showTestimonials: value })),
+    setShowTestimonials: (value) =>
+      setState((prev) => ({
+        ...prev,
+        sectionVisibility: {
+          ...prev.sectionVisibility,
+          testimonials: value,
+        },
+      })),
     addNotification: (notification) =>
       setState((prev) => ({
         ...prev,
-        notifications: [notification, ...prev.notifications].slice(0, 50),
+        notifications: [
+          {
+            ...notification,
+            status: notification.status ?? "new",
+          },
+          ...prev.notifications,
+        ].slice(0, 50),
+      })),
+    updateNotificationStatus: (id, status) =>
+      setState((prev) => ({
+        ...prev,
+        notifications: prev.notifications.map((notification) =>
+          notification.id === id ? { ...notification, status } : notification,
+        ),
+      })),
+    saveNotificationResponse: (id, response) =>
+      setState((prev) => ({
+        ...prev,
+        notifications: prev.notifications.map((notification) =>
+          notification.id === id
+            ? { ...notification, response: response.trim(), status: response.trim() ? "responded" : notification.status }
+            : notification,
+        ),
+      })),
+    removeNotification: (id) =>
+      setState((prev) => ({
+        ...prev,
+        notifications: prev.notifications.filter((notification) => notification.id !== id),
       })),
     clearNotifications: () => setState((prev) => ({ ...prev, notifications: [] })),
     resetState: () => {
