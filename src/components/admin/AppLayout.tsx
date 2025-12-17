@@ -3,7 +3,7 @@ import { LayoutDashboard, Mail, MessagesSquare, Settings, Sparkles } from "lucid
 import { Button } from "../ui/button";
 import { Separator } from "../ui/separator";
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "../ui/sidebar";
-import { useApiKey } from "../../providers/ApiKeyProvider";
+import { useApiKey } from "../../providers/apiKey";
 import { Avatar, AvatarFallback } from "../ui/avatar";
 
 const navItems = [
@@ -29,28 +29,26 @@ export function AppLayout() {
       <div className="mx-auto flex max-w-7xl gap-6 px-4 py-6 lg:px-8">
         <Sidebar>
           <SidebarHeader className="flex items-center gap-3 px-4 py-4">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-indigo-600 text-white font-semibold">
-              DM
-            </div>
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-indigo-600 text-white font-semibold">DM</div>
             <div>
               <p className="text-sm font-semibold">Digital Marketing</p>
               <p className="text-xs text-slate-500">Admin</p>
             </div>
-        </SidebarHeader>
-        <SidebarContent>
-          <SidebarMenu>
-            {navItems.map((item) => (
-              <SidebarMenuItem key={item.to}>
-                <SidebarMenuButton asChild isActive={location.pathname === item.to}>
-                  <Link to={item.to} className="flex items-center gap-2">
-                    <item.icon className="h-4 w-4" />
-                    <span>{item.label}</span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-            ))}
-          </SidebarMenu>
-        </SidebarContent>
+          </SidebarHeader>
+          <SidebarContent>
+            <SidebarMenu>
+              {navItems.map((item) => (
+                <SidebarMenuItem key={item.to}>
+                  <SidebarMenuButton asChild isActive={location.pathname === item.to}>
+                    <Link to={item.to} className="flex items-center gap-2">
+                      <item.icon className="h-4 w-4" />
+                      <span>{item.label}</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarContent>
           <SidebarFooter className="px-4 py-4">
             <Separator className="mb-3" />
             <div className="flex items-center justify-between gap-3">

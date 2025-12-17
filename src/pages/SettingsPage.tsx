@@ -4,7 +4,7 @@ import { format } from "date-fns";
 import { Button } from "../components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
 import { Badge } from "../components/ui/badge";
-import { useApiKey } from "../providers/ApiKeyProvider";
+import { useApiKey } from "../providers/apiKey";
 import { clearAuditLog, getAuditLog } from "../lib/audit";
 
 export function SettingsPage() {

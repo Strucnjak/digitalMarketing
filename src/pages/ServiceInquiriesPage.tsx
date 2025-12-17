@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { format, formatDistanceToNow } from "date-fns";
 import { getServiceInquiries } from "../lib/api";
-import { useApiKey } from "../providers/ApiKeyProvider";
+import { useApiKey } from "../providers/apiKey";
 import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
 import { Input } from "../components/ui/input";
 import { Button } from "../components/ui/button";
@@ -56,31 +56,14 @@ export function ServiceInquiriesPage() {
       const createdAt = new Date(item.createdAt).getTime();
       const matchesFrom = filters.from ? createdAt >= new Date(filters.from).getTime() : true;
       const matchesTo = filters.to ? createdAt <= new Date(filters.to).getTime() : true;
-      const matchesService = filters.selectedService
-        ? (item.selectedService ?? "").toLowerCase() === filters.selectedService.toLowerCase()
-        : true;
-      const matchesPackage = filters.selectedPackage
-        ? (item.selectedPackage ?? "").toLowerCase() === filters.selectedPackage.toLowerCase()
-        : true;
+      const matchesService = filters.selectedService ? (item.selectedService ?? "").toLowerCase() === filters.selectedService.toLowerCase() : true;
+      const matchesPackage = filters.selectedPackage ? (item.selectedPackage ?? "").toLowerCase() === filters.selectedPackage.toLowerCase() : true;
       const matchesBudget = filters.budget ? (item.budget ?? "").toLowerCase().includes(filters.budget.toLowerCase()) : true;
-      const matchesTimeline = filters.timeline
-        ? (item.timeline ?? "").toLowerCase().includes(filters.timeline.toLowerCase())
-        : true;
-      const matchesNewsletter = filters.newsletter
-        ? String(Boolean(item.newsletter)) === filters.newsletter
-        : true;
+      const matchesTimeline = filters.timeline ? (item.timeline ?? "").toLowerCase().includes(filters.timeline.toLowerCase()) : true;
+      const matchesNewsletter = filters.newsletter ? String(Boolean(item.newsletter)) === filters.newsletter : true;
       const text = `${item.currentSituation ?? ""} ${item.projectGoals ?? ""}`.toLowerCase();
       const matchesSearch = filters.q ? text.includes(filters.q.toLowerCase()) : true;
-      return (
-        matchesFrom &&
-        matchesTo &&
-        matchesService &&
-        matchesPackage &&
-        matchesBudget &&
-        matchesTimeline &&
-        matchesNewsletter &&
-        matchesSearch
-      );
+      return matchesFrom && matchesTo && matchesService && matchesPackage && matchesBudget && matchesTimeline && matchesNewsletter && matchesSearch;
     });
   }, [
     filters.budget,
@@ -94,10 +77,7 @@ export function ServiceInquiriesPage() {
     query.data,
   ]);
 
-  const sorted = useMemo(
-    () => [...filtered].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()),
-    [filtered],
-  );
+  const sorted = useMemo(() => [...filtered].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()), [filtered]);
 
   const totalPages = Math.max(1, Math.ceil(sorted.length / filters.pageSize));
   const currentPage = Math.min(filters.page, totalPages);
@@ -126,33 +106,12 @@ export function ServiceInquiriesPage() {
           <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-4">
             <div className="relative">
               <Search className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
-              <Input
-                placeholder="Search situation or goals"
-                value={filters.q}
-                onChange={(e) => updateParam("q", e.target.value)}
-                className="pl-9"
-              />
+              <Input placeholder="Search situation or goals" value={filters.q} onChange={(e) => updateParam("q", e.target.value)} className="pl-9" />
             </div>
-            <Input
-              placeholder="Selected service"
-              value={filters.selectedService}
-              onChange={(e) => updateParam("selectedService", e.target.value)}
-            />
-            <Input
-              placeholder="Selected package"
-              value={filters.selectedPackage}
-              onChange={(e) => updateParam("selectedPackage", e.target.value)}
-            />
-            <Input
-              placeholder="Budget"
-              value={filters.budget}
-              onChange={(e) => updateParam("budget", e.target.value)}
-            />
-            <Input
-              placeholder="Timeline"
-              value={filters.timeline}
-              onChange={(e) => updateParam("timeline", e.target.value)}
-            />
+            <Input placeholder="Selected service" value={filters.selectedService} onChange={(e) => updateParam("selectedService", e.target.value)} />
+            <Input placeholder="Selected package" value={filters.selectedPackage} onChange={(e) => updateParam("selectedPackage", e.target.value)} />
+            <Input placeholder="Budget" value={filters.budget} onChange={(e) => updateParam("budget", e.target.value)} />
+            <Input placeholder="Timeline" value={filters.timeline} onChange={(e) => updateParam("timeline", e.target.value)} />
             <select
               value={filters.newsletter}
               onChange={(e) => updateParam("newsletter", e.target.value || null)}
@@ -163,18 +122,8 @@ export function ServiceInquiriesPage() {
               <option value="false">Not subscribed</option>
             </select>
             <div className="flex gap-2">
-              <Input
-                type="date"
-                value={filters.from ?? ""}
-                onChange={(e) => updateParam("from", e.target.value || null)}
-                className="flex-1"
-              />
-              <Input
-                type="date"
-                value={filters.to ?? ""}
-                onChange={(e) => updateParam("to", e.target.value || null)}
-                className="flex-1"
-              />
+              <Input type="date" value={filters.from ?? ""} onChange={(e) => updateParam("from", e.target.value || null)} className="flex-1" />
+              <Input type="date" value={filters.to ?? ""} onChange={(e) => updateParam("to", e.target.value || null)} className="flex-1" />
             </div>
           </div>
         </CardHeader>
@@ -259,12 +208,7 @@ export function ServiceInquiriesPage() {
           <Button disabled={currentPage === 1} variant="outline" size="sm" onClick={() => updateParam("page", String(currentPage - 1))}>
             Previous
           </Button>
-          <Button
-            disabled={currentPage === totalPages}
-            variant="outline"
-            size="sm"
-            onClick={() => updateParam("page", String(currentPage + 1))}
-          >
+          <Button disabled={currentPage === totalPages} variant="outline" size="sm" onClick={() => updateParam("page", String(currentPage + 1))}>
             Next
           </Button>
         </div>

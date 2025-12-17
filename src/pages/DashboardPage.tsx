@@ -2,7 +2,7 @@ import { Database, Mail, MessagesSquare, Sparkles } from "lucide-react";
 import { useMemo } from "react";
 import { format, formatDistanceToNow } from "date-fns";
 import { getContactMessages, getConsultations, getDatabaseStatus, getServiceInquiries } from "../lib/api";
-import { useApiKey } from "../providers/ApiKeyProvider";
+import { useApiKey } from "../providers/apiKey";
 import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
 import { Badge } from "../components/ui/badge";
 import { Skeleton } from "../components/ui/skeleton";
@@ -58,13 +58,13 @@ export function DashboardPage() {
   const recentItems = useMemo(() => {
     const normalized: { id: string; name: string; type: string; createdAt: string }[] = [];
     (contactQuery.data ?? []).forEach((item: ContactMessage) =>
-      normalized.push({ id: item.id, name: item.name, type: "Contact", createdAt: item.createdAt }),
+      normalized.push({ id: item.id, name: item.name, type: "Contact", createdAt: item.createdAt })
     );
     (consultationQuery.data ?? []).forEach((item: Consultation) =>
-      normalized.push({ id: item.id, name: item.fullName, type: "Consultation", createdAt: item.createdAt }),
+      normalized.push({ id: item.id, name: item.fullName, type: "Consultation", createdAt: item.createdAt })
     );
     (serviceInquiryQuery.data ?? []).forEach((item: ServiceInquiry) =>
-      normalized.push({ id: item.id, name: item.fullName, type: "Service inquiry", createdAt: item.createdAt }),
+      normalized.push({ id: item.id, name: item.fullName, type: "Service inquiry", createdAt: item.createdAt })
     );
     return normalized.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()).slice(0, 5);
   }, [contactQuery.data, consultationQuery.data, serviceInquiryQuery.data]);
@@ -86,12 +86,8 @@ export function DashboardPage() {
           <div>
             <p className="text-xs text-slate-500">Database connectivity</p>
             <div className="flex items-center gap-2">
-              <StatusPill
-                status={statusQuery.isLoading ? "loading" : statusQuery.data?.status === "ok" ? "ok" : "error"}
-              />
-              {statusQuery.data?.message && (
-                <span className="text-xs text-slate-500">{statusQuery.data.message}</span>
-              )}
+              <StatusPill status={statusQuery.isLoading ? "loading" : statusQuery.data?.status === "ok" ? "ok" : "error"} />
+              {statusQuery.data?.message && <span className="text-xs text-slate-500">{statusQuery.data.message}</span>}
             </div>
           </div>
         </div>
@@ -101,7 +97,11 @@ export function DashboardPage() {
         <SummaryTile label="Contact messages" value={contactQuery.data?.length ?? 0} icon={Mail} />
         <SummaryTile label="Consultations" value={consultationQuery.data?.length ?? 0} icon={MessagesSquare} />
         <SummaryTile label="Service inquiries" value={serviceInquiryQuery.data?.length ?? 0} icon={Sparkles} />
-        <SummaryTile label="Total" value={(contactQuery.data?.length ?? 0) + (consultationQuery.data?.length ?? 0) + (serviceInquiryQuery.data?.length ?? 0)} icon={Database} />
+        <SummaryTile
+          label="Total"
+          value={(contactQuery.data?.length ?? 0) + (consultationQuery.data?.length ?? 0) + (serviceInquiryQuery.data?.length ?? 0)}
+          icon={Database}
+        />
       </div>
 
       {anyError && (

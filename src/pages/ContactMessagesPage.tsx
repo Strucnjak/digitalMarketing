@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { format, formatDistanceToNow } from "date-fns";
 import { getContactMessages } from "../lib/api";
-import { useApiKey } from "../providers/ApiKeyProvider";
+import { useApiKey } from "../providers/apiKey";
 import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
 import { Input } from "../components/ui/input";
 import { Button } from "../components/ui/button";
@@ -89,17 +89,9 @@ export function ContactMessagesPage() {
     const headers = ["id", "name", "email", "company", "phone", "message", "createdAt"].map(encode).join(",");
     const rows = sorted
       .map((item) =>
-        [
-          item.id,
-          item.name,
-          item.email,
-          item.company ?? "",
-          item.phone ?? "",
-          item.message,
-          item.createdAt,
-        ]
+        [item.id, item.name, item.email, item.company ?? "", item.phone ?? "", item.message, item.createdAt]
           .map((value) => encode(String(value)))
-          .join(","),
+          .join(",")
       )
       .join("\n");
     const csv = `${headers}\n${rows}`;
@@ -151,22 +143,12 @@ export function ContactMessagesPage() {
               <label className="flex items-center gap-2 rounded-md border border-slate-200 px-3 py-2">
                 <CalendarRange className="h-4 w-4 text-slate-400" />
                 <span>From</span>
-                <Input
-                  type="date"
-                  value={filters.from ?? ""}
-                  onChange={(e) => updateParam("from", e.target.value || null)}
-                  className="w-[160px]"
-                />
+                <Input type="date" value={filters.from ?? ""} onChange={(e) => updateParam("from", e.target.value || null)} className="w-[160px]" />
               </label>
               <label className="flex items-center gap-2 rounded-md border border-slate-200 px-3 py-2">
                 <CalendarRange className="h-4 w-4 text-slate-400" />
                 <span>To</span>
-                <Input
-                  type="date"
-                  value={filters.to ?? ""}
-                  onChange={(e) => updateParam("to", e.target.value || null)}
-                  className="w-[160px]"
-                />
+                <Input type="date" value={filters.to ?? ""} onChange={(e) => updateParam("to", e.target.value || null)} className="w-[160px]" />
               </label>
             </div>
           </div>
@@ -255,20 +237,10 @@ export function ContactMessagesPage() {
               Page {currentPage} of {totalPages}
             </div>
             <div className="flex items-center gap-2">
-              <Button
-                variant="outline"
-                size="sm"
-                disabled={currentPage === 1}
-                onClick={() => updateParam("page", String(currentPage - 1))}
-              >
+              <Button variant="outline" size="sm" disabled={currentPage === 1} onClick={() => updateParam("page", String(currentPage - 1))}>
                 Previous
               </Button>
-              <Button
-                variant="outline"
-                size="sm"
-                disabled={currentPage === totalPages}
-                onClick={() => updateParam("page", String(currentPage + 1))}
-              >
+              <Button variant="outline" size="sm" disabled={currentPage === totalPages} onClick={() => updateParam("page", String(currentPage + 1))}>
                 Next
               </Button>
             </div>

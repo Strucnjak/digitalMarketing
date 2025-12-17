@@ -6,7 +6,7 @@ import { ConsultationsPage } from "./pages/ConsultationsPage";
 import { ServiceInquiriesPage } from "./pages/ServiceInquiriesPage";
 import { SettingsPage } from "./pages/SettingsPage";
 import { LoginPage } from "./pages/LoginPage";
-import { useApiKey } from "./providers/ApiKeyProvider";
+import { useApiKey } from "./providers/apiKey";
 
 function RequireAuth() {
   const { apiKey } = useApiKey();

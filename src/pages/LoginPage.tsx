@@ -10,7 +10,7 @@ import { Alert, AlertDescription, AlertTitle } from "../components/ui/alert";
 import { toast } from "sonner";
 import { getDatabaseStatus } from "../lib/api";
 import { logAuditEvent } from "../lib/audit";
-import { useApiKey } from "../providers/ApiKeyProvider";
+import { useApiKey } from "../providers/apiKey";
 
 export function LoginPage() {
   const [apiKeyInput, setApiKeyInput] = useState("");
@@ -100,13 +100,7 @@ export function LoginPage() {
             <Button disabled={!apiKeyInput || loading} onClick={handleValidate} className="w-full">
               Validate
             </Button>
-            <Button
-              disabled={!isValid}
-              onClick={handleContinue}
-              className="w-full"
-              variant="secondary"
-              aria-label="Continue to dashboard"
-            >
+            <Button disabled={!isValid} onClick={handleContinue} className="w-full" variant="secondary" aria-label="Continue to dashboard">
               Continue to Dashboard
             </Button>
           </div>

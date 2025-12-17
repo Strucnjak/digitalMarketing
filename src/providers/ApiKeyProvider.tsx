@@ -1,14 +1,5 @@
-import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
-
-interface ApiKeyContextValue {
-  apiKey: string | null;
-  isRemembered: boolean;
-  setApiKey: (key: string, remember: boolean) => void;
-  clearApiKey: () => void;
-}
-
-const ApiKeyContext = createContext<ApiKeyContextValue | undefined>(undefined);
-const STORAGE_KEY = "admin_api_key";
+import { useEffect, useMemo, useState, type ReactNode } from "react";
+import { ApiKeyContext, STORAGE_KEY } from "./apiKey";
 
 export function ApiKeyProvider({ children }: { children: ReactNode }) {
   const [apiKey, setApiKeyState] = useState<string | null>(null);
@@ -42,16 +33,7 @@ export function ApiKeyProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  const value = useMemo(
-    () => ({ apiKey, setApiKey, clearApiKey, isRemembered }),
-    [apiKey, isRemembered],
-  );
+  const value = useMemo(() => ({ apiKey, setApiKey, clearApiKey, isRemembered }), [apiKey, isRemembered]);
 
   return <ApiKeyContext.Provider value={value}>{children}</ApiKeyContext.Provider>;
-}
-
-export function useApiKey() {
-  const ctx = useContext(ApiKeyContext);
-  if (!ctx) throw new Error("ApiKeyProvider missing");
-  return ctx;
 }
