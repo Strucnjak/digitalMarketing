@@ -8,8 +8,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card"
 import { Badge } from "../components/ui/badge";
 import { Skeleton } from "../components/ui/skeleton";
 import { Alert, AlertDescription } from "../components/ui/alert";
-import type { ContactMessage, Consultation, ServiceInquiry } from "../types/admin";
-
 function StatusPill({ status }: { status: "ok" | "error" | "loading" }) {
   const color = status === "ok" ? "bg-green-100 text-green-700" : status === "loading" ? "bg-amber-100 text-amber-700" : "bg-red-100 text-red-700";
   const label = status === "ok" ? "Connected" : status === "loading" ? "Checking" : "Error";
