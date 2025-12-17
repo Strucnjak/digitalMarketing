@@ -12,7 +12,7 @@ import { Alert, AlertDescription } from "../components/ui/alert";
 import { Skeleton } from "../components/ui/skeleton";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "../components/ui/sheet";
 import { Badge } from "../components/ui/badge";
-import { CalendarRange, Search, SlidersHorizontal } from "lucide-react";
+import { Search } from "lucide-react";
 import type { Consultation } from "../types/admin";
 import { logAuditEvent } from "../lib/audit";
 
@@ -77,7 +77,7 @@ export function ConsultationsPage() {
     const next = new URLSearchParams(searchParams.toString());
     if (value) next.set(key, value);
     else next.delete(key);
-    setSearchParams(next, { replace: true });
+    setSearchParams(next);
     logAuditEvent("table_filter_change", { route: "/consultations", key, value });
   };
 

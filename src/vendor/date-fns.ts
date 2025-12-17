@@ -1,5 +1,6 @@
 export function format(date: Date | number, formatString: string): string {
   const d = typeof date === "number" ? new Date(date) : date;
+  void formatString;
   return new Intl.DateTimeFormat(undefined, {
     year: "numeric",
     month: "2-digit",

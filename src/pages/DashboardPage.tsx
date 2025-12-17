@@ -70,7 +70,7 @@ export function DashboardPage() {
     return normalized.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()).slice(0, 5);
   }, [contactQuery.data, consultationQuery.data, serviceInquiryQuery.data]);
 
-  const anyError = contactQuery.error || consultationQuery.error || serviceInquiryQuery.error;
+  const anyError = Boolean(contactQuery.error || consultationQuery.error || serviceInquiryQuery.error);
 
   return (
     <div className="space-y-6">

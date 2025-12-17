@@ -1,8 +1,8 @@
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { LayoutDashboard, Mail, MessagesSquare, Settings, Sparkles } from "lucide-react";
 import { Button } from "../ui/button";
 import { Separator } from "../ui/separator";
-import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarItem } from "../ui/sidebar";
+import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "../ui/sidebar";
 import { useApiKey } from "../../providers/ApiKeyProvider";
 import { Avatar, AvatarFallback } from "../ui/avatar";
 
@@ -36,14 +36,21 @@ export function AppLayout() {
               <p className="text-sm font-semibold">Digital Marketing</p>
               <p className="text-xs text-slate-500">Admin</p>
             </div>
-          </SidebarHeader>
-          <SidebarContent>
+        </SidebarHeader>
+        <SidebarContent>
+          <SidebarMenu>
             {navItems.map((item) => (
-              <SidebarItem key={item.to} active={location.pathname === item.to} href={item.to} icon={<item.icon className="h-4 w-4" />}>
-                {item.label}
-              </SidebarItem>
+              <SidebarMenuItem key={item.to}>
+                <SidebarMenuButton asChild isActive={location.pathname === item.to}>
+                  <Link to={item.to} className="flex items-center gap-2">
+                    <item.icon className="h-4 w-4" />
+                    <span>{item.label}</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
             ))}
-          </SidebarContent>
+          </SidebarMenu>
+        </SidebarContent>
           <SidebarFooter className="px-4 py-4">
             <Separator className="mb-3" />
             <div className="flex items-center justify-between gap-3">
