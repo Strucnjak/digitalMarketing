@@ -234,6 +234,7 @@ export function ServiceInquiryForm() {
           formData.selectedService || "uslugu"
         } (${formData.selectedPackage || "paket"}).`,
         payload: formData,
+        status: "new",
       });
 
       // Clear stored service/package info

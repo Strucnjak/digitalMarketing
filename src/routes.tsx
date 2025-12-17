@@ -3,6 +3,7 @@ import { Navigate, Outlet, useLocation, useParams, useRoutes, type RouteObject }
 import { LanguageProvider, useLanguage } from "./components/LanguageContext";
 import { Navigation } from "./components/Navigation";
 import { useInitialState } from "./components/InitialStateContext";
+import { useAdminData } from "./components/AdminDataContext";
 import { getSeoMetadata } from "./config/seo-meta";
 import { SITE_BASE_URL } from "./config/site";
 import {
@@ -232,38 +233,53 @@ function SeoMetadataUpdater() {
 }
 
 function HomePage() {
+  const { sectionVisibility, showTestimonials } = useAdminData();
+  const shouldShowTestimonials = sectionVisibility.testimonials && showTestimonials;
+
   return (
     <>
-      <section id="hero" data-anchor>
-        <SuspenseSection fallback={<SectionLoader label="Hero" />}>
-          <HeroSection />
-        </SuspenseSection>
-      </section>
-      <section id="services" data-anchor>
-        <SuspenseSection fallback={<SectionLoader label="Services" />}>
-          <ServicesSection />
-        </SuspenseSection>
-      </section>
-      <section id="portfolio" data-anchor>
-        <SuspenseSection fallback={<SectionLoader label="Portfolio" />}>
-          <PortfolioSection />
-        </SuspenseSection>
-      </section>
-      <section id="about" data-anchor>
-        <SuspenseSection fallback={<SectionLoader label="About" />}>
-          <AboutSection />
-        </SuspenseSection>
-      </section>
-      <section id="testimonials" data-anchor>
-        <SuspenseSection fallback={<SectionLoader label="Testimonials" />}>
-          <TestimonialsSection />
-        </SuspenseSection>
-      </section>
-      <section id="contact" data-anchor>
-        <SuspenseSection fallback={<SectionLoader label="Contact" />}>
-          <ContactSection />
-        </SuspenseSection>
-      </section>
+      {sectionVisibility.hero && (
+        <section id="hero" data-anchor>
+          <SuspenseSection fallback={<SectionLoader label="Hero" />}>
+            <HeroSection />
+          </SuspenseSection>
+        </section>
+      )}
+      {sectionVisibility.services && (
+        <section id="services" data-anchor>
+          <SuspenseSection fallback={<SectionLoader label="Services" />}>
+            <ServicesSection />
+          </SuspenseSection>
+        </section>
+      )}
+      {sectionVisibility.portfolio && (
+        <section id="portfolio" data-anchor>
+          <SuspenseSection fallback={<SectionLoader label="Portfolio" />}>
+            <PortfolioSection />
+          </SuspenseSection>
+        </section>
+      )}
+      {sectionVisibility.about && (
+        <section id="about" data-anchor>
+          <SuspenseSection fallback={<SectionLoader label="About" />}>
+            <AboutSection />
+          </SuspenseSection>
+        </section>
+      )}
+      {shouldShowTestimonials && (
+        <section id="testimonials" data-anchor>
+          <SuspenseSection fallback={<SectionLoader label="Testimonials" />}>
+            <TestimonialsSection />
+          </SuspenseSection>
+        </section>
+      )}
+      {sectionVisibility.contact && (
+        <section id="contact" data-anchor>
+          <SuspenseSection fallback={<SectionLoader label="Contact" />}>
+            <ContactSection />
+          </SuspenseSection>
+        </section>
+      )}
     </>
   );
 }

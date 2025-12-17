@@ -145,6 +145,7 @@ export function FreeConsultationPage() {
         createdAt: Date.now(),
         details: `${formData.fullName || "Posjetilac"} je tražio konsultaciju (${formData.businessType || "biznis"}).`,
         payload: formData,
+        status: "new",
       });
     } catch (err) {
       const message = err instanceof Error ? err.message : "Failed to submit consultation request";
