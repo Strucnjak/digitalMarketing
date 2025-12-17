@@ -17,7 +17,11 @@
     "resolveJsonModule": true,
     "paths": {
       "react-router-dom": ["./src/router/react-router-dom"],
-      "react-router-dom/server": ["./src/router/react-router-dom-server"]
+      "react-router-dom/server": ["./src/router/react-router-dom-server"],
+      "@tanstack/react-query": ["./src/vendor/tanstack/react-query"],
+      "@tanstack/react-table": ["./src/vendor/tanstack/react-table"],
+      "date-fns": ["./src/vendor/date-fns"],
+      "papaparse": ["./src/vendor/papaparse"]
     },
 
     /* Linting */

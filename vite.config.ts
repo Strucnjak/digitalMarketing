@@ -23,6 +23,22 @@ export default defineConfig(({ mode }: ConfigEnv) => {
             "src/router/react-router-dom.tsx"
           ),
         },
+        {
+          find: "@tanstack/react-query",
+          replacement: path.resolve(__dirname, "src/vendor/tanstack/react-query.tsx"),
+        },
+        {
+          find: "@tanstack/react-table",
+          replacement: path.resolve(__dirname, "src/vendor/tanstack/react-table.ts"),
+        },
+        {
+          find: "date-fns",
+          replacement: path.resolve(__dirname, "src/vendor/date-fns.ts"),
+        },
+        {
+          find: "papaparse",
+          replacement: path.resolve(__dirname, "src/vendor/papaparse.ts"),
+        },
       ],
     },
     server: isDev
