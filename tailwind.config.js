@@ -7,6 +7,8 @@ export default {
       colors: {
         "bdigital-navy": "#0a1f3e",
         "bdigital-dark-navy": "#07172a",
+        "bdigital-midnight": "#0b2236",
+        "bdigital-night": "#122a40",
         "bdigital-cyan": "#00d4ff",
         "bdigital-cyan-light": "#33eaff",
         "neutral-gray": "#6b7280",

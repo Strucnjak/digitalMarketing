@@ -142,9 +142,9 @@ export function SEOPage() {
   };
 
   return (
-    <div className="min-h-screen bg-white dark:bg-slate-950">
+    <div className="min-h-screen bg-white dark:bg-bdigital-midnight">
       {/* Hero Section */}
-      <section className="pt-20 pb-16 bg-gradient-to-br from-bdigital-navy via-bdigital-dark-navy to-black">
+      <section className="pt-20 pb-16 bg-gradient-to-br from-bdigital-navy via-bdigital-dark-navy to-bdigital-midnight">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="text-white">
@@ -198,7 +198,7 @@ export function SEOPage() {
             </div>
 
             <div className="relative">
-              <div className="rounded-2xl bg-white p-8 shadow-2xl dark:bg-slate-900 dark:shadow-black/40">
+              <div className="rounded-2xl bg-white p-8 shadow-2xl dark:bg-bdigital-night dark:shadow-black/40">
                 <ImageWithFallback
                   src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=500&h=400&fit=crop"
                   alt="SEO Analytics"
@@ -211,7 +211,7 @@ export function SEOPage() {
       </section>
 
       {/* Services Section */}
-      <section className="bg-gray-50 py-20 dark:bg-slate-900">
+      <section className="bg-gray-50 py-20 dark:bg-bdigital-night">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="mb-4 text-3xl font-bold text-bdigital-navy md:text-4xl dark:text-slate-100">{t("seo.services.heading")}</h2>
@@ -224,7 +224,7 @@ export function SEOPage() {
               return (
                 <Card
                   key={index}
-                  className="border-0 shadow-lg transition-all duration-300 group hover:shadow-xl dark:border dark:border-slate-800 dark:bg-slate-900"
+                  className="border-0 shadow-lg transition-all duration-300 group hover:shadow-xl dark:border dark:border-bdigital-dark-navy dark:bg-bdigital-night"
                 >
                   <CardContent className="p-6">
                     <div className="w-12 h-12 bg-bdigital-cyan/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-bdigital-cyan group-hover:text-white transition-all duration-300">
@@ -241,7 +241,7 @@ export function SEOPage() {
       </section>
 
       {/* Results Section */}
-      <section className="bg-white py-20 dark:bg-slate-950">
+      <section className="bg-white py-20 dark:bg-bdigital-midnight">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="mb-4 text-3xl font-bold text-bdigital-navy md:text-4xl dark:text-slate-100">{t("seo.results.heading")}</h2>
@@ -252,7 +252,7 @@ export function SEOPage() {
             {results.map((result, index) => (
               <Card
                 key={index}
-                className="border-0 shadow-lg transition-all duration-300 group text-center hover:shadow-xl dark:border dark:border-slate-800 dark:bg-slate-900"
+                className="border-0 shadow-lg transition-all duration-300 group text-center hover:shadow-xl dark:border dark:border-bdigital-dark-navy dark:bg-bdigital-night"
               >
                 <CardContent className="p-6">
                   <div className="text-4xl font-bold text-bdigital-cyan-dark mb-2 group-hover:scale-110 transition-transform duration-300">
@@ -268,7 +268,7 @@ export function SEOPage() {
       </section>
 
       {/* Pricing Section */}
-      <section className="bg-gray-50 py-20 dark:bg-slate-900">
+      <section className="bg-gray-50 py-20 dark:bg-bdigital-night">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="mb-4 text-3xl font-bold text-bdigital-navy md:text-4xl dark:text-slate-100">{t("seo.pricing.heading")}</h2>
@@ -278,7 +278,7 @@ export function SEOPage() {
             {packages.map((pkg, index) => (
               <Card
                 key={index}
-                className={`relative border-0 shadow-lg transition-all duration-300 hover:shadow-xl dark:border dark:border-slate-800 dark:bg-slate-900 ${
+                className={`relative border-0 shadow-lg transition-all duration-300 hover:shadow-xl dark:border dark:border-bdigital-dark-navy dark:bg-bdigital-night ${
                   pkg.popular ? "ring-2 ring-bdigital-cyan" : ""
                 }`}
               >
@@ -317,7 +317,7 @@ export function SEOPage() {
       </section>
 
       {/* Case Studies */}
-      <section className="bg-white py-20 dark:bg-slate-950">
+      <section className="bg-white py-20 dark:bg-bdigital-midnight">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="mb-4 text-3xl font-bold text-bdigital-navy md:text-4xl dark:text-slate-100">{t("seo.case.heading")}</h2>
@@ -328,7 +328,7 @@ export function SEOPage() {
             {caseStudies.map((study, index) => (
               <Card
                 key={index}
-                className="border-0 shadow-lg transition-all duration-300 overflow-hidden hover:shadow-xl dark:border dark:border-slate-800 dark:bg-slate-900"
+                className="border-0 shadow-lg transition-all duration-300 overflow-hidden hover:shadow-xl dark:border dark:border-bdigital-dark-navy dark:bg-bdigital-night"
               >
                 <div className="relative">
                   <ImageWithFallback src={study.image} alt={study.client} className="w-full h-48 object-cover" />
