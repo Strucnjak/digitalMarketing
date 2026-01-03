@@ -35,7 +35,8 @@ export function ServicesSection() {
         t('services.web.feature3'),
         t('services.web.feature4')
       ],
-      color: 'from-blue-500 to-cyan-500',
+      color: 'bg-bdigital-cyan/10 text-bdigital-cyan-dark',
+      iconTone: 'text-bdigital-cyan-dark',
       stats: { value: '50+', label: 'Web stranica' }
     },
     {
@@ -49,7 +50,8 @@ export function ServicesSection() {
         t('services.seo.feature3'),
         t('services.seo.feature4')
       ],
-      color: 'from-green-500 to-emerald-500',
+      color: 'bg-bdigital-cyan/10 text-bdigital-cyan-dark',
+      iconTone: 'text-bdigital-cyan-dark',
       stats: { value: '300%', label: 'Avg. povećanje' }
     },
     {
@@ -63,7 +65,8 @@ export function ServicesSection() {
         t('services.social.feature3'),
         t('services.social.feature4')
       ],
-      color: 'from-purple-500 to-pink-500',
+      color: 'bg-bdigital-cyan/10 text-bdigital-cyan-dark',
+      iconTone: 'text-bdigital-cyan-dark',
       stats: { value: '10K+', label: 'Followers gained' }
     },
     {
@@ -77,7 +80,8 @@ export function ServicesSection() {
         t('services.branding.feature3'),
         t('services.branding.feature4')
       ],
-      color: 'from-orange-500 to-red-500',
+      color: 'bg-bdigital-cyan/10 text-bdigital-cyan-dark',
+      iconTone: 'text-bdigital-cyan-dark',
       stats: { value: '100+', label: 'Brand identiteta' }
     },
     {
@@ -91,7 +95,8 @@ export function ServicesSection() {
         t('services.strategy.feature3'),
         t('services.strategy.feature4')
       ],
-      color: 'from-indigo-500 to-purple-500',
+      color: 'bg-bdigital-cyan/10 text-bdigital-cyan-dark',
+      iconTone: 'text-bdigital-cyan-dark',
       stats: { value: '250%', label: 'ROI povećanje' }
     }
   ];
@@ -131,13 +136,13 @@ export function ServicesSection() {
             return (
               <Card
                 key={service.id} 
-                className="group cursor-pointer overflow-hidden border-0 bg-white shadow-lg transition-all duration-500 hover:-translate-y-2 hover:scale-105 hover:shadow-2xl dark:border dark:border-bdigital-dark-navy dark:bg-bdigital-night"
+                className="group cursor-pointer overflow-hidden border border-transparent bg-white shadow-lg transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl dark:border-bdigital-dark-navy/60 dark:bg-bdigital-night"
                 onClick={() => handleServiceClick(service.id as PageType)}
               >
                 <CardHeader className="pb-4">
                   {/* Icon with gradient background */}
-                  <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${service.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
-                    <IconComponent className="h-8 w-8 text-white" />
+                  <div className={`w-16 h-16 rounded-2xl ${service.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
+                    <IconComponent className={`h-8 w-8 ${service.iconTone}`} />
                   </div>
                   
                   {/* Title and Stats */}
@@ -158,14 +163,14 @@ export function ServicesSection() {
                   </p>
                   
                   {/* Features List */}
-                  <div className="space-y-2 mb-6">
+                  <ul className="mb-6 space-y-2 text-sm text-neutral-gray dark:text-slate-300">
                     {service.features.map((feature, idx) => (
-                      <div key={idx} className="flex items-center text-sm">
-                        <div className="w-1.5 h-1.5 bg-bdigital-cyan-dark rounded-full mr-3 flex-shrink-0"></div>
-                        <span className="text-neutral-gray dark:text-slate-300">{feature}</span>
-                      </div>
+                      <li key={idx} className="flex items-center gap-3">
+                        <span className="h-1.5 w-1.5 rounded-full bg-bdigital-cyan-dark" aria-hidden="true"></span>
+                        <span>{feature}</span>
+                      </li>
                     ))}
-                  </div>
+                  </ul>
                   
                   {/* CTA Button */}
                   <Button

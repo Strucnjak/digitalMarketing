@@ -232,6 +232,9 @@ export function ContactSection() {
                       </>
                     )}
                   </Button>
+                  <p className="text-xs text-neutral-gray text-center dark:text-slate-400">
+                    {_t("contact.privacy")}
+                  </p>
                   {error && <p className="text-red-500 text-sm text-center mt-4">{error}</p>}
                 </form>
               )}
