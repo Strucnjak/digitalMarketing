@@ -108,13 +108,14 @@ export function ContactSection() {
   ];
 
   return (
-    <section id="contact" className="bg-gradient-to-b from-gray-50 to-white py-16 lg:py-24 dark:from-slate-950 dark:to-slate-900">
+    <section id="contact" className="bg-gradient-to-b from-gray-50 to-white py-16 lg:py-24 dark:from-bdigital-midnight dark:to-bdigital-dark-navy">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-12 lg:mb-16">
           <Badge className="bg-bdigital-cyan/10 text-bdigital-cyan-dark border-bdigital-cyan-dark/20 mb-4 px-4 py-2">{_t("contact.badge")}</Badge>
           <h2 className="mb-4 text-3xl font-bold text-bdigital-navy sm:text-4xl lg:mb-6 lg:text-5xl dark:text-slate-100">
-            {_t("contact.heading.part1")} <span className="text-bdigital-cyan-dark">{_t("contact.heading.emphasis")}</span>
+            {_t("contact.heading.part1")}{" "}
+            <span className="text-bdigital-cyan-dark dark:text-bdigital-cyan">{_t("contact.heading.emphasis")}</span>
           </h2>
           <p className="mx-auto max-w-3xl text-lg text-neutral-gray leading-relaxed lg:text-xl dark:text-slate-300">
             {_t("contact.description")}
@@ -123,7 +124,7 @@ export function ContactSection() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
           {/* Contact Form */}
-          <Card className="border-0 shadow-xl dark:border dark:border-slate-800 dark:bg-slate-900">
+          <Card className="border-0 shadow-xl dark:border dark:border-bdigital-dark-navy dark:bg-bdigital-night">
             <CardContent className="p-6 lg:p-8">
               <div className="flex items-center mb-6">
                 <MessageSquare className="h-6 w-6 text-bdigital-cyan mr-3" />
@@ -244,7 +245,7 @@ export function ContactSection() {
                 {contactInfo.map((item, index) => {
                   const IconComponent = item.icon;
                   return (
-                  <Card key={index} className="border-0 shadow-lg transition-all duration-300 hover:shadow-xl group dark:border dark:border-slate-800 dark:bg-slate-900">
+                  <Card key={index} className="border-0 shadow-lg transition-all duration-300 hover:shadow-xl group dark:border dark:border-bdigital-dark-navy dark:bg-bdigital-night">
                     <CardContent className="p-6">
                       <div className="flex items-start space-x-4">
                         <div className="w-12 h-12 bg-bdigital-cyan/10 rounded-xl flex items-center justify-center group-hover:bg-bdigital-cyan group-hover:scale-110 transition-all duration-300">
@@ -291,7 +292,7 @@ export function ContactSection() {
             </Card>
 
             {/* Map or Additional Info */}
-            <Card className="border-0 shadow-xl dark:border dark:border-slate-800 dark:bg-slate-900">
+            <Card className="border-0 shadow-xl dark:border dark:border-bdigital-dark-navy dark:bg-bdigital-night">
               <CardContent className="p-6 lg:p-8">
                 <h4 className="mb-4 text-xl font-bold text-bdigital-navy dark:text-slate-100">{_t("contact.meeting.title")}</h4>
                 <p className="mb-4 text-neutral-gray dark:text-slate-300">{_t("contact.meeting.desc")}</p>

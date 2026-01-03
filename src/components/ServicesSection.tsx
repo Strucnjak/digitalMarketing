@@ -107,7 +107,7 @@ export function ServicesSection() {
   };
 
   return (
-    <section id="services" className="bg-gradient-to-b from-gray-50 to-white py-16 lg:py-24 dark:from-slate-950 dark:to-slate-900">
+    <section id="services" className="bg-gradient-to-b from-gray-50 to-white py-16 lg:py-24 dark:from-bdigital-midnight dark:to-bdigital-dark-navy">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-12 lg:mb-20">
@@ -117,7 +117,7 @@ export function ServicesSection() {
           <h2 className="mb-4 text-3xl font-bold text-bdigital-navy sm:text-4xl lg:mb-6 lg:text-5xl dark:text-slate-100">
             {t('services.heading.part1')}
             <br />
-            <span className="text-bdigital-cyan-dark">{t('services.heading.emphasis')}</span>
+            <span className="text-bdigital-cyan-dark dark:text-bdigital-cyan">{t('services.heading.emphasis')}</span>
           </h2>
           <p className="mx-auto max-w-3xl text-lg text-neutral-gray leading-relaxed lg:text-xl dark:text-slate-300">
             {t('services.description')}
@@ -131,7 +131,7 @@ export function ServicesSection() {
             return (
               <Card
                 key={service.id} 
-                className="group cursor-pointer overflow-hidden border-0 bg-white shadow-lg transition-all duration-500 hover:-translate-y-2 hover:scale-105 hover:shadow-2xl dark:border dark:border-slate-800 dark:bg-slate-900"
+                className="group cursor-pointer overflow-hidden border-0 bg-white shadow-lg transition-all duration-500 hover:-translate-y-2 hover:scale-105 hover:shadow-2xl dark:border dark:border-bdigital-dark-navy dark:bg-bdigital-night"
                 onClick={() => handleServiceClick(service.id as PageType)}
               >
                 <CardHeader className="pb-4">
@@ -146,7 +146,7 @@ export function ServicesSection() {
                       {service.title}
                     </CardTitle>
                     <div className="text-right ml-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <div className="text-lg font-bold text-bdigital-cyan-dark">{service.stats.value}</div>
+                      <div className="text-lg font-bold text-bdigital-cyan-dark dark:text-bdigital-cyan">{service.stats.value}</div>
                       <div className="text-xs text-neutral-gray dark:text-slate-400">{service.stats.label}</div>
                     </div>
                   </div>

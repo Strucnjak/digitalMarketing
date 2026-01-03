@@ -158,7 +158,7 @@ export function Navigation() {
     <nav
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-white/95 backdrop-blur-sm shadow-lg border-b border-gray-200/20 dark:bg-slate-950/95 dark:border-slate-800/60 dark:shadow-black/40"
+          ? "bg-white/95 backdrop-blur-sm shadow-lg border-b border-gray-200/20 dark:bg-bdigital-midnight/95 dark:border-bdigital-dark-navy/60 dark:shadow-black/40"
           : "bg-transparent"
       }`}
     >
@@ -226,7 +226,7 @@ export function Navigation() {
 
               {/* Dropdown Menu */}
               <div
-                className={`absolute top-full left-0 mt-1 w-80 rounded-xl border border-gray-200 bg-white py-4 shadow-xl transition-all duration-300 dark:border-slate-800 dark:bg-slate-950 ${
+                className={`absolute top-full left-0 mt-1 w-80 rounded-xl border border-gray-200 bg-white py-4 shadow-xl transition-all duration-300 dark:border-bdigital-dark-navy dark:bg-bdigital-midnight ${
                   servicesOpen ? "opacity-100 translate-y-0 pointer-events-auto visible" : "opacity-0 translate-y-2 pointer-events-none invisible"
                 }`}
                 onMouseEnter={handleDropdownMouseEnter}
@@ -302,7 +302,7 @@ export function Navigation() {
             <div
               className={`flex items-center gap-2 rounded-full border px-2 py-1 text-xs font-semibold transition-colors duration-300 ${
                 isScrolled
-                  ? "border-slate-200/70 bg-white/80 text-bdigital-navy backdrop-blur dark:border-slate-700/80 dark:bg-slate-900/80 dark:text-slate-100"
+                  ? "border-slate-200/70 bg-white/80 text-bdigital-navy backdrop-blur dark:border-bdigital-dark-navy/80 dark:bg-bdigital-night/80 dark:text-slate-100"
                   : "border-white/30 bg-white/10 text-white"
               }`}
             >
@@ -346,7 +346,7 @@ export function Navigation() {
                   <Menu className="h-6 w-6" />
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right" className="w-full bg-white sm:w-80 dark:bg-slate-950">
+              <SheetContent side="right" className="w-full bg-white sm:w-80 dark:bg-bdigital-midnight">
                 <SheetHeader className="sr-only">
                   <SheetTitle>Navigation</SheetTitle>
                   <SheetDescription>Displays the mobile navigation menu.</SheetDescription>
@@ -355,7 +355,7 @@ export function Navigation() {
                   {/* Header */}
                   <div className="flex justify-between items-center py-4 border-b border-gray-200 dark:border-slate-800">
                     <div className="flex items-center space-x-2">
-                      <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center shadow dark:bg-slate-900">
+                      <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center shadow dark:bg-bdigital-night">
                         <img src="/logo.svg" alt="DIAL Digital logo" className="w-6 h-6" loading="lazy" />
                       </div>
                       <span className="text-lg font-bold text-bdigital-navy dark:text-slate-100">DIAL Digital</span>
@@ -464,7 +464,7 @@ export function Navigation() {
                       <span className="text-sm text-neutral-gray dark:text-slate-400">
                         {_t("nav.theme") ?? "Theme:"}
                       </span>
-                      <div className="flex items-center gap-2 rounded-full border border-slate-200/70 bg-white/80 px-2 py-1 text-xs font-semibold text-bdigital-navy transition-colors duration-300 dark:border-slate-700/80 dark:bg-slate-900/80 dark:text-slate-100">
+                      <div className="flex items-center gap-2 rounded-full border border-slate-200/70 bg-white/80 px-2 py-1 text-xs font-semibold text-bdigital-navy transition-colors duration-300 dark:border-bdigital-dark-navy/80 dark:bg-bdigital-night/80 dark:text-slate-100">
                         <Moon className={`h-3.5 w-3.5 ${theme === "dark" ? "text-bdigital-cyan" : "text-slate-400"}`} />
                         <Switch
                           checked={theme === "dark"}

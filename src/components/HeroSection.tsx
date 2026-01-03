@@ -64,9 +64,12 @@ export function HeroSection() {
   };
 
   return (
-    <section id="hero" className="relative min-h-screen bg-gradient-to-br from-bdigital-navy via-bdigital-dark-navy to-black overflow-hidden">
+    <section
+      id="hero"
+      className="relative min-h-screen bg-gradient-to-br from-bdigital-navy via-bdigital-dark-navy to-bdigital-midnight overflow-hidden"
+    >
       {/* Background Elements */}
-      <div className="absolute inset-0 bg-gradient-to-br from-bdigital-navy/90 via-bdigital-dark-navy/90 to-black/90"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-bdigital-navy/90 via-bdigital-dark-navy/90 to-bdigital-midnight/90"></div>
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(0,212,255,0.1),transparent_50%)]"></div>
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(0,212,255,0.05),transparent_50%)]"></div>
 
@@ -153,7 +156,7 @@ export function HeroSection() {
           <div className="relative order-first lg:order-last">
             <div className="relative">
               {/* Main Image Container */}
-              <div className="relative rounded-2xl bg-white p-4 shadow-2xl transition-all duration-500 group hover:scale-105 lg:rounded-3xl lg:p-8 dark:bg-slate-900 dark:shadow-black/40">
+              <div className="relative rounded-2xl bg-white p-4 shadow-2xl transition-all duration-500 group hover:scale-105 lg:rounded-3xl lg:p-8 dark:bg-bdigital-night dark:shadow-black/40">
                 {/* Floating Elements */}
                 <div
                   className={`absolute -top-4 -right-4 w-8 h-8 bg-bdigital-cyan rounded-full flex items-center justify-center shadow-lg ${
@@ -184,7 +187,7 @@ export function HeroSection() {
                   {/* Overlay Stats */}
                   <div className="absolute inset-0 bg-gradient-to-t from-bdigital-navy/20 via-transparent to-transparent">
                     <div className="absolute bottom-4 left-4 right-4">
-                      <div className="rounded-lg bg-white/90 p-3 backdrop-blur-sm transition-transform duration-300 group-hover:translate-y-0 dark:bg-slate-900/80">
+                      <div className="rounded-lg bg-white/90 p-3 backdrop-blur-sm transition-transform duration-300 group-hover:translate-y-0 dark:bg-bdigital-night/80">
                         <div className="flex items-center justify-between">
                           <div>
                             <div className="text-sm font-medium text-bdigital-navy dark:text-slate-100">{_t("hero.stats.conversionRate")}</div>

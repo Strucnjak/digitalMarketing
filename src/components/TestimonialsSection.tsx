@@ -53,7 +53,7 @@ export function TestimonialsSection() {
   ];
 
   return (
-    <section className="bg-gray-50 py-20 dark:bg-slate-950">
+    <section className="bg-gray-50 py-20 dark:bg-bdigital-midnight">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16">
@@ -70,7 +70,7 @@ export function TestimonialsSection() {
           {testimonials.map((testimonial, index) => (
             <Card
               key={index}
-              className="border-0 bg-white shadow-lg transition-shadow duration-300 hover:shadow-xl dark:border dark:border-slate-800 dark:bg-slate-900"
+              className="border-0 bg-white shadow-lg transition-shadow duration-300 hover:shadow-xl dark:border dark:border-bdigital-dark-navy dark:bg-bdigital-night"
             >
               <CardContent className="p-6">
                 {/* Rating Stars */}

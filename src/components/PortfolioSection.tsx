@@ -181,13 +181,14 @@ export function PortfolioSection() {
   };
 
   return (
-    <section id="portfolio" className="bg-white py-16 lg:py-24 dark:bg-slate-950">
+    <section id="portfolio" className="bg-white py-16 lg:py-24 dark:bg-bdigital-midnight">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-12 lg:mb-16">
           <Badge className="bg-bdigital-cyan/10 text-bdigital-cyan-dark border-bdigital-cyan-dark/20 mb-4 px-4 py-2">{_t("portfolio.badge")}</Badge>
           <h2 className="mb-4 text-3xl font-bold text-bdigital-navy sm:text-4xl lg:mb-6 lg:text-5xl dark:text-slate-100">
-            {_t("portfolio.heading.part1")} <span className="text-bdigital-cyan-dark">{_t("portfolio.heading.emphasis")}</span>{" "}
+            {_t("portfolio.heading.part1")}{" "}
+            <span className="text-bdigital-cyan-dark dark:text-bdigital-cyan">{_t("portfolio.heading.emphasis")}</span>{" "}
             {_t("portfolio.heading.part2")}
           </h2>
           <p className="mx-auto max-w-3xl text-lg text-neutral-gray leading-relaxed lg:text-xl dark:text-slate-300">
@@ -204,7 +205,7 @@ export function PortfolioSection() {
               className={`px-4 lg:px-6 py-2 lg:py-3 text-sm lg:text-base font-medium rounded-full transition-all duration-300 ${
                 activeFilter === filter.id
                   ? "bg-bdigital-cyan text-bdigital-navy shadow-lg transform scale-105"
-                  : "bg-gray-100 text-neutral-gray hover:bg-gray-200 hover:text-bdigital-navy dark:bg-slate-900 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-slate-100"
+                  : "bg-gray-100 text-neutral-gray hover:bg-gray-200 hover:text-bdigital-navy dark:bg-bdigital-night dark:text-slate-300 dark:hover:bg-bdigital-dark-navy dark:hover:text-slate-100"
               }`}
               aria-pressed={activeFilter === filter.id}
             >
@@ -276,7 +277,7 @@ export function PortfolioSection() {
                       className={`group flex h-11 w-11 items-center justify-center rounded-full transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bdigital-cyan-dark ${
                         isActive
                           ? "text-bdigital-cyan-dark dark:text-bdigital-cyan"
-                          : "text-gray-500 hover:text-bdigital-cyan-dark dark:text-slate-500 dark:hover:text-bdigital-cyan"
+                          : "text-gray-500 hover:text-bdigital-cyan-dark dark:text-slate-400 dark:hover:text-bdigital-cyan"
                       }`}
                       aria-label={`${_t("portfolio.slide") ?? "Slide"} ${index + 1}`}
                       aria-selected={isActive}
@@ -287,7 +288,7 @@ export function PortfolioSection() {
                         className={`h-3 w-3 rounded-full transition-all duration-300 ${
                           isActive
                             ? "bg-bdigital-cyan-dark scale-110 dark:bg-bdigital-cyan"
-                            : "bg-gray-300 group-hover:bg-bdigital-cyan-dark dark:bg-slate-700 dark:group-hover:bg-bdigital-cyan"
+                            : "bg-gray-300 group-hover:bg-bdigital-cyan-dark dark:bg-slate-600 dark:group-hover:bg-bdigital-cyan"
                         }`}
                         aria-hidden="true"
                       />
@@ -339,7 +340,7 @@ function ProjectCard({ project }: { project: Project }) {
   };
 
   return (
-    <Card className="group border-0 shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden cursor-pointer transform hover:scale-105">
+    <Card className="group border-0 shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden cursor-pointer transform hover:scale-105 dark:border dark:border-bdigital-dark-navy dark:bg-bdigital-night">
       <div className="relative overflow-hidden">
         <ImageWithFallback
           src={project.image}

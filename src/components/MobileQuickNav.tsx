@@ -243,7 +243,7 @@ export function MobileQuickNav({ onSectionClick }: MobileQuickNavProps) {
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.8, opacity: 0, y: 20 }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
-          className="absolute bottom-24 right-6 min-w-48 overflow-hidden rounded-2xl border border-gray-200/50 bg-white/95 shadow-2xl backdrop-blur-md dark:border-slate-800/70 dark:bg-slate-950/95"
+          className="absolute bottom-24 right-6 min-w-48 overflow-hidden rounded-2xl border border-gray-200/50 bg-white/95 shadow-2xl backdrop-blur-md dark:border-bdigital-dark-navy/70 dark:bg-bdigital-midnight/95"
           onClick={(e) => e.stopPropagation()}
         >
               {sections.map((section, index) => {

@@ -142,9 +142,9 @@ export function FreeConsultationPage() {
 
   if (isSubmitted) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white pb-16 pt-20 dark:from-slate-950 dark:to-slate-900">
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white pb-16 pt-20 dark:from-bdigital-midnight dark:to-bdigital-dark-navy">
         <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Card className="border-0 shadow-2xl overflow-visible dark:border dark:border-slate-800 dark:bg-slate-900">
+          <Card className="border-0 shadow-2xl overflow-visible dark:border dark:border-bdigital-dark-navy dark:bg-bdigital-night">
             <CardContent className="p-8 text-center lg:p-12">
               <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-green-100 dark:bg-emerald-900/40">
                 <CheckCircle className="h-10 w-10 text-green-600 dark:text-emerald-300" />
@@ -218,7 +218,7 @@ export function FreeConsultationPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white pb-16 pt-20 dark:from-slate-950 dark:to-slate-900">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white pb-16 pt-20 dark:from-bdigital-midnight dark:to-bdigital-dark-navy">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-8">
@@ -240,7 +240,7 @@ export function FreeConsultationPage() {
                 <Gift className="h-8 w-8 text-bdigital-cyan-dark" />
               </div>
               <h1 className="text-4xl font-bold text-bdigital-navy sm:text-5xl lg:text-6xl dark:text-slate-100">
-                <span className="text-bdigital-cyan-dark">Besplatna</span> konsultacija
+                <span className="text-bdigital-cyan-dark dark:text-bdigital-cyan">Besplatna</span> konsultacija
               </h1>
             </div>
             <p className="mb-8 max-w-3xl text-xl text-neutral-gray leading-relaxed mx-auto dark:text-slate-300">
@@ -250,21 +250,21 @@ export function FreeConsultationPage() {
 
             {/* Benefits Grid */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-              <div className="rounded-xl border border-gray-100 bg-white p-6 shadow-lg dark:border-slate-800 dark:bg-slate-900">
+              <div className="rounded-xl border border-gray-100 bg-white p-6 shadow-lg dark:border-bdigital-dark-navy dark:bg-bdigital-night">
                 <div className="w-12 h-12 bg-bdigital-cyan/10 rounded-xl flex items-center justify-center mx-auto mb-4">
                   <Clock className="h-6 w-6 text-bdigital-cyan-dark" />
                 </div>
                 <h3 className="mb-2 font-semibold text-bdigital-navy dark:text-slate-100">45 minuta</h3>
                 <p className="text-sm text-neutral-gray dark:text-slate-300">Detaljne analize i konkretni saveti</p>
               </div>
-              <div className="rounded-xl border border-gray-100 bg-white p-6 shadow-lg dark:border-slate-800 dark:bg-slate-900">
+              <div className="rounded-xl border border-gray-100 bg-white p-6 shadow-lg dark:border-bdigital-dark-navy dark:bg-bdigital-night">
                 <div className="w-12 h-12 bg-bdigital-cyan/10 rounded-xl flex items-center justify-center mx-auto mb-4">
                   <Target className="h-6 w-6 text-bdigital-cyan-dark" />
                 </div>
                 <h3 className="mb-2 font-semibold text-bdigital-navy dark:text-slate-100">Personalizovano</h3>
                 <p className="text-sm text-neutral-gray dark:text-slate-300">Strategija prilagođena vašem biznisu</p>
               </div>
-              <div className="rounded-xl border border-gray-100 bg-white p-6 shadow-lg dark:border-slate-800 dark:bg-slate-900">
+              <div className="rounded-xl border border-gray-100 bg-white p-6 shadow-lg dark:border-bdigital-dark-navy dark:bg-bdigital-night">
                 <div className="w-12 h-12 bg-bdigital-cyan/10 rounded-xl flex items-center justify-center mx-auto mb-4">
                   <Gift className="h-6 w-6 text-bdigital-cyan-dark" />
                 </div>
@@ -275,7 +275,7 @@ export function FreeConsultationPage() {
           </div>
         </div>
 
-        <Card className="border-0 shadow-2xl overflow-visible dark:border dark:border-slate-800 dark:bg-slate-900">
+        <Card className="border-0 shadow-2xl overflow-visible dark:border dark:border-bdigital-dark-navy dark:bg-bdigital-night">
           <CardHeader>
             <CardTitle className="text-2xl text-bdigital-navy text-center dark:text-slate-100">Zakazivanje konsultacije</CardTitle>
             <p className="text-center text-neutral-gray dark:text-slate-300">Popunite formu ispod da zakazujete vašu besplatnu konsultaciju</p>
@@ -547,7 +547,7 @@ export function FreeConsultationPage() {
               </div>
 
               {/* Submit Button */}
-              <div className="border-t border-gray-200 pt-6 dark:border-slate-800">
+              <div className="border-t border-gray-200 pt-6 dark:border-bdigital-dark-navy">
                 <Button
                   onClick={handleSubmit}
                   disabled={isSubmitting}

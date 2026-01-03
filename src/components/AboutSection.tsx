@@ -87,7 +87,7 @@ export function AboutSection() {
   const handleSecondary = () => goAndScroll("home", "portfolio");
 
   return (
-    <section id="about" className="bg-white py-20 dark:bg-slate-950">
+    <section id="about" className="bg-white py-20 dark:bg-bdigital-midnight">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16">
@@ -105,7 +105,10 @@ export function AboutSection() {
           {values.map((value, index) => {
             const IconComponent = value.icon;
             return (
-              <Card key={index} className="text-center border-0 shadow-lg hover:shadow-xl transition-all duration-300 group">
+              <Card
+                key={index}
+                className="text-center border-0 shadow-lg hover:shadow-xl transition-all duration-300 group dark:border dark:border-bdigital-dark-navy dark:bg-bdigital-night"
+              >
                 <CardContent className="p-8">
                   <div
                     className={`w-16 h-16 ${value.color} rounded-xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300`}
@@ -151,7 +154,10 @@ export function AboutSection() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
           {team.map((member, index) => (
-            <Card key={index} className="text-center border-0 shadow-lg hover:shadow-xl transition-all duration-300 group overflow-hidden">
+            <Card
+              key={index}
+              className="text-center border-0 shadow-lg hover:shadow-xl transition-all duration-300 group overflow-hidden dark:border dark:border-bdigital-dark-navy dark:bg-bdigital-night"
+            >
               <CardContent className="p-6">
                 <div className="relative mb-6">
                   <ImageWithFallback
@@ -169,7 +175,7 @@ export function AboutSection() {
         </div>
 
         {/* CTA Section */}
-        <div className="rounded-2xl bg-gray-50 p-8 text-center md:p-12 dark:bg-slate-900">
+        <div className="rounded-2xl bg-gray-50 p-8 text-center md:p-12 dark:bg-bdigital-night">
           <h3 className="mb-4 text-2xl font-bold text-bdigital-navy md:text-3xl dark:text-slate-100">{t("about.cta.title")}</h3>
           <p className="mx-auto mb-8 max-w-2xl text-neutral-gray dark:text-slate-300">{t("about.cta.desc")}</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

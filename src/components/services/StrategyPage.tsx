@@ -83,9 +83,9 @@ export function StrategyPage() {
   };
 
   return (
-    <div className="min-h-screen bg-white dark:bg-slate-950">
+    <div className="min-h-screen bg-white dark:bg-bdigital-midnight">
       {/* Hero Section */}
-      <section className="pt-20 pb-16 bg-gradient-to-br from-bdigital-navy via-bdigital-dark-navy to-black">
+      <section className="pt-20 pb-16 bg-gradient-to-br from-bdigital-navy via-bdigital-dark-navy to-bdigital-midnight">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="text-white">
@@ -119,7 +119,7 @@ export function StrategyPage() {
             </div>
 
             <div className="relative">
-              <div className="rounded-2xl bg-white p-8 shadow-2xl dark:bg-slate-900 dark:shadow-black/40">
+              <div className="rounded-2xl bg-white p-8 shadow-2xl dark:bg-bdigital-night dark:shadow-black/40">
                 <ImageWithFallback
                   src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=500&h=400&fit=crop"
                   alt="Strategy"
@@ -132,7 +132,7 @@ export function StrategyPage() {
       </section>
 
       {/* Services Section */}
-      <section className="bg-gray-50 py-20 dark:bg-slate-900">
+      <section className="bg-gray-50 py-20 dark:bg-bdigital-night">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="mb-4 text-3xl font-bold text-bdigital-navy md:text-4xl dark:text-slate-100">{t("strategy.services.heading")}</h2>
@@ -144,7 +144,7 @@ export function StrategyPage() {
               return (
                 <Card
                   key={index}
-                  className="border-0 shadow-lg transition-all duration-300 group hover:shadow-xl dark:border dark:border-slate-800 dark:bg-slate-900"
+                  className="border-0 shadow-lg transition-all duration-300 group hover:shadow-xl dark:border dark:border-bdigital-dark-navy dark:bg-bdigital-night"
                 >
                   <CardContent className="p-6">
                     <div className="w-12 h-12 bg-bdigital-cyan/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-bdigital-cyan group-hover:text-white transition-all duration-300">
@@ -161,7 +161,7 @@ export function StrategyPage() {
       </section>
 
       {/* Pricing Section */}
-      <section className="bg-white py-20 dark:bg-slate-950">
+      <section className="bg-white py-20 dark:bg-bdigital-midnight">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="mb-4 text-3xl font-bold text-bdigital-navy md:text-4xl dark:text-slate-100">{t("strategy.pricing.heading")}</h2>
@@ -170,7 +170,7 @@ export function StrategyPage() {
             {packages.map((pkg, index) => (
               <Card
                 key={index}
-                className={`relative border-0 shadow-lg transition-all duration-300 hover:shadow-xl dark:border dark:border-slate-800 dark:bg-slate-900 ${
+                className={`relative border-0 shadow-lg transition-all duration-300 hover:shadow-xl dark:border dark:border-bdigital-dark-navy dark:bg-bdigital-night ${
                   pkg.popular ? "ring-2 ring-bdigital-cyan" : ""
                 }`}
               >
