@@ -39,7 +39,6 @@ export function StrategyPage() {
   const packages = [
     {
       name: t("strategy.package.starter.name"),
-      price: "600 €",
       features: [
         t("strategy.package.starter.feature1"),
         t("strategy.package.starter.feature2"),
@@ -50,7 +49,6 @@ export function StrategyPage() {
     },
     {
       name: t("strategy.package.professional.name"),
-      price: "900 €",
       features: [
         t("strategy.package.professional.feature1"),
         t("strategy.package.professional.feature2"),
@@ -62,7 +60,6 @@ export function StrategyPage() {
     },
     {
       name: t("strategy.package.enterprise.name"),
-      price: "2.000 €+",
       features: [
         t("strategy.package.enterprise.feature1"),
         t("strategy.package.enterprise.feature2"),
@@ -180,7 +177,6 @@ export function StrategyPage() {
                 <CardContent className="p-6">
                   <div className="text-center mb-6">
                     <h3 className="text-xl font-bold text-bdigital-navy mb-2">{pkg.name}</h3>
-                    <div className="text-3xl font-bold text-bdigital-cyan-dark">{pkg.price}</div>
                   </div>
                   <ul className="space-y-3 mb-6">
                     {pkg.features.map((feature, idx) => (

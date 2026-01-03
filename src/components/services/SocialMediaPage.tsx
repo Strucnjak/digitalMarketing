@@ -39,7 +39,6 @@ export function SocialMediaPage() {
   const packages = [
     {
       name: t("social.package.starter.name"),
-      price: "500 €/mes",
       features: [
         t("social.package.starter.feature1"),
         t("social.package.starter.feature2"),
@@ -49,7 +48,6 @@ export function SocialMediaPage() {
     },
     {
       name: t("social.package.professional.name"),
-      price: "900 €/mes",
       features: [
         t("social.package.professional.feature1"),
         t("social.package.professional.feature2"),
@@ -61,7 +59,6 @@ export function SocialMediaPage() {
     },
     {
       name: t("social.package.enterprise.name"),
-      price: "1.500 €/mes",
       features: [
         t("social.package.enterprise.feature1"),
         t("social.package.enterprise.feature2"),
@@ -176,7 +173,6 @@ export function SocialMediaPage() {
                 <CardContent className="p-6">
                   <div className="text-center mb-6">
                     <h3 className="text-xl font-bold text-bdigital-navy mb-2">{pkg.name}</h3>
-                    <div className="text-3xl font-bold text-bdigital-cyan-dark">{pkg.price}</div>
                   </div>
                   <ul className="space-y-3 mb-6">
                     {pkg.features.map((feature, idx) => (
