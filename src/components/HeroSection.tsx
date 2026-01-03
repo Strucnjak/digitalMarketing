@@ -69,7 +69,8 @@ export function HeroSection() {
       className="relative min-h-screen bg-gradient-to-br from-bdigital-navy via-bdigital-dark-navy to-bdigital-midnight overflow-hidden"
     >
       {/* Background Elements */}
-      <div className="absolute inset-0 bg-gradient-to-br from-bdigital-navy/90 via-bdigital-dark-navy/90 to-bdigital-midnight/90"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-bdigital-navy/80 via-bdigital-dark-navy/85 to-bdigital-midnight/90"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(0,212,255,0.18),transparent_48%)]"></div>
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(0,212,255,0.1),transparent_50%)]"></div>
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(0,212,255,0.05),transparent_50%)]"></div>
 
@@ -109,6 +110,7 @@ export function HeroSection() {
             </div>
 
             {/* Subtitle */}
+            <p className="text-base font-semibold uppercase tracking-[0.2em] text-bdigital-cyan/80">{_t("hero.tagline")}</p>
             <p className="text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed">{_t("hero.subtitle")}</p>
 
             {/* CTA Buttons */}
@@ -204,6 +206,14 @@ export function HeroSection() {
               </div>
 
               {/* Decorative Elements */}
+              <div className="absolute right-6 top-1/3 hidden w-40 rounded-2xl border border-white/20 bg-white/10 p-4 text-left text-xs text-white/80 shadow-xl backdrop-blur lg:block">
+                <div className="mb-2 flex items-center gap-2 text-bdigital-cyan">
+                  <span className="h-2 w-2 rounded-full bg-bdigital-cyan"></span>
+                  Live analytics
+                </div>
+                <div className="text-lg font-semibold text-white">12.4K</div>
+                <div className="text-white/60">Active visitors today</div>
+              </div>
               <div className="absolute -z-10 -top-8 -right-8 w-32 h-32 bg-bdigital-cyan/10 rounded-full blur-3xl"></div>
               <div className="absolute -z-10 -bottom-8 -left-8 w-24 h-24 bg-bdigital-cyan/10 rounded-full blur-2xl"></div>
             </div>

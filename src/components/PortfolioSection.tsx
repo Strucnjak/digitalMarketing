@@ -128,6 +128,14 @@ export function PortfolioSection() {
   const [activeFilter, setActiveFilter] = useState("all");
   const [currentSlide, setCurrentSlide] = useState(0);
   const projects = PROJECTS;
+  const clientLogos = [
+    "Adriatic Adventures",
+    "Montenegro Properties",
+    "Cafe Central",
+    "TechStart",
+    "Wellness Spa",
+    "Fashion Boutique",
+  ];
 
   // Map category keys -> localized labels
   const categoryKeyToLabel: Record<string, string> = {
@@ -194,6 +202,17 @@ export function PortfolioSection() {
           <p className="mx-auto max-w-3xl text-lg text-neutral-gray leading-relaxed lg:text-xl dark:text-slate-300">
             {_t("portfolio.description")}
           </p>
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-3 text-xs text-neutral-gray dark:text-slate-300">
+            <span className="text-sm font-semibold text-bdigital-navy dark:text-slate-100">{_t("portfolio.clients.title")}</span>
+            {clientLogos.map((logo) => (
+              <span
+                key={logo}
+                className="rounded-full border border-bdigital-cyan/20 bg-bdigital-cyan/5 px-3 py-1 text-[0.7rem] uppercase tracking-[0.2em] text-bdigital-cyan-dark dark:border-bdigital-cyan/30 dark:text-bdigital-cyan"
+              >
+                {logo}
+              </span>
+            ))}
+          </div>
         </div>
 
         {/* Filter Tabs (dynamic counts) */}

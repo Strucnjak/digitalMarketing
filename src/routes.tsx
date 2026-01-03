@@ -39,6 +39,9 @@ const TestimonialsSection = lazy(() =>
 const ContactSection = lazy(() => import("./components/ContactSection").then((mod) => ({ default: mod.ContactSection })));
 const Footer = lazy(() => import("./components/Footer").then((mod) => ({ default: mod.Footer })));
 const MobileQuickNav = lazy(() => import("./components/MobileQuickNav").then((mod) => ({ default: mod.MobileQuickNav })));
+const FloatingConsultationButton = lazy(() =>
+  import("./components/FloatingConsultationButton").then((mod) => ({ default: mod.FloatingConsultationButton })),
+);
 const WebDesignPage = lazy(() =>
   import("./components/services/WebDesignPage").then((mod) => ({ default: mod.WebDesignPage })),
 );
@@ -263,6 +266,9 @@ function AppLayout() {
       <main id="app-content">
         <Outlet />
       </main>
+      <Suspense fallback={null}>
+        <FloatingConsultationButton />
+      </Suspense>
       {isHome && (
         <Suspense fallback={null}>
           <MobileQuickNav />

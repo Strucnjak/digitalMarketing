@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { Card, CardContent } from "./ui/card";
-import { Target, Eye, Heart, Users, Award, Clock } from "lucide-react";
+import { Target, Eye, Heart, Users, Award, Clock, Linkedin, Twitter } from "lucide-react";
 import { useLanguage } from "./LanguageContext";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { useActiveLocale } from "../hooks/useActiveLocale";
@@ -45,20 +45,32 @@ export function AboutSection() {
     {
       name: "Marko Petrović",
       role: "CEO & Creative Director",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&face",
+      image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=480&h=640&fit=crop&q=80",
       description: "Vodi kreativni tim sa više od 5 godina iskustva u digitalnom marketingu.",
+      socials: [
+        { label: "LinkedIn", href: "https://www.linkedin.com", icon: Linkedin },
+        { label: "Twitter", href: "https://twitter.com", icon: Twitter },
+      ],
     },
     {
       name: "Ana Nikolić",
       role: "Lead Developer",
-      image: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=300&h=300&fit=crop&face",
+      image: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=480&h=640&fit=crop&q=80",
       description: "Ekspert za web tehnologije i UX/UI dizajn sa strašću za inovacije.",
+      socials: [
+        { label: "LinkedIn", href: "https://www.linkedin.com", icon: Linkedin },
+        { label: "Twitter", href: "https://twitter.com", icon: Twitter },
+      ],
     },
     {
       name: "Stefan Jovanović",
       role: "SEO Specialist",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&face",
+      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=480&h=640&fit=crop&q=80",
       description: "Specijalizovan za SEO optimizaciju i digitalne strategije.",
+      socials: [
+        { label: "LinkedIn", href: "https://www.linkedin.com", icon: Linkedin },
+        { label: "Twitter", href: "https://twitter.com", icon: Twitter },
+      ],
     },
   ];
 
@@ -158,17 +170,40 @@ export function AboutSection() {
               key={index}
               className="text-center border-0 shadow-lg hover:shadow-xl transition-all duration-300 group overflow-hidden dark:border dark:border-bdigital-dark-navy dark:bg-bdigital-night"
             >
-              <CardContent className="p-6">
-                <div className="relative mb-6">
+              <CardContent className="p-0">
+                <div className="relative overflow-hidden">
                   <ImageWithFallback
                     src={member.image}
                     alt={member.name}
-                    className="w-24 h-24 rounded-full mx-auto object-cover border-4 border-bdigital-cyan/20 group-hover:border-bdigital-cyan transition-all duration-300"
+                    className="h-80 w-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
+                  <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-bdigital-navy/90 via-bdigital-navy/10 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                    <div className="p-6 text-left text-white">
+                      <p className="mb-4 text-sm leading-relaxed">{member.description}</p>
+                      <div className="flex items-center gap-3">
+                        {member.socials.map((social) => {
+                          const Icon = social.icon;
+                          return (
+                            <a
+                              key={social.label}
+                              href={social.href}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              aria-label={social.label}
+                              className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-bdigital-cyan hover:text-bdigital-navy focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bdigital-cyan"
+                            >
+                              <Icon className="h-4 w-4" />
+                            </a>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <h4 className="mb-2 text-xl font-bold text-bdigital-navy dark:text-slate-100">{member.name}</h4>
-                <p className="mb-4 font-medium text-bdigital-cyan-dark dark:text-bdigital-cyan">{member.role}</p>
-                <p className="text-sm text-neutral-gray leading-relaxed dark:text-slate-300">{member.description}</p>
+                <div className="p-6 text-left">
+                  <h4 className="mb-1 text-xl font-bold text-bdigital-navy dark:text-slate-100">{member.name}</h4>
+                  <p className="font-medium text-bdigital-cyan-dark dark:text-bdigital-cyan">{member.role}</p>
+                </div>
               </CardContent>
             </Card>
           ))}
