@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "./ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle, SheetDescription } from "./ui/sheet";
+import { Switch } from "./ui/switch";
 import { Menu, X, ChevronDown, Moon, Sun } from "lucide-react";
 import { useLanguage, type Language } from "./LanguageContext";
 import { useTheme } from "./ThemeContext";
@@ -298,19 +299,30 @@ export function Navigation() {
               </button>
             </div>
 
-            <button
-              type="button"
-              onClick={toggleTheme}
-              aria-label={theme === "dark" ? _t("nav.light_mode") ?? "Switch to light mode" : _t("nav.dark_mode") ?? "Switch to dark mode"}
-              aria-pressed={theme === "dark"}
-              className={`rounded-full p-2 transition-colors duration-300 ${
+            <div
+              className={`flex items-center gap-2 rounded-full border px-2 py-1 text-xs font-semibold transition-colors duration-300 ${
                 isScrolled
-                  ? "text-bdigital-navy hover:bg-bdigital-cyan/20 dark:text-slate-100 dark:hover:bg-slate-800/70"
-                  : "text-white hover:bg-white/10"
+                  ? "border-slate-200/70 bg-white/80 text-bdigital-navy backdrop-blur dark:border-slate-700/80 dark:bg-slate-900/80 dark:text-slate-100"
+                  : "border-white/30 bg-white/10 text-white"
               }`}
             >
-              {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
-            </button>
+              <Moon
+                className={`h-3.5 w-3.5 transition-colors ${
+                  theme === "dark" ? "text-bdigital-cyan" : isScrolled ? "text-bdigital-navy/60 dark:text-slate-400" : "text-white/70"
+                }`}
+              />
+              <Switch
+                checked={theme === "dark"}
+                onCheckedChange={toggleTheme}
+                aria-label={theme === "dark" ? _t("nav.light_mode") ?? "Switch to light mode" : _t("nav.dark_mode") ?? "Switch to dark mode"}
+                className="h-5 w-10 data-[state=checked]:bg-bdigital-cyan data-[state=unchecked]:bg-slate-300/80 dark:data-[state=unchecked]:bg-slate-700"
+              />
+              <Sun
+                className={`h-3.5 w-3.5 transition-colors ${
+                  theme === "dark" ? "text-slate-300" : isScrolled ? "text-bdigital-cyan-dark" : "text-white"
+                }`}
+              />
+            </div>
 
             {/* CTA Button - now links to free consultation */}
             <Button
@@ -452,17 +464,18 @@ export function Navigation() {
                       <span className="text-sm text-neutral-gray dark:text-slate-400">
                         {_t("nav.theme") ?? "Theme:"}
                       </span>
-                      <button
-                        type="button"
-                        onClick={toggleTheme}
-                        aria-label={
-                          theme === "dark" ? _t("nav.light_mode") ?? "Switch to light mode" : _t("nav.dark_mode") ?? "Switch to dark mode"
-                        }
-                        aria-pressed={theme === "dark"}
-                        className="rounded-full p-2 text-bdigital-navy transition-colors duration-300 hover:bg-gray-100 dark:text-slate-100 dark:hover:bg-slate-800"
-                      >
-                        {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
-                      </button>
+                      <div className="flex items-center gap-2 rounded-full border border-slate-200/70 bg-white/80 px-2 py-1 text-xs font-semibold text-bdigital-navy transition-colors duration-300 dark:border-slate-700/80 dark:bg-slate-900/80 dark:text-slate-100">
+                        <Moon className={`h-3.5 w-3.5 ${theme === "dark" ? "text-bdigital-cyan" : "text-slate-400"}`} />
+                        <Switch
+                          checked={theme === "dark"}
+                          onCheckedChange={toggleTheme}
+                          aria-label={
+                            theme === "dark" ? _t("nav.light_mode") ?? "Switch to light mode" : _t("nav.dark_mode") ?? "Switch to dark mode"
+                          }
+                          className="h-5 w-10 data-[state=checked]:bg-bdigital-cyan data-[state=unchecked]:bg-slate-300/80 dark:data-[state=unchecked]:bg-slate-700"
+                        />
+                        <Sun className={`h-3.5 w-3.5 ${theme === "dark" ? "text-slate-300" : "text-bdigital-cyan-dark"}`} />
+                      </div>
                     </div>
 
                     {/* CTA Button - now links to free consultation */}
