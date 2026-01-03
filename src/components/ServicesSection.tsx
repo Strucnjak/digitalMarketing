@@ -146,11 +146,11 @@ export function ServicesSection() {
                   </div>
                   
                   {/* Title and Stats */}
-                  <div className="flex items-start justify-between">
+                  <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                     <CardTitle className="flex-1 text-xl font-bold text-bdigital-navy transition-colors duration-300 group-hover:text-bdigital-cyan-dark lg:text-2xl dark:text-slate-100 dark:group-hover:text-bdigital-cyan">
                       {service.title}
                     </CardTitle>
-                    <div className="text-right ml-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="text-left sm:text-right sm:ml-4 opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300">
                       <div className="text-lg font-bold text-bdigital-cyan-dark dark:text-bdigital-cyan">{service.stats.value}</div>
                       <div className="text-xs text-neutral-gray dark:text-slate-400">{service.stats.label}</div>
                     </div>
@@ -187,7 +187,7 @@ export function ServicesSection() {
         </div>
 
         {/* Why Choose Us Section */}
-        <div className="bg-gradient-to-r from-bdigital-navy to-bdigital-dark-navy rounded-3xl p-8 lg:p-12 text-white">
+        <div className="bg-gradient-to-r from-bdigital-navy to-bdigital-dark-navy rounded-3xl p-6 sm:p-8 lg:p-12 text-white">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             <div>
               <h3 className="text-2xl lg:text-3xl font-bold mb-4 lg:mb-6">
@@ -207,7 +207,7 @@ export function ServicesSection() {
               </Button>
             </div>
             
-            <div className="grid grid-cols-2 gap-6 lg:gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
               {[
                 { icon: Zap, title: t('services.why.fast.title'), desc: t('services.why.fast.desc') },
                 { icon: TrendingUp, title: t('services.why.results.title'), desc: t('services.why.results.desc') },
