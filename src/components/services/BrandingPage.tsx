@@ -83,7 +83,7 @@ export function BrandingPage() {
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white dark:bg-slate-950">
       {/* Hero Section */}
       <section className="pt-20 pb-16 bg-gradient-to-br from-bdigital-navy via-bdigital-dark-navy to-black">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -117,7 +117,7 @@ export function BrandingPage() {
             </div>
 
             <div className="relative">
-              <div className="bg-white rounded-2xl p-8 shadow-2xl">
+              <div className="rounded-2xl bg-white p-8 shadow-2xl dark:bg-slate-900 dark:shadow-black/40">
                 <ImageWithFallback
                   src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=500&h=400&fit=crop"
                   alt="Branding"
@@ -130,23 +130,26 @@ export function BrandingPage() {
       </section>
 
       {/* Services Section */}
-      <section className="py-20 bg-gray-50">
+      <section className="bg-gray-50 py-20 dark:bg-slate-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-bdigital-navy mb-4">{t("branding.services.heading")}</h2>
+            <h2 className="mb-4 text-3xl font-bold text-bdigital-navy md:text-4xl dark:text-slate-100">{t("branding.services.heading")}</h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {services.map((service, index) => {
               const IconComponent = service.icon;
               return (
-                <Card key={index} className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 group">
+                <Card
+                  key={index}
+                  className="border-0 shadow-lg transition-all duration-300 group hover:shadow-xl dark:border dark:border-slate-800 dark:bg-slate-900"
+                >
                   <CardContent className="p-6">
                     <div className="w-12 h-12 bg-bdigital-cyan/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-bdigital-cyan group-hover:text-white transition-all duration-300">
                       <IconComponent className="h-6 w-6 text-bdigital-cyan group-hover:text-white" />
                     </div>
-                    <h3 className="text-xl font-bold text-bdigital-navy mb-3">{service.title}</h3>
-                    <p className="text-neutral-gray leading-relaxed">{service.description}</p>
+                    <h3 className="mb-3 text-xl font-bold text-bdigital-navy dark:text-slate-100">{service.title}</h3>
+                    <p className="text-neutral-gray leading-relaxed dark:text-slate-300">{service.description}</p>
                   </CardContent>
                 </Card>
               );
@@ -156,16 +159,18 @@ export function BrandingPage() {
       </section>
 
       {/* Pricing Section */}
-      <section className="py-20 bg-white">
+      <section className="bg-white py-20 dark:bg-slate-950">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-bdigital-navy mb-4">{t("branding.pricing.heading")}</h2>
+            <h2 className="mb-4 text-3xl font-bold text-bdigital-navy md:text-4xl dark:text-slate-100">{t("branding.pricing.heading")}</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {packages.map((pkg, index) => (
               <Card
                 key={index}
-                className={`border-0 shadow-lg hover:shadow-xl transition-all duration-300 relative ${pkg.popular ? "ring-2 ring-bdigital-cyan" : ""}`}
+                className={`relative border-0 shadow-lg transition-all duration-300 hover:shadow-xl dark:border dark:border-slate-800 dark:bg-slate-900 ${
+                  pkg.popular ? "ring-2 ring-bdigital-cyan" : ""
+                }`}
               >
                 {pkg.popular && (
                   <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
@@ -174,13 +179,13 @@ export function BrandingPage() {
                 )}
                 <CardContent className="p-6">
                   <div className="text-center mb-6">
-                    <h3 className="text-xl font-bold text-bdigital-navy mb-2">{pkg.name}</h3>
+                    <h3 className="mb-2 text-xl font-bold text-bdigital-navy dark:text-slate-100">{pkg.name}</h3>
                   </div>
                   <ul className="space-y-3 mb-6">
                     {pkg.features.map((feature, idx) => (
                       <li key={idx} className="flex items-center text-sm">
                         <CheckCircle className="h-4 w-4 text-bdigital-cyan-dark mr-3 flex-shrink-0" />
-                        <span className="text-neutral-gray">{feature}</span>
+                        <span className="text-neutral-gray dark:text-slate-300">{feature}</span>
                       </li>
                     ))}
                   </ul>
@@ -196,7 +201,7 @@ export function BrandingPage() {
             ))}
           </div>{" "}
           {/* Pricing Note */}
-          <p className="mt-8 text-center text-sm text-neutral-gray max-w-2xl mx-auto">{t("web.pricing.note")}</p>
+          <p className="mx-auto mt-8 max-w-2xl text-center text-sm text-neutral-gray dark:text-slate-300">{t("web.pricing.note")}</p>
         </div>
       </section>
 

@@ -18,19 +18,19 @@ export function AboutSection() {
       icon: Target,
       title: t("about.mission.title"),
       description: t("about.mission.desc"),
-      color: "bg-cyan-50 text-cyan-600",
+      color: "bg-cyan-50 text-cyan-600 dark:bg-cyan-900/40 dark:text-cyan-200",
     },
     {
       icon: Eye,
       title: t("about.vision.title"),
       description: t("about.vision.desc"),
-      color: "bg-blue-50 text-blue-600",
+      color: "bg-blue-50 text-blue-600 dark:bg-blue-900/40 dark:text-blue-200",
     },
     {
       icon: Heart,
       title: t("about.values.title"),
       description: t("about.values.desc"),
-      color: "bg-purple-50 text-purple-600",
+      color: "bg-purple-50 text-purple-600 dark:bg-purple-900/40 dark:text-purple-200",
     },
   ];
 
@@ -87,17 +87,17 @@ export function AboutSection() {
   const handleSecondary = () => goAndScroll("home", "portfolio");
 
   return (
-    <section id="about" className="py-20 bg-white">
+    <section id="about" className="bg-white py-20 dark:bg-slate-950">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-bdigital-navy mb-4">{t("about.title")}</h2>
-          <p className="text-lg text-neutral-gray max-w-2xl mx-auto mb-8">{t("about.subtitle")}</p>
+          <h2 className="mb-4 text-3xl font-bold text-bdigital-navy md:text-4xl dark:text-slate-100">{t("about.title")}</h2>
+          <p className="mx-auto mb-8 max-w-2xl text-lg text-neutral-gray dark:text-slate-300">{t("about.subtitle")}</p>
         </div>
 
         {/* About Description */}
-        <div className="max-w-4xl mx-auto text-center mb-20">
-          <p className="text-lg text-neutral-gray leading-relaxed">{t("about.description")}</p>
+        <div className="mx-auto mb-20 max-w-4xl text-center">
+          <p className="text-lg text-neutral-gray leading-relaxed dark:text-slate-300">{t("about.description")}</p>
         </div>
 
         {/* Mission, Vision, Values */}
@@ -112,8 +112,8 @@ export function AboutSection() {
                   >
                     <IconComponent className="h-8 w-8" />
                   </div>
-                  <h3 className="text-xl font-bold text-bdigital-navy mb-4">{value.title}</h3>
-                  <p className="text-neutral-gray leading-relaxed">{value.description}</p>
+                  <h3 className="mb-4 text-xl font-bold text-bdigital-navy dark:text-slate-100">{value.title}</h3>
+                  <p className="text-neutral-gray leading-relaxed dark:text-slate-300">{value.description}</p>
                 </CardContent>
               </Card>
             );
@@ -145,8 +145,8 @@ export function AboutSection() {
 
         {/* Team Section */}
         <div className="text-center mb-16">
-          <h3 className="text-2xl md:text-3xl font-bold text-bdigital-navy mb-4">{t("about.team.title")}</h3>
-          <p className="text-lg text-neutral-gray max-w-2xl mx-auto">{t("about.team.subtitle")}</p>
+          <h3 className="mb-4 text-2xl font-bold text-bdigital-navy md:text-3xl dark:text-slate-100">{t("about.team.title")}</h3>
+          <p className="mx-auto max-w-2xl text-lg text-neutral-gray dark:text-slate-300">{t("about.team.subtitle")}</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
@@ -160,18 +160,18 @@ export function AboutSection() {
                     className="w-24 h-24 rounded-full mx-auto object-cover border-4 border-bdigital-cyan/20 group-hover:border-bdigital-cyan transition-all duration-300"
                   />
                 </div>
-                <h4 className="text-xl font-bold text-bdigital-navy mb-2">{member.name}</h4>
-                <p className="text-bdigital-cyan-dark font-medium mb-4">{member.role}</p>
-                <p className="text-neutral-gray text-sm leading-relaxed">{member.description}</p>
+                <h4 className="mb-2 text-xl font-bold text-bdigital-navy dark:text-slate-100">{member.name}</h4>
+                <p className="mb-4 font-medium text-bdigital-cyan-dark dark:text-bdigital-cyan">{member.role}</p>
+                <p className="text-sm text-neutral-gray leading-relaxed dark:text-slate-300">{member.description}</p>
               </CardContent>
             </Card>
           ))}
         </div>
 
         {/* CTA Section */}
-        <div className="text-center bg-gray-50 rounded-2xl p-8 md:p-12">
-          <h3 className="text-2xl md:text-3xl font-bold text-bdigital-navy mb-4">{t("about.cta.title")}</h3>
-          <p className="text-neutral-gray mb-8 max-w-2xl mx-auto">{t("about.cta.desc")}</p>
+        <div className="rounded-2xl bg-gray-50 p-8 text-center md:p-12 dark:bg-slate-900">
+          <h3 className="mb-4 text-2xl font-bold text-bdigital-navy md:text-3xl dark:text-slate-100">{t("about.cta.title")}</h3>
+          <p className="mx-auto mb-8 max-w-2xl text-neutral-gray dark:text-slate-300">{t("about.cta.desc")}</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button
               type="button"
@@ -184,7 +184,7 @@ export function AboutSection() {
             <button
               type="button"
               onClick={handleSecondary}
-              className="border border-bdigital-cyan-dark text-bdigital-cyan-dark px-8 py-3 rounded-lg font-semibold hover:bg-bdigital-cyan hover:text-bdigital-navy transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bdigital-cyan-dark"
+              className="rounded-lg border border-bdigital-cyan-dark px-8 py-3 font-semibold text-bdigital-cyan-dark transition-colors hover:bg-bdigital-cyan hover:text-bdigital-navy focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bdigital-cyan-dark dark:text-bdigital-cyan dark:hover:text-slate-900"
             >
               {t("about.cta.secondary")}
             </button>

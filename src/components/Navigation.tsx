@@ -2,14 +2,16 @@ import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "./ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle, SheetDescription } from "./ui/sheet";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X, ChevronDown, Moon, Sun } from "lucide-react";
 import { useLanguage, type Language } from "./LanguageContext";
+import { useTheme } from "./ThemeContext";
 import { buildLocalizedPath, defaultLocale, servicePageIds, type Locale, type PageType } from "../routing";
 import { useRouteInfo } from "../hooks/useRouteInfo";
 import { useActiveLocale } from "../hooks/useActiveLocale";
 
 export function Navigation() {
   const { language, setLanguage, t: _t } = useLanguage();
+  const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
   const routeInfo = useRouteInfo();
   const { activeLocale, includeLocalePrefix, routeLocale } = useActiveLocale();
@@ -154,7 +156,9 @@ export function Navigation() {
   return (
     <nav
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        isScrolled ? "bg-white/95 backdrop-blur-sm shadow-lg border-b border-gray-200/20" : "bg-transparent"
+        isScrolled
+          ? "bg-white/95 backdrop-blur-sm shadow-lg border-b border-gray-200/20 dark:bg-slate-950/95 dark:border-slate-800/60 dark:shadow-black/40"
+          : "bg-transparent"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -169,7 +173,11 @@ export function Navigation() {
               <div className="w-8 h-8 lg:w-10 lg:h-10 bg-bdigital-cyan-dark rounded-lg flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow duration-300">
                 <img src="/logo.svg" alt="DIAL Digital logo" className="w-7 h-7 lg:w-8 lg:h-8" loading="lazy" />
               </div>
-              <span className={`text-lg lg:text-xl font-bold transition-colors duration-300 ${isScrolled ? "text-bdigital-navy" : "text-white"}`}>
+              <span
+                className={`text-lg lg:text-xl font-bold transition-colors duration-300 ${
+                  isScrolled ? "text-bdigital-navy dark:text-slate-100" : "text-white"
+                }`}
+              >
                 DIAL Digital
               </span>
             </button>
@@ -180,14 +188,14 @@ export function Navigation() {
             <button
               onClick={handleHomeClick}
               className={`text-sm font-medium transition-colors duration-300 ${
-                isScrolled ? "hover:text-bdigital-cyan-dark" : "hover:text-bdigital-cyan"
+                isScrolled ? "hover:text-bdigital-cyan-dark dark:hover:text-bdigital-cyan" : "hover:text-bdigital-cyan"
               } ${
                 routeInfo.page === "home"
                   ? isScrolled
-                    ? "text-bdigital-cyan-dark"
+                    ? "text-bdigital-cyan-dark dark:text-bdigital-cyan"
                     : "text-bdigital-cyan"
                   : isScrolled
-                    ? "text-bdigital-navy"
+                    ? "text-bdigital-navy dark:text-slate-100"
                     : "text-white"
               }`}
             >
@@ -198,14 +206,14 @@ export function Navigation() {
             <div ref={dropdownRef} className="relative" onMouseEnter={handleServicesMouseEnter} onMouseLeave={handleServicesMouseLeave}>
               <button
                 className={`flex items-center space-x-1 text-sm font-medium transition-colors duration-300 ${
-                  isScrolled ? "hover:text-bdigital-cyan-dark" : "hover:text-bdigital-cyan"
+                  isScrolled ? "hover:text-bdigital-cyan-dark dark:hover:text-bdigital-cyan" : "hover:text-bdigital-cyan"
                 } py-2 ${
                   servicePageIds.includes(routeInfo.page as (typeof servicePageIds)[number])
                     ? isScrolled
-                      ? "text-bdigital-cyan-dark"
+                      ? "text-bdigital-cyan-dark dark:text-bdigital-cyan"
                       : "text-bdigital-cyan"
                     : isScrolled
-                      ? "text-bdigital-navy"
+                      ? "text-bdigital-navy dark:text-slate-100"
                       : "text-white"
                 }`}
                 aria-expanded={servicesOpen}
@@ -217,7 +225,7 @@ export function Navigation() {
 
               {/* Dropdown Menu */}
               <div
-                className={`absolute top-full left-0 mt-1 w-80 bg-white rounded-xl shadow-xl border border-gray-200 py-4 transform transition-all duration-300 ${
+                className={`absolute top-full left-0 mt-1 w-80 rounded-xl border border-gray-200 bg-white py-4 shadow-xl transition-all duration-300 dark:border-slate-800 dark:bg-slate-950 ${
                   servicesOpen ? "opacity-100 translate-y-0 pointer-events-auto visible" : "opacity-0 translate-y-2 pointer-events-none invisible"
                 }`}
                 onMouseEnter={handleDropdownMouseEnter}
@@ -227,15 +235,15 @@ export function Navigation() {
                 <div className="absolute -top-1 left-0 right-0 h-1 bg-transparent"></div>
 
                 {services.map((service) => (
-                  <button
-                    key={service.id}
-                    onClick={() => handleServiceClick(service.id as PageType)}
-                    className="w-full px-4 py-3 text-left hover:bg-gray-50 transition-colors duration-200 group focus:bg-gray-50 focus:outline-none"
-                  >
-                    <div className="font-medium text-bdigital-navy text-sm mb-1 group-hover:text-bdigital-cyan-dark group-focus:text-bdigital-cyan-dark transition-colors duration-200">
+                    <button
+                      key={service.id}
+                      onClick={() => handleServiceClick(service.id as PageType)}
+                    className="w-full px-4 py-3 text-left transition-colors duration-200 group hover:bg-gray-50 focus:bg-gray-50 focus:outline-none dark:hover:bg-slate-900 dark:focus:bg-slate-900"
+                    >
+                    <div className="mb-1 text-sm font-medium text-bdigital-navy transition-colors duration-200 group-hover:text-bdigital-cyan-dark group-focus:text-bdigital-cyan-dark dark:text-slate-100 dark:group-hover:text-bdigital-cyan dark:group-focus:text-bdigital-cyan">
                       {service.title}
                     </div>
-                    <div className="text-xs text-neutral-gray">{service.description}</div>
+                    <div className="text-xs text-neutral-gray dark:text-slate-400">{service.description}</div>
                   </button>
                 ))}
               </div>
@@ -244,8 +252,8 @@ export function Navigation() {
             <button
               onClick={handleContactClick}
               className={`text-sm font-medium transition-colors duration-300 ${
-                isScrolled ? "hover:text-bdigital-cyan-dark" : "hover:text-bdigital-cyan"
-              } ${isScrolled ? "text-bdigital-navy" : "text-white"}`}
+                isScrolled ? "hover:text-bdigital-cyan-dark dark:hover:text-bdigital-cyan" : "hover:text-bdigital-cyan"
+              } ${isScrolled ? "text-bdigital-navy dark:text-slate-100" : "text-white"}`}
             >
               {_t("nav.contact")}
             </button>
@@ -257,7 +265,9 @@ export function Navigation() {
                 className={`px-2 py-1 text-xs font-medium rounded transition-all duration-300 ${
                   language === "me"
                     ? "bg-bdigital-cyan text-bdigital-navy"
-                    : `hover:bg-bdigital-cyan/20 ${isScrolled ? "text-bdigital-navy" : "text-white"}`
+                    : `hover:bg-bdigital-cyan/20 dark:hover:bg-slate-800/70 ${
+                        isScrolled ? "text-bdigital-navy dark:text-slate-100" : "text-white"
+                      }`
                 }`}
               >
                 ME
@@ -267,7 +277,9 @@ export function Navigation() {
                 className={`px-2 py-1 text-xs font-medium rounded transition-all duration-300 ${
                   language === "en"
                     ? "bg-bdigital-cyan text-bdigital-navy"
-                    : `hover:bg-bdigital-cyan/20 ${isScrolled ? "text-bdigital-navy" : "text-white"}`
+                    : `hover:bg-bdigital-cyan/20 dark:hover:bg-slate-800/70 ${
+                        isScrolled ? "text-bdigital-navy dark:text-slate-100" : "text-white"
+                      }`
                 }`}
               >
                 EN
@@ -277,12 +289,28 @@ export function Navigation() {
                 className={`px-2 py-1 text-xs font-medium rounded transition-all duration-300 ${
                   language === "fr"
                     ? "bg-bdigital-cyan text-bdigital-navy"
-                    : `hover:bg-bdigital-cyan/20 ${isScrolled ? "text-bdigital-navy" : "text-white"}`
+                    : `hover:bg-bdigital-cyan/20 dark:hover:bg-slate-800/70 ${
+                        isScrolled ? "text-bdigital-navy dark:text-slate-100" : "text-white"
+                      }`
                 }`}
               >
                 FR
               </button>
             </div>
+
+            <button
+              type="button"
+              onClick={toggleTheme}
+              aria-label={theme === "dark" ? _t("nav.light_mode") ?? "Switch to light mode" : _t("nav.dark_mode") ?? "Switch to dark mode"}
+              aria-pressed={theme === "dark"}
+              className={`rounded-full p-2 transition-colors duration-300 ${
+                isScrolled
+                  ? "text-bdigital-navy hover:bg-bdigital-cyan/20 dark:text-slate-100 dark:hover:bg-slate-800/70"
+                  : "text-white hover:bg-white/10"
+              }`}
+            >
+              {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+            </button>
 
             {/* CTA Button - now links to free consultation */}
             <Button
@@ -297,29 +325,34 @@ export function Navigation() {
           <div className="lg:hidden">
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
               <SheetTrigger asChild>
-                <Button className={`p-2 ${isScrolled ? "text-bdigital-navy" : "text-white"} hover:bg-bdigital-cyan/20`} aria-label="Otvori meni">
+                <Button
+                  className={`p-2 ${
+                    isScrolled ? "text-bdigital-navy dark:text-slate-100" : "text-white"
+                  } hover:bg-bdigital-cyan/20 dark:hover:bg-slate-800/70`}
+                  aria-label="Otvori meni"
+                >
                   <Menu className="h-6 w-6" />
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right" className="w-full sm:w-80 bg-white">
+              <SheetContent side="right" className="w-full bg-white sm:w-80 dark:bg-slate-950">
                 <SheetHeader className="sr-only">
                   <SheetTitle>Navigation</SheetTitle>
                   <SheetDescription>Displays the mobile navigation menu.</SheetDescription>
                 </SheetHeader>
                 <div className="flex flex-col h-full">
                   {/* Header */}
-                  <div className="flex justify-between items-center py-4 border-b border-gray-200">
+                  <div className="flex justify-between items-center py-4 border-b border-gray-200 dark:border-slate-800">
                     <div className="flex items-center space-x-2">
-                      <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center shadow">
+                      <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center shadow dark:bg-slate-900">
                         <img src="/logo.svg" alt="DIAL Digital logo" className="w-6 h-6" loading="lazy" />
                       </div>
-                      <span className="text-lg font-bold text-bdigital-navy">DIAL Digital</span>
+                      <span className="text-lg font-bold text-bdigital-navy dark:text-slate-100">DIAL Digital</span>
                     </div>
                     <Button
                       variant="ghost"
                       size="sm"
                       onClick={() => setIsOpen(false)}
-                      className="p-2 text-bdigital-navy hover:bg-gray-100"
+                      className="p-2 text-bdigital-navy hover:bg-gray-100 dark:text-slate-100 dark:hover:bg-slate-800"
                       aria-label="Zatvori meni"
                     >
                       <X className="h-5 w-5" />
@@ -331,7 +364,9 @@ export function Navigation() {
                     <button
                       onClick={handleHomeClick}
                       className={`w-full text-left px-4 py-3 text-base font-medium rounded-lg transition-all duration-200 ${
-                        routeInfo.page === "home" ? "bg-bdigital-cyan text-bdigital-navy" : "text-bdigital-navy hover:bg-gray-50"
+                        routeInfo.page === "home"
+                          ? "bg-bdigital-cyan text-bdigital-navy"
+                          : "text-bdigital-navy hover:bg-gray-50 dark:text-slate-100 dark:hover:bg-slate-900"
                       }`}
                     >
                       {_t("nav.home")}
@@ -341,7 +376,7 @@ export function Navigation() {
                     <div className="space-y-2">
                       <button
                         onClick={() => setServicesOpen(!servicesOpen)}
-                        className="w-full flex items-center justify-between px-4 py-3 text-base font-medium text-bdigital-navy hover:bg-gray-50 rounded-lg transition-colors duration-200"
+                        className="w-full flex items-center justify-between px-4 py-3 text-base font-medium text-bdigital-navy hover:bg-gray-50 rounded-lg transition-colors duration-200 dark:text-slate-100 dark:hover:bg-slate-900"
                         aria-expanded={servicesOpen}
                       >
                         <span>{_t("nav.services")}</span>
@@ -357,7 +392,7 @@ export function Navigation() {
                               className={`w-full text-left px-4 py-3 text-sm rounded-lg transition-all duration-200 ${
                                 routeInfo.page === service.id
                                   ? "bg-bdigital-cyan text-bdigital-navy"
-                                  : "text-neutral-gray hover:bg-gray-50 hover:text-bdigital-navy"
+                                  : "text-neutral-gray hover:bg-gray-50 hover:text-bdigital-navy dark:text-slate-300 dark:hover:bg-slate-900 dark:hover:text-slate-100"
                               }`}
                             >
                               <div className="font-medium mb-1">{service.title}</div>
@@ -370,21 +405,23 @@ export function Navigation() {
 
                     <button
                       onClick={handleContactClick}
-                      className="w-full text-left px-4 py-3 text-base font-medium text-bdigital-navy hover:bg-gray-50 rounded-lg transition-colors duration-200"
+                      className="w-full text-left px-4 py-3 text-base font-medium text-bdigital-navy hover:bg-gray-50 rounded-lg transition-colors duration-200 dark:text-slate-100 dark:hover:bg-slate-900"
                     >
                       {_t("nav.contact")}
                     </button>
                   </div>
 
                   {/* Footer */}
-                  <div className="border-t border-gray-200 pt-6 space-y-4">
+                  <div className="border-t border-gray-200 pt-6 space-y-4 dark:border-slate-800">
                     {/* Language Switcher */}
                     <div className="flex items-center justify-center space-x-2">
-                      <span className="text-sm text-neutral-gray">Jezik:</span>
+                      <span className="text-sm text-neutral-gray dark:text-slate-400">Jezik:</span>
                       <button
                         onClick={() => handleLanguageChange("me")}
                         className={`px-3 py-1 text-sm font-medium rounded-lg transition-all duration-200 ${
-                          language === "me" ? "bg-bdigital-cyan text-bdigital-navy" : "text-bdigital-navy hover:bg-gray-100"
+                          language === "me"
+                            ? "bg-bdigital-cyan text-bdigital-navy"
+                            : "text-bdigital-navy hover:bg-gray-100 dark:text-slate-100 dark:hover:bg-slate-800"
                         }`}
                       >
                         Crnogorski
@@ -392,7 +429,9 @@ export function Navigation() {
                       <button
                         onClick={() => handleLanguageChange("en")}
                         className={`px-3 py-1 text-sm font-medium rounded-lg transition-all duration-200 ${
-                          language === "en" ? "bg-bdigital-cyan text-bdigital-navy" : "text-bdigital-navy hover:bg-gray-100"
+                          language === "en"
+                            ? "bg-bdigital-cyan text-bdigital-navy"
+                            : "text-bdigital-navy hover:bg-gray-100 dark:text-slate-100 dark:hover:bg-slate-800"
                         }`}
                       >
                         English
@@ -400,10 +439,29 @@ export function Navigation() {
                       <button
                         onClick={() => handleLanguageChange("fr")}
                         className={`px-3 py-1 text-sm font-medium rounded-lg transition-all duration-200 ${
-                          language === "fr" ? "bg-bdigital-cyan text-bdigital-navy" : "text-bdigital-navy hover:bg-gray-100"
+                          language === "fr"
+                            ? "bg-bdigital-cyan text-bdigital-navy"
+                            : "text-bdigital-navy hover:bg-gray-100 dark:text-slate-100 dark:hover:bg-slate-800"
                         }`}
                       >
                         Français
+                      </button>
+                    </div>
+
+                    <div className="flex items-center justify-center gap-3">
+                      <span className="text-sm text-neutral-gray dark:text-slate-400">
+                        {_t("nav.theme") ?? "Theme:"}
+                      </span>
+                      <button
+                        type="button"
+                        onClick={toggleTheme}
+                        aria-label={
+                          theme === "dark" ? _t("nav.light_mode") ?? "Switch to light mode" : _t("nav.dark_mode") ?? "Switch to dark mode"
+                        }
+                        aria-pressed={theme === "dark"}
+                        className="rounded-full p-2 text-bdigital-navy transition-colors duration-300 hover:bg-gray-100 dark:text-slate-100 dark:hover:bg-slate-800"
+                      >
+                        {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
                       </button>
                     </div>
 

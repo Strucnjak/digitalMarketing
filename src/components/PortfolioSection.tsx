@@ -181,16 +181,18 @@ export function PortfolioSection() {
   };
 
   return (
-    <section id="portfolio" className="py-16 lg:py-24 bg-white">
+    <section id="portfolio" className="bg-white py-16 lg:py-24 dark:bg-slate-950">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-12 lg:mb-16">
           <Badge className="bg-bdigital-cyan/10 text-bdigital-cyan-dark border-bdigital-cyan-dark/20 mb-4 px-4 py-2">{_t("portfolio.badge")}</Badge>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-bdigital-navy mb-4 lg:mb-6">
+          <h2 className="mb-4 text-3xl font-bold text-bdigital-navy sm:text-4xl lg:mb-6 lg:text-5xl dark:text-slate-100">
             {_t("portfolio.heading.part1")} <span className="text-bdigital-cyan-dark">{_t("portfolio.heading.emphasis")}</span>{" "}
             {_t("portfolio.heading.part2")}
           </h2>
-          <p className="text-lg lg:text-xl text-neutral-gray max-w-3xl mx-auto leading-relaxed">{_t("portfolio.description")}</p>
+          <p className="mx-auto max-w-3xl text-lg text-neutral-gray leading-relaxed lg:text-xl dark:text-slate-300">
+            {_t("portfolio.description")}
+          </p>
         </div>
 
         {/* Filter Tabs (dynamic counts) */}
@@ -202,14 +204,14 @@ export function PortfolioSection() {
               className={`px-4 lg:px-6 py-2 lg:py-3 text-sm lg:text-base font-medium rounded-full transition-all duration-300 ${
                 activeFilter === filter.id
                   ? "bg-bdigital-cyan text-bdigital-navy shadow-lg transform scale-105"
-                  : "bg-gray-100 text-neutral-gray hover:bg-gray-200 hover:text-bdigital-navy"
+                  : "bg-gray-100 text-neutral-gray hover:bg-gray-200 hover:text-bdigital-navy dark:bg-slate-900 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-slate-100"
               }`}
               aria-pressed={activeFilter === filter.id}
             >
               {filter.label}
               <span
                 className={`ml-2 text-xs font-medium transition-colors duration-200 ${
-                  activeFilter === filter.id ? "text-bdigital-navy" : "text-bdigital-cyan-dark"
+                  activeFilter === filter.id ? "text-bdigital-navy" : "text-bdigital-cyan-dark dark:text-bdigital-cyan"
                 }`}
               >
                 ({filter.count})
@@ -226,7 +228,7 @@ export function PortfolioSection() {
               <ProjectCard key={project.id} project={project} />
             ))}
             {filteredProjects.length === 0 && (
-              <div className="col-span-3 text-center text-neutral-gray py-12">
+              <div className="col-span-3 py-12 text-center text-neutral-gray dark:text-slate-300">
                 {_t("portfolio.no_results") ?? "No projects found for this filter."}
               </div>
             )}
@@ -243,7 +245,7 @@ export function PortfolioSection() {
                     </div>
                   ))
                 ) : (
-                  <div className="w-full flex-shrink-0 px-4 py-12 text-center text-neutral-gray">
+                  <div className="w-full flex-shrink-0 px-4 py-12 text-center text-neutral-gray dark:text-slate-300">
                     {_t("portfolio.no_results") ?? "No projects found for this filter."}
                   </div>
                 )}
@@ -258,7 +260,7 @@ export function PortfolioSection() {
                 variant="outline"
                 size="sm"
                 onClick={prevSlide}
-                className="w-10 h-10 rounded-full border-bdigital-cyan-dark text-bdigital-cyan-dark hover:bg-bdigital-cyan hover:text-bdigital-navy focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bdigital-cyan-dark"
+                className="h-10 w-10 rounded-full border-bdigital-cyan-dark text-bdigital-cyan-dark hover:bg-bdigital-cyan hover:text-bdigital-navy focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bdigital-cyan-dark dark:text-bdigital-cyan dark:hover:text-slate-900"
                 aria-label={_t("portfolio.prev") ?? "Previous"}
               >
                 <ChevronLeft className="h-4 w-4" />
@@ -272,7 +274,9 @@ export function PortfolioSection() {
                       key={index}
                       onClick={() => setCurrentSlide(index)}
                       className={`group flex h-11 w-11 items-center justify-center rounded-full transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bdigital-cyan-dark ${
-                        isActive ? "text-bdigital-cyan-dark" : "text-gray-500 hover:text-bdigital-cyan-dark"
+                        isActive
+                          ? "text-bdigital-cyan-dark dark:text-bdigital-cyan"
+                          : "text-gray-500 hover:text-bdigital-cyan-dark dark:text-slate-500 dark:hover:text-bdigital-cyan"
                       }`}
                       aria-label={`${_t("portfolio.slide") ?? "Slide"} ${index + 1}`}
                       aria-selected={isActive}
@@ -281,7 +285,9 @@ export function PortfolioSection() {
                     >
                       <span
                         className={`h-3 w-3 rounded-full transition-all duration-300 ${
-                          isActive ? "bg-bdigital-cyan-dark scale-110" : "bg-gray-300 group-hover:bg-bdigital-cyan-dark"
+                          isActive
+                            ? "bg-bdigital-cyan-dark scale-110 dark:bg-bdigital-cyan"
+                            : "bg-gray-300 group-hover:bg-bdigital-cyan-dark dark:bg-slate-700 dark:group-hover:bg-bdigital-cyan"
                         }`}
                         aria-hidden="true"
                       />
@@ -294,7 +300,7 @@ export function PortfolioSection() {
                 variant="outline"
                 size="sm"
                 onClick={nextSlide}
-                className="w-10 h-10 rounded-full border-bdigital-cyan-dark text-bdigital-cyan-dark hover:bg-bdigital-cyan hover:text-bdigital-navy focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bdigital-cyan-dark"
+                className="h-10 w-10 rounded-full border-bdigital-cyan-dark text-bdigital-cyan-dark hover:bg-bdigital-cyan hover:text-bdigital-navy focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bdigital-cyan-dark dark:text-bdigital-cyan dark:hover:text-slate-900"
                 aria-label={_t("portfolio.next") ?? "Next"}
               >
                 <ChevronRight className="h-4 w-4" />
@@ -350,36 +356,38 @@ function ProjectCard({ project }: { project: Project }) {
       </div>
 
       <CardContent className="p-6">
-        <div className="flex items-center justify-between mb-3">
-          <h3 className="text-xl font-bold text-bdigital-navy group-hover:text-bdigital-cyan-dark transition-colors duration-300">{project.title}</h3>
-          <div className="flex items-center text-sm text-neutral-gray">
+        <div className="mb-3 flex items-center justify-between">
+          <h3 className="text-xl font-bold text-bdigital-navy transition-colors duration-300 group-hover:text-bdigital-cyan-dark dark:text-slate-100 dark:group-hover:text-bdigital-cyan">
+            {project.title}
+          </h3>
+          <div className="flex items-center text-sm text-neutral-gray dark:text-slate-400">
             <Calendar className="h-4 w-4 mr-1" />
             {project.year}
           </div>
         </div>
 
-        <p className="text-neutral-gray leading-relaxed mb-4 text-sm lg:text-base">{project.description}</p>
+        <p className="mb-4 text-sm text-neutral-gray leading-relaxed lg:text-base dark:text-slate-300">{project.description}</p>
 
         {/* Results */}
         <div className="space-y-2 mb-4">
           {project.results.slice(0, 2).map((result: string, index: number) => (
             <div key={index} className="flex items-center text-sm">
               <div className="w-1.5 h-1.5 bg-bdigital-cyan rounded-full mr-2 flex-shrink-0"></div>
-              <span className="text-neutral-gray">{result}</span>
+              <span className="text-neutral-gray dark:text-slate-300">{result}</span>
             </div>
           ))}
         </div>
 
         {/* Footer */}
-        <div className="flex items-center justify-between pt-4 border-t border-gray-100">
-          <div className="text-sm text-neutral-gray">
+        <div className="flex items-center justify-between border-t border-gray-100 pt-4 dark:border-slate-800">
+          <div className="text-sm text-neutral-gray dark:text-slate-300">
             <span className="font-medium">Client:</span> {project.client}
           </div>
           <Button
             variant="ghost"
             size="sm"
             onClick={openLink}
-            className="text-bdigital-cyan-dark hover:text-bdigital-navy hover:bg-bdigital-cyan/10 p-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bdigital-cyan-dark"
+            className="p-2 text-bdigital-cyan-dark hover:bg-bdigital-cyan/10 hover:text-bdigital-navy focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bdigital-cyan-dark dark:text-bdigital-cyan dark:hover:text-slate-900"
             aria-label="Open project link"
           >
             <ExternalLink className="h-4 w-4" />

@@ -3,6 +3,7 @@ import { Navigate, Outlet, useLocation, useParams, useRoutes, type RouteObject }
 import { LanguageProvider, useLanguage } from "./components/LanguageContext";
 import { Navigation } from "./components/Navigation";
 import { useInitialState } from "./components/InitialStateContext";
+import { ThemeProvider } from "./components/ThemeContext";
 import { getSeoMetadata } from "./config/seo-meta";
 import { SITE_BASE_URL } from "./config/site";
 import {
@@ -257,7 +258,7 @@ function AppLayout() {
   }, [location.pathname, location.hash]);
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-background text-foreground transition-colors duration-300">
       <Navigation />
       <main id="app-content">
         <Outlet />
@@ -282,10 +283,12 @@ function LocalizedLayout() {
   const initialLanguage = routeLocale ?? parsed.locale ?? defaultLocale;
 
   return (
-    <LanguageProvider initialLanguage={initialLanguage} localeFromRoute={routeLocale}>
-      <SeoMetadataUpdater />
-      <AppLayout />
-    </LanguageProvider>
+    <ThemeProvider>
+      <LanguageProvider initialLanguage={initialLanguage} localeFromRoute={routeLocale}>
+        <SeoMetadataUpdater />
+        <AppLayout />
+      </LanguageProvider>
+    </ThemeProvider>
   );
 }
 
