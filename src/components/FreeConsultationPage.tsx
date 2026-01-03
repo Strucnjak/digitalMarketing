@@ -142,21 +142,21 @@ export function FreeConsultationPage() {
 
   if (isSubmitted) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white pt-20 pb-16">
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white pb-16 pt-20 dark:from-slate-950 dark:to-slate-900">
         <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Card className="border-0 shadow-2xl overflow-visible">
-            <CardContent className="p-8 lg:p-12 text-center">
-              <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                <CheckCircle className="h-10 w-10 text-green-600" />
+          <Card className="border-0 shadow-2xl overflow-visible dark:border dark:border-slate-800 dark:bg-slate-900">
+            <CardContent className="p-8 text-center lg:p-12">
+              <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-green-100 dark:bg-emerald-900/40">
+                <CheckCircle className="h-10 w-10 text-green-600 dark:text-emerald-300" />
               </div>
-              <h2 className="text-2xl lg:text-3xl font-bold text-bdigital-navy mb-4">Vaša besplatna konsultacija je zakazana!</h2>
-              <p className="text-neutral-gray text-lg mb-8 leading-relaxed">
+              <h2 className="mb-4 text-2xl font-bold text-bdigital-navy lg:text-3xl dark:text-slate-100">Vaša besplatna konsultacija je zakazana!</h2>
+              <p className="mb-8 text-lg text-neutral-gray leading-relaxed dark:text-slate-300">
                 Hvala vam na interesu! Kontaktiraćemo vas u roku od 24 sata da zakazujemo termin za vašu besplatnu konsultaciju. Pripremićemo
                 personalizovanu analizu i strategiju za vaš digitalni uspeh.
               </p>
-              <div className="bg-bdigital-cyan/10 border border-bdigital-cyan/20 rounded-xl p-6 mb-8">
-                <h3 className="text-lg font-semibold text-bdigital-navy mb-3">Šta možete očekivati na konsultaciji:</h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-bdigital-navy">
+              <div className="mb-8 rounded-xl border border-bdigital-cyan/20 bg-bdigital-cyan/10 p-6 dark:border-bdigital-cyan/40 dark:bg-bdigital-cyan/5">
+                <h3 className="mb-3 text-lg font-semibold text-bdigital-navy dark:text-slate-100">Šta možete očekivati na konsultaciji:</h3>
+                <div className="grid grid-cols-1 gap-4 text-sm text-bdigital-navy sm:grid-cols-2 dark:text-slate-100">
                   <div className="flex items-center gap-2">
                     <Target className="h-4 w-4 text-bdigital-cyan-dark" />
                     <span>Analiza trenutnog stanja</span>
@@ -205,7 +205,7 @@ export function FreeConsultationPage() {
                       newsletter: false,
                     });
                   }}
-                  className="border-bdigital-cyan-dark text-bdigital-cyan-dark hover:bg-bdigital-cyan hover:text-bdigital-navy font-semibold px-8 py-3"
+                  className="border-bdigital-cyan-dark text-bdigital-cyan-dark hover:bg-bdigital-cyan hover:text-bdigital-navy font-semibold px-8 py-3 dark:text-bdigital-cyan dark:hover:text-slate-900"
                 >
                   {t("form.new_consultation")}
                 </Button>
@@ -218,7 +218,7 @@ export function FreeConsultationPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white pt-20 pb-16">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white pb-16 pt-20 dark:from-slate-950 dark:to-slate-900">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-8">
@@ -228,7 +228,7 @@ export function FreeConsultationPage() {
               const path = buildLocalizedPath(activeLocale, "home", { includeLocalePrefix });
               navigate(path);
             }}
-            className="text-bdigital-navy hover:text-bdigital-cyan-dark mb-6 -ml-2"
+            className="mb-6 -ml-2 text-bdigital-navy hover:text-bdigital-cyan-dark dark:text-slate-100 dark:hover:text-bdigital-cyan"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
             {t("general.back_home")}
@@ -239,53 +239,53 @@ export function FreeConsultationPage() {
               <div className="w-16 h-16 bg-bdigital-cyan/10 rounded-2xl flex items-center justify-center">
                 <Gift className="h-8 w-8 text-bdigital-cyan-dark" />
               </div>
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-bdigital-navy">
+              <h1 className="text-4xl font-bold text-bdigital-navy sm:text-5xl lg:text-6xl dark:text-slate-100">
                 <span className="text-bdigital-cyan-dark">Besplatna</span> konsultacija
               </h1>
             </div>
-            <p className="text-xl text-neutral-gray max-w-3xl mx-auto leading-relaxed mb-8">
+            <p className="mb-8 max-w-3xl text-xl text-neutral-gray leading-relaxed mx-auto dark:text-slate-300">
               Zakazite vašu besplatnu digitalnu konsultaciju sa našim ekspertima. Analiziraćemo vaš trenutni digitalni pristup i dati konkretne
               preporuke za unapređenje.
             </p>
 
             {/* Benefits Grid */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-              <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-100">
+              <div className="rounded-xl border border-gray-100 bg-white p-6 shadow-lg dark:border-slate-800 dark:bg-slate-900">
                 <div className="w-12 h-12 bg-bdigital-cyan/10 rounded-xl flex items-center justify-center mx-auto mb-4">
                   <Clock className="h-6 w-6 text-bdigital-cyan-dark" />
                 </div>
-                <h3 className="font-semibold text-bdigital-navy mb-2">45 minuta</h3>
-                <p className="text-sm text-neutral-gray">Detaljne analize i konkretni saveti</p>
+                <h3 className="mb-2 font-semibold text-bdigital-navy dark:text-slate-100">45 minuta</h3>
+                <p className="text-sm text-neutral-gray dark:text-slate-300">Detaljne analize i konkretni saveti</p>
               </div>
-              <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-100">
+              <div className="rounded-xl border border-gray-100 bg-white p-6 shadow-lg dark:border-slate-800 dark:bg-slate-900">
                 <div className="w-12 h-12 bg-bdigital-cyan/10 rounded-xl flex items-center justify-center mx-auto mb-4">
                   <Target className="h-6 w-6 text-bdigital-cyan-dark" />
                 </div>
-                <h3 className="font-semibold text-bdigital-navy mb-2">Personalizovano</h3>
-                <p className="text-sm text-neutral-gray">Strategija prilagođena vašem biznisu</p>
+                <h3 className="mb-2 font-semibold text-bdigital-navy dark:text-slate-100">Personalizovano</h3>
+                <p className="text-sm text-neutral-gray dark:text-slate-300">Strategija prilagođena vašem biznisu</p>
               </div>
-              <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-100">
+              <div className="rounded-xl border border-gray-100 bg-white p-6 shadow-lg dark:border-slate-800 dark:bg-slate-900">
                 <div className="w-12 h-12 bg-bdigital-cyan/10 rounded-xl flex items-center justify-center mx-auto mb-4">
                   <Gift className="h-6 w-6 text-bdigital-cyan-dark" />
                 </div>
-                <h3 className="font-semibold text-bdigital-navy mb-2">100% besplatno</h3>
-                <p className="text-sm text-neutral-gray">Bez skrivenih troškova ili obaveza</p>
+                <h3 className="mb-2 font-semibold text-bdigital-navy dark:text-slate-100">100% besplatno</h3>
+                <p className="text-sm text-neutral-gray dark:text-slate-300">Bez skrivenih troškova ili obaveza</p>
               </div>
             </div>
           </div>
         </div>
 
-        <Card className="border-0 shadow-2xl overflow-visible">
+        <Card className="border-0 shadow-2xl overflow-visible dark:border dark:border-slate-800 dark:bg-slate-900">
           <CardHeader>
-            <CardTitle className="text-2xl text-bdigital-navy text-center">Zakazivanje konsultacije</CardTitle>
-            <p className="text-center text-neutral-gray">Popunite formu ispod da zakazujete vašu besplatnu konsultaciju</p>
+            <CardTitle className="text-2xl text-bdigital-navy text-center dark:text-slate-100">Zakazivanje konsultacije</CardTitle>
+            <p className="text-center text-neutral-gray dark:text-slate-300">Popunite formu ispod da zakazujete vašu besplatnu konsultaciju</p>
           </CardHeader>
           <CardContent className="p-6 lg:p-8">
             <div className="space-y-6">
               {/* Contact Information */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <Label className="flex items-center gap-2 mb-2 text-bdigital-navy">
+                  <Label className="mb-2 flex items-center gap-2 text-bdigital-navy dark:text-slate-200">
                     <User className="h-4 w-4" />
                     Ime i prezime *
                   </Label>
@@ -293,7 +293,9 @@ export function FreeConsultationPage() {
                     value={formData.fullName}
                     onChange={(e) => updateFormData("fullName", e.target.value)}
                     placeholder={t("form.placeholder_full_name")}
-                    className={`border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan ${errors.fullName ? "border-red-500" : ""}`}
+                    className={`border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan dark:border-slate-700 dark:bg-slate-900/60 dark:text-slate-100 dark:placeholder:text-slate-500 ${
+                      errors.fullName ? "border-red-500" : ""
+                    }`}
                   />
                   {errors.fullName && (
                     <div className="flex items-center mt-1 text-red-600 text-sm">
@@ -303,7 +305,7 @@ export function FreeConsultationPage() {
                   )}
                 </div>
                 <div>
-                  <Label className="flex items-center gap-2 mb-2 text-bdigital-navy">
+                  <Label className="mb-2 flex items-center gap-2 text-bdigital-navy dark:text-slate-200">
                     <Mail className="h-4 w-4" />
                     Email adresa *
                   </Label>
@@ -312,7 +314,9 @@ export function FreeConsultationPage() {
                     value={formData.email}
                     onChange={(e) => updateFormData("email", e.target.value)}
                     placeholder={t("form.placeholder_email")}
-                    className={`border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan ${errors.email ? "border-red-500" : ""}`}
+                    className={`border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan dark:border-slate-700 dark:bg-slate-900/60 dark:text-slate-100 dark:placeholder:text-slate-500 ${
+                      errors.email ? "border-red-500" : ""
+                    }`}
                   />
                   {errors.email && (
                     <div className="flex items-center mt-1 text-red-600 text-sm">
@@ -325,7 +329,7 @@ export function FreeConsultationPage() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <Label className="flex items-center gap-2 mb-2 text-bdigital-navy">
+                  <Label className="mb-2 flex items-center gap-2 text-bdigital-navy dark:text-slate-200">
                     <Phone className="h-4 w-4" />
                     Telefon *
                   </Label>
@@ -333,11 +337,11 @@ export function FreeConsultationPage() {
                     value={formData.phone}
                     onChange={(e) => updateFormData("phone", e.target.value)}
                     placeholder={t("form.placeholder_phone")}
-                    className="border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan"
+                    className="border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan dark:border-slate-700 dark:bg-slate-900/60 dark:text-slate-100 dark:placeholder:text-slate-500"
                   />
                 </div>
                 <div>
-                  <Label className="flex items-center gap-2 mb-2 text-bdigital-navy">
+                  <Label className="mb-2 flex items-center gap-2 text-bdigital-navy dark:text-slate-200">
                     <Building className="h-4 w-4" />
                     Kompanija/Organizacija *
                   </Label>
@@ -345,7 +349,9 @@ export function FreeConsultationPage() {
                     value={formData.company}
                     onChange={(e) => updateFormData("company", e.target.value)}
                     placeholder={t("form.placeholder_company")}
-                    className={`border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan ${errors.company ? "border-red-500" : ""}`}
+                    className={`border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan dark:border-slate-700 dark:bg-slate-900/60 dark:text-slate-100 dark:placeholder:text-slate-500 ${
+                      errors.company ? "border-red-500" : ""
+                    }`}
                   />
                   {errors.company && (
                     <div className="flex items-center mt-1 text-red-600 text-sm">
@@ -358,7 +364,7 @@ export function FreeConsultationPage() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <Label className="flex items-center gap-2 mb-2 text-bdigital-navy">
+                  <Label className="mb-2 flex items-center gap-2 text-bdigital-navy dark:text-slate-200">
                     <Globe className="h-4 w-4" />
                     Website (ako postoji)
                   </Label>
@@ -366,13 +372,17 @@ export function FreeConsultationPage() {
                     value={formData.website}
                     onChange={(e) => updateFormData("website", e.target.value)}
                     placeholder={t("form.placeholder_website")}
-                    className="border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan"
+                    className="border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan dark:border-slate-700 dark:bg-slate-900/60 dark:text-slate-100 dark:placeholder:text-slate-500"
                   />
                 </div>
                 <div className="relative z-20">
-                  <Label className="mb-2 block text-bdigital-navy">Tip biznisa *</Label>
+                  <Label className="mb-2 block text-bdigital-navy dark:text-slate-200">Tip biznisa *</Label>
                   <Select value={formData.businessType} onValueChange={(value) => updateFormData("businessType", value)}>
-                    <SelectTrigger className={`border-gray-300 focus:border-bdigital-cyan ${errors.businessType ? "border-red-500" : ""}`}>
+                    <SelectTrigger
+                      className={`border-gray-300 focus:border-bdigital-cyan dark:border-slate-700 dark:bg-slate-900/60 dark:text-slate-100 ${
+                        errors.businessType ? "border-red-500" : ""
+                      }`}
+                    >
                       <SelectValue placeholder={t("form.placeholder_business_type")} />
                     </SelectTrigger>
                     <SelectContent>
@@ -397,12 +407,12 @@ export function FreeConsultationPage() {
 
               {/* Business Challenges */}
               <div>
-                <Label className="mb-2 block text-bdigital-navy">Trenutni digitalni izazovi *</Label>
+                <Label className="mb-2 block text-bdigital-navy dark:text-slate-200">Trenutni digitalni izazovi *</Label>
                 <Textarea
                   value={formData.currentChallenges}
                   onChange={(e) => updateFormData("currentChallenges", e.target.value)}
                   placeholder={t("form.placeholder_current_challenges")}
-                  className={`border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan min-h-[100px] resize-none ${
+                  className={`min-h-[100px] resize-none border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan dark:border-slate-700 dark:bg-slate-900/60 dark:text-slate-100 dark:placeholder:text-slate-500 ${
                     errors.currentChallenges ? "border-red-500" : ""
                   }`}
                 />
@@ -416,12 +426,12 @@ export function FreeConsultationPage() {
 
               {/* Goals */}
               <div>
-                <Label className="mb-2 block text-bdigital-navy">Vaši ciljevi *</Label>
+                <Label className="mb-2 block text-bdigital-navy dark:text-slate-200">Vaši ciljevi *</Label>
                 <Textarea
                   value={formData.goals}
                   onChange={(e) => updateFormData("goals", e.target.value)}
                   placeholder={t("form.placeholder_goals")}
-                  className={`border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan min-h-[100px] resize-none ${
+                  className={`min-h-[100px] resize-none border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan dark:border-slate-700 dark:bg-slate-900/60 dark:text-slate-100 dark:placeholder:text-slate-500 ${
                     errors.goals ? "border-red-500" : ""
                   }`}
                 />
@@ -435,7 +445,7 @@ export function FreeConsultationPage() {
 
               {/* Interested Services */}
               <div>
-                <Label className="mb-3 block text-bdigital-navy">Usluge koje vas zanimaju * (možete odabrati više)</Label>
+                <Label className="mb-3 block text-bdigital-navy dark:text-slate-200">Usluge koje vas zanimaju * (možete odabrati više)</Label>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   {[
                     "Web design & development",
@@ -451,9 +461,9 @@ export function FreeConsultationPage() {
                       <Checkbox
                         checked={formData.interestedServices.includes(service)}
                         onCheckedChange={(checked) => handleServicesChange(service, checked as boolean)}
-                        className="border-gray-300"
+                        className="border-gray-300 dark:border-slate-700"
                       />
-                      <Label className="text-sm font-normal text-neutral-gray">{service}</Label>
+                      <Label className="text-sm font-normal text-neutral-gray dark:text-slate-300">{service}</Label>
                     </div>
                   ))}
                 </div>
@@ -468,23 +478,23 @@ export function FreeConsultationPage() {
               {/* Contact Preferences */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <Label className="mb-3 block text-bdigital-navy">Preferirani način kontakta *</Label>
+                  <Label className="mb-3 block text-bdigital-navy dark:text-slate-200">Preferirani način kontakta *</Label>
                   <RadioGroup value={formData.preferredContact} onValueChange={(value) => updateFormData("preferredContact", value)}>
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem value="phone" />
-                      <Label className="text-neutral-gray">Telefon</Label>
+                      <Label className="text-neutral-gray dark:text-slate-300">Telefon</Label>
                     </div>
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem value="whatsapp" />
-                      <Label className="text-neutral-gray">WhatsApp</Label>
+                      <Label className="text-neutral-gray dark:text-slate-300">WhatsApp</Label>
                     </div>
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem value="video-call" />
-                      <Label className="text-neutral-gray">Video poziv (Zoom/Meet)</Label>
+                      <Label className="text-neutral-gray dark:text-slate-300">Video poziv (Zoom/Meet)</Label>
                     </div>
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem value="meeting" />
-                      <Label className="text-neutral-gray">Lični sastanak</Label>
+                      <Label className="text-neutral-gray dark:text-slate-300">Lični sastanak</Label>
                     </div>
                   </RadioGroup>
                   {errors.preferredContact && (
@@ -495,9 +505,9 @@ export function FreeConsultationPage() {
                   )}
                 </div>
                 <div className="relative z-20">
-                  <Label className="mb-2 block text-bdigital-navy">Preferirano vreme</Label>
+                  <Label className="mb-2 block text-bdigital-navy dark:text-slate-200">Preferirano vreme</Label>
                   <Select value={formData.preferredTime} onValueChange={(value) => updateFormData("preferredTime", value)}>
-                    <SelectTrigger className="border-gray-300 focus:border-bdigital-cyan">
+                    <SelectTrigger className="border-gray-300 focus:border-bdigital-cyan dark:border-slate-700 dark:bg-slate-900/60 dark:text-slate-100">
                       <SelectValue placeholder={t("form.placeholder_preferred_time")} />
                     </SelectTrigger>
                     <SelectContent>
@@ -512,7 +522,7 @@ export function FreeConsultationPage() {
 
               {/* Additional Info */}
               <div>
-                <Label className="flex items-center gap-2 mb-2 text-bdigital-navy">
+                <Label className="mb-2 flex items-center gap-2 text-bdigital-navy dark:text-slate-200">
                   <MessageSquare className="h-4 w-4" />
                   Dodatne informacije
                 </Label>
@@ -520,7 +530,7 @@ export function FreeConsultationPage() {
                   value={formData.additionalInfo}
                   onChange={(e) => updateFormData("additionalInfo", e.target.value)}
                   placeholder={t("form.placeholder_additional_info_consult")}
-                  className="border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan min-h-[80px] resize-none"
+                  className="min-h-[80px] resize-none border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan dark:border-slate-700 dark:bg-slate-900/60 dark:text-slate-100 dark:placeholder:text-slate-500"
                 />
               </div>
 
@@ -529,13 +539,15 @@ export function FreeConsultationPage() {
                 <Checkbox
                   checked={formData.newsletter}
                   onCheckedChange={(checked) => updateFormData("newsletter", checked)}
-                  className="border-gray-300"
+                  className="border-gray-300 dark:border-slate-700"
                 />
-                <Label className="text-sm font-normal text-neutral-gray">Želim da primam newsletter sa digitalnim marketing savetima</Label>
+                <Label className="text-sm font-normal text-neutral-gray dark:text-slate-300">
+                  Želim da primam newsletter sa digitalnim marketing savetima
+                </Label>
               </div>
 
               {/* Submit Button */}
-              <div className="pt-6 border-t border-gray-200">
+              <div className="border-t border-gray-200 pt-6 dark:border-slate-800">
                 <Button
                   onClick={handleSubmit}
                   disabled={isSubmitting}
@@ -553,7 +565,9 @@ export function FreeConsultationPage() {
                     </>
                   )}
                 </Button>
-                <p className="text-center text-sm text-neutral-gray mt-3">Kontaktiraćemo vas u roku od 24 sata da potvrdimo termin</p>
+                <p className="mt-3 text-center text-sm text-neutral-gray dark:text-slate-400">
+                  Kontaktiraćemo vas u roku od 24 sata da potvrdimo termin
+                </p>
                 {submitError && <p className="text-red-500 text-sm text-center mt-4">{submitError}</p>}
               </div>
             </div>

@@ -108,39 +108,41 @@ export function ContactSection() {
   ];
 
   return (
-    <section id="contact" className="py-16 lg:py-24 bg-gradient-to-b from-gray-50 to-white">
+    <section id="contact" className="bg-gradient-to-b from-gray-50 to-white py-16 lg:py-24 dark:from-slate-950 dark:to-slate-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-12 lg:mb-16">
           <Badge className="bg-bdigital-cyan/10 text-bdigital-cyan-dark border-bdigital-cyan-dark/20 mb-4 px-4 py-2">{_t("contact.badge")}</Badge>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-bdigital-navy mb-4 lg:mb-6">
+          <h2 className="mb-4 text-3xl font-bold text-bdigital-navy sm:text-4xl lg:mb-6 lg:text-5xl dark:text-slate-100">
             {_t("contact.heading.part1")} <span className="text-bdigital-cyan-dark">{_t("contact.heading.emphasis")}</span>
           </h2>
-          <p className="text-lg lg:text-xl text-neutral-gray max-w-3xl mx-auto leading-relaxed">{_t("contact.description")}</p>
+          <p className="mx-auto max-w-3xl text-lg text-neutral-gray leading-relaxed lg:text-xl dark:text-slate-300">
+            {_t("contact.description")}
+          </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
           {/* Contact Form */}
-          <Card className="border-0 shadow-xl">
+          <Card className="border-0 shadow-xl dark:border dark:border-slate-800 dark:bg-slate-900">
             <CardContent className="p-6 lg:p-8">
               <div className="flex items-center mb-6">
                 <MessageSquare className="h-6 w-6 text-bdigital-cyan mr-3" />
-                <h3 className="text-xl lg:text-2xl font-bold text-bdigital-navy">{_t("contact.form.title")}</h3>
+                <h3 className="text-xl font-bold text-bdigital-navy lg:text-2xl dark:text-slate-100">{_t("contact.form.title")}</h3>
               </div>
 
               {isSubmitted ? (
                 <div className="text-center py-8 lg:py-12">
-                  <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <CheckCircle className="h-8 w-8 text-green-600" />
+                  <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-100 dark:bg-emerald-900/40">
+                    <CheckCircle className="h-8 w-8 text-green-600 dark:text-emerald-300" />
                   </div>
-                  <h4 className="text-lg font-semibold text-bdigital-navy mb-2">{_t("contact.success.title")}</h4>
-                  <p className="text-neutral-gray">{_t("contact.success.desc")}</p>
+                  <h4 className="mb-2 text-lg font-semibold text-bdigital-navy dark:text-slate-100">{_t("contact.success.title")}</h4>
+                  <p className="text-neutral-gray dark:text-slate-300">{_t("contact.success.desc")}</p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="flex items-center text-sm font-medium text-bdigital-navy mb-2">
+                      <label className="mb-2 flex items-center text-sm font-medium text-bdigital-navy dark:text-slate-200">
                         <User className="h-4 w-4 mr-2" />
                         {_t("contact.name")} *
                       </label>
@@ -150,11 +152,11 @@ export function ContactSection() {
                         onChange={(e) => handleChange("name", e.target.value)}
                         placeholder={_t("form.placeholder_full_name")}
                         required
-                        className="border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan"
+                        className="border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan dark:border-slate-700 dark:bg-slate-900/60 dark:text-slate-100 dark:placeholder:text-slate-500"
                       />
                     </div>
                     <div>
-                      <label className="flex items-center text-sm font-medium text-bdigital-navy mb-2">
+                      <label className="mb-2 flex items-center text-sm font-medium text-bdigital-navy dark:text-slate-200">
                         <Mail className="h-4 w-4 mr-2" />
                         {_t("contact.email")} *
                       </label>
@@ -164,14 +166,14 @@ export function ContactSection() {
                         onChange={(e) => handleChange("email", e.target.value)}
                         placeholder={_t("form.placeholder_email")}
                         required
-                        className="border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan"
+                        className="border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan dark:border-slate-700 dark:bg-slate-900/60 dark:text-slate-100 dark:placeholder:text-slate-500"
                       />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="flex items-center text-sm font-medium text-bdigital-navy mb-2">
+                      <label className="mb-2 flex items-center text-sm font-medium text-bdigital-navy dark:text-slate-200">
                         <Building className="h-4 w-4 mr-2" />
                         {_t("contact.company")}
                       </label>
@@ -180,11 +182,11 @@ export function ContactSection() {
                         value={formData.company}
                         onChange={(e) => handleChange("company", e.target.value)}
                         placeholder={_t("form.placeholder_company")}
-                        className="border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan"
+                        className="border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan dark:border-slate-700 dark:bg-slate-900/60 dark:text-slate-100 dark:placeholder:text-slate-500"
                       />
                     </div>
                     <div>
-                      <label className="flex items-center text-sm font-medium text-bdigital-navy mb-2">
+                      <label className="mb-2 flex items-center text-sm font-medium text-bdigital-navy dark:text-slate-200">
                         <Phone className="h-4 w-4 mr-2" />
                         {_t("contact.phone")}
                       </label>
@@ -193,13 +195,13 @@ export function ContactSection() {
                         value={formData.phone}
                         onChange={(e) => handleChange("phone", e.target.value)}
                         placeholder={_t("form.placeholder_phone")}
-                        className="border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan"
+                        className="border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan dark:border-slate-700 dark:bg-slate-900/60 dark:text-slate-100 dark:placeholder:text-slate-500"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="flex items-center text-sm font-medium text-bdigital-navy mb-2">
+                    <label className="mb-2 flex items-center text-sm font-medium text-bdigital-navy dark:text-slate-200">
                       <MessageSquare className="h-4 w-4 mr-2" />
                       {_t("contact.message")} *
                     </label>
@@ -208,7 +210,7 @@ export function ContactSection() {
                       onChange={(e) => handleChange("message", e.target.value)}
                       placeholder={_t("form.placeholder_additional_info")}
                       required
-                      className="min-h-[120px] border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan resize-none"
+                      className="min-h-[120px] resize-none border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan dark:border-slate-700 dark:bg-slate-900/60 dark:text-slate-100 dark:placeholder:text-slate-500"
                     />
                   </div>
 
@@ -236,28 +238,31 @@ export function ContactSection() {
           </Card>
 
           {/* Contact Information */}
-          <div className="space-y-6">
-            {/* Contact Details */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4">
-              {contactInfo.map((item, index) => {
-                const IconComponent = item.icon;
-                return (
-                  <Card key={index} className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 group">
+            <div className="space-y-6">
+              {/* Contact Details */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4">
+                {contactInfo.map((item, index) => {
+                  const IconComponent = item.icon;
+                  return (
+                  <Card key={index} className="border-0 shadow-lg transition-all duration-300 hover:shadow-xl group dark:border dark:border-slate-800 dark:bg-slate-900">
                     <CardContent className="p-6">
                       <div className="flex items-start space-x-4">
                         <div className="w-12 h-12 bg-bdigital-cyan/10 rounded-xl flex items-center justify-center group-hover:bg-bdigital-cyan group-hover:scale-110 transition-all duration-300">
                           <IconComponent className="h-6 w-6 text-bdigital-cyan group-hover:text-bdigital-navy" />
                         </div>
                         <div className="flex-1">
-                          <h4 className="font-semibold text-bdigital-navy mb-1">{item.title}</h4>
+                          <h4 className="mb-1 font-semibold text-bdigital-navy dark:text-slate-100">{item.title}</h4>
                           {item.link ? (
-                            <a href={item.link} className="text-bdigital-cyan-dark hover:text-bdigital-navy font-medium transition-colors duration-200">
+                            <a
+                              href={item.link}
+                              className="font-medium text-bdigital-cyan-dark transition-colors duration-200 hover:text-bdigital-navy dark:text-bdigital-cyan dark:hover:text-slate-100"
+                            >
                               {item.content}
                             </a>
                           ) : (
-                            <p className="text-bdigital-cyan-dark font-medium">{item.content}</p>
+                            <p className="font-medium text-bdigital-cyan-dark dark:text-bdigital-cyan">{item.content}</p>
                           )}
-                          <p className="text-sm text-neutral-gray mt-1">{item.description}</p>
+                          <p className="mt-1 text-sm text-neutral-gray dark:text-slate-300">{item.description}</p>
                         </div>
                       </div>
                     </CardContent>
@@ -286,22 +291,22 @@ export function ContactSection() {
             </Card>
 
             {/* Map or Additional Info */}
-            <Card className="border-0 shadow-xl">
+            <Card className="border-0 shadow-xl dark:border dark:border-slate-800 dark:bg-slate-900">
               <CardContent className="p-6 lg:p-8">
-                <h4 className="text-xl font-bold text-bdigital-navy mb-4">{_t("contact.meeting.title")}</h4>
-                <p className="text-neutral-gray mb-4">{_t("contact.meeting.desc")}</p>
+                <h4 className="mb-4 text-xl font-bold text-bdigital-navy dark:text-slate-100">{_t("contact.meeting.title")}</h4>
+                <p className="mb-4 text-neutral-gray dark:text-slate-300">{_t("contact.meeting.desc")}</p>
                 <div className="space-y-3">
                   <div className="flex items-center text-sm">
                     <Clock className="h-4 w-4 text-bdigital-cyan mr-2" />
-                    <span className="text-neutral-gray">{_t("contact.meeting.flexible")}</span>
+                    <span className="text-neutral-gray dark:text-slate-300">{_t("contact.meeting.flexible")}</span>
                   </div>
                   <div className="flex items-center text-sm">
                     <MapPin className="h-4 w-4 text-bdigital-cyan mr-2" />
-                    <span className="text-neutral-gray">{_t("contact.meeting.location")}</span>
+                    <span className="text-neutral-gray dark:text-slate-300">{_t("contact.meeting.location")}</span>
                   </div>
                   <div className="flex items-center text-sm">
                     <CheckCircle className="h-4 w-4 text-bdigital-cyan mr-2" />
-                    <span className="text-neutral-gray">{_t("contact.meeting.free")}</span>
+                    <span className="text-neutral-gray dark:text-slate-300">{_t("contact.meeting.free")}</span>
                   </div>
                 </div>
               </CardContent>

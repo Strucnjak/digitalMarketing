@@ -43,7 +43,7 @@ function TooltipInput({
 
   return (
     <div>
-      <Label htmlFor={name} className="flex items-center gap-2 mb-2 text-bdigital-navy">
+      <Label htmlFor={name} className="mb-2 flex items-center gap-2 text-bdigital-navy dark:text-slate-200">
         {icon}
         {label}
       </Label>
@@ -60,7 +60,9 @@ function TooltipInput({
             aria-invalid={!!error}
             aria-describedby={error ? errorId : undefined}
             placeholder={placeholder}
-            className={`w-full border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan ${error && touched ? "border-red-500" : ""}`}
+            className={`w-full border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan dark:border-slate-700 dark:bg-slate-900/60 dark:text-slate-100 dark:placeholder:text-slate-500 ${
+              error && touched ? "border-red-500" : ""
+            }`}
           />
         </TooltipTrigger>
         {error && (

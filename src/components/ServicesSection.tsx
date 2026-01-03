@@ -107,19 +107,19 @@ export function ServicesSection() {
   };
 
   return (
-    <section id="services" className="py-16 lg:py-24 bg-gradient-to-b from-gray-50 to-white">
+    <section id="services" className="bg-gradient-to-b from-gray-50 to-white py-16 lg:py-24 dark:from-slate-950 dark:to-slate-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-12 lg:mb-20">
           <Badge className="bg-bdigital-cyan/10 text-bdigital-cyan-dark border-bdigital-cyan-dark/20 mb-4 px-4 py-2">
             {t('services.title')}
           </Badge>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-bdigital-navy mb-4 lg:mb-6">
+          <h2 className="mb-4 text-3xl font-bold text-bdigital-navy sm:text-4xl lg:mb-6 lg:text-5xl dark:text-slate-100">
             {t('services.heading.part1')}
             <br />
             <span className="text-bdigital-cyan-dark">{t('services.heading.emphasis')}</span>
           </h2>
-          <p className="text-lg lg:text-xl text-neutral-gray max-w-3xl mx-auto leading-relaxed">
+          <p className="mx-auto max-w-3xl text-lg text-neutral-gray leading-relaxed lg:text-xl dark:text-slate-300">
             {t('services.description')}
           </p>
         </div>
@@ -129,9 +129,9 @@ export function ServicesSection() {
           {services.map((service, _index) => {
             const IconComponent = service.icon;
             return (
-              <Card 
+              <Card
                 key={service.id} 
-                className="group border-0 shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer transform hover:scale-105 hover:-translate-y-2 bg-white overflow-hidden"
+                className="group cursor-pointer overflow-hidden border-0 bg-white shadow-lg transition-all duration-500 hover:-translate-y-2 hover:scale-105 hover:shadow-2xl dark:border dark:border-slate-800 dark:bg-slate-900"
                 onClick={() => handleServiceClick(service.id as PageType)}
               >
                 <CardHeader className="pb-4">
@@ -142,18 +142,18 @@ export function ServicesSection() {
                   
                   {/* Title and Stats */}
                   <div className="flex items-start justify-between">
-                    <CardTitle className="text-xl lg:text-2xl font-bold text-bdigital-navy group-hover:text-bdigital-cyan-dark transition-colors duration-300 flex-1">
+                    <CardTitle className="flex-1 text-xl font-bold text-bdigital-navy transition-colors duration-300 group-hover:text-bdigital-cyan-dark lg:text-2xl dark:text-slate-100 dark:group-hover:text-bdigital-cyan">
                       {service.title}
                     </CardTitle>
                     <div className="text-right ml-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                       <div className="text-lg font-bold text-bdigital-cyan-dark">{service.stats.value}</div>
-                      <div className="text-xs text-neutral-gray">{service.stats.label}</div>
+                      <div className="text-xs text-neutral-gray dark:text-slate-400">{service.stats.label}</div>
                     </div>
                   </div>
                 </CardHeader>
                 
                 <CardContent className="pt-0">
-                  <p className="text-neutral-gray leading-relaxed mb-4 lg:mb-6">
+                  <p className="mb-4 text-neutral-gray leading-relaxed lg:mb-6 dark:text-slate-300">
                     {service.description}
                   </p>
                   
@@ -162,7 +162,7 @@ export function ServicesSection() {
                     {service.features.map((feature, idx) => (
                       <div key={idx} className="flex items-center text-sm">
                         <div className="w-1.5 h-1.5 bg-bdigital-cyan-dark rounded-full mr-3 flex-shrink-0"></div>
-                        <span className="text-neutral-gray">{feature}</span>
+                        <span className="text-neutral-gray dark:text-slate-300">{feature}</span>
                       </div>
                     ))}
                   </div>
@@ -170,7 +170,7 @@ export function ServicesSection() {
                   {/* CTA Button */}
                   <Button
                     variant="ghost"
-                    className="w-full justify-between text-bdigital-cyan-dark hover:text-bdigital-navy hover:bg-bdigital-cyan/10 font-semibold p-4 group-hover:bg-bdigital-cyan group-hover:text-bdigital-navy transition-all duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bdigital-cyan-dark"
+                    className="w-full justify-between p-4 font-semibold text-bdigital-cyan-dark transition-all duration-300 hover:bg-bdigital-cyan/10 hover:text-bdigital-navy group-hover:bg-bdigital-cyan group-hover:text-bdigital-navy focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bdigital-cyan-dark dark:text-bdigital-cyan dark:hover:bg-bdigital-cyan dark:hover:text-slate-900 dark:group-hover:bg-bdigital-cyan dark:group-hover:text-slate-900"
                   >
                     {t('services.learn_more')}
                     <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />

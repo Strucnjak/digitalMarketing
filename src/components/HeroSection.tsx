@@ -153,7 +153,7 @@ export function HeroSection() {
           <div className="relative order-first lg:order-last">
             <div className="relative">
               {/* Main Image Container */}
-              <div className="relative bg-white rounded-2xl lg:rounded-3xl p-4 lg:p-8 shadow-2xl transform hover:scale-105 transition-all duration-500 group">
+              <div className="relative rounded-2xl bg-white p-4 shadow-2xl transition-all duration-500 group hover:scale-105 lg:rounded-3xl lg:p-8 dark:bg-slate-900 dark:shadow-black/40">
                 {/* Floating Elements */}
                 <div
                   className={`absolute -top-4 -right-4 w-8 h-8 bg-bdigital-cyan rounded-full flex items-center justify-center shadow-lg ${
@@ -184,14 +184,14 @@ export function HeroSection() {
                   {/* Overlay Stats */}
                   <div className="absolute inset-0 bg-gradient-to-t from-bdigital-navy/20 via-transparent to-transparent">
                     <div className="absolute bottom-4 left-4 right-4">
-                      <div className="bg-white/90 backdrop-blur-sm rounded-lg p-3 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                      <div className="rounded-lg bg-white/90 p-3 backdrop-blur-sm transition-transform duration-300 group-hover:translate-y-0 dark:bg-slate-900/80">
                         <div className="flex items-center justify-between">
                           <div>
-                            <div className="text-sm font-medium text-bdigital-navy">{_t("hero.stats.conversionRate")}</div>
+                            <div className="text-sm font-medium text-bdigital-navy dark:text-slate-100">{_t("hero.stats.conversionRate")}</div>
                             <div className="text-2xl font-bold text-bdigital-cyan-dark">+287%</div>
                           </div>
-                          <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
-                            <div className="text-green-600 text-xs">↗</div>
+                          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-green-100 dark:bg-emerald-900/40">
+                            <div className="text-xs text-green-600 dark:text-emerald-300">↗</div>
                           </div>
                         </div>
                       </div>

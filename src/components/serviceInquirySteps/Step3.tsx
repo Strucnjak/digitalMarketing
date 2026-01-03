@@ -21,7 +21,7 @@ export function Step3({ formData, errors, touched, updateFormData, handleAdditio
   return (
     <div className="space-y-6">
       <div className="relative z-20">
-        <Label className="flex items-center gap-2 mb-3 text-bdigital-navy">
+        <Label className="mb-3 flex items-center gap-2 text-bdigital-navy dark:text-slate-200">
           <Calendar className="h-4 w-4" />
           {t("form.timeline")}
         </Label>
@@ -30,11 +30,13 @@ export function Step3({ formData, errors, touched, updateFormData, handleAdditio
             <Select value={formData.timeline} onValueChange={(value) => updateFormData("timeline", value)}>
               <SelectTrigger
                 onBlur={() => handleBlur("timeline")}
-                className={`border-gray-300 focus:border-bdigital-cyan ${errors.timeline && touched.timeline ? "border-red-500" : ""}`}
+                className={`border-gray-300 focus:border-bdigital-cyan dark:border-slate-700 dark:bg-slate-900/60 dark:text-slate-100 ${
+                  errors.timeline && touched.timeline ? "border-red-500" : ""
+                }`}
               >
                 <SelectValue placeholder={t("form.placeholder_timeline")} />
               </SelectTrigger>
-              <SelectContent className="z-[999] bg-white text-black shadow-lg rounded border border-gray-200">
+              <SelectContent className="z-[999] rounded border border-gray-200 bg-white text-black shadow-lg dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100">
                 <SelectItem value="asap">{t("form.timeline_option.asap")}</SelectItem>
                 <SelectItem value="1-month">{t("form.timeline_option.one_month")}</SelectItem>
                 <SelectItem value="2-3-months">{t("form.timeline_option.two_three_months")}</SelectItem>
@@ -48,7 +50,7 @@ export function Step3({ formData, errors, touched, updateFormData, handleAdditio
       </div>
 
       <div className="relative z-20">
-        <Label className="flex items-center gap-2 mb-3 text-bdigital-navy">
+        <Label className="mb-3 flex items-center gap-2 text-bdigital-navy dark:text-slate-200">
           <DollarSign className="h-4 w-4" />
           {t("form.budget")}
         </Label>
@@ -57,11 +59,13 @@ export function Step3({ formData, errors, touched, updateFormData, handleAdditio
             <Select value={formData.budget} onValueChange={(value) => updateFormData("budget", value)}>
               <SelectTrigger
                 onBlur={() => handleBlur("budget")}
-                className={`border-gray-300 focus:border-bdigital-cyan ${errors.budget && touched.budget ? "border-red-500" : ""}`}
+                className={`border-gray-300 focus:border-bdigital-cyan dark:border-slate-700 dark:bg-slate-900/60 dark:text-slate-100 ${
+                  errors.budget && touched.budget ? "border-red-500" : ""
+                }`}
               >
                 <SelectValue placeholder={t("form.placeholder_budget")} />
               </SelectTrigger>
-              <SelectContent className="z-[999] bg-white text-black shadow-lg rounded border border-gray-200">
+              <SelectContent className="z-[999] rounded border border-gray-200 bg-white text-black shadow-lg dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100">
                 <SelectItem value="under-1000">{t("form.budget_option.under_1000")}</SelectItem>
                 <SelectItem value="1000-2500">{t("form.budget_option.1000_2500")}</SelectItem>
                 <SelectItem value="2500-5000">{t("form.budget_option.2500_5000")}</SelectItem>
@@ -76,7 +80,7 @@ export function Step3({ formData, errors, touched, updateFormData, handleAdditio
       </div>
 
       <div>
-        <Label className="mb-3 block text-bdigital-navy">{t("form.additional_services_label")}</Label>
+        <Label className="mb-3 block text-bdigital-navy dark:text-slate-200">{t("form.additional_services_label")}</Label>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           {[
             t("form.additional_service.seo"),
@@ -92,9 +96,9 @@ export function Step3({ formData, errors, touched, updateFormData, handleAdditio
               <Checkbox
                 checked={formData.additionalServices.includes(service)}
                 onCheckedChange={(checked) => handleAdditionalServicesChange(service, checked as boolean)}
-                className="border-gray-300"
+                className="border-gray-300 dark:border-slate-700"
               />
-              <Label className="text-sm font-normal text-neutral-gray">{service}</Label>
+              <Label className="text-sm font-normal text-neutral-gray dark:text-slate-300">{service}</Label>
             </div>
           ))}
         </div>

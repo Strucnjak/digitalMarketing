@@ -243,9 +243,9 @@ export function MobileQuickNav({ onSectionClick }: MobileQuickNavProps) {
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.8, opacity: 0, y: 20 }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="absolute bottom-24 right-6 bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl border border-gray-200/50 overflow-hidden min-w-48"
-              onClick={(e) => e.stopPropagation()}
-            >
+          className="absolute bottom-24 right-6 min-w-48 overflow-hidden rounded-2xl border border-gray-200/50 bg-white/95 shadow-2xl backdrop-blur-md dark:border-slate-800/70 dark:bg-slate-950/95"
+          onClick={(e) => e.stopPropagation()}
+        >
               {sections.map((section, index) => {
                 const IconComponent = section.icon;
                 return (
@@ -256,7 +256,7 @@ export function MobileQuickNav({ onSectionClick }: MobileQuickNavProps) {
                     animate={{ x: 0, opacity: 1 }}
                     transition={{ delay: prefersReducedMotion ? 0 : index * 0.05 }}
                     onClick={() => handleSectionClick(section.id)}
-                    className="flex items-center gap-3 w-full px-4 py-3 text-left text-bdigital-navy hover:bg-bdigital-cyan/10 active:bg-bdigital-cyan/20 transition-colors border-b border-gray-100/50 last:border-b-0"
+                    className="flex w-full items-center gap-3 border-b border-gray-100/50 px-4 py-3 text-left text-bdigital-navy transition-colors hover:bg-bdigital-cyan/10 active:bg-bdigital-cyan/20 last:border-b-0 dark:border-slate-800/70 dark:text-slate-100 dark:hover:bg-slate-900"
                   >
                     <IconComponent size={18} className="text-bdigital-cyan flex-shrink-0" />
                     <span className="flex-1">{section.label}</span>

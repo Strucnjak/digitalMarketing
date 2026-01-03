@@ -53,14 +53,14 @@ export function TestimonialsSection() {
   ];
 
   return (
-    <section className="py-20 bg-gray-50">
+    <section className="bg-gray-50 py-20 dark:bg-slate-950">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-dark-gray mb-4">
+          <h2 className="mb-4 text-3xl font-bold text-dark-gray md:text-4xl dark:text-slate-100">
             {t('testimonials.title')}
           </h2>
-          <p className="text-lg text-neutral-gray max-w-2xl mx-auto">
+          <p className="mx-auto max-w-2xl text-lg text-neutral-gray dark:text-slate-300">
             {t('testimonials.subtitle')}
           </p>
         </div>
@@ -68,7 +68,10 @@ export function TestimonialsSection() {
         {/* Testimonials Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {testimonials.map((testimonial, index) => (
-            <Card key={index} className="bg-white border-0 shadow-lg hover:shadow-xl transition-shadow duration-300">
+            <Card
+              key={index}
+              className="border-0 bg-white shadow-lg transition-shadow duration-300 hover:shadow-xl dark:border dark:border-slate-800 dark:bg-slate-900"
+            >
               <CardContent className="p-6">
                 {/* Rating Stars */}
                 <div className="flex items-center mb-4">
@@ -78,7 +81,7 @@ export function TestimonialsSection() {
                 </div>
 
                 {/* Testimonial Content */}
-                <p className="text-neutral-gray mb-6 italic leading-relaxed">
+                <p className="mb-6 text-neutral-gray italic leading-relaxed dark:text-slate-300">
                   "{testimonial.content}"
                 </p>
 
@@ -91,8 +94,8 @@ export function TestimonialsSection() {
                     </AvatarFallback>
                   </Avatar>
                   <div>
-                    <h4 className="font-semibold text-dark-gray">{testimonial.name}</h4>
-                    <p className="text-sm text-neutral-gray">{testimonial.role}</p>
+                    <h4 className="font-semibold text-dark-gray dark:text-slate-100">{testimonial.name}</h4>
+                    <p className="text-sm text-neutral-gray dark:text-slate-400">{testimonial.role}</p>
                   </div>
                 </div>
               </CardContent>
@@ -104,20 +107,20 @@ export function TestimonialsSection() {
         <div className="mt-16 text-center">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
             <div className="text-center">
-              <div className="text-2xl font-bold text-digital-blue mb-2">100%</div>
-              <div className="text-sm text-neutral-gray">{t('testimonials.stats.clients')}</div>
+              <div className="mb-2 text-2xl font-bold text-digital-blue dark:text-bdigital-cyan">100%</div>
+              <div className="text-sm text-neutral-gray dark:text-slate-400">{t('testimonials.stats.clients')}</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-digital-blue mb-2">24h</div>
-              <div className="text-sm text-neutral-gray">{t('testimonials.stats.response')}</div>
+              <div className="mb-2 text-2xl font-bold text-digital-blue dark:text-bdigital-cyan">24h</div>
+              <div className="text-sm text-neutral-gray dark:text-slate-400">{t('testimonials.stats.response')}</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-digital-blue mb-2">3+</div>
-              <div className="text-sm text-neutral-gray">{t('testimonials.stats.years')}</div>
+              <div className="mb-2 text-2xl font-bold text-digital-blue dark:text-bdigital-cyan">3+</div>
+              <div className="text-sm text-neutral-gray dark:text-slate-400">{t('testimonials.stats.years')}</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-digital-blue mb-2">50+</div>
-              <div className="text-sm text-neutral-gray">{t('testimonials.stats.projects')}</div>
+              <div className="mb-2 text-2xl font-bold text-digital-blue dark:text-bdigital-cyan">50+</div>
+              <div className="text-sm text-neutral-gray dark:text-slate-400">{t('testimonials.stats.projects')}</div>
             </div>
           </div>
         </div>

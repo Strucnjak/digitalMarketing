@@ -4,6 +4,6 @@
 
 @layer components {
   .tooltip-content {
-    @apply bg-white text-sm text-red-600 border border-red-300 rounded shadow-md z-50 px-3 py-2;
+    @apply bg-white text-sm text-red-600 border border-red-300 rounded shadow-md z-50 px-3 py-2 dark:bg-slate-950 dark:text-red-300 dark:border-red-400/60;
   }
 }
