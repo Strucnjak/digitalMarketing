@@ -76,7 +76,6 @@ export function WebDesignPage() {
   const packages = [
     {
       name: t("web.package.starter.name"),
-      price: "800 €",
       description: t("web.package.starter.desc"),
       features: [
         t("web.package.starter.feature1"),
@@ -89,7 +88,6 @@ export function WebDesignPage() {
     },
     {
       name: t("web.package.professional.name"),
-      price: "1.200 €",
       description: t("web.package.professional.desc"),
       features: [
         t("web.package.professional.feature1"),
@@ -103,7 +101,6 @@ export function WebDesignPage() {
     },
     {
       name: t("web.package.enterprise.name"),
-      price: "2.000 €+",
       description: t("web.package.enterprise.desc"),
       features: [
         t("web.package.enterprise.feature1"),
@@ -295,7 +292,6 @@ export function WebDesignPage() {
                 )}
                 <CardHeader className="text-center pb-4">
                   <CardTitle className="text-xl text-bdigital-navy">{pkg.name}</CardTitle>
-                  <div className="text-3xl font-bold text-bdigital-cyan-dark mb-2">{pkg.price}</div>
                   <p className="text-neutral-gray text-sm">{pkg.description}</p>
                 </CardHeader>
                 <CardContent>

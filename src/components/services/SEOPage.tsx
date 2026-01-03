@@ -72,7 +72,6 @@ export function SEOPage() {
   const packages = [
     {
       name: t("seo.package.starter.name"),
-      price: "350 €/mes",
       description: t("seo.package.starter.desc"),
       features: [
         t("seo.package.starter.feature1"),
@@ -85,7 +84,6 @@ export function SEOPage() {
     },
     {
       name: t("seo.package.professional.name"),
-      price: "600 €/mes",
       description: t("seo.package.professional.desc"),
       features: [
         t("seo.package.professional.feature1"),
@@ -99,7 +97,6 @@ export function SEOPage() {
     },
     {
       name: t("seo.package.enterprise.name"),
-      price: "1.000 €/mes",
       description: t("seo.package.enterprise.desc"),
       features: [
         t("seo.package.enterprise.feature1"),
@@ -284,7 +281,6 @@ export function SEOPage() {
                 )}
                 <CardHeader className="text-center pb-4">
                   <CardTitle className="text-xl text-bdigital-navy">{pkg.name}</CardTitle>
-                  <div className="text-3xl font-bold text-bdigital-cyan-dark mb-2">{pkg.price}</div>
                   <p className="text-neutral-gray text-sm">{pkg.description}</p>
                 </CardHeader>
                 <CardContent>
