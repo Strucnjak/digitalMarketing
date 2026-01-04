@@ -62,7 +62,10 @@ const FreeConsultationPage = lazy(() =>
 
 function PageLoader() {
   return (
-    <div className="flex min-h-[50vh] items-center justify-center bg-slate-50 text-slate-500" aria-busy="true">
+    <div
+      className="flex min-h-[50vh] items-center justify-center bg-gradient-to-br from-bdigital-navy via-bdigital-dark-navy to-bdigital-midnight text-slate-100"
+      aria-busy="true"
+    >
       <span className="animate-pulse">Loading...</span>
     </div>
   );
@@ -70,7 +73,10 @@ function PageLoader() {
 
 function SectionLoader({ label }: { label: string }) {
   return (
-    <div className="flex min-h-[280px] items-center justify-center bg-slate-50/60 text-slate-500" aria-busy="true">
+    <div
+      className="flex min-h-[280px] items-center justify-center bg-gradient-to-br from-bdigital-navy via-bdigital-dark-navy to-bdigital-midnight text-slate-100"
+      aria-busy="true"
+    >
       <span className="animate-pulse">Loading {label}…</span>
     </div>
   );
