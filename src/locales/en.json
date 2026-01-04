@@ -341,6 +341,7 @@
   "form.placeholder_email": "you@email.com",
   "form.placeholder_phone": "+1 234 567 890",
   "form.placeholder_company": "Your company name",
+  "form.placeholder_business_type": "Select your business type",
   "form.placeholder_website": "https://www.yoursite.com",
   "form.placeholder_current_situation": "Describe your current situation and why you need our services...",
   "form.placeholder_project_goals": "What do you want to achieve with this project? More sales, more clients, better online presence...",

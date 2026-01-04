@@ -341,6 +341,7 @@
   "form.placeholder_email": "vasa@email.com",
   "form.placeholder_phone": "+382 67 123 456",
   "form.placeholder_company": "Naziv vaše kompanije",
+  "form.placeholder_business_type": "Odaberite tip biznisa",
   "form.placeholder_website": "https://www.vasasajt.com",
   "form.placeholder_current_situation": "Opišite šta trenutno imate (ili nemate) i zašto tražite naše usluge...",
   "form.placeholder_project_goals": "Šta želite da postignete ovim projektom? Povećanje prodaje, više klijenata, bolja online pozicija...",
