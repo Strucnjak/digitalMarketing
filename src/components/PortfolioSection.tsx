@@ -121,13 +121,20 @@ const PROJECTS: Project[] = [
   },
 ];
 
+type ProjectWithCategories = Project & { categories: string[] };
+
+const PROJECTS_WITH_CATEGORIES: ProjectWithCategories[] = PROJECTS.map((project) => ({
+  ...project,
+  categories: normalizeCategories((project as any).category),
+}));
+
 export function PortfolioSection() {
   const { t: _t } = useLanguage();
   const navigate = useNavigate();
   const { activeLocale, includeLocalePrefix } = useActiveLocale();
   const [activeFilter, setActiveFilter] = useState("all");
   const [currentSlide, setCurrentSlide] = useState(0);
-  const projects = PROJECTS;
+  const projects = PROJECTS_WITH_CATEGORIES;
   const clientLogos = [
     "Adriatic Adventures",
     "Montenegro Properties",
@@ -149,7 +156,7 @@ export function PortfolioSection() {
   const { filters, filteredProjects } = useMemo(() => {
     const counts: Record<string, number> = {};
     for (const p of projects) {
-      for (const c of normalizeCategories((p as any).category)) {
+      for (const c of p.categories) {
         counts[c] = (counts[c] ?? 0) + 1;
       }
     }
@@ -165,10 +172,10 @@ export function PortfolioSection() {
         })),
     ];
 
-    const filtered = activeFilter === "all" ? projects : projects.filter((p) => normalizeCategories((p as any).category).includes(activeFilter));
+    const filtered = activeFilter === "all" ? projects : projects.filter((p) => p.categories.includes(activeFilter));
 
     return { filters: builtFilters, filteredProjects: filtered };
-  }, [activeFilter, _t]);
+  }, [activeFilter, _t, projects]);
 
   // ---- Pagination/slider logic ----
   const projectsPerPage = 3;
@@ -178,10 +185,10 @@ export function PortfolioSection() {
   const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % totalSlides);
   const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides);
 
-  const getCurrentProjects = () => {
+  const currentProjects = useMemo(() => {
     const start = currentSlide * projectsPerPage;
     return filteredProjects.slice(start, start + projectsPerPage);
-  };
+  }, [currentSlide, filteredProjects, projectsPerPage]);
 
   const handleFilterChange = (filterId: string) => {
     setActiveFilter(filterId);
@@ -244,7 +251,7 @@ export function PortfolioSection() {
         <div className="relative">
           {/* Desktop Grid */}
           <div className="hidden lg:grid lg:grid-cols-3 gap-8 mb-12">
-            {getCurrentProjects().map((project) => (
+          {currentProjects.map((project) => (
               <ProjectCard key={project.id} project={project} />
             ))}
             {filteredProjects.length === 0 && (
