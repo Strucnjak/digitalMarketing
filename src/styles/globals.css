@@ -219,6 +219,17 @@
 
 html {
   font-size: var(--font-size);
+  background-color: var(--color-background);
+}
+
+body {
+  min-height: 100%;
+  background-color: var(--color-background);
+}
+
+#root {
+  min-height: 100%;
+  background-color: var(--color-background);
 }
 
 /* Custom utilities for DIAL Digital */
