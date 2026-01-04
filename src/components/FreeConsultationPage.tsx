@@ -385,7 +385,7 @@ export function FreeConsultationPage() {
                     >
                       <SelectValue placeholder={t("form.placeholder_business_type")} />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent className="border border-gray-200 bg-white text-bdigital-navy shadow-xl dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100">
                       <SelectItem value="startup">Startup</SelectItem>
                       <SelectItem value="small-business">Malo preduzeće</SelectItem>
                       <SelectItem value="medium-business">Srednje preduzeće</SelectItem>
@@ -510,7 +510,7 @@ export function FreeConsultationPage() {
                     <SelectTrigger className="border-gray-300 focus:border-bdigital-cyan dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100">
                       <SelectValue placeholder={t("form.placeholder_preferred_time")} />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent className="border border-gray-200 bg-white text-bdigital-navy shadow-xl dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100">
                       <SelectItem value="morning">Ujutru (09:00-12:00)</SelectItem>
                       <SelectItem value="afternoon">Popodne (12:00-16:00)</SelectItem>
                       <SelectItem value="evening">Uveče (16:00-19:00)</SelectItem>
