@@ -119,6 +119,8 @@ function getMimeType(filePath: string) {
       return "application/javascript";
     case ".css":
       return "text/css";
+    case ".html":
+      return "text/html";
     case ".json":
       return "application/json";
     case ".ico":
