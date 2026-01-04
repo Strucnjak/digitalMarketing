@@ -55,10 +55,10 @@ export function Step4({ formData, errors, touched, updateFormData, handleBlur }:
       <div className="relative z-20">
         <Label className="mb-2 block text-bdigital-navy dark:text-slate-200">{t("form.how_hear_label")}</Label>
         <Select value={formData.howDidYouHear} onValueChange={(value) => updateFormData("howDidYouHear", value)}>
-          <SelectTrigger className="border-gray-300 focus:border-bdigital-cyan dark:border-slate-700 dark:bg-slate-900/60 dark:text-slate-100">
+          <SelectTrigger className="border-gray-300 focus:border-bdigital-cyan dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100">
             <SelectValue placeholder={t("form.placeholder_how_hear")} />
           </SelectTrigger>
-          <SelectContent className="z-[999] rounded border border-gray-200 bg-white text-black shadow-lg dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100">
+          <SelectContent className="z-[999]">
             <SelectItem value="google">{t("form.how_hear_option.google")}</SelectItem>
             <SelectItem value="social-media">{t("form.how_hear_option.social_media")}</SelectItem>
             <SelectItem value="referral">{t("form.how_hear_option.referral")}</SelectItem>

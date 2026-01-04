@@ -379,7 +379,7 @@ export function FreeConsultationPage() {
                   <Label className="mb-2 block text-bdigital-navy dark:text-slate-200">Tip biznisa *</Label>
                   <Select value={formData.businessType} onValueChange={(value) => updateFormData("businessType", value)}>
                     <SelectTrigger
-                      className={`border-gray-300 focus:border-bdigital-cyan dark:border-slate-700 dark:bg-slate-900/60 dark:text-slate-100 ${
+                      className={`border-gray-300 focus:border-bdigital-cyan dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 ${
                         errors.businessType ? "border-red-500" : ""
                       }`}
                     >
@@ -507,7 +507,7 @@ export function FreeConsultationPage() {
                 <div className="relative z-20">
                   <Label className="mb-2 block text-bdigital-navy dark:text-slate-200">Preferirano vreme</Label>
                   <Select value={formData.preferredTime} onValueChange={(value) => updateFormData("preferredTime", value)}>
-                    <SelectTrigger className="border-gray-300 focus:border-bdigital-cyan dark:border-slate-700 dark:bg-slate-900/60 dark:text-slate-100">
+                    <SelectTrigger className="border-gray-300 focus:border-bdigital-cyan dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100">
                       <SelectValue placeholder={t("form.placeholder_preferred_time")} />
                     </SelectTrigger>
                     <SelectContent>
