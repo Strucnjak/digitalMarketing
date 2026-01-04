@@ -30,13 +30,13 @@ export function Step3({ formData, errors, touched, updateFormData, handleAdditio
             <Select value={formData.timeline} onValueChange={(value) => updateFormData("timeline", value)}>
               <SelectTrigger
                 onBlur={() => handleBlur("timeline")}
-                className={`border-gray-300 focus:border-bdigital-cyan dark:border-slate-700 dark:bg-slate-900/60 dark:text-slate-100 ${
+                className={`border-gray-300 focus:border-bdigital-cyan dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 ${
                   errors.timeline && touched.timeline ? "border-red-500" : ""
                 }`}
               >
                 <SelectValue placeholder={t("form.placeholder_timeline")} />
               </SelectTrigger>
-              <SelectContent className="z-[999] rounded border border-gray-200 bg-white text-black shadow-lg dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100">
+              <SelectContent className="z-[999]">
                 <SelectItem value="asap">{t("form.timeline_option.asap")}</SelectItem>
                 <SelectItem value="1-month">{t("form.timeline_option.one_month")}</SelectItem>
                 <SelectItem value="2-3-months">{t("form.timeline_option.two_three_months")}</SelectItem>
@@ -59,13 +59,13 @@ export function Step3({ formData, errors, touched, updateFormData, handleAdditio
             <Select value={formData.budget} onValueChange={(value) => updateFormData("budget", value)}>
               <SelectTrigger
                 onBlur={() => handleBlur("budget")}
-                className={`border-gray-300 focus:border-bdigital-cyan dark:border-slate-700 dark:bg-slate-900/60 dark:text-slate-100 ${
+                className={`border-gray-300 focus:border-bdigital-cyan dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 ${
                   errors.budget && touched.budget ? "border-red-500" : ""
                 }`}
               >
                 <SelectValue placeholder={t("form.placeholder_budget")} />
               </SelectTrigger>
-              <SelectContent className="z-[999] rounded border border-gray-200 bg-white text-black shadow-lg dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100">
+              <SelectContent className="z-[999]">
                 <SelectItem value="under-1000">{t("form.budget_option.under_1000")}</SelectItem>
                 <SelectItem value="1000-2500">{t("form.budget_option.1000_2500")}</SelectItem>
                 <SelectItem value="2500-5000">{t("form.budget_option.2500_5000")}</SelectItem>
