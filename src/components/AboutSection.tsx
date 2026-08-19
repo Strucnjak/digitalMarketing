@@ -1,6 +1,12 @@
 import { useLanguage } from "./LanguageContext";
 
-const teamMembers = [
+type TeamMember = {
+  id: "marko" | "ana" | "stefan";
+  name: string;
+  initials: string;
+};
+
+const team: TeamMember[] = [
   { id: "marko", name: "Marko Petrović", initials: "MP" },
   { id: "ana", name: "Ana Nikolić", initials: "AN" },
   { id: "stefan", name: "Stefan Jovanović", initials: "SJ" },
@@ -83,7 +89,7 @@ export function AboutSection() {
         </div>
 
         <div className="mt-14 grid gap-x-8 gap-y-12 md:grid-cols-3">
-          {teamMembers.map((member) => (
+          {team.map((member) => (
             <article key={member.id} className="border-t border-white/20 pt-6">
               <TeamPortraitPlaceholder
                 name={member.name}
@@ -101,30 +107,6 @@ export function AboutSection() {
               </p>
               <p className="mt-4 text-xs italic text-slate-500">
                 {t("about.team.image_placeholder")}
-              </p>
-            </article>
-          ))}
-        </div>
-
-        <div className="mt-12 grid gap-10 md:grid-cols-3">
-          {team.map((member) => (
-            <article key={member.name}>
-              <div className="aspect-[4/5] overflow-hidden rounded-lg bg-bdigital-dark-navy">
-                <ImageWithFallback
-                  src={member.image}
-                  alt={member.name}
-                  className="h-full w-full object-cover grayscale"
-                  loading="lazy"
-                />
-              </div>
-              <h4 className="mt-5 text-xl font-semibold text-white">
-                {member.name}
-              </h4>
-              <p className="mt-1 text-sm font-medium text-bdigital-cyan">
-                {member.role}
-              </p>
-              <p className="mt-3 text-sm leading-6 text-slate-400">
-                {member.description}
               </p>
             </article>
           ))}
