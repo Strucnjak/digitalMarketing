@@ -1,8 +1,12 @@
 import { SITE_BASE_URL } from "../src/config/site";
-import { parsePathname } from "../src/routing";
+import { getSeoMetadata } from "../src/config/seo-meta";
+import { parsePathname, type PageType } from "../src/routing";
 import { buildCanonicalCluster } from "../src/utils/seo";
 
-function assertCondition(condition: unknown, message: string): asserts condition {
+function assertCondition(
+  condition: unknown,
+  message: string,
+): asserts condition {
   if (!condition) {
     throw new Error(message);
   }
@@ -30,7 +34,9 @@ const results = pathsToTest.map((path) => {
   return { path, cluster };
 });
 
-const canonicalHrefs = new Set(results.map((result) => result.cluster.canonical));
+const canonicalHrefs = new Set(
+  results.map((result) => result.cluster.canonical),
+);
 assertEqual(
   canonicalHrefs.size,
   1,
@@ -76,4 +82,14 @@ for (const { path, cluster } of results) {
   );
 }
 
-console.log("SEO canonical regression checks passed for", pathsToTest.join(", "));
+console.log(
+  "SEO canonical regression checks passed for",
+  pathsToTest.join(", "),
+);
+
+const frenchFallback = getSeoMetadata("fr", "unmapped" as PageType);
+assertEqual(
+  frenchFallback.title,
+  "Agence DIAL Digital",
+  "Unmapped French pages should use the safe French metadata default",
+);

@@ -61,6 +61,9 @@ export function PortfolioSection() {
         </div>
 
         <div className="mt-20 space-y-24 lg:mt-28 lg:space-y-32">
+          <p className="border-l-2 border-slate-300 pl-4 text-sm leading-6 text-slate-500 dark:border-slate-700 dark:text-slate-400">
+            {t("portfolio.placeholder_notice")}
+          </p>
           {projectDefinitions.map((definition, index) => {
             const prefix = `portfolio.projects.${definition.id}`;
             const fields = ["context", "challenge", "intervention", "outcome"]

@@ -87,7 +87,7 @@ export function Footer({ initialYear }: FooterProps) {
             © {initialYear ?? new Date().getFullYear()} DIAL Digital.{" "}
             {t("footer.rights")}
           </p>
-          <p>Podgorica · Montenegro</p>
+          <p>{t("footer.location")}</p>
         </div>
       </div>
     </footer>
