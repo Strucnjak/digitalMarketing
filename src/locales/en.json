@@ -633,5 +633,6 @@
   "seo.service.technical.description": "Review of crawlability, indexing, performance, and structured data foundations.",
   "about.team.marko.name": "Team profile pending approval",
   "about.team.ana.name": "Team profile pending approval",
-  "about.team.stefan.name": "Team profile pending approval"
+  "about.team.stefan.name": "Team profile pending approval",
+  "contact.error.submit": "We could not send your message. Please try again or contact us by phone or email."
 }

@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { CheckCircle, Send } from "lucide-react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import { useLanguage } from "./LanguageContext";
 import { ADDRESS, EMAIL, PHONE } from "../config/contact";
+import { submitLead } from "../utils/leadSubmission";
 
 export function ContactSection() {
   const { t, language } = useLanguage();
@@ -18,32 +19,31 @@ export function ContactSection() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const submissionInProgress = useRef(false);
 
   const change = (field: keyof typeof formData, value: string) =>
     setFormData((current) => ({ ...current, [field]: value }));
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+    if (submissionInProgress.current || isSubmitted) return;
+    submissionInProgress.current = true;
     setIsSubmitting(true);
     setError(null);
     try {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/contact`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ ...formData, language }),
-        },
-      );
-      if (!response.ok) throw new Error("Failed to send message");
+      await submitLead("/api/contact", {
+        name: formData.name.trim(),
+        email: formData.email.trim(),
+        company: formData.company.trim(),
+        message: formData.message.trim(),
+        phone: formData.phone.trim(),
+        language,
+      });
       setIsSubmitted(true);
       setFormData({ name: "", email: "", company: "", message: "", phone: "" });
-    } catch (submissionError) {
-      setError(
-        submissionError instanceof Error
-          ? submissionError.message
-          : "Failed to send message",
-      );
+    } catch {
+      setError(t("contact.error.submit"));
     } finally {
+      submissionInProgress.current = false;
       setIsSubmitting(false);
     }
   };

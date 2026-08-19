@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useLanguage } from "./LanguageContext";
 import { useActiveLocale } from "../hooks/useActiveLocale";
 import { buildLocalizedPath } from "../routing";
+import { submitLead } from "../utils/leadSubmission";
 
 interface ConsultationFormData {
   fullName: string;
@@ -67,6 +68,7 @@ export function FreeConsultationPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const statusRef = useRef<HTMLDivElement>(null);
+  const submissionInProgress = useRef(false);
 
   useEffect(() => {
     if (isSubmitted || submitError) statusRef.current?.focus();
@@ -131,23 +133,29 @@ export function FreeConsultationPage() {
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
+    if (submissionInProgress.current || isSubmitted) return;
     if (!validate()) return;
+    submissionInProgress.current = true;
     setIsSubmitting(true);
     setSubmitError(null);
     try {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/consultations`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ ...formData, language }),
-        },
-      );
-      if (!response.ok) throw new Error(t("consultation.error.submit"));
+      await submitLead("/api/consultations", {
+        ...formData,
+        fullName: formData.fullName.trim(),
+        email: formData.email.trim(),
+        phone: formData.phone.trim(),
+        company: formData.company.trim(),
+        website: formData.website.trim(),
+        currentChallenges: formData.currentChallenges.trim(),
+        goals: formData.goals.trim(),
+        additionalInfo: formData.additionalInfo.trim(),
+        language,
+      });
       setIsSubmitted(true);
     } catch {
       setSubmitError(t("consultation.error.submit"));
     } finally {
+      submissionInProgress.current = false;
       setIsSubmitting(false);
     }
   };
