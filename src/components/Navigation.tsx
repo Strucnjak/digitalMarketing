@@ -11,13 +11,23 @@ import { Button } from "./ui/button";
 import {
   Sheet,
   SheetContent,
-  SheetDescription,
+  SheetTrigger,
   SheetHeader,
   SheetTitle,
-  SheetTrigger,
+  SheetDescription,
 } from "./ui/sheet";
+import { Switch } from "./ui/switch";
+import { Menu, X, ChevronDown, Moon, Sun } from "lucide-react";
 import { useLanguage, type Language } from "./LanguageContext";
 import { useTheme } from "./ThemeContext";
+import {
+  buildLocalizedPath,
+  defaultLocale,
+  servicePageIds,
+  type Locale,
+  type PageType,
+} from "../routing";
+import { useRouteInfo } from "../hooks/useRouteInfo";
 import { useActiveLocale } from "../hooks/useActiveLocale";
 import { useRouteInfo } from "../hooks/useRouteInfo";
 import { usePrefersReducedMotion } from "../hooks/usePrefersReducedMotion";
@@ -75,8 +85,34 @@ export function Navigation() {
     () => () => {
       if (closeTimer.current) clearTimeout(closeTimer.current);
     },
-    [],
-  );
+  ];
+
+  const handleServiceClick = (serviceId: PageType) => {
+    const path = buildLocalizedPath(activeLocale, serviceId, {
+      includeLocalePrefix,
+    });
+    navigate(path);
+    setIsOpen(false);
+    setServicesOpen(false);
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const handleHomeClick = () => {
+    const path = buildLocalizedPath(activeLocale, "home", {
+      includeLocalePrefix,
+    });
+    const isAlreadyHome = routeInfo.page === "home";
+
+    if (isAlreadyHome) {
+      scrollToTop();
+    } else {
+      navigate(path);
+      // Ensure we land at the top after navigation completes
+      setTimeout(scrollToTop, 100);
+    }
 
   const localizedPath = (page: PageType) =>
     buildLocalizedPath(activeLocale, page, { includeLocalePrefix });
@@ -89,25 +125,35 @@ export function Navigation() {
     else navigate(localizedPath("home"));
     setMobileOpen(false);
   };
-  const goService = (page: PageType) => {
-    navigate(localizedPath(page));
-    setServicesOpen(false);
-    setMobileOpen(false);
+
+  const handleContactClick = () => {
+    const path = buildLocalizedPath(activeLocale, "home", {
+      includeLocalePrefix,
+    });
+    navigate(path);
+    setIsOpen(false);
+    setTimeout(() => {
+      const element = document.querySelector("#contact");
+      element?.scrollIntoView({ behavior: "smooth" });
+    }, 100);
   };
-  const bookCall = () => {
-    navigate(localizedPath("free-consultation"));
-    setMobileOpen(false);
+
+  const handleLanguageChange = (newLanguage: Language) => {
+    const targetLocale = newLanguage as Locale;
+    const path = buildLocalizedPath(targetLocale, routeInfo.page, {
+      includeLocalePrefix:
+        targetLocale !== defaultLocale || routeLocale != null,
+    });
+    navigate(path, { replace: true });
+    setLanguage(newLanguage);
+    setIsOpen(false);
   };
-  const changeLanguage = (next: Language) => {
-    const locale = next as Locale;
-    navigate(
-      buildLocalizedPath(locale, routeInfo.page, {
-        includeLocalePrefix: locale !== defaultLocale || routeLocale != null,
-      }),
-      { replace: true },
-    );
-    setLanguage(next);
-    setMobileOpen(false);
+
+  const navigateToFreeConsultation = () => {
+    const path = buildLocalizedPath(activeLocale, "free-consultation", {
+      includeLocalePrefix,
+    });
+    navigate(path);
   };
   const openServices = () => {
     if (closeTimer.current) clearTimeout(closeTimer.current);
@@ -133,8 +179,11 @@ export function Navigation() {
 
   return (
     <nav
-      className={`fixed inset-x-0 top-0 z-50 border-b transition-colors duration-200 motion-reduce:transition-none ${isScrolled ? "border-slate-200 bg-white dark:border-slate-800 dark:bg-bdigital-midnight" : "border-transparent bg-transparent"}`}
-      aria-label={t("nav.primary")}
+      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+        isScrolled
+          ? "border-b border-slate-200 bg-white dark:border-slate-800 dark:bg-bdigital-midnight"
+          : "bg-transparent"
+      }`}
     >
       <div className="site-container flex h-16 items-center justify-between lg:h-20">
         <button
@@ -168,164 +217,309 @@ export function Navigation() {
             onKeyDown={handleDropdownKeyDown}
           >
             <button
-              type="button"
-              onClick={() => setServicesOpen((open: boolean) => !open)}
-              className={`focus-ring flex items-center gap-1.5 text-sm transition-colors hover:text-slate-500 dark:hover:text-slate-300 ${foreground} ${servicePageIds.includes(routeInfo.page as (typeof servicePageIds)[number]) ? "font-semibold" : "font-normal"}`}
-              aria-expanded={servicesOpen}
-              aria-haspopup="true"
+              onClick={handleHomeClick}
+              className="focus-ring flex items-center space-x-2"
+              aria-label="DIAL Digital - Početna stranica"
             >
-              {t("nav.services")}
-              <ChevronDown
-                className={`h-3.5 w-3.5 transition-transform motion-reduce:transition-none ${servicesOpen ? "rotate-180" : ""}`}
-                aria-hidden="true"
-              />
+              <div className="flex h-8 w-8 items-center justify-center rounded-md bg-bdigital-cyan-dark lg:h-10 lg:w-10">
+                <img
+                  src="/logo.svg"
+                  alt="DIAL Digital logo"
+                  className="w-7 h-7 lg:w-8 lg:h-8"
+                  loading="lazy"
+                />
+              </div>
+              <span
+                className={`text-lg lg:text-xl font-bold transition-colors duration-300 ${
+                  isScrolled
+                    ? "text-bdigital-navy dark:text-slate-100"
+                    : "text-white"
+                }`}
+              >
+                DIAL Digital
+              </span>
             </button>
-            <div
-              className={`absolute left-0 top-full mt-5 w-96 border border-slate-200 bg-white py-1 text-bdigital-navy shadow-lg dark:border-slate-700 dark:bg-bdigital-midnight dark:text-white ${servicesOpen ? "visible opacity-100" : "invisible opacity-0"}`}
+          </div>
+
+          {/* Desktop Navigation */}
+          <div className="hidden lg:flex items-center space-x-8">
+            <button
+              onClick={handleHomeClick}
+              className={`text-sm font-medium transition-colors duration-300 ${
+                isScrolled
+                  ? "hover:text-bdigital-cyan-dark dark:hover:text-bdigital-cyan"
+                  : "hover:text-bdigital-cyan"
+              } ${
+                routeInfo.page === "home"
+                  ? isScrolled
+                    ? "text-bdigital-cyan-dark dark:text-bdigital-cyan"
+                    : "text-bdigital-cyan"
+                  : isScrolled
+                    ? "text-bdigital-navy dark:text-slate-100"
+                    : "text-white"
+              }`}
             >
-              {services.map((service) => (
-                <button
-                  key={service.id}
-                  type="button"
-                  onClick={() => goService(service.id)}
-                  className="focus-ring block w-full border-b border-slate-100 px-5 py-4 text-left last:border-0 hover:bg-slate-50 dark:border-slate-800 dark:hover:bg-slate-900"
-                >
-                  <span className="block text-sm font-semibold">
-                    {service.title}
-                  </span>
-                  <span className="mt-1 block text-xs leading-5 text-slate-500 dark:text-slate-400">
-                    {service.description}
-                  </span>
-                </button>
-              ))}
+              {_t("nav.home")}
+            </button>
+
+            {/* Services Dropdown */}
+            <div
+              ref={dropdownRef}
+              className="relative"
+              onMouseEnter={handleServicesMouseEnter}
+              onMouseLeave={handleServicesMouseLeave}
+            >
+              <button
+                onClick={() => setServicesOpen((open) => !open)}
+                className={`flex items-center space-x-1 text-sm font-medium transition-colors duration-300 ${
+                  isScrolled
+                    ? "hover:text-bdigital-cyan-dark dark:hover:text-bdigital-cyan"
+                    : "hover:text-bdigital-cyan"
+                } py-2 ${
+                  servicePageIds.includes(
+                    routeInfo.page as (typeof servicePageIds)[number],
+                  )
+                    ? isScrolled
+                      ? "text-bdigital-cyan-dark dark:text-bdigital-cyan"
+                      : "text-bdigital-cyan"
+                    : isScrolled
+                      ? "text-bdigital-navy dark:text-slate-100"
+                      : "text-white"
+                }`}
+                aria-expanded={servicesOpen}
+                aria-haspopup="true"
+              >
+                <span>{_t("nav.services")}</span>
+                <ChevronDown
+                  className={`h-4 w-4 transition-transform duration-300 ${servicesOpen ? "rotate-180" : ""}`}
+                />
+              </button>
+
+              {/* Dropdown Menu */}
+              <div
+                className={`absolute left-0 top-full mt-2 w-80 rounded-md border border-gray-200 bg-white py-2 shadow-lg transition-[opacity,transform] duration-200 dark:border-slate-700 dark:bg-bdigital-midnight ${
+                  servicesOpen
+                    ? "opacity-100 translate-y-0 pointer-events-auto visible"
+                    : "opacity-0 translate-y-2 pointer-events-none invisible"
+                }`}
+                onMouseEnter={handleDropdownMouseEnter}
+                onMouseLeave={handleDropdownMouseLeave}
+              >
+                {/* Small connecting bridge to prevent gap issues */}
+                <div className="absolute -top-1 left-0 right-0 h-1 bg-transparent"></div>
+
+                {services.map((service) => (
+                  <button
+                    key={service.id}
+                    onClick={() => handleServiceClick(service.id as PageType)}
+                    className="w-full px-4 py-3 text-left transition-colors duration-200 group hover:bg-gray-50 focus:bg-gray-50 focus:outline-none dark:hover:bg-slate-900 dark:focus:bg-slate-900"
+                  >
+                    <div className="mb-1 text-sm font-medium text-bdigital-navy transition-colors duration-200 group-hover:text-bdigital-cyan-dark group-focus:text-bdigital-cyan-dark dark:text-slate-100 dark:group-hover:text-bdigital-cyan dark:group-focus:text-bdigital-cyan">
+                      {service.title}
+                    </div>
+                    <div className="text-xs text-neutral-gray dark:text-slate-400">
+                      {service.description}
+                    </div>
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
 
-          <div
-            className={`flex items-center gap-2 text-xs ${isScrolled ? "text-slate-500 dark:text-slate-400" : "text-slate-300"}`}
-            aria-label={t("nav.language")}
-          >
-            {localeOptions.map((option, index) => (
-              <span key={option.value} className="flex items-center gap-2">
-                {index > 0 && <span aria-hidden="true">/</span>}
-                <button
-                  type="button"
-                  onClick={() => changeLanguage(option.value)}
-                  className={`focus-ring border-b py-1 transition-colors hover:text-current ${language === option.value ? "border-current font-semibold" : "border-transparent"}`}
-                  aria-current={language === option.value ? "true" : undefined}
-                >
-                  {option.label}
-                </button>
-              </span>
-            ))}
-          </div>
-
-          <button
-            type="button"
-            onClick={toggleTheme}
-            className={`focus-ring flex h-9 w-9 items-center justify-center rounded-md border transition-colors ${isScrolled ? "border-slate-200 text-slate-500 hover:text-bdigital-navy dark:border-slate-700 dark:text-slate-400 dark:hover:text-white" : "border-white/25 text-slate-300 hover:text-white"}`}
-            aria-label={
-              theme === "dark" ? t("nav.light_mode") : t("nav.dark_mode")
-            }
-          >
-            {theme === "dark" ? (
-              <Sun className="h-4 w-4" />
-            ) : (
-              <Moon className="h-4 w-4" />
-            )}
-          </button>
-
-          <Button
-            onClick={bookCall}
-            className="focus-ring rounded-md bg-bdigital-cyan px-5 text-sm font-semibold text-bdigital-navy shadow-none hover:bg-bdigital-cyan-light"
-          >
-            {t("web.cta.primary")}
-          </Button>
-        </div>
-
-        <div className="lg:hidden">
-          <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
-            <SheetTrigger asChild>
+            {/* Language Switcher */}
+            <div className="flex items-center space-x-2">
               <button
-                type="button"
-                className={`focus-ring flex h-11 w-11 items-center justify-center ${foreground}`}
-                aria-label={t("nav.open")}
+                onClick={() => handleLanguageChange("me")}
+                className={`px-2 py-1 text-xs font-medium rounded transition-all duration-300 ${
+                  language === "me"
+                    ? "bg-bdigital-cyan text-bdigital-navy"
+                    : `hover:bg-bdigital-cyan/20 dark:hover:bg-slate-800/70 ${
+                        isScrolled
+                          ? "text-bdigital-navy dark:text-slate-100"
+                          : "text-white"
+                      }`
+                }`}
+              >
+                ME
+              </button>
+              <button
+                onClick={() => handleLanguageChange("en")}
+                className={`px-2 py-1 text-xs font-medium rounded transition-all duration-300 ${
+                  language === "en"
+                    ? "bg-bdigital-cyan text-bdigital-navy"
+                    : `hover:bg-bdigital-cyan/20 dark:hover:bg-slate-800/70 ${
+                        isScrolled
+                          ? "text-bdigital-navy dark:text-slate-100"
+                          : "text-white"
+                      }`
+                }`}
+              >
+                EN
+              </button>
+              <button
+                onClick={() => handleLanguageChange("fr")}
+                className={`px-2 py-1 text-xs font-medium rounded transition-all duration-300 ${
+                  language === "fr"
+                    ? "bg-bdigital-cyan text-bdigital-navy"
+                    : `hover:bg-bdigital-cyan/20 dark:hover:bg-slate-800/70 ${
+                        isScrolled
+                          ? "text-bdigital-navy dark:text-slate-100"
+                          : "text-white"
+                      }`
+                }`}
               >
                 <Menu className="h-5 w-5" />
               </button>
-            </SheetTrigger>
-            <SheetContent
-              side="right"
-              className="w-full border-l border-slate-200 bg-white p-0 sm:w-96 dark:border-slate-800 dark:bg-bdigital-midnight"
+            </div>
+
+            <div
+              className={`flex items-center gap-2 rounded-full border px-2 py-1 text-xs font-semibold transition-colors duration-300 ${
+                isScrolled
+                  ? "border-slate-200/70 bg-white/80 text-bdigital-navy backdrop-blur dark:border-bdigital-dark-navy/80 dark:bg-bdigital-night/80 dark:text-slate-100"
+                  : "border-white/30 bg-white/10 text-white"
+              }`}
             >
-              <SheetHeader className="sr-only">
-                <SheetTitle>{t("nav.primary")}</SheetTitle>
-                <SheetDescription>{t("nav.primary")}</SheetDescription>
-              </SheetHeader>
-              <div className="flex h-full flex-col px-6 pb-8 pt-5">
-                <div className="flex items-center justify-between border-b border-slate-200 pb-5 dark:border-slate-800">
-                  <span className="text-lg font-semibold text-bdigital-navy dark:text-white">
-                    DIAL Digital
-                  </span>
-                  <button
-                    type="button"
-                    onClick={() => setMobileOpen(false)}
-                    className="focus-ring flex h-11 w-11 items-center justify-center text-bdigital-navy dark:text-white"
-                    aria-label={t("nav.close")}
-                  >
-                    <X className="h-5 w-5" />
-                  </button>
-                </div>
-                <div className="flex-1 overflow-y-auto py-8">
-                  <button
-                    type="button"
-                    onClick={goHome}
-                    className="focus-ring block min-h-12 w-full border-b border-slate-200 py-4 text-left text-lg font-semibold text-bdigital-navy dark:border-slate-800 dark:text-white"
-                  >
-                    {t("nav.home")}
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setServicesOpen((open: boolean) => !open)}
-                    className="focus-ring flex min-h-12 w-full items-center justify-between border-b border-slate-200 py-4 text-left text-lg font-semibold text-bdigital-navy dark:border-slate-800 dark:text-white"
-                    aria-expanded={servicesOpen}
-                  >
-                    {t("nav.services")}
-                    <ChevronDown
-                      className={`h-4 w-4 transition-transform motion-reduce:transition-none ${servicesOpen ? "rotate-180" : ""}`}
-                    />
-                  </button>
-                  {servicesOpen && (
-                    <div className="border-b border-slate-200 py-2 dark:border-slate-800">
-                      {services.map((service) => (
-                        <button
-                          key={service.id}
-                          type="button"
-                          onClick={() => goService(service.id)}
-                          className="focus-ring block min-h-11 w-full py-3 pl-4 text-left text-sm text-slate-600 dark:text-slate-300"
-                        >
-                          {service.title}
-                        </button>
-                      ))}
+              <Moon
+                className={`h-3.5 w-3.5 transition-colors ${
+                  theme === "dark"
+                    ? "text-bdigital-cyan"
+                    : isScrolled
+                      ? "text-bdigital-navy/60 dark:text-slate-400"
+                      : "text-white/70"
+                }`}
+              />
+              <Switch
+                checked={theme === "dark"}
+                onCheckedChange={toggleTheme}
+                aria-label={
+                  theme === "dark"
+                    ? (_t("nav.light_mode") ?? "Switch to light mode")
+                    : (_t("nav.dark_mode") ?? "Switch to dark mode")
+                }
+                className="h-5 w-10 data-[state=checked]:bg-bdigital-cyan data-[state=unchecked]:bg-slate-300/80 dark:data-[state=unchecked]:bg-slate-700"
+              />
+              <Sun
+                className={`h-3.5 w-3.5 transition-colors ${
+                  theme === "dark"
+                    ? "text-slate-300"
+                    : isScrolled
+                      ? "text-bdigital-cyan-dark"
+                      : "text-white"
+                }`}
+              />
+            </div>
+
+            {/* CTA Button - now links to free consultation */}
+            <Button
+              onClick={navigateToFreeConsultation}
+              className="focus-ring rounded-md bg-bdigital-cyan px-6 py-2 text-sm font-semibold text-bdigital-navy shadow-none transition-colors hover:bg-bdigital-cyan-light"
+            >
+              {_t("web.cta.primary")}
+            </Button>
+          </div>
+
+          {/* Mobile Navigation */}
+          <div className="lg:hidden">
+            <Sheet open={isOpen} onOpenChange={setIsOpen}>
+              <SheetTrigger asChild>
+                <Button
+                  className={`p-2 ${
+                    isScrolled
+                      ? "text-bdigital-navy dark:text-slate-100"
+                      : "text-white"
+                  } hover:bg-bdigital-cyan/20 dark:hover:bg-slate-800/70`}
+                  aria-label="Otvori meni"
+                >
+                  <Menu className="h-6 w-6" />
+                </Button>
+              </SheetTrigger>
+              <SheetContent
+                side="right"
+                className="w-full bg-white sm:w-80 dark:bg-bdigital-midnight"
+              >
+                <SheetHeader className="sr-only">
+                  <SheetTitle>Navigation</SheetTitle>
+                  <SheetDescription>
+                    Displays the mobile navigation menu.
+                  </SheetDescription>
+                </SheetHeader>
+                <div className="flex flex-col h-full">
+                  {/* Header */}
+                  <div className="flex justify-between items-center py-4 border-b border-gray-200 dark:border-slate-800">
+                    <div className="flex items-center space-x-2">
+                      <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center shadow dark:bg-bdigital-night">
+                        <img
+                          src="/logo.svg"
+                          alt="DIAL Digital logo"
+                          className="w-6 h-6"
+                          loading="lazy"
+                        />
+                      </div>
+                      <span className="text-lg font-bold text-bdigital-navy dark:text-slate-100">
+                        DIAL Digital
+                      </span>
                     </div>
-                  )}
-                </div>
-                <div className="border-t border-slate-200 pt-6 dark:border-slate-800">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3 text-xs text-slate-500 dark:text-slate-400">
-                      {localeOptions.map((option) => (
-                        <button
-                          key={option.value}
-                          type="button"
-                          onClick={() => changeLanguage(option.value)}
-                          className={`focus-ring border-b py-1 ${language === option.value ? "border-current font-semibold" : "border-transparent"}`}
-                          aria-current={
-                            language === option.value ? "true" : undefined
-                          }
-                        >
-                          {option.label}
-                        </button>
-                      ))}
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => setIsOpen(false)}
+                      className="p-2 text-bdigital-navy hover:bg-gray-100 dark:text-slate-100 dark:hover:bg-slate-800"
+                      aria-label="Zatvori meni"
+                    >
+                      <X className="h-5 w-5" />
+                    </Button>
+                  </div>
+
+                  {/* Navigation Items */}
+                  <div className="flex-1 py-6 space-y-2">
+                    <button
+                      onClick={handleHomeClick}
+                      className={`w-full text-left px-4 py-3 text-base font-medium rounded-lg transition-all duration-200 ${
+                        routeInfo.page === "home"
+                          ? "bg-bdigital-cyan text-bdigital-navy"
+                          : "text-bdigital-navy hover:bg-gray-50 dark:text-slate-100 dark:hover:bg-slate-900"
+                      }`}
+                    >
+                      {_t("nav.home")}
+                    </button>
+
+                    {/* Services Menu */}
+                    <div className="space-y-2">
+                      <button
+                        onClick={() => setServicesOpen(!servicesOpen)}
+                        className="w-full flex items-center justify-between px-4 py-3 text-base font-medium text-bdigital-navy hover:bg-gray-50 rounded-lg transition-colors duration-200 dark:text-slate-100 dark:hover:bg-slate-900"
+                        aria-expanded={servicesOpen}
+                      >
+                        <span>{_t("nav.services")}</span>
+                        <ChevronDown
+                          className={`h-4 w-4 transition-transform duration-300 ${servicesOpen ? "rotate-180" : ""}`}
+                        />
+                      </button>
+
+                      {servicesOpen && (
+                        <div className="pl-4 space-y-1 animate-in slide-in-from-top-2 duration-200">
+                          {services.map((service) => (
+                            <button
+                              key={service.id}
+                              onClick={() =>
+                                handleServiceClick(service.id as PageType)
+                              }
+                              className={`w-full text-left px-4 py-3 text-sm rounded-lg transition-all duration-200 ${
+                                routeInfo.page === service.id
+                                  ? "bg-bdigital-cyan text-bdigital-navy"
+                                  : "text-neutral-gray hover:bg-gray-50 hover:text-bdigital-navy dark:text-slate-300 dark:hover:bg-slate-900 dark:hover:text-slate-100"
+                              }`}
+                            >
+                              <div className="font-medium mb-1">
+                                {service.title}
+                              </div>
+                              <div className="text-xs opacity-70">
+                                {service.description}
+                              </div>
+                            </button>
+                          ))}
+                        </div>
+                      )}
                     </div>
                     <button
                       type="button"
@@ -344,12 +538,81 @@ export function Navigation() {
                       )}
                     </button>
                   </div>
-                  <Button
-                    onClick={bookCall}
-                    className="focus-ring mt-6 min-h-12 w-full rounded-md bg-bdigital-cyan font-semibold text-bdigital-navy shadow-none hover:bg-bdigital-cyan-light"
-                  >
-                    {t("web.cta.primary")}
-                  </Button>
+
+                  {/* Footer */}
+                  <div className="border-t border-gray-200 pt-6 space-y-4 dark:border-slate-800">
+                    {/* Language Switcher */}
+                    <div className="flex items-center justify-center space-x-2">
+                      <span className="text-sm text-neutral-gray dark:text-slate-400">
+                        Jezik:
+                      </span>
+                      <button
+                        onClick={() => handleLanguageChange("me")}
+                        className={`px-3 py-1 text-sm font-medium rounded-lg transition-all duration-200 ${
+                          language === "me"
+                            ? "bg-bdigital-cyan text-bdigital-navy"
+                            : "text-bdigital-navy hover:bg-gray-100 dark:text-slate-100 dark:hover:bg-slate-800"
+                        }`}
+                      >
+                        Crnogorski
+                      </button>
+                      <button
+                        onClick={() => handleLanguageChange("en")}
+                        className={`px-3 py-1 text-sm font-medium rounded-lg transition-all duration-200 ${
+                          language === "en"
+                            ? "bg-bdigital-cyan text-bdigital-navy"
+                            : "text-bdigital-navy hover:bg-gray-100 dark:text-slate-100 dark:hover:bg-slate-800"
+                        }`}
+                      >
+                        English
+                      </button>
+                      <button
+                        onClick={() => handleLanguageChange("fr")}
+                        className={`px-3 py-1 text-sm font-medium rounded-lg transition-all duration-200 ${
+                          language === "fr"
+                            ? "bg-bdigital-cyan text-bdigital-navy"
+                            : "text-bdigital-navy hover:bg-gray-100 dark:text-slate-100 dark:hover:bg-slate-800"
+                        }`}
+                      >
+                        Français
+                      </button>
+                    </div>
+
+                    <div className="flex items-center justify-center gap-3">
+                      <span className="text-sm text-neutral-gray dark:text-slate-400">
+                        {_t("nav.theme") ?? "Theme:"}
+                      </span>
+                      <div className="flex items-center gap-2 rounded-full border border-slate-200/70 bg-white/80 px-2 py-1 text-xs font-semibold text-bdigital-navy transition-colors duration-300 dark:border-bdigital-dark-navy/80 dark:bg-bdigital-night/80 dark:text-slate-100">
+                        <Moon
+                          className={`h-3.5 w-3.5 ${theme === "dark" ? "text-bdigital-cyan" : "text-slate-400"}`}
+                        />
+                        <Switch
+                          checked={theme === "dark"}
+                          onCheckedChange={toggleTheme}
+                          aria-label={
+                            theme === "dark"
+                              ? (_t("nav.light_mode") ?? "Switch to light mode")
+                              : (_t("nav.dark_mode") ?? "Switch to dark mode")
+                          }
+                          className="h-5 w-10 data-[state=checked]:bg-bdigital-cyan data-[state=unchecked]:bg-slate-300/80 dark:data-[state=unchecked]:bg-slate-700"
+                        />
+                        <Sun
+                          className={`h-3.5 w-3.5 ${theme === "dark" ? "text-slate-300" : "text-bdigital-cyan-dark"}`}
+                        />
+                      </div>
+                    </div>
+
+                    {/* CTA Button - now links to free consultation */}
+                    <Button
+                      onClick={() => {
+                        navigateToFreeConsultation();
+                        setIsOpen(false);
+                      }}
+                      className="w-full bg-bdigital-cyan text-bdigital-navy hover:bg-bdigital-cyan-light font-semibold py-3 text-sm shadow-lg transition-all duration-300"
+                    >
+                      {_t("web.cta.primary")}
+                    </Button>
+                  </div>
                 </div>
               </div>
             </SheetContent>
