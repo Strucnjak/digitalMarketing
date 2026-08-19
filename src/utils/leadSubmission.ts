@@ -2,9 +2,14 @@ const REQUEST_TIMEOUT_MS = 15_000;
 
 export type LeadFailureKind = "validation" | "rate_limit" | "server" | "timeout" | "network" | "configuration";
 export class LeadSubmissionError extends Error {
-  constructor(public kind: LeadFailureKind, public fields: Record<string, string> = {}) {
+  kind: LeadFailureKind;
+  fields: Record<string, string>;
+
+  constructor(kind: LeadFailureKind, fields: Record<string, string> = {}) {
     super("Lead submission failed");
     this.name = "LeadSubmissionError";
+    this.kind = kind;
+    this.fields = fields;
   }
 }
 

@@ -27,7 +27,13 @@ export interface ServiceInquiryRequest { fullName: string; email: string; compan
 export type LeadRequest = ContactRequest | ConsultationRequest | ServiceInquiryRequest;
 
 export class LeadContractError extends Error {
-  constructor(public fields: Record<string, string>) { super("Invalid lead request"); }
+  fields: Record<string, string>;
+
+  constructor(fields: Record<string, string>) {
+    super("Invalid lead request");
+    this.name = "LeadContractError";
+    this.fields = fields;
+  }
 }
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const absoluteHttpUrl = (value: string) => { try { return ["http:", "https:"].includes(new URL(value).protocol); } catch { return false; } };
