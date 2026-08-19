@@ -105,6 +105,30 @@ export function AboutSection() {
             </article>
           ))}
         </div>
+
+        <div className="mt-12 grid gap-10 md:grid-cols-3">
+          {team.map((member) => (
+            <article key={member.name}>
+              <div className="aspect-[4/5] overflow-hidden rounded-lg bg-bdigital-dark-navy">
+                <ImageWithFallback
+                  src={member.image}
+                  alt={member.name}
+                  className="h-full w-full object-cover grayscale"
+                  loading="lazy"
+                />
+              </div>
+              <h4 className="mt-5 text-xl font-semibold text-white">
+                {member.name}
+              </h4>
+              <p className="mt-1 text-sm font-medium text-bdigital-cyan">
+                {member.role}
+              </p>
+              <p className="mt-3 text-sm leading-6 text-slate-400">
+                {member.description}
+              </p>
+            </article>
+          ))}
+        </div>
       </div>
     </section>
   );
