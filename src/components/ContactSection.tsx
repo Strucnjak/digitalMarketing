@@ -1,15 +1,13 @@
 import { useState } from "react";
+import { CheckCircle, Send } from "lucide-react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
-import { Card, CardContent } from "./ui/card";
-import { Badge } from "./ui/badge";
-import { Mail, Phone, MapPin, Clock, Send, CheckCircle, MessageSquare, User, Building } from "lucide-react";
 import { useLanguage } from "./LanguageContext";
-import { EMAIL, PHONE, ADDRESS } from "../config/contact";
+import { ADDRESS, EMAIL, PHONE } from "../config/contact";
 
 export function ContactSection() {
-  const { t: _t, language } = useLanguage();
+  const { t, language } = useLanguage();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -21,301 +19,176 @@ export function ContactSection() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const change = (field: keyof typeof formData, value: string) =>
+    setFormData((current) => ({ ...current, [field]: value }));
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
     setIsSubmitting(true);
     setError(null);
-
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/contact`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/contact`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ ...formData, language }),
         },
-        body: JSON.stringify({ ...formData, language }),
-      });
-
-      if (!response.ok) {
-        const data = await response.json().catch(() => null);
-        const message = data?.errors ? Object.values(data.errors).join(", ") : "Failed to send message";
-        throw new Error(message);
-      }
-
+      );
+      if (!response.ok) throw new Error("Failed to send message");
       setIsSubmitted(true);
-
-      // Reset form after 3 seconds
-      setTimeout(() => {
-        setIsSubmitted(false);
-        setFormData({
-          name: "",
-          email: "",
-          company: "",
-          message: "",
-          phone: "",
-        });
-      }, 3000);
-    } catch (err) {
-      const message = err instanceof Error ? err.message : "Failed to send message";
-      setError(message);
+      setFormData({ name: "", email: "", company: "", message: "", phone: "" });
+    } catch (submissionError) {
+      setError(
+        submissionError instanceof Error
+          ? submissionError.message
+          : "Failed to send message",
+      );
     } finally {
       setIsSubmitting(false);
     }
   };
-
-  const handleChange = (field: string, value: string) => {
-    setFormData((prev) => ({
-      ...prev,
-      [field]: value,
-    }));
-  };
-
-  const contactInfo = [
-    {
-      icon: Mail,
-      title: _t("contact.info.email"),
-      content: EMAIL,
-      link: `mailto:${EMAIL}`,
-      description: _t("contact.info.emailDesc"),
-    },
-    {
-      icon: Phone,
-      title: _t("contact.info.phone"),
-      content: PHONE,
-      link: `tel:${PHONE.replace(/\s+/g, "")}`,
-      description: _t("contact.info.phoneDesc"),
-    },
-    {
-      icon: MapPin,
-      title: _t("contact.info.location"),
-      content: ADDRESS,
-      link: "https://maps.google.com",
-      description: _t("contact.info.locationDesc"),
-    },
-    {
-      icon: Clock,
-      title: _t("contact.info.hours"),
-      content: "09:00 - 17:00",
-      link: null,
-      description: _t("contact.info.hoursDesc"),
-    },
-  ];
-
-  const stats = [
-    { value: "24h", label: _t("contact.stats.response") },
-    { value: "100%", label: _t("contact.stats.clients") },
-    { value: "24/7", label: _t("contact.stats.support") },
-    { value: "5+", label: _t("contact.stats.years") },
-  ];
+  const fieldClass =
+    "h-12 rounded-md border-slate-300 bg-transparent px-4 focus-visible:border-bdigital-cyan focus-visible:ring-bdigital-cyan/20 dark:border-slate-700 dark:bg-transparent dark:text-white";
 
   return (
-    <section id="contact" className="bg-gradient-to-b from-gray-50 to-white py-16 lg:py-24 dark:from-bdigital-midnight dark:to-bdigital-dark-navy">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="text-center mb-12 lg:mb-16">
-          <Badge className="bg-bdigital-cyan/10 text-bdigital-cyan-dark border-bdigital-cyan-dark/20 mb-4 px-4 py-2">{_t("contact.badge")}</Badge>
-          <h2 className="mb-4 text-3xl font-bold text-bdigital-navy sm:text-4xl lg:mb-6 lg:text-5xl dark:text-slate-100">
-            {_t("contact.heading.part1")}{" "}
-            <span className="text-bdigital-cyan-dark dark:text-bdigital-cyan">{_t("contact.heading.emphasis")}</span>
+    <section
+      id="contact"
+      className="section-shell bg-white dark:bg-bdigital-midnight"
+    >
+      <div className="site-container grid gap-16 lg:grid-cols-12 lg:gap-8">
+        <div className="lg:col-span-4">
+          <p className="eyebrow mb-7">{t("contact.badge")}</p>
+          <h2 className="section-title text-bdigital-navy dark:text-white">
+            {t("contact.heading.part1")} {t("contact.heading.emphasis")}
           </h2>
-          <p className="mx-auto max-w-3xl text-lg text-neutral-gray leading-relaxed lg:text-xl dark:text-slate-300">
-            {_t("contact.description")}
-          </p>
+          <p className="lead-copy mt-7">{t("contact.description")}</p>
+
+          <address className="mt-12 space-y-7 border-t border-slate-300 pt-8 not-italic dark:border-slate-700">
+            <div>
+              <p className="text-xs font-medium text-slate-500">
+                {t("contact.info.email")}
+              </p>
+              <a
+                className="focus-ring mt-1 inline-block font-semibold text-bdigital-navy underline decoration-slate-300 underline-offset-4 hover:decoration-bdigital-cyan dark:text-white"
+                href={`mailto:${EMAIL}`}
+              >
+                {EMAIL}
+              </a>
+            </div>
+            <div>
+              <p className="text-xs font-medium text-slate-500">
+                {t("contact.info.phone")}
+              </p>
+              <a
+                className="focus-ring mt-1 inline-block font-semibold text-bdigital-navy underline decoration-slate-300 underline-offset-4 hover:decoration-bdigital-cyan dark:text-white"
+                href={`tel:${PHONE.replace(/\s+/g, "")}`}
+              >
+                {PHONE}
+              </a>
+            </div>
+            <div>
+              <p className="text-xs font-medium text-slate-500">
+                {t("contact.info.location")}
+              </p>
+              <p className="mt-1 font-semibold text-bdigital-navy dark:text-white">
+                {ADDRESS}
+              </p>
+            </div>
+          </address>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
-          {/* Contact Form */}
-          <Card className="border-0 shadow-xl dark:border dark:border-bdigital-dark-navy dark:bg-bdigital-night">
-            <CardContent className="p-6 lg:p-8">
-              <div className="flex items-center mb-6">
-                <MessageSquare className="h-6 w-6 text-bdigital-cyan mr-3" />
-                <h3 className="text-xl font-bold text-bdigital-navy lg:text-2xl dark:text-slate-100">{_t("contact.form.title")}</h3>
-              </div>
-
-              {isSubmitted ? (
-                <div className="text-center py-8 lg:py-12">
-                  <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-100 dark:bg-emerald-900/40">
-                    <CheckCircle className="h-8 w-8 text-green-600 dark:text-emerald-300" />
-                  </div>
-                  <h4 className="mb-2 text-lg font-semibold text-bdigital-navy dark:text-slate-100">{_t("contact.success.title")}</h4>
-                  <p className="text-neutral-gray dark:text-slate-300">{_t("contact.success.desc")}</p>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="mb-2 flex items-center text-sm font-medium text-bdigital-navy dark:text-slate-200">
-                        <User className="h-4 w-4 mr-2" />
-                        {_t("contact.name")} *
-                      </label>
-                      <Input
-                        type="text"
-                        value={formData.name}
-                        onChange={(e) => handleChange("name", e.target.value)}
-                        placeholder={_t("form.placeholder_full_name")}
-                        required
-                        className="border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan dark:border-slate-700 dark:bg-slate-900/60 dark:text-slate-100 dark:placeholder:text-slate-500"
-                      />
-                    </div>
-                    <div>
-                      <label className="mb-2 flex items-center text-sm font-medium text-bdigital-navy dark:text-slate-200">
-                        <Mail className="h-4 w-4 mr-2" />
-                        {_t("contact.email")} *
-                      </label>
-                      <Input
-                        type="email"
-                        value={formData.email}
-                        onChange={(e) => handleChange("email", e.target.value)}
-                        placeholder={_t("form.placeholder_email")}
-                        required
-                        className="border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan dark:border-slate-700 dark:bg-slate-900/60 dark:text-slate-100 dark:placeholder:text-slate-500"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="mb-2 flex items-center text-sm font-medium text-bdigital-navy dark:text-slate-200">
-                        <Building className="h-4 w-4 mr-2" />
-                        {_t("contact.company")}
-                      </label>
-                      <Input
-                        type="text"
-                        value={formData.company}
-                        onChange={(e) => handleChange("company", e.target.value)}
-                        placeholder={_t("form.placeholder_company")}
-                        className="border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan dark:border-slate-700 dark:bg-slate-900/60 dark:text-slate-100 dark:placeholder:text-slate-500"
-                      />
-                    </div>
-                    <div>
-                      <label className="mb-2 flex items-center text-sm font-medium text-bdigital-navy dark:text-slate-200">
-                        <Phone className="h-4 w-4 mr-2" />
-                        {_t("contact.phone")}
-                      </label>
-                      <Input
-                        type="tel"
-                        value={formData.phone}
-                        onChange={(e) => handleChange("phone", e.target.value)}
-                        placeholder={_t("form.placeholder_phone")}
-                        className="border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan dark:border-slate-700 dark:bg-slate-900/60 dark:text-slate-100 dark:placeholder:text-slate-500"
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <label className="mb-2 flex items-center text-sm font-medium text-bdigital-navy dark:text-slate-200">
-                      <MessageSquare className="h-4 w-4 mr-2" />
-                      {_t("contact.message")} *
-                    </label>
-                    <Textarea
-                      value={formData.message}
-                      onChange={(e) => handleChange("message", e.target.value)}
-                      placeholder={_t("form.placeholder_additional_info")}
-                      required
-                      className="min-h-[120px] resize-none border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan dark:border-slate-700 dark:bg-slate-900/60 dark:text-slate-100 dark:placeholder:text-slate-500"
-                    />
-                  </div>
-
-                  <Button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full bg-bdigital-cyan text-bdigital-navy hover:bg-bdigital-cyan-light font-semibold py-3 text-base shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
-                  >
-                    {isSubmitting ? (
-                      <>
-                        <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-bdigital-navy mr-2"></div>
-                        {_t("contact.sending")}
-                      </>
-                    ) : (
-                      <>
-                        <Send className="h-5 w-5 mr-2" />
-                        {_t("contact.send")}
-                      </>
-                    )}
-                  </Button>
-                  <p className="text-xs text-neutral-gray text-center dark:text-slate-400">
-                    {_t("contact.privacy")}
-                  </p>
-                  {error && <p className="text-red-500 text-sm text-center mt-4">{error}</p>}
-                </form>
-              )}
-            </CardContent>
-          </Card>
-
-          {/* Contact Information */}
-            <div className="space-y-6">
-              {/* Contact Details */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4">
-                {contactInfo.map((item, index) => {
-                  const IconComponent = item.icon;
-                  return (
-                  <Card key={index} className="border-0 shadow-lg transition-all duration-300 hover:shadow-xl group dark:border dark:border-bdigital-dark-navy dark:bg-bdigital-night">
-                    <CardContent className="p-6">
-                      <div className="flex items-start space-x-4">
-                        <div className="w-12 h-12 bg-bdigital-cyan/10 rounded-xl flex items-center justify-center group-hover:bg-bdigital-cyan group-hover:scale-110 transition-all duration-300">
-                          <IconComponent className="h-6 w-6 text-bdigital-cyan group-hover:text-bdigital-navy" />
-                        </div>
-                        <div className="flex-1">
-                          <h4 className="mb-1 font-semibold text-bdigital-navy dark:text-slate-100">{item.title}</h4>
-                          {item.link ? (
-                            <a
-                              href={item.link}
-                              className="font-medium text-bdigital-cyan-dark transition-colors duration-200 hover:text-bdigital-navy dark:text-bdigital-cyan dark:hover:text-slate-100"
-                            >
-                              {item.content}
-                            </a>
-                          ) : (
-                            <p className="font-medium text-bdigital-cyan-dark dark:text-bdigital-cyan">{item.content}</p>
-                          )}
-                          <p className="mt-1 text-sm text-neutral-gray dark:text-slate-300">{item.description}</p>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                );
-              })}
+        <div className="lg:col-span-7 lg:col-start-6">
+          {isSubmitted ? (
+            <div
+              className="flex min-h-96 flex-col justify-center border-y border-slate-300 py-16 dark:border-slate-700"
+              role="status"
+            >
+              <CheckCircle className="h-10 w-10 text-emerald-600" />
+              <h3 className="mt-6 text-3xl font-semibold text-bdigital-navy dark:text-white">
+                {t("contact.success.title")}
+              </h3>
+              <p className="mt-3 text-slate-600 dark:text-slate-300">
+                {t("contact.success.desc")}
+              </p>
             </div>
-
-            {/* Stats */}
-            <Card className="border-0 shadow-xl bg-gradient-to-r from-bdigital-navy to-bdigital-dark-navy text-white">
-              <CardContent className="p-6 lg:p-8">
-                <h4 className="text-xl font-bold mb-6 text-center">
-                  {_t("contact.stats.title.pre")} <span className="text-bdigital-cyan-dark">{_t("contact.stats.title.emphasis")}</span>
-                </h4>
-                <div className="grid grid-cols-2 gap-4 lg:gap-6">
-                  {stats.map((stat, index) => (
-                    <div key={index} className="text-center group">
-                      <div className="text-2xl lg:text-3xl font-bold text-bdigital-cyan mb-1 group-hover:scale-110 transition-transform duration-300">
-                        {stat.value}
-                      </div>
-                      <div className="text-sm text-gray-300">{stat.label}</div>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Map or Additional Info */}
-            <Card className="border-0 shadow-xl dark:border dark:border-bdigital-dark-navy dark:bg-bdigital-night">
-              <CardContent className="p-6 lg:p-8">
-                <h4 className="mb-4 text-xl font-bold text-bdigital-navy dark:text-slate-100">{_t("contact.meeting.title")}</h4>
-                <p className="mb-4 text-neutral-gray dark:text-slate-300">{_t("contact.meeting.desc")}</p>
-                <div className="space-y-3">
-                  <div className="flex items-center text-sm">
-                    <Clock className="h-4 w-4 text-bdigital-cyan mr-2" />
-                    <span className="text-neutral-gray dark:text-slate-300">{_t("contact.meeting.flexible")}</span>
-                  </div>
-                  <div className="flex items-center text-sm">
-                    <MapPin className="h-4 w-4 text-bdigital-cyan mr-2" />
-                    <span className="text-neutral-gray dark:text-slate-300">{_t("contact.meeting.location")}</span>
-                  </div>
-                  <div className="flex items-center text-sm">
-                    <CheckCircle className="h-4 w-4 text-bdigital-cyan mr-2" />
-                    <span className="text-neutral-gray dark:text-slate-300">{_t("contact.meeting.free")}</span>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
+          ) : (
+            <form
+              onSubmit={handleSubmit}
+              className="border-t border-slate-300 pt-8 dark:border-slate-700"
+            >
+              <h3 className="mb-8 text-2xl font-semibold text-bdigital-navy dark:text-white">
+                {t("contact.form.title")}
+              </h3>
+              <div className="grid gap-6 sm:grid-cols-2">
+                <label className="text-sm font-medium text-bdigital-navy dark:text-slate-200">
+                  {t("contact.name")} *
+                  <Input
+                    required
+                    value={formData.name}
+                    onChange={(e) => change("name", e.target.value)}
+                    placeholder={t("form.placeholder_full_name")}
+                    className={`mt-2 ${fieldClass}`}
+                  />
+                </label>
+                <label className="text-sm font-medium text-bdigital-navy dark:text-slate-200">
+                  {t("contact.email")} *
+                  <Input
+                    required
+                    type="email"
+                    value={formData.email}
+                    onChange={(e) => change("email", e.target.value)}
+                    placeholder={t("form.placeholder_email")}
+                    className={`mt-2 ${fieldClass}`}
+                  />
+                </label>
+                <label className="text-sm font-medium text-bdigital-navy dark:text-slate-200">
+                  {t("contact.company")}
+                  <Input
+                    value={formData.company}
+                    onChange={(e) => change("company", e.target.value)}
+                    placeholder={t("form.placeholder_company")}
+                    className={`mt-2 ${fieldClass}`}
+                  />
+                </label>
+                <label className="text-sm font-medium text-bdigital-navy dark:text-slate-200">
+                  {t("contact.phone")}
+                  <Input
+                    type="tel"
+                    value={formData.phone}
+                    onChange={(e) => change("phone", e.target.value)}
+                    placeholder={t("form.placeholder_phone")}
+                    className={`mt-2 ${fieldClass}`}
+                  />
+                </label>
+              </div>
+              <label className="mt-6 block text-sm font-medium text-bdigital-navy dark:text-slate-200">
+                {t("contact.message")} *
+                <Textarea
+                  required
+                  value={formData.message}
+                  onChange={(e) => change("message", e.target.value)}
+                  placeholder={t("form.placeholder_additional_info")}
+                  className="mt-2 min-h-36 resize-y rounded-md border-slate-300 bg-transparent p-4 focus-visible:border-bdigital-cyan focus-visible:ring-bdigital-cyan/20 dark:border-slate-700 dark:bg-transparent dark:text-white"
+                />
+              </label>
+              <Button
+                type="submit"
+                disabled={isSubmitting}
+                className="focus-ring mt-8 min-h-12 w-full rounded-md bg-bdigital-cyan font-semibold text-bdigital-navy shadow-none hover:bg-bdigital-cyan-light sm:w-auto sm:px-8"
+              >
+                <Send className="mr-2 h-4 w-4" aria-hidden="true" />
+                {isSubmitting ? t("contact.sending") : t("contact.send")}
+              </Button>
+              <p className="mt-4 text-xs leading-5 text-slate-500">
+                {t("contact.privacy")}
+              </p>
+              {error && (
+                <p className="mt-4 text-sm text-red-600" role="alert">
+                  {error}
+                </p>
+              )}
+            </form>
+          )}
         </div>
       </div>
     </section>

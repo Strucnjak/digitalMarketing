@@ -1,5 +1,18 @@
-import { Suspense, lazy, useEffect, type ReactElement, type ReactNode } from "react";
-import { Navigate, Outlet, useLocation, useParams, useRoutes, type RouteObject } from "react-router-dom";
+import {
+  Suspense,
+  lazy,
+  useEffect,
+  type ReactElement,
+  type ReactNode,
+} from "react";
+import {
+  Navigate,
+  Outlet,
+  useLocation,
+  useParams,
+  useRoutes,
+  type RouteObject,
+} from "react-router-dom";
 import { LanguageProvider, useLanguage } from "./components/LanguageContext";
 import { Navigation } from "./components/Navigation";
 import { useInitialState } from "./components/InitialStateContext";
@@ -23,41 +36,74 @@ import {
   parsePathname,
   type PageType,
 } from "./routing";
-import "./styles/mobile-quick-nav.css";
 
-const HeroSection = lazy(() => import("./components/HeroSection").then((mod) => ({ default: mod.HeroSection })));
+const HeroSection = lazy(() =>
+  import("./components/HeroSection").then((mod) => ({
+    default: mod.HeroSection,
+  })),
+);
 const ServicesSection = lazy(() =>
-  import("./components/ServicesSection").then((mod) => ({ default: mod.ServicesSection })),
+  import("./components/ServicesSection").then((mod) => ({
+    default: mod.ServicesSection,
+  })),
 );
 const PortfolioSection = lazy(() =>
-  import("./components/PortfolioSection").then((mod) => ({ default: mod.PortfolioSection })),
+  import("./components/PortfolioSection").then((mod) => ({
+    default: mod.PortfolioSection,
+  })),
 );
-const AboutSection = lazy(() => import("./components/AboutSection").then((mod) => ({ default: mod.AboutSection })));
+const AboutSection = lazy(() =>
+  import("./components/AboutSection").then((mod) => ({
+    default: mod.AboutSection,
+  })),
+);
 const TestimonialsSection = lazy(() =>
-  import("./components/TestimonialsSection").then((mod) => ({ default: mod.TestimonialsSection })),
+  import("./components/TestimonialsSection").then((mod) => ({
+    default: mod.TestimonialsSection,
+  })),
 );
-const ContactSection = lazy(() => import("./components/ContactSection").then((mod) => ({ default: mod.ContactSection })));
-const Footer = lazy(() => import("./components/Footer").then((mod) => ({ default: mod.Footer })));
-const MobileQuickNav = lazy(() => import("./components/MobileQuickNav").then((mod) => ({ default: mod.MobileQuickNav })));
-const FloatingConsultationButton = lazy(() =>
-  import("./components/FloatingConsultationButton").then((mod) => ({ default: mod.FloatingConsultationButton })),
+const ContactSection = lazy(() =>
+  import("./components/ContactSection").then((mod) => ({
+    default: mod.ContactSection,
+  })),
+);
+const Footer = lazy(() =>
+  import("./components/Footer").then((mod) => ({ default: mod.Footer })),
 );
 const WebDesignPage = lazy(() =>
-  import("./components/services/WebDesignPage").then((mod) => ({ default: mod.WebDesignPage })),
+  import("./components/services/WebDesignPage").then((mod) => ({
+    default: mod.WebDesignPage,
+  })),
 );
-const SEOPage = lazy(() => import("./components/services/SEOPage").then((mod) => ({ default: mod.SEOPage })));
+const SEOPage = lazy(() =>
+  import("./components/services/SEOPage").then((mod) => ({
+    default: mod.SEOPage,
+  })),
+);
 const SocialMediaPage = lazy(() =>
-  import("./components/services/SocialMediaPage").then((mod) => ({ default: mod.SocialMediaPage })),
+  import("./components/services/SocialMediaPage").then((mod) => ({
+    default: mod.SocialMediaPage,
+  })),
 );
 const BrandingPage = lazy(() =>
-  import("./components/services/BrandingPage").then((mod) => ({ default: mod.BrandingPage })),
+  import("./components/services/BrandingPage").then((mod) => ({
+    default: mod.BrandingPage,
+  })),
 );
-const StrategyPage = lazy(() => import("./components/services/StrategyPage").then((mod) => ({ default: mod.StrategyPage })));
+const StrategyPage = lazy(() =>
+  import("./components/services/StrategyPage").then((mod) => ({
+    default: mod.StrategyPage,
+  })),
+);
 const ServiceInquiryForm = lazy(() =>
-  import("./components/ServiceInquiryForm").then((mod) => ({ default: mod.ServiceInquiryForm })),
+  import("./components/ServiceInquiryForm").then((mod) => ({
+    default: mod.ServiceInquiryForm,
+  })),
 );
 const FreeConsultationPage = lazy(() =>
-  import("./components/FreeConsultationPage").then((mod) => ({ default: mod.FreeConsultationPage })),
+  import("./components/FreeConsultationPage").then((mod) => ({
+    default: mod.FreeConsultationPage,
+  })),
 );
 
 function PageLoader() {
@@ -82,7 +128,13 @@ function SectionLoader({ label }: { label: string }) {
   );
 }
 
-function SuspenseSection({ children, fallback }: { children: ReactNode; fallback: ReactNode }) {
+function SuspenseSection({
+  children,
+  fallback,
+}: {
+  children: ReactNode;
+  fallback: ReactNode;
+}) {
   return <Suspense fallback={fallback}>{children}</Suspense>;
 }
 
@@ -103,7 +155,8 @@ function SeoMetadataUpdater() {
     const locale = parsed.locale ?? language ?? defaultLocale;
     const { title, description } = getSeoMetadata(locale, parsed.page);
 
-    let canonicalCluster: ReturnType<typeof buildCanonicalCluster> | null = null;
+    let canonicalCluster: ReturnType<typeof buildCanonicalCluster> | null =
+      null;
     try {
       canonicalCluster = buildCanonicalCluster({
         currentUrl: new URL(window.location.href),
@@ -133,7 +186,8 @@ function SeoMetadataUpdater() {
       document.head.appendChild(canonicalTag);
     }
 
-    let fallbackCanonicalHref = canonicalTag.getAttribute("href") ?? window.location.href;
+    let fallbackCanonicalHref =
+      canonicalTag.getAttribute("href") ?? window.location.href;
     try {
       const resolved = new URL(fallbackCanonicalHref, window.location.origin);
       resolved.search = "";
@@ -246,9 +300,10 @@ function HomePage() {
 
 function AppLayout() {
   const location = useLocation();
-  const isHome = parsePathname(location.pathname).page === "home";
   const initialState = useInitialState();
-  const footerYear = initialState?.footerYear ? String(initialState.footerYear) : undefined;
+  const footerYear = initialState?.footerYear
+    ? String(initialState.footerYear)
+    : undefined;
 
   useEffect(() => {
     if (typeof window === "undefined") {
@@ -273,14 +328,6 @@ function AppLayout() {
         <Outlet />
       </main>
       <Suspense fallback={null}>
-        <FloatingConsultationButton />
-      </Suspense>
-      {isHome && (
-        <Suspense fallback={null}>
-          <MobileQuickNav />
-        </Suspense>
-      )}
-      <Suspense fallback={null}>
         <Footer initialYear={footerYear} />
       </Suspense>
     </div>
@@ -296,7 +343,10 @@ function LocalizedLayout() {
 
   return (
     <ThemeProvider>
-      <LanguageProvider initialLanguage={initialLanguage} localeFromRoute={routeLocale}>
+      <LanguageProvider
+        initialLanguage={initialLanguage}
+        localeFromRoute={routeLocale}
+      >
         <SeoMetadataUpdater />
         <AppLayout />
       </LanguageProvider>
@@ -350,7 +400,12 @@ export const appRouteObjects: RouteObject[] = [
   {
     path: "*",
     element: (
-      <Navigate to={buildLocalizedPath(defaultLocale, "home", { includeLocalePrefix: false })} replace />
+      <Navigate
+        to={buildLocalizedPath(defaultLocale, "home", {
+          includeLocalePrefix: false,
+        })}
+        replace
+      />
     ),
   },
 ];
