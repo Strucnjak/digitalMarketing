@@ -2,14 +2,13 @@ import { useLanguage } from "./LanguageContext";
 
 type TeamMember = {
   id: "marko" | "ana" | "stefan";
-  name: string;
   initials: string;
 };
 
 const team: TeamMember[] = [
-  { id: "marko", name: "Marko Petrović", initials: "MP" },
-  { id: "ana", name: "Ana Nikolić", initials: "AN" },
-  { id: "stefan", name: "Stefan Jovanović", initials: "SJ" },
+  { id: "marko", initials: "—" },
+  { id: "ana", initials: "—" },
+  { id: "stefan", initials: "—" },
 ];
 
 function TeamPortraitPlaceholder({
@@ -92,12 +91,12 @@ export function AboutSection() {
           {team.map((member) => (
             <article key={member.id} className="border-t border-white/20 pt-6">
               <TeamPortraitPlaceholder
-                name={member.name}
+                name={t(`about.team.${member.id}.name`)}
                 initials={member.initials}
                 label={t("about.team.image_placeholder")}
               />
               <h4 className="mt-5 text-xl font-semibold text-white">
-                {member.name}
+                {t(`about.team.${member.id}.name`)}
               </h4>
               <p className="mt-1 text-sm font-medium text-slate-400">
                 {t(`about.team.${member.id}.role`)}

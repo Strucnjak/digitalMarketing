@@ -13,7 +13,9 @@ interface LanguageContextType {
   t: (key: string) => string;
 }
 
-const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
+const LanguageContext = createContext<LanguageContextType | undefined>(
+  undefined,
+);
 
 const TRANSLATIONS: Record<Language, Record<string, string>> = {
   en,
@@ -70,7 +72,16 @@ export function LanguageProvider({
     setLanguageState(lang);
   };
 
-  const t = (key: string): string => translations[key] ?? key;
+  const t = (key: string): string => {
+    const localized = translations[key];
+    if (localized) return localized;
+
+    const fallback = TRANSLATIONS[defaultLocale][key];
+    if (import.meta.env.DEV) {
+      console.warn(`[i18n] Missing “${key}” for locale “${language}”.`);
+    }
+    return fallback ?? "";
+  };
 
   return (
     <LanguageContext.Provider value={{ language, setLanguage, t }}>
@@ -83,7 +94,7 @@ export function LanguageProvider({
 export function useLanguage() {
   const context = useContext(LanguageContext);
   if (context === undefined) {
-    throw new Error('useLanguage must be used within a LanguageProvider');
+    throw new Error("useLanguage must be used within a LanguageProvider");
   }
   return context;
 }

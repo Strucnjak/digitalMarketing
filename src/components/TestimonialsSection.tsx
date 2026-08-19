@@ -5,6 +5,7 @@ const testimonialIds = ["marko", "ana", "stefan"] as const;
 export function TestimonialsSection() {
   const { t } = useLanguage();
   const testimonials = testimonialIds.map((id) => ({
+    id,
     name: t(`testimonials.items.${id}.name`),
     role: t(`testimonials.items.${id}.role`),
     quote: t(`testimonials.items.${id}.quote`),
@@ -35,7 +36,7 @@ export function TestimonialsSection() {
 
         <div className="mt-24 grid gap-12 border-t border-slate-300 pt-10 dark:border-slate-700 md:grid-cols-2 lg:ml-auto lg:max-w-5xl">
           {testimonials.slice(1).map((testimonial) => (
-            <figure key={testimonial.name}>
+            <figure key={testimonial.id}>
               <blockquote className="text-lg leading-8 text-bdigital-navy dark:text-slate-200">
                 “{testimonial.quote}”
               </blockquote>

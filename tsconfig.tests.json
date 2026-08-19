@@ -13,6 +13,7 @@
   },
   "include": [
     "src/config/site.ts",
+    "src/config/seo-meta.ts",
     "src/routing.ts",
     "src/utils/seo.ts",
     "tests/seo-regression.test.ts",

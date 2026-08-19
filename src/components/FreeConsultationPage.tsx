@@ -1,31 +1,6 @@
-import { useState } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
+import { ArrowLeft, CheckCircle, Send } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { Button } from "./ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
-import { Input } from "./ui/input";
-import { Label } from "./ui/label";
-import { Textarea } from "./ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
-import { Checkbox } from "./ui/checkbox";
-import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
-import {
-  ArrowLeft,
-  CheckCircle,
-  Building,
-  User,
-  Mail,
-  Phone,
-  Globe,
-  MessageSquare,
-  AlertCircle,
-  Gift,
-  Calendar,
-  Clock,
-  Target,
-  Zap,
-  Users,
-  TrendingUp,
-} from "lucide-react";
 import { useLanguage } from "./LanguageContext";
 import { useActiveLocale } from "../hooks/useActiveLocale";
 import { buildLocalizedPath } from "../routing";
@@ -46,95 +21,132 @@ interface ConsultationFormData {
   newsletter: boolean;
 }
 
+const initialFormData: ConsultationFormData = {
+  fullName: "",
+  email: "",
+  phone: "",
+  company: "",
+  website: "",
+  businessType: "",
+  currentChallenges: "",
+  goals: "",
+  interestedServices: [],
+  preferredContact: "",
+  preferredTime: "",
+  additionalInfo: "",
+  newsletter: false,
+};
+
+const businessTypes = [
+  "startup",
+  "small_business",
+  "medium_business",
+  "large_business",
+  "freelancer",
+  "agency",
+  "non_profit",
+  "other",
+] as const;
+const serviceOptions = [
+  "web",
+  "seo",
+  "social",
+  "branding",
+  "strategy",
+] as const;
+const contactOptions = ["phone", "whatsapp", "video", "meeting"] as const;
+const timeOptions = ["morning", "afternoon", "evening", "flexible"] as const;
+
 export function FreeConsultationPage() {
   const navigate = useNavigate();
   const { activeLocale, includeLocalePrefix } = useActiveLocale();
   const { t, language } = useLanguage();
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [formData, setFormData] = useState(initialFormData);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const statusRef = useRef<HTMLDivElement>(null);
 
-  const [formData, setFormData] = useState<ConsultationFormData>({
-    fullName: "",
-    email: "",
-    phone: "",
-    company: "",
-    website: "",
-    businessType: "",
-    currentChallenges: "",
-    goals: "",
-    interestedServices: [],
-    preferredContact: "",
-    preferredTime: "",
-    additionalInfo: "",
-    newsletter: false,
+  useEffect(() => {
+    if (isSubmitted || submitError) statusRef.current?.focus();
+  }, [isSubmitted, submitError]);
+
+  const homePath = buildLocalizedPath(activeLocale, "home", {
+    includeLocalePrefix,
   });
+  const update = <K extends keyof ConsultationFormData>(
+    field: K,
+    value: ConsultationFormData[K],
+  ) => {
+    setFormData((current) => ({ ...current, [field]: value }));
+    setErrors((current) => ({ ...current, [field]: "" }));
+  };
+  const errorProps = (field: string) => ({
+    "aria-invalid": Boolean(errors[field]),
+    "aria-describedby": errors[field] ? `${field}-error` : undefined,
+  });
+  const errorMessage = (field: string) =>
+    errors[field] ? (
+      <p
+        id={`${field}-error`}
+        className="mt-2 text-sm text-red-600"
+        role="alert"
+      >
+        {errors[field]}
+      </p>
+    ) : null;
 
-  const updateFormData = (field: keyof ConsultationFormData, value: ConsultationFormData[keyof ConsultationFormData]) => {
-    setFormData((prev) => ({
-      ...prev,
-      [field]: value,
-    }));
-
-    // Clear error when user starts typing
-    if (errors[field]) {
-      setErrors((prev) => ({
-        ...prev,
-        [field]: "",
-      }));
+  const validate = () => {
+    const next: Record<string, string> = {};
+    if (!formData.fullName.trim()) next.fullName = t("form.required_name");
+    if (!formData.email.trim()) next.email = t("form.required_email");
+    else if (!/\S+@\S+\.\S+/.test(formData.email))
+      next.email = t("form.invalid_email");
+    if (!formData.company.trim()) next.company = t("form.required_company");
+    if (!formData.businessType)
+      next.businessType = t("form.required_business_type");
+    if (!formData.currentChallenges.trim())
+      next.currentChallenges = t("form.required_field");
+    if (!formData.goals.trim()) next.goals = t("form.required_field");
+    if (!formData.interestedServices.length)
+      next.interestedServices = t("form.required_services");
+    if (!formData.preferredContact)
+      next.preferredContact = t("form.required_contact");
+    setErrors(next);
+    const first = Object.keys(next)[0];
+    if (first === "interestedServices") {
+      document
+        .querySelector<HTMLInputElement>('input[name="interestedServices"]')
+        ?.focus();
+    } else if (first === "preferredContact") {
+      document
+        .querySelector<HTMLInputElement>('input[name="preferredContact"]')
+        ?.focus();
+    } else if (first) {
+      document.getElementById(first)?.focus();
     }
+    return !first;
   };
 
-  const validateForm = (): boolean => {
-    const newErrors: Record<string, string> = {};
-
-    if (!formData.fullName.trim()) newErrors.fullName = t("form.required_name");
-    if (!formData.email.trim()) newErrors.email = t("form.required_email");
-    else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = t("form.invalid_email");
-    if (!formData.company.trim()) newErrors.company = t("form.required_company");
-    if (!formData.businessType) newErrors.businessType = t("form.required_business_type");
-    if (!formData.currentChallenges.trim()) newErrors.currentChallenges = t("form.required_field");
-    if (!formData.goals.trim()) newErrors.goals = t("form.required_field");
-    if (formData.interestedServices.length === 0) newErrors.interestedServices = t("form.required_services");
-    if (!formData.preferredContact) newErrors.preferredContact = t("form.required_contact");
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleServicesChange = (service: string, checked: boolean) => {
-    setFormData((prev) => ({
-      ...prev,
-      interestedServices: checked ? [...prev.interestedServices, service] : prev.interestedServices.filter((s) => s !== service),
-    }));
-  };
-
-  const handleSubmit = async () => {
-    if (!validateForm()) return;
-
+  const handleSubmit = async (event: FormEvent) => {
+    event.preventDefault();
+    if (!validate()) return;
     setIsSubmitting(true);
     setSubmitError(null);
-
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/consultations`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/consultations`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ ...formData, language }),
         },
-        body: JSON.stringify({ ...formData, language }),
-      });
-
-      if (!response.ok) {
-        const data = await response.json().catch(() => null);
-        const message = data?.error || "Failed to submit consultation request";
-        throw new Error(message);
-      }
-
+      );
+      if (!response.ok) throw new Error(t("consultation.error.submit"));
       setIsSubmitted(true);
-    } catch (err) {
-      const message = err instanceof Error ? err.message : "Failed to submit consultation request";
-      setSubmitError(message);
+    } catch {
+      setSubmitError(t("consultation.error.submit"));
     } finally {
       setIsSubmitting(false);
     }
@@ -142,438 +154,367 @@ export function FreeConsultationPage() {
 
   if (isSubmitted) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white pb-16 pt-20 dark:from-bdigital-midnight dark:to-bdigital-dark-navy">
-        <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Card className="border-0 shadow-2xl overflow-visible dark:border dark:border-bdigital-dark-navy dark:bg-bdigital-night">
-            <CardContent className="p-8 text-center lg:p-12">
-              <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-green-100 dark:bg-emerald-900/40">
-                <CheckCircle className="h-10 w-10 text-green-600 dark:text-emerald-300" />
-              </div>
-              <h2 className="mb-4 text-2xl font-bold text-bdigital-navy lg:text-3xl dark:text-slate-100">Vaša besplatna konsultacija je zakazana!</h2>
-              <p className="mb-8 text-lg text-neutral-gray leading-relaxed dark:text-slate-300">
-                Hvala vam na interesu! Kontaktiraćemo vas u roku od 24 sata da zakazujemo termin za vašu besplatnu konsultaciju. Pripremićemo
-                personalizovanu analizu i strategiju za vaš digitalni uspeh.
-              </p>
-              <div className="mb-8 rounded-xl border border-bdigital-cyan/20 bg-bdigital-cyan/10 p-6 dark:border-bdigital-cyan/40 dark:bg-bdigital-cyan/5">
-                <h3 className="mb-3 text-lg font-semibold text-bdigital-navy dark:text-slate-100">Šta možete očekivati na konsultaciji:</h3>
-                <div className="grid grid-cols-1 gap-4 text-sm text-bdigital-navy sm:grid-cols-2 dark:text-slate-100">
-                  <div className="flex items-center gap-2">
-                    <Target className="h-4 w-4 text-bdigital-cyan-dark" />
-                    <span>Analiza trenutnog stanja</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <TrendingUp className="h-4 w-4 text-bdigital-cyan-dark" />
-                    <span>Strategija za rast</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Zap className="h-4 w-4 text-bdigital-cyan-dark" />
-                    <span>Konkretni saveti</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Users className="h-4 w-4 text-bdigital-cyan-dark" />
-                    <span>Personalizovana ponuda</span>
-                  </div>
-                </div>
-              </div>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button
-                  onClick={() => {
-                    const path = buildLocalizedPath(activeLocale, "home", { includeLocalePrefix });
-                    navigate(path);
-                  }}
-                  className="bg-bdigital-cyan text-bdigital-navy hover:bg-bdigital-cyan-light font-semibold px-8 py-3"
-                >
-                  {t("general.back_home")}
-                </Button>
-                <Button
-                  variant="outline"
-                  onClick={() => {
-                    setIsSubmitted(false);
-                    setFormData({
-                      fullName: "",
-                      email: "",
-                      phone: "",
-                      company: "",
-                      website: "",
-                      businessType: "",
-                      currentChallenges: "",
-                      goals: "",
-                      interestedServices: [],
-                      preferredContact: "",
-                      preferredTime: "",
-                      additionalInfo: "",
-                      newsletter: false,
-                    });
-                  }}
-                  className="border-bdigital-cyan-dark text-bdigital-cyan-dark hover:bg-bdigital-cyan hover:text-bdigital-navy font-semibold px-8 py-3 dark:text-bdigital-cyan dark:hover:text-slate-900"
-                >
-                  {t("form.new_consultation")}
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      </div>
-    );
-  }
-
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white pb-16 pt-20 dark:from-bdigital-midnight dark:to-bdigital-dark-navy">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="mb-8">
-          <Button
-            variant="ghost"
-            onClick={() => {
-              const path = buildLocalizedPath(activeLocale, "home", { includeLocalePrefix });
-              navigate(path);
-            }}
-            className="mb-6 -ml-2 text-bdigital-navy hover:text-bdigital-cyan-dark dark:text-slate-100 dark:hover:text-bdigital-cyan"
+      <main className="min-h-screen bg-white pb-20 pt-28 dark:bg-bdigital-midnight">
+        <div className="site-container max-w-3xl">
+          <div
+            ref={statusRef}
+            tabIndex={-1}
+            role="status"
+            className="border-y border-slate-300 py-16 outline-none dark:border-slate-700"
           >
-            <ArrowLeft className="h-4 w-4 mr-2" />
-            {t("general.back_home")}
-          </Button>
-
-          <div className="text-center mb-8">
-            <div className="flex items-center justify-center gap-3 mb-6">
-              <div className="w-16 h-16 bg-bdigital-cyan/10 rounded-2xl flex items-center justify-center">
-                <Gift className="h-8 w-8 text-bdigital-cyan-dark" />
-              </div>
-              <h1 className="text-4xl font-bold text-bdigital-navy sm:text-5xl lg:text-6xl dark:text-slate-100">
-                <span className="text-bdigital-cyan-dark dark:text-bdigital-cyan">Besplatna</span> konsultacija
-              </h1>
-            </div>
-            <p className="mb-8 max-w-3xl text-xl text-neutral-gray leading-relaxed mx-auto dark:text-slate-300">
-              Zakazite vašu besplatnu digitalnu konsultaciju sa našim ekspertima. Analiziraćemo vaš trenutni digitalni pristup i dati konkretne
-              preporuke za unapređenje.
+            <CheckCircle
+              className="h-9 w-9 text-emerald-600"
+              aria-hidden="true"
+            />
+            <h1 className="mt-7 text-4xl font-semibold tracking-tight text-bdigital-navy dark:text-white">
+              {t("consultation.success.title")}
+            </h1>
+            <p className="lead-copy mt-5 max-w-2xl">
+              {t("consultation.success.description")}
             </p>
-
-            {/* Benefits Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-              <div className="rounded-xl border border-gray-100 bg-white p-6 shadow-lg dark:border-bdigital-dark-navy dark:bg-bdigital-night">
-                <div className="w-12 h-12 bg-bdigital-cyan/10 rounded-xl flex items-center justify-center mx-auto mb-4">
-                  <Clock className="h-6 w-6 text-bdigital-cyan-dark" />
-                </div>
-                <h3 className="mb-2 font-semibold text-bdigital-navy dark:text-slate-100">45 minuta</h3>
-                <p className="text-sm text-neutral-gray dark:text-slate-300">Detaljne analize i konkretni saveti</p>
-              </div>
-              <div className="rounded-xl border border-gray-100 bg-white p-6 shadow-lg dark:border-bdigital-dark-navy dark:bg-bdigital-night">
-                <div className="w-12 h-12 bg-bdigital-cyan/10 rounded-xl flex items-center justify-center mx-auto mb-4">
-                  <Target className="h-6 w-6 text-bdigital-cyan-dark" />
-                </div>
-                <h3 className="mb-2 font-semibold text-bdigital-navy dark:text-slate-100">Personalizovano</h3>
-                <p className="text-sm text-neutral-gray dark:text-slate-300">Strategija prilagođena vašem biznisu</p>
-              </div>
-              <div className="rounded-xl border border-gray-100 bg-white p-6 shadow-lg dark:border-bdigital-dark-navy dark:bg-bdigital-night">
-                <div className="w-12 h-12 bg-bdigital-cyan/10 rounded-xl flex items-center justify-center mx-auto mb-4">
-                  <Gift className="h-6 w-6 text-bdigital-cyan-dark" />
-                </div>
-                <h3 className="mb-2 font-semibold text-bdigital-navy dark:text-slate-100">100% besplatno</h3>
-                <p className="text-sm text-neutral-gray dark:text-slate-300">Bez skrivenih troškova ili obaveza</p>
-              </div>
+            <h2 className="mt-10 font-semibold text-bdigital-navy dark:text-white">
+              {t("consultation.expect.title")}
+            </h2>
+            <ul className="mt-4 grid gap-3 text-slate-600 sm:grid-cols-2 dark:text-slate-300">
+              {["review", "strategy", "advice", "proposal"].map((item) => (
+                <li key={item}>— {t(`consultation.expect.${item}`)}</li>
+              ))}
+            </ul>
+            <div className="mt-10 flex flex-wrap gap-4">
+              <button
+                className="focus-ring min-h-12 rounded-md bg-bdigital-cyan px-6 font-semibold text-bdigital-navy"
+                onClick={() => navigate(homePath)}
+              >
+                {t("general.back_home")}
+              </button>
+              <button
+                className="focus-ring min-h-12 border-b border-slate-400 px-2 font-semibold text-bdigital-navy dark:text-white"
+                onClick={() => {
+                  setFormData(initialFormData);
+                  setIsSubmitted(false);
+                }}
+              >
+                {t("form.new_consultation")}
+              </button>
             </div>
           </div>
         </div>
+      </main>
+    );
+  }
 
-        <Card className="border-0 shadow-2xl overflow-visible dark:border dark:border-bdigital-dark-navy dark:bg-bdigital-night">
-          <CardHeader>
-            <CardTitle className="text-2xl text-bdigital-navy text-center dark:text-slate-100">Zakazivanje konsultacije</CardTitle>
-            <p className="text-center text-neutral-gray dark:text-slate-300">Popunite formu ispod da zakazujete vašu besplatnu konsultaciju</p>
-          </CardHeader>
-          <CardContent className="p-6 lg:p-8">
-            <div className="space-y-6">
-              {/* Contact Information */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <Label className="mb-2 flex items-center gap-2 text-bdigital-navy dark:text-slate-200">
-                    <User className="h-4 w-4" />
-                    Ime i prezime *
-                  </Label>
-                  <Input
-                    value={formData.fullName}
-                    onChange={(e) => updateFormData("fullName", e.target.value)}
-                    placeholder={t("form.placeholder_full_name")}
-                    className={`border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan dark:border-slate-700 dark:bg-slate-900/60 dark:text-slate-100 dark:placeholder:text-slate-500 ${
-                      errors.fullName ? "border-red-500" : ""
-                    }`}
-                  />
-                  {errors.fullName && (
-                    <div className="flex items-center mt-1 text-red-600 text-sm">
-                      <AlertCircle className="h-4 w-4 mr-1" />
-                      {errors.fullName}
-                    </div>
-                  )}
-                </div>
-                <div>
-                  <Label className="mb-2 flex items-center gap-2 text-bdigital-navy dark:text-slate-200">
-                    <Mail className="h-4 w-4" />
-                    Email adresa *
-                  </Label>
-                  <Input
-                    type="email"
-                    value={formData.email}
-                    onChange={(e) => updateFormData("email", e.target.value)}
-                    placeholder={t("form.placeholder_email")}
-                    className={`border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan dark:border-slate-700 dark:bg-slate-900/60 dark:text-slate-100 dark:placeholder:text-slate-500 ${
-                      errors.email ? "border-red-500" : ""
-                    }`}
-                  />
-                  {errors.email && (
-                    <div className="flex items-center mt-1 text-red-600 text-sm">
-                      <AlertCircle className="h-4 w-4 mr-1" />
-                      {errors.email}
-                    </div>
-                  )}
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <Label className="mb-2 flex items-center gap-2 text-bdigital-navy dark:text-slate-200">
-                    <Phone className="h-4 w-4" />
-                    Telefon *
-                  </Label>
-                  <Input
-                    value={formData.phone}
-                    onChange={(e) => updateFormData("phone", e.target.value)}
-                    placeholder={t("form.placeholder_phone")}
-                    className="border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan dark:border-slate-700 dark:bg-slate-900/60 dark:text-slate-100 dark:placeholder:text-slate-500"
-                  />
-                </div>
-                <div>
-                  <Label className="mb-2 flex items-center gap-2 text-bdigital-navy dark:text-slate-200">
-                    <Building className="h-4 w-4" />
-                    Kompanija/Organizacija *
-                  </Label>
-                  <Input
-                    value={formData.company}
-                    onChange={(e) => updateFormData("company", e.target.value)}
-                    placeholder={t("form.placeholder_company")}
-                    className={`border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan dark:border-slate-700 dark:bg-slate-900/60 dark:text-slate-100 dark:placeholder:text-slate-500 ${
-                      errors.company ? "border-red-500" : ""
-                    }`}
-                  />
-                  {errors.company && (
-                    <div className="flex items-center mt-1 text-red-600 text-sm">
-                      <AlertCircle className="h-4 w-4 mr-1" />
-                      {errors.company}
-                    </div>
-                  )}
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <Label className="mb-2 flex items-center gap-2 text-bdigital-navy dark:text-slate-200">
-                    <Globe className="h-4 w-4" />
-                    Website (ako postoji)
-                  </Label>
-                  <Input
-                    value={formData.website}
-                    onChange={(e) => updateFormData("website", e.target.value)}
-                    placeholder={t("form.placeholder_website")}
-                    className="border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan dark:border-slate-700 dark:bg-slate-900/60 dark:text-slate-100 dark:placeholder:text-slate-500"
-                  />
-                </div>
-                <div className="relative z-20">
-                  <Label className="mb-2 block text-bdigital-navy dark:text-slate-200">Tip biznisa *</Label>
-                  <Select value={formData.businessType} onValueChange={(value) => updateFormData("businessType", value)}>
-                    <SelectTrigger
-                      className={`border-gray-300 focus:border-bdigital-cyan dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 ${
-                        errors.businessType ? "border-red-500" : ""
-                      }`}
-                    >
-                      <SelectValue placeholder={t("form.placeholder_business_type")} />
-                    </SelectTrigger>
-                    <SelectContent className="border border-gray-200 bg-white text-bdigital-navy shadow-xl dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100">
-                      <SelectItem value="startup">Startup</SelectItem>
-                      <SelectItem value="small-business">Malo preduzeće</SelectItem>
-                      <SelectItem value="medium-business">Srednje preduzeće</SelectItem>
-                      <SelectItem value="large-business">Veliko preduzeće</SelectItem>
-                      <SelectItem value="freelancer">Freelancer</SelectItem>
-                      <SelectItem value="agency">Agencija</SelectItem>
-                      <SelectItem value="non-profit">Non-profit organizacija</SelectItem>
-                      <SelectItem value="other">Ostalo</SelectItem>
-                    </SelectContent>
-                  </Select>
-                  {errors.businessType && (
-                    <div className="flex items-center mt-1 text-red-600 text-sm">
-                      <AlertCircle className="h-4 w-4 mr-1" />
-                      {errors.businessType}
-                    </div>
-                  )}
-                </div>
-              </div>
-
-              {/* Business Challenges */}
-              <div>
-                <Label className="mb-2 block text-bdigital-navy dark:text-slate-200">Trenutni digitalni izazovi *</Label>
-                <Textarea
-                  value={formData.currentChallenges}
-                  onChange={(e) => updateFormData("currentChallenges", e.target.value)}
-                  placeholder={t("form.placeholder_current_challenges")}
-                  className={`min-h-[100px] resize-none border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan dark:border-slate-700 dark:bg-slate-900/60 dark:text-slate-100 dark:placeholder:text-slate-500 ${
-                    errors.currentChallenges ? "border-red-500" : ""
-                  }`}
-                />
-                {errors.currentChallenges && (
-                  <div className="flex items-center mt-1 text-red-600 text-sm">
-                    <AlertCircle className="h-4 w-4 mr-1" />
-                    {errors.currentChallenges}
-                  </div>
-                )}
-              </div>
-
-              {/* Goals */}
-              <div>
-                <Label className="mb-2 block text-bdigital-navy dark:text-slate-200">Vaši ciljevi *</Label>
-                <Textarea
-                  value={formData.goals}
-                  onChange={(e) => updateFormData("goals", e.target.value)}
-                  placeholder={t("form.placeholder_goals")}
-                  className={`min-h-[100px] resize-none border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan dark:border-slate-700 dark:bg-slate-900/60 dark:text-slate-100 dark:placeholder:text-slate-500 ${
-                    errors.goals ? "border-red-500" : ""
-                  }`}
-                />
-                {errors.goals && (
-                  <div className="flex items-center mt-1 text-red-600 text-sm">
-                    <AlertCircle className="h-4 w-4 mr-1" />
-                    {errors.goals}
-                  </div>
-                )}
-              </div>
-
-              {/* Interested Services */}
-              <div>
-                <Label className="mb-3 block text-bdigital-navy dark:text-slate-200">Usluge koje vas zanimaju * (možete odabrati više)</Label>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  {[
-                    "Web design & development",
-                    "SEO optimizacija",
-                    "Social media marketing",
-                    "Google Ads kampanje",
-                    "Branding & logo dizajn",
-                    "Content marketing",
-                    "Email marketing",
-                    "Marketing strategija",
-                  ].map((service) => (
-                    <div key={service} className="flex items-center space-x-2">
-                      <Checkbox
-                        checked={formData.interestedServices.includes(service)}
-                        onCheckedChange={(checked) => handleServicesChange(service, checked as boolean)}
-                        className="border-gray-300 dark:border-slate-700"
-                      />
-                      <Label className="text-sm font-normal text-neutral-gray dark:text-slate-300">{service}</Label>
-                    </div>
-                  ))}
-                </div>
-                {errors.interestedServices && (
-                  <div className="flex items-center mt-2 text-red-600 text-sm">
-                    <AlertCircle className="h-4 w-4 mr-1" />
-                    {errors.interestedServices}
-                  </div>
-                )}
-              </div>
-
-              {/* Contact Preferences */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <Label className="mb-3 block text-bdigital-navy dark:text-slate-200">Preferirani način kontakta *</Label>
-                  <RadioGroup value={formData.preferredContact} onValueChange={(value) => updateFormData("preferredContact", value)}>
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="phone" />
-                      <Label className="text-neutral-gray dark:text-slate-300">Telefon</Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="whatsapp" />
-                      <Label className="text-neutral-gray dark:text-slate-300">WhatsApp</Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="video-call" />
-                      <Label className="text-neutral-gray dark:text-slate-300">Video poziv (Zoom/Meet)</Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="meeting" />
-                      <Label className="text-neutral-gray dark:text-slate-300">Lični sastanak</Label>
-                    </div>
-                  </RadioGroup>
-                  {errors.preferredContact && (
-                    <div className="flex items-center mt-2 text-red-600 text-sm">
-                      <AlertCircle className="h-4 w-4 mr-1" />
-                      {errors.preferredContact}
-                    </div>
-                  )}
-                </div>
-                <div className="relative z-20">
-                  <Label className="mb-2 block text-bdigital-navy dark:text-slate-200">Preferirano vreme</Label>
-                  <Select value={formData.preferredTime} onValueChange={(value) => updateFormData("preferredTime", value)}>
-                    <SelectTrigger className="border-gray-300 focus:border-bdigital-cyan dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100">
-                      <SelectValue placeholder={t("form.placeholder_preferred_time")} />
-                    </SelectTrigger>
-                    <SelectContent className="border border-gray-200 bg-white text-bdigital-navy shadow-xl dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100">
-                      <SelectItem value="morning">Ujutru (09:00-12:00)</SelectItem>
-                      <SelectItem value="afternoon">Popodne (12:00-16:00)</SelectItem>
-                      <SelectItem value="evening">Uveče (16:00-19:00)</SelectItem>
-                      <SelectItem value="flexible">Fleksibilno</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-              </div>
-
-              {/* Additional Info */}
-              <div>
-                <Label className="mb-2 flex items-center gap-2 text-bdigital-navy dark:text-slate-200">
-                  <MessageSquare className="h-4 w-4" />
-                  Dodatne informacije
-                </Label>
-                <Textarea
-                  value={formData.additionalInfo}
-                  onChange={(e) => updateFormData("additionalInfo", e.target.value)}
-                  placeholder={t("form.placeholder_additional_info_consult")}
-                  className="min-h-[80px] resize-none border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan dark:border-slate-700 dark:bg-slate-900/60 dark:text-slate-100 dark:placeholder:text-slate-500"
-                />
-              </div>
-
-              {/* Newsletter */}
-              <div className="flex items-center space-x-2">
-                <Checkbox
-                  checked={formData.newsletter}
-                  onCheckedChange={(checked) => updateFormData("newsletter", checked)}
-                  className="border-gray-300 dark:border-slate-700"
-                />
-                <Label className="text-sm font-normal text-neutral-gray dark:text-slate-300">
-                  Želim da primam newsletter sa digitalnim marketing savetima
-                </Label>
-              </div>
-
-              {/* Submit Button */}
-              <div className="border-t border-gray-200 pt-6 dark:border-bdigital-dark-navy">
-                <Button
-                  onClick={handleSubmit}
-                  disabled={isSubmitting}
-                  className="w-full bg-bdigital-cyan text-bdigital-navy hover:bg-bdigital-cyan-light font-semibold py-4 text-lg"
-                >
-                  {isSubmitting ? (
-                    <>
-                      <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-bdigital-navy mr-2"></div>
-                      {t("form.scheduling")}
-                    </>
-                  ) : (
-                    <>
-                      <Calendar className="h-5 w-5 mr-2" />
-                      {t("form.submit_consultation")}
-                    </>
-                  )}
-                </Button>
-                <p className="mt-3 text-center text-sm text-neutral-gray dark:text-slate-400">
-                  Kontaktiraćemo vas u roku od 24 sata da potvrdimo termin
-                </p>
-                {submitError && <p className="text-red-500 text-sm text-center mt-4">{submitError}</p>}
-              </div>
+  const fieldClass =
+    "mt-2 min-h-12 w-full rounded-md border border-slate-300 bg-transparent px-4 text-bdigital-navy focus:border-bdigital-cyan focus:outline-none focus:ring-2 focus:ring-bdigital-cyan/20 dark:border-slate-700 dark:text-white";
+  return (
+    <main className="min-h-screen bg-white pb-20 pt-24 dark:bg-bdigital-midnight">
+      <div className="site-container max-w-5xl">
+        <button
+          className="focus-ring inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-bdigital-navy dark:text-white"
+          onClick={() => navigate(homePath)}
+        >
+          <ArrowLeft className="h-4 w-4" aria-hidden="true" />
+          {t("general.back_home")}
+        </button>
+        <header className="mt-12 grid gap-8 border-b border-slate-300 pb-14 dark:border-slate-700 lg:grid-cols-12">
+          <div className="lg:col-span-8">
+            <p className="eyebrow">{t("consultation.eyebrow")}</p>
+            <h1 className="display-title mt-7 text-bdigital-navy dark:text-white">
+              {t("consultation.title")}
+            </h1>
+          </div>
+          <p className="lead-copy lg:col-span-4 lg:self-end">
+            {t("consultation.intro")}
+          </p>
+        </header>
+        <section
+          aria-labelledby="benefits-title"
+          className="grid border-b border-slate-300 dark:border-slate-700 md:grid-cols-3"
+        >
+          <h2 id="benefits-title" className="sr-only">
+            {t("consultation.benefits.title")}
+          </h2>
+          {["duration", "tailored", "free"].map((item) => (
+            <div
+              key={item}
+              className="border-b border-slate-200 py-8 last:border-0 md:border-b-0 md:border-r md:px-8 md:first:pl-0 md:last:border-r-0"
+            >
+              <h3 className="font-semibold text-bdigital-navy dark:text-white">
+                {t(`consultation.benefit.${item}.title`)}
+              </h3>
+              <p className="mt-2 text-sm leading-6 text-slate-500 dark:text-slate-400">
+                {t(`consultation.benefit.${item}.description`)}
+              </p>
             </div>
-          </CardContent>
-        </Card>
+          ))}
+        </section>
+
+        <form
+          onSubmit={handleSubmit}
+          noValidate
+          className="mt-16"
+          aria-labelledby="consultation-form-title"
+        >
+          <h2
+            id="consultation-form-title"
+            className="section-title text-bdigital-navy dark:text-white"
+          >
+            {t("consultation.form.title")}
+          </h2>
+          <p className="mt-3 text-slate-500 dark:text-slate-400">
+            {t("consultation.form.description")}
+          </p>
+          <p className="mt-3 text-sm text-slate-500">
+            {t("consultation.form.required_note")}
+          </p>
+          <div className="mt-10 grid gap-6 sm:grid-cols-2">
+            {(
+              [
+                [
+                  "fullName",
+                  "text",
+                  "form.full_name",
+                  "form.placeholder_full_name",
+                  true,
+                ],
+                [
+                  "email",
+                  "email",
+                  "form.email",
+                  "form.placeholder_email",
+                  true,
+                ],
+                ["phone", "tel", "form.phone", "form.placeholder_phone", false],
+                [
+                  "company",
+                  "text",
+                  "form.company",
+                  "form.placeholder_company",
+                  true,
+                ],
+                [
+                  "website",
+                  "url",
+                  "form.website",
+                  "form.placeholder_website",
+                  false,
+                ],
+              ] as const
+            ).map(([field, type, label, placeholder, required]) => (
+              <div key={field}>
+                <label
+                  htmlFor={field}
+                  className="text-sm font-medium text-bdigital-navy dark:text-slate-200"
+                >
+                  {t(label)}
+                </label>
+                <input
+                  id={field}
+                  type={type}
+                  required={required}
+                  value={formData[field]}
+                  onChange={(e) => update(field, e.target.value)}
+                  placeholder={t(placeholder)}
+                  className={fieldClass}
+                  {...errorProps(field)}
+                />
+                {errorMessage(field)}
+              </div>
+            ))}
+            <div>
+              <label
+                htmlFor="businessType"
+                className="text-sm font-medium text-bdigital-navy dark:text-slate-200"
+              >
+                {t("consultation.form.business_type")} *
+              </label>
+              <select
+                id="businessType"
+                required
+                value={formData.businessType}
+                onChange={(e) => update("businessType", e.target.value)}
+                className={fieldClass}
+                {...errorProps("businessType")}
+              >
+                <option value="">{t("form.placeholder_business_type")}</option>
+                {businessTypes.map((item) => (
+                  <option key={item} value={item}>
+                    {t(`consultation.business_type.${item}`)}
+                  </option>
+                ))}
+              </select>
+              {errorMessage("businessType")}
+            </div>
+          </div>
+          <div className="mt-6">
+            <label
+              htmlFor="currentChallenges"
+              className="text-sm font-medium text-bdigital-navy dark:text-slate-200"
+            >
+              {t("consultation.form.challenges")} *
+            </label>
+            <textarea
+              id="currentChallenges"
+              required
+              value={formData.currentChallenges}
+              onChange={(e) => update("currentChallenges", e.target.value)}
+              placeholder={t("form.placeholder_current_challenges")}
+              className={`${fieldClass} min-h-28 py-3`}
+              {...errorProps("currentChallenges")}
+            />
+            {errorMessage("currentChallenges")}
+          </div>
+          <div className="mt-6">
+            <label
+              htmlFor="goals"
+              className="text-sm font-medium text-bdigital-navy dark:text-slate-200"
+            >
+              {t("consultation.form.goals")} *
+            </label>
+            <textarea
+              id="goals"
+              required
+              value={formData.goals}
+              onChange={(e) => update("goals", e.target.value)}
+              placeholder={t("form.placeholder_goals")}
+              className={`${fieldClass} min-h-28 py-3`}
+              {...errorProps("goals")}
+            />
+            {errorMessage("goals")}
+          </div>
+          <fieldset
+            className="mt-8"
+            aria-describedby={
+              errors.interestedServices ? "interestedServices-error" : undefined
+            }
+          >
+            <legend className="text-sm font-medium text-bdigital-navy dark:text-slate-200">
+              {t("consultation.form.services")} *
+            </legend>
+            <div className="mt-4 grid gap-3 sm:grid-cols-2">
+              {serviceOptions.map((service) => (
+                <label
+                  key={service}
+                  className="flex min-h-11 items-center gap-3 text-slate-600 dark:text-slate-300"
+                >
+                  <input
+                    type="checkbox"
+                    name="interestedServices"
+                    checked={formData.interestedServices.includes(service)}
+                    onChange={(e) =>
+                      update(
+                        "interestedServices",
+                        e.target.checked
+                          ? [...formData.interestedServices, service]
+                          : formData.interestedServices.filter(
+                              (item) => item !== service,
+                            ),
+                      )
+                    }
+                  />
+                  {t(`services.${service}.title`)}
+                </label>
+              ))}
+            </div>
+            {errorMessage("interestedServices")}
+          </fieldset>
+          <div className="mt-8 grid gap-8 sm:grid-cols-2">
+            <fieldset
+              aria-describedby={
+                errors.preferredContact ? "preferredContact-error" : undefined
+              }
+            >
+              <legend className="text-sm font-medium text-bdigital-navy dark:text-slate-200">
+                {t("consultation.form.preferred_contact")} *
+              </legend>
+              <div className="mt-4 space-y-2">
+                {contactOptions.map((option) => (
+                  <label
+                    key={option}
+                    className="flex min-h-11 items-center gap-3 text-slate-600 dark:text-slate-300"
+                  >
+                    <input
+                      type="radio"
+                      name="preferredContact"
+                      required
+                      value={option}
+                      checked={formData.preferredContact === option}
+                      onChange={(e) =>
+                        update("preferredContact", e.target.value)
+                      }
+                    />
+                    {t(`consultation.contact.${option}`)}
+                  </label>
+                ))}
+              </div>
+              {errorMessage("preferredContact")}
+            </fieldset>
+            <div>
+              <label
+                htmlFor="preferredTime"
+                className="text-sm font-medium text-bdigital-navy dark:text-slate-200"
+              >
+                {t("consultation.form.preferred_time")}
+              </label>
+              <select
+                id="preferredTime"
+                value={formData.preferredTime}
+                onChange={(e) => update("preferredTime", e.target.value)}
+                className={fieldClass}
+              >
+                <option value="">{t("form.placeholder_preferred_time")}</option>
+                {timeOptions.map((option) => (
+                  <option key={option} value={option}>
+                    {t(`consultation.time.${option}`)}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+          <div className="mt-8">
+            <label
+              htmlFor="additionalInfo"
+              className="text-sm font-medium text-bdigital-navy dark:text-slate-200"
+            >
+              {t("form.additional_info_label")}
+            </label>
+            <textarea
+              id="additionalInfo"
+              value={formData.additionalInfo}
+              onChange={(e) => update("additionalInfo", e.target.value)}
+              placeholder={t("form.placeholder_additional_info_consult")}
+              className={`${fieldClass} min-h-24 py-3`}
+            />
+          </div>
+          <label className="mt-6 flex min-h-11 items-center gap-3 text-sm text-slate-600 dark:text-slate-300">
+            <input
+              type="checkbox"
+              checked={formData.newsletter}
+              onChange={(e) => update("newsletter", e.target.checked)}
+            />
+            {t("consultation.form.newsletter")}
+          </label>
+          {submitError && (
+            <div
+              ref={statusRef}
+              tabIndex={-1}
+              role="alert"
+              className="mt-6 border-l-2 border-red-600 pl-4 text-sm text-red-600 outline-none"
+            >
+              {submitError}
+            </div>
+          )}
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="focus-ring mt-8 inline-flex min-h-12 items-center rounded-md bg-bdigital-cyan px-7 font-semibold text-bdigital-navy disabled:opacity-60"
+          >
+            <Send className="mr-2 h-4 w-4" aria-hidden="true" />
+            {isSubmitting
+              ? t("form.scheduling")
+              : t("form.submit_consultation")}
+          </button>
+        </form>
       </div>
-    </div>
+    </main>
   );
 }

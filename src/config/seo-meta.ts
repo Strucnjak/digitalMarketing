@@ -13,12 +13,28 @@ const SOCIAL_IMAGE_BY_LOCALE: Record<Locale, string[]> = {
   en: [`${SITE_BASE_URL}/social-share-en.svg`],
 };
 
-const DEFAULT_SEO_METADATA: SeoMetadata = {
-  title: "DIAL Digital Agency",
-  description:
-    "DIAL Digital is a full-service digital agency delivering design, marketing, and growth solutions.",
-  images: SOCIAL_IMAGE_BY_LOCALE[defaultLocale],
+const DEFAULT_SEO_METADATA_BY_LOCALE: Record<Locale, SeoMetadata> = {
+  me: {
+    title: "DIAL Digital agencija",
+    description:
+      "DIAL Digital je digitalna agencija iz Crne Gore za dizajn, marketing i strategiju.",
+    images: SOCIAL_IMAGE_BY_LOCALE.me,
+  },
+  en: {
+    title: "DIAL Digital Agency",
+    description:
+      "DIAL Digital is a digital agency in Montenegro for design, marketing, and strategy.",
+    images: SOCIAL_IMAGE_BY_LOCALE.en,
+  },
+  fr: {
+    title: "Agence DIAL Digital",
+    description:
+      "DIAL Digital est une agence digitale au Monténégro spécialisée dans le design, le marketing et la stratégie.",
+    images: SOCIAL_IMAGE_BY_LOCALE.fr,
+  },
 };
+
+const DEFAULT_SEO_METADATA = DEFAULT_SEO_METADATA_BY_LOCALE[defaultLocale];
 
 const SEO_METADATA: Record<Locale, Partial<Record<PageType, SeoMetadata>>> = {
   me: {
@@ -65,7 +81,8 @@ const SEO_METADATA: Record<Locale, Partial<Record<PageType, SeoMetadata>>> = {
   },
   fr: {
     home: {
-      title: "Agence DIAL Digital | Marketing digital et conception web au Monténégro",
+      title:
+        "Agence DIAL Digital | Marketing digital et conception web au Monténégro",
       description:
         "DIAL Digital est une agence full-service qui fournit des solutions de design, de marketing et de croissance au Monténégro.",
     },
@@ -107,7 +124,8 @@ const SEO_METADATA: Record<Locale, Partial<Record<PageType, SeoMetadata>>> = {
   },
   en: {
     home: {
-      title: "DIAL Digital Agency | Digital Marketing & Web Design in Montenegro",
+      title:
+        "DIAL Digital Agency | Digital Marketing & Web Design in Montenegro",
       description:
         "DIAL Digital is a full-service digital agency delivering design, marketing, and growth solutions across Montenegro.",
     },
@@ -155,16 +173,14 @@ export function getSeoMetadata(locale: Locale, page: PageType): SeoMetadata {
     return withSeoDefaults(locale, localized);
   }
 
-  const fallback = SEO_METADATA[defaultLocale]?.[page];
-  if (fallback) {
-    return withSeoDefaults(locale, fallback);
-  }
-
-  return withSeoDefaults(locale, DEFAULT_SEO_METADATA);
+  return withSeoDefaults(locale, DEFAULT_SEO_METADATA_BY_LOCALE[locale]);
 }
 
 function withSeoDefaults(locale: Locale, metadata: SeoMetadata): SeoMetadata {
-  const localeImages = SOCIAL_IMAGE_BY_LOCALE[locale] ?? SOCIAL_IMAGE_BY_LOCALE[defaultLocale] ?? [];
+  const localeImages =
+    SOCIAL_IMAGE_BY_LOCALE[locale] ??
+    SOCIAL_IMAGE_BY_LOCALE[defaultLocale] ??
+    [];
   return {
     ...metadata,
     images: metadata.images ?? localeImages,
