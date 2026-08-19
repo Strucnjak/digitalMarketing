@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { Button } from "./ui/button";
@@ -13,6 +13,8 @@ import { Step3 } from "./serviceInquirySteps/Step3";
 import { Step4 } from "./serviceInquirySteps/Step4";
 import { useActiveLocale } from "../hooks/useActiveLocale";
 import { buildLocalizedPath } from "../routing";
+import { submitLead } from "../utils/leadSubmission";
+import { emitCommercialEvent } from "../utils/measurement";
 
 export interface InquiryFormData {
   // Contact Information
@@ -63,6 +65,7 @@ export function ServiceInquiryForm() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const submissionInProgress = useRef(false);
 
   const [formData, setFormData] = useState<InquiryFormData>({
     fullName: "",
@@ -197,35 +200,24 @@ export function ServiceInquiryForm() {
   };
 
   const handleSubmit = async () => {
-    if (!validateStep(4)) return;
+    if (submissionInProgress.current || isSubmitted || !validateStep(4)) return;
 
+    submissionInProgress.current = true;
     setIsSubmitting(true);
     setSubmitError(null);
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/service-inquiries`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ ...formData, language }),
-      });
-
-      if (!response.ok) {
-        const data = await response.json().catch(() => null);
-        const message = data?.error || "Failed to submit inquiry";
-        throw new Error(message);
-      }
-
+      await submitLead("/api/service-inquiries", { ...formData, language });
       setIsSubmitted(true);
+      emitCommercialEvent({ event: "service_inquiry_submission_success", locale: language });
 
       // Clear stored service/package info
       localStorage.removeItem("selectedService");
       localStorage.removeItem("selectedPackage");
-    } catch (err) {
-      const message = err instanceof Error ? err.message : "Failed to submit inquiry";
-      setSubmitError(message);
+    } catch {
+      setSubmitError(t("form.submit_error"));
     } finally {
+      submissionInProgress.current = false;
       setIsSubmitting(false);
     }
   };

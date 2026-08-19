@@ -6,6 +6,7 @@ import { Textarea } from "./ui/textarea";
 import { useLanguage } from "./LanguageContext";
 import { ADDRESS, EMAIL, PHONE } from "../config/contact";
 import { submitLead } from "../utils/leadSubmission";
+import { emitCommercialEvent } from "../utils/measurement";
 
 export function ContactSection() {
   const { t, language } = useLanguage();
@@ -39,6 +40,7 @@ export function ContactSection() {
         language,
       });
       setIsSubmitted(true);
+      emitCommercialEvent({ event: "contact_submission_success", locale: language });
       setFormData({ name: "", email: "", company: "", message: "", phone: "" });
     } catch {
       setError(t("contact.error.submit"));

@@ -93,3 +93,6 @@ assertEqual(
   "Agence DIAL Digital",
   "Unmapped French pages should use the safe French metadata default",
 );
+
+assertEqual(parsePathname("/en/does-not-exist").isKnown, false, "Unknown localized paths must be classified as 404s");
+assertEqual(parsePathname("/fr/services/referencement").isKnown, true, "Known localized deep links must not be classified as 404s");

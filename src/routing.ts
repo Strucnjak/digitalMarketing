@@ -89,6 +89,7 @@ export interface ParsedPath {
   locale: Locale;
   hasLocalePrefix: boolean;
   page: PageType;
+  isKnown: boolean;
 }
 
 export function isLocale(value: string | undefined | null): value is Locale {
@@ -118,24 +119,24 @@ export function parsePathname(pathname: string): ParsedPath {
     .filter((segment) => segment.length > 0);
 
   if (segments.length === 0) {
-    return { locale: defaultLocale, hasLocalePrefix: false, page: "home" };
+    return { locale: defaultLocale, hasLocalePrefix: false, page: "home", isKnown: true };
   }
 
   const [first, ...rest] = segments;
   if (isLocale(first)) {
     const locale = first;
-    const page = resolvePage(rest, locale) ?? resolvePage(rest, defaultLocale) ?? "home";
-    return { locale, hasLocalePrefix: true, page };
+    const resolved = resolvePage(rest, locale) ?? resolvePage(rest, defaultLocale);
+    return { locale, hasLocalePrefix: true, page: resolved ?? "home", isKnown: resolved !== null };
   }
 
   for (const locale of orderedLocales) {
     const page = resolvePage(segments, locale);
     if (page) {
-      return { locale, hasLocalePrefix: false, page };
+      return { locale, hasLocalePrefix: false, page, isKnown: true };
     }
   }
 
-  return { locale: defaultLocale, hasLocalePrefix: false, page: "home" };
+  return { locale: defaultLocale, hasLocalePrefix: false, page: "home", isKnown: false };
 }
 
 export function enumerateStaticPaths(): string[] {

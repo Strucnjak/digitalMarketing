@@ -6,6 +6,7 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 import type { ServerResponse } from "node:http";
 import type { Manifest, RenderResult } from "./src/entry-server";
 import { createServer as createViteServer, type ViteDevServer } from "vite";
+import { parsePathname } from "./src/routing";
 
 const currentDir = path.dirname(fileURLToPath(import.meta.url));
 const isProduction = process.env.NODE_ENV === "production";
@@ -52,7 +53,7 @@ async function handleRequest({
 
     const html = injectRenderedApp(template, rendered);
 
-    res.statusCode = 200;
+    res.statusCode = parsePathname(url.pathname).isKnown ? 200 : 404;
     res.setHeader("Content-Type", "text/html");
     res.end(html);
   } catch (error) {
