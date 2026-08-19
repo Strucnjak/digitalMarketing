@@ -638,5 +638,13 @@
   "not_found.title": "Stranica nije pronađena",
   "not_found.description": "Adresa koju ste otvorili ne vodi do postojeće stranice.",
   "not_found.home": "Nazad na početnu",
-  "form.submit_error": "Slanje upita nije uspjelo. Pokušajte ponovo."
+  "form.submit_error": "Slanje upita nije uspjelo. Pokušajte ponovo.",
+  "lead.error.validation": "Provjerite označena polja.",
+  "lead.error.field": "Provjerite ovu vrijednost.",
+  "lead.error.rate_limit": "Previše zahtjeva. Sačekajte i pokušajte ponovo.",
+  "lead.error.server": "Nijesmo mogli prihvatiti zahtjev. Pokušajte ponovo.",
+  "lead.error.timeout": "Zahtjev traje predugo. Ishod može biti neizvjestan; sačekajte prije ponovnog pokušaja.",
+  "lead.error.network": "Provjerite internet vezu i pokušajte ponovo.",
+  "lead.error.configuration": "Slanje upita nije podešeno. Kontaktirajte nas direktno.",
+  "lead.error.generic": "Nijesmo mogli prihvatiti zahtjev. Pokušajte ponovo."
 }

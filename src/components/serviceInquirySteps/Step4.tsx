@@ -85,7 +85,7 @@ export function Step4({ formData, errors, touched, updateFormData, handleBlur }:
       <div className="flex items-center space-x-2">
         <Checkbox
           checked={formData.newsletter}
-          onCheckedChange={(checked) => updateFormData("newsletter", checked)}
+          onCheckedChange={(checked) => updateFormData("newsletter", checked === true)}
           className="border-gray-300 dark:border-slate-700"
         />
         <Label className="text-sm font-normal text-neutral-gray dark:text-slate-300">{t("form.newsletter_label")}</Label>

@@ -5,7 +5,8 @@ import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import { useLanguage } from "./LanguageContext";
 import { ADDRESS, EMAIL, PHONE } from "../config/contact";
-import { submitLead } from "../utils/leadSubmission";
+import { leadErrorTranslationKey, submitLead } from "../utils/leadSubmission";
+import { buildContactRequest, LeadContractError, LEAD_LIMITS } from "../api/leadContract";
 import { emitCommercialEvent } from "../utils/measurement";
 
 export function ContactSection() {
@@ -31,7 +32,7 @@ export function ContactSection() {
     setIsSubmitting(true);
     setError(null);
     try {
-      await submitLead("/api/contact", {
+      const request = buildContactRequest({
         name: formData.name.trim(),
         email: formData.email.trim(),
         company: formData.company.trim(),
@@ -39,11 +40,12 @@ export function ContactSection() {
         phone: formData.phone.trim(),
         language,
       });
+      await submitLead("/api/contact", request);
       setIsSubmitted(true);
       emitCommercialEvent({ event: "contact_submission_success", locale: language });
       setFormData({ name: "", email: "", company: "", message: "", phone: "" });
-    } catch {
-      setError(t("contact.error.submit"));
+    } catch (caught) {
+      setError(t(caught instanceof LeadContractError ? "lead.error.validation" : leadErrorTranslationKey(caught)));
     } finally {
       submissionInProgress.current = false;
       setIsSubmitting(false);
@@ -116,6 +118,7 @@ export function ContactSection() {
           ) : (
             <form
               onSubmit={handleSubmit}
+              noValidate
               className="border-t border-slate-300 pt-8 dark:border-slate-700"
             >
               <h3 className="mb-8 text-2xl font-semibold text-bdigital-navy dark:text-white">
@@ -126,6 +129,7 @@ export function ContactSection() {
                   {t("contact.name")} *
                   <Input
                     required
+                    maxLength={LEAD_LIMITS.name}
                     value={formData.name}
                     onChange={(e) => change("name", e.target.value)}
                     placeholder={t("form.placeholder_full_name")}
@@ -137,6 +141,7 @@ export function ContactSection() {
                   <Input
                     required
                     type="email"
+                    maxLength={LEAD_LIMITS.email}
                     value={formData.email}
                     onChange={(e) => change("email", e.target.value)}
                     placeholder={t("form.placeholder_email")}
@@ -146,6 +151,7 @@ export function ContactSection() {
                 <label className="text-sm font-medium text-bdigital-navy dark:text-slate-200">
                   {t("contact.company")}
                   <Input
+                    maxLength={LEAD_LIMITS.company}
                     value={formData.company}
                     onChange={(e) => change("company", e.target.value)}
                     placeholder={t("form.placeholder_company")}
@@ -156,6 +162,7 @@ export function ContactSection() {
                   {t("contact.phone")}
                   <Input
                     type="tel"
+                    maxLength={LEAD_LIMITS.phone}
                     value={formData.phone}
                     onChange={(e) => change("phone", e.target.value)}
                     placeholder={t("form.placeholder_phone")}
@@ -167,6 +174,7 @@ export function ContactSection() {
                 {t("contact.message")} *
                 <Textarea
                   required
+                  maxLength={LEAD_LIMITS.longText}
                   value={formData.message}
                   onChange={(e) => change("message", e.target.value)}
                   placeholder={t("form.placeholder_additional_info")}

@@ -13,10 +13,11 @@ import { Step3 } from "./serviceInquirySteps/Step3";
 import { Step4 } from "./serviceInquirySteps/Step4";
 import { useActiveLocale } from "../hooks/useActiveLocale";
 import { buildLocalizedPath } from "../routing";
-import { submitLead } from "../utils/leadSubmission";
+import { LeadSubmissionError, leadErrorTranslationKey, submitLead } from "../utils/leadSubmission";
+import { buildServiceInquiryRequest, LeadContractError, type ServiceInquiryRequest } from "../api/leadContract";
 import { emitCommercialEvent } from "../utils/measurement";
 
-export interface InquiryFormData {
+export interface InquiryFormData extends Omit<ServiceInquiryRequest, "language" | "timeline" | "budget" | "preferredContact" | "howDidYouHear"> {
   // Contact Information
   fullName: string;
   email: string;
@@ -207,15 +208,18 @@ export function ServiceInquiryForm() {
     setSubmitError(null);
 
     try {
-      await submitLead("/api/service-inquiries", { ...formData, language });
+      const request = buildServiceInquiryRequest({ ...formData, language });
+      await submitLead("/api/service-inquiries", request);
       setIsSubmitted(true);
       emitCommercialEvent({ event: "service_inquiry_submission_success", locale: language });
 
       // Clear stored service/package info
       localStorage.removeItem("selectedService");
       localStorage.removeItem("selectedPackage");
-    } catch {
-      setSubmitError(t("form.submit_error"));
+    } catch (caught) {
+      if (caught instanceof LeadContractError) setErrors(Object.fromEntries(Object.keys(caught.fields).map((field) => [field, t("lead.error.field")])));
+      if (caught instanceof LeadSubmissionError && caught.kind === "validation") setErrors(Object.fromEntries(Object.keys(caught.fields).map((field) => [field, t("lead.error.field")])));
+      setSubmitError(t(caught instanceof LeadContractError ? "lead.error.validation" : leadErrorTranslationKey(caught)));
     } finally {
       submissionInProgress.current = false;
       setIsSubmitting(false);

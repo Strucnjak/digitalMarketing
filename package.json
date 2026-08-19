@@ -13,7 +13,7 @@
     "sitemap": "node dist/server/scripts/generate-sitemaps.js",
     "lint": "eslint .",
     "preview": "vite preview",
-    "test": "tsc -p tsconfig.tests.json && node --loader ./tests/esm-loader.mjs .test-dist/tests/seo-regression.test.js"
+    "test": "tsc -p tsconfig.tests.json && node --loader ./tests/esm-loader.mjs .test-dist/tests/seo-regression.test.js && node --loader ./tests/esm-loader.mjs .test-dist/tests/lead-contract.test.js"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.11",

@@ -6,7 +6,7 @@
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "types": [],
+    "types": ["vite/client"],
     "outDir": ".test-dist",
     "rootDir": ".",
     "strict": false
@@ -17,6 +17,9 @@
     "src/routing.ts",
     "src/utils/seo.ts",
     "tests/seo-regression.test.ts",
-    "src/locales/routes.json"
+    "src/locales/routes.json",
+    "src/api/leadContract.ts",
+    "src/utils/leadSubmission.ts",
+    "tests/lead-contract.test.ts"
   ]
 }
