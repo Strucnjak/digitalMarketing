@@ -1,235 +1,106 @@
-import { useNavigate } from "react-router-dom";
-import { Card, CardContent } from "./ui/card";
-import { Target, Eye, Heart, Users, Award, Clock, Linkedin, Twitter } from "lucide-react";
 import { useLanguage } from "./LanguageContext";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
-import { useActiveLocale } from "../hooks/useActiveLocale";
-import { useRouteInfo } from "../hooks/useRouteInfo";
-import { buildLocalizedPath, type PageType } from "../routing";
 
 export function AboutSection() {
   const { t } = useLanguage();
-  const navigate = useNavigate();
-  const { activeLocale, includeLocalePrefix } = useActiveLocale();
-  const routeInfo = useRouteInfo();
-
-  const values = [
-    {
-      icon: Target,
-      title: t("about.mission.title"),
-      description: t("about.mission.desc"),
-      color: "bg-cyan-50 text-cyan-600 dark:bg-cyan-900/40 dark:text-cyan-200",
-    },
-    {
-      icon: Eye,
-      title: t("about.vision.title"),
-      description: t("about.vision.desc"),
-      color: "bg-blue-50 text-blue-600 dark:bg-blue-900/40 dark:text-blue-200",
-    },
-    {
-      icon: Heart,
-      title: t("about.values.title"),
-      description: t("about.values.desc"),
-      color: "bg-purple-50 text-purple-600 dark:bg-purple-900/40 dark:text-purple-200",
-    },
+  const principles = [
+    { title: t("about.mission.title"), description: t("about.mission.desc") },
+    { title: t("about.vision.title"), description: t("about.vision.desc") },
+    { title: t("about.values.title"), description: t("about.values.desc") },
   ];
-
-  const stats = [
-    { icon: Users, number: "50+", label: t("about.stats.clients") },
-    { icon: Award, number: "100+", label: t("about.stats.projects") },
-    { icon: Clock, number: "3+", label: t("about.stats.years") },
-    { icon: Target, number: "98%", label: t("about.stats.success_rate") },
-  ];
-
   const team = [
     {
       name: "Marko Petrović",
       role: "CEO & Creative Director",
-      image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=480&h=640&fit=crop&q=80",
-      description: "Vodi kreativni tim sa više od 5 godina iskustva u digitalnom marketingu.",
-      socials: [
-        { label: "LinkedIn", href: "https://www.linkedin.com", icon: Linkedin },
-        { label: "Twitter", href: "https://twitter.com", icon: Twitter },
-      ],
+      description:
+        "Vodi kreativni tim sa više od 5 godina iskustva u digitalnom marketingu.",
+      image:
+        "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=640&h=800&fit=crop&q=85",
     },
     {
       name: "Ana Nikolić",
       role: "Lead Developer",
-      image: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=480&h=640&fit=crop&q=80",
-      description: "Ekspert za web tehnologije i UX/UI dizajn sa strašću za inovacije.",
-      socials: [
-        { label: "LinkedIn", href: "https://www.linkedin.com", icon: Linkedin },
-        { label: "Twitter", href: "https://twitter.com", icon: Twitter },
-      ],
+      description:
+        "Ekspert za web tehnologije i UX/UI dizajn sa strašću za inovacije.",
+      image:
+        "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=640&h=800&fit=crop&q=85",
     },
     {
       name: "Stefan Jovanović",
       role: "SEO Specialist",
-      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=480&h=640&fit=crop&q=80",
       description: "Specijalizovan za SEO optimizaciju i digitalne strategije.",
-      socials: [
-        { label: "LinkedIn", href: "https://www.linkedin.com", icon: Linkedin },
-        { label: "Twitter", href: "https://twitter.com", icon: Twitter },
-      ],
+      image:
+        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=640&h=800&fit=crop&q=85",
     },
   ];
 
-  const scrollToId = (id: string) => {
-    const el = document.getElementById(id) || document.querySelector(`#${id}`);
-    if (!el) return false;
-    el.scrollIntoView({ behavior: "smooth", block: "start" });
-    return true;
-  };
-
-  const goAndScroll = (route: PageType, id: string) => {
-    const tryScroll = () => {
-      if (!scrollToId(id)) setTimeout(tryScroll, 50);
-    };
-
-    if (routeInfo.page === route) {
-      tryScroll();
-    } else {
-      const path = buildLocalizedPath(activeLocale, route, { includeLocalePrefix });
-      navigate(path);
-      requestAnimationFrame(tryScroll);
-    }
-  };
-
-  const handlePrimary = () => goAndScroll("home", "contact");
-  const handleSecondary = () => goAndScroll("home", "portfolio");
-
   return (
-    <section id="about" className="bg-white py-20 dark:bg-bdigital-midnight">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="mb-4 text-3xl font-bold text-bdigital-navy md:text-4xl dark:text-slate-100">{t("about.title")}</h2>
-          <p className="mx-auto mb-8 max-w-2xl text-lg text-neutral-gray dark:text-slate-300">{t("about.subtitle")}</p>
-        </div>
-
-        {/* About Description */}
-        <div className="mx-auto mb-20 max-w-4xl text-center">
-          <p className="text-lg text-neutral-gray leading-relaxed dark:text-slate-300">{t("about.description")}</p>
-        </div>
-
-        {/* Mission, Vision, Values */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
-          {values.map((value, index) => {
-            const IconComponent = value.icon;
-            return (
-              <Card
-                key={index}
-                className="text-center border-0 shadow-lg hover:shadow-xl transition-all duration-300 group dark:border dark:border-bdigital-dark-navy dark:bg-bdigital-night"
-              >
-                <CardContent className="p-8">
-                  <div
-                    className={`w-16 h-16 ${value.color} rounded-xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300`}
-                  >
-                    <IconComponent className="h-8 w-8" />
-                  </div>
-                  <h3 className="mb-4 text-xl font-bold text-bdigital-navy dark:text-slate-100">{value.title}</h3>
-                  <p className="text-neutral-gray leading-relaxed dark:text-slate-300">{value.description}</p>
-                </CardContent>
-              </Card>
-            );
-          })}
-        </div>
-
-        {/* Stats Section */}
-        <div className="bg-gradient-to-r from-bdigital-navy to-bdigital-dark-navy rounded-2xl p-8 md:p-12 mb-20 text-white">
-          <div className="text-center mb-12">
-            <h3 className="text-2xl md:text-3xl font-bold mb-4">{t("about.stats.title")}</h3>
-            <p className="text-gray-300 max-w-2xl mx-auto">{t("about.stats.subtitle")}</p>
+    <section id="about" className="section-shell bg-bdigital-navy text-white">
+      <div className="site-container">
+        <div className="grid gap-12 lg:grid-cols-12 lg:gap-8">
+          <div className="lg:col-span-4">
+            <p className="eyebrow !text-slate-400">{t("about.title")}</p>
           </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {stats.map((stat, index) => {
-              const IconComponent = stat.icon;
-              return (
-                <div key={index} className="text-center">
-                  <div className="w-12 h-12 bg-bdigital-cyan/20 rounded-lg flex items-center justify-center mx-auto mb-4">
-                    <IconComponent className="h-6 w-6 text-bdigital-cyan" />
-                  </div>
-                  <div className="text-3xl font-bold text-bdigital-cyan mb-2">{stat.number}</div>
-                  <div className="text-gray-300 text-sm">{stat.label}</div>
-                </div>
-              );
-            })}
+          <div className="lg:col-span-8">
+            <h2 className="section-title max-w-4xl text-white">
+              {t("about.subtitle")}
+            </h2>
+            <p className="mt-8 max-w-3xl text-lg leading-8 text-slate-300">
+              {t("about.description")}
+            </p>
           </div>
         </div>
 
-        {/* Team Section */}
-        <div className="text-center mb-16">
-          <h3 className="mb-4 text-2xl font-bold text-bdigital-navy md:text-3xl dark:text-slate-100">{t("about.team.title")}</h3>
-          <p className="mx-auto max-w-2xl text-lg text-neutral-gray dark:text-slate-300">{t("about.team.subtitle")}</p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
-          {team.map((member, index) => (
-            <Card
-              key={index}
-              className="text-center border-0 shadow-lg hover:shadow-xl transition-all duration-300 group overflow-hidden dark:border dark:border-bdigital-dark-navy dark:bg-bdigital-night"
+        <div className="mt-20 grid border-y border-white/20 lg:grid-cols-3">
+          {principles.map((principle, index) => (
+            <div
+              key={principle.title}
+              className="border-b border-white/20 py-9 last:border-b-0 lg:border-b-0 lg:border-r lg:px-8 lg:first:pl-0 lg:last:border-r-0"
             >
-              <CardContent className="p-0">
-                <div className="relative overflow-hidden">
-                  <ImageWithFallback
-                    src={member.image}
-                    alt={member.name}
-                    className="h-80 w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-bdigital-navy/90 via-bdigital-navy/10 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                    <div className="p-6 text-left text-white">
-                      <p className="mb-4 text-sm leading-relaxed">{member.description}</p>
-                      <div className="flex items-center gap-3">
-                        {member.socials.map((social) => {
-                          const Icon = social.icon;
-                          return (
-                            <a
-                              key={social.label}
-                              href={social.href}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              aria-label={social.label}
-                              className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-bdigital-cyan hover:text-bdigital-navy focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bdigital-cyan"
-                            >
-                              <Icon className="h-4 w-4" />
-                            </a>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="p-6 text-left">
-                  <h4 className="mb-1 text-xl font-bold text-bdigital-navy dark:text-slate-100">{member.name}</h4>
-                  <p className="font-medium text-bdigital-cyan-dark dark:text-bdigital-cyan">{member.role}</p>
-                </div>
-              </CardContent>
-            </Card>
+              <p className="font-mono text-xs text-slate-500">0{index + 1}</p>
+              <h3 className="mt-6 text-xl font-semibold text-white">
+                {principle.title}
+              </h3>
+              <p className="mt-4 text-sm leading-7 text-slate-300">
+                {principle.description}
+              </p>
+            </div>
           ))}
         </div>
 
-        {/* CTA Section */}
-        <div className="rounded-2xl bg-gray-50 p-8 text-center md:p-12 dark:bg-bdigital-night">
-          <h3 className="mb-4 text-2xl font-bold text-bdigital-navy md:text-3xl dark:text-slate-100">{t("about.cta.title")}</h3>
-          <p className="mx-auto mb-8 max-w-2xl text-neutral-gray dark:text-slate-300">{t("about.cta.desc")}</p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button
-              type="button"
-              onClick={handlePrimary}
-              className="bg-bdigital-cyan text-bdigital-navy px-8 py-3 rounded-lg font-semibold hover:bg-bdigital-cyan-light transition-colors"
-            >
-              {t("about.cta.primary")}
-            </button>
-
-            <button
-              type="button"
-              onClick={handleSecondary}
-              className="rounded-lg border border-bdigital-cyan-dark px-8 py-3 font-semibold text-bdigital-cyan-dark transition-colors hover:bg-bdigital-cyan hover:text-bdigital-navy focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bdigital-cyan-dark dark:text-bdigital-cyan dark:hover:text-slate-900"
-            >
-              {t("about.cta.secondary")}
-            </button>
+        <div className="mt-24 grid gap-10 lg:grid-cols-12 lg:items-end">
+          <div className="lg:col-span-5">
+            <p className="eyebrow mb-6 !text-slate-400">
+              {t("about.team.title")}
+            </p>
+            <h3 className="text-4xl font-semibold leading-tight tracking-[-0.04em] text-white sm:text-5xl">
+              {t("about.team.subtitle")}
+            </h3>
           </div>
+        </div>
+
+        <div className="mt-12 grid gap-10 md:grid-cols-3">
+          {team.map((member) => (
+            <article key={member.name}>
+              <div className="aspect-[4/5] overflow-hidden rounded-lg bg-bdigital-dark-navy">
+                <ImageWithFallback
+                  src={member.image}
+                  alt={member.name}
+                  className="h-full w-full object-cover grayscale"
+                  loading="lazy"
+                />
+              </div>
+              <h4 className="mt-5 text-xl font-semibold text-white">
+                {member.name}
+              </h4>
+              <p className="mt-1 text-sm font-medium text-bdigital-cyan">
+                {member.role}
+              </p>
+              <p className="mt-3 text-sm leading-6 text-slate-400">
+                {member.description}
+              </p>
+            </article>
+          ))}
         </div>
       </div>
     </section>

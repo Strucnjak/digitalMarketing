@@ -1,12 +1,25 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "./ui/button";
-import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle, SheetDescription } from "./ui/sheet";
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+  SheetHeader,
+  SheetTitle,
+  SheetDescription,
+} from "./ui/sheet";
 import { Switch } from "./ui/switch";
 import { Menu, X, ChevronDown, Moon, Sun } from "lucide-react";
 import { useLanguage, type Language } from "./LanguageContext";
 import { useTheme } from "./ThemeContext";
-import { buildLocalizedPath, defaultLocale, servicePageIds, type Locale, type PageType } from "../routing";
+import {
+  buildLocalizedPath,
+  defaultLocale,
+  servicePageIds,
+  type Locale,
+  type PageType,
+} from "../routing";
 import { useRouteInfo } from "../hooks/useRouteInfo";
 import { useActiveLocale } from "../hooks/useActiveLocale";
 
@@ -73,7 +86,9 @@ export function Navigation() {
   ];
 
   const handleServiceClick = (serviceId: PageType) => {
-    const path = buildLocalizedPath(activeLocale, serviceId, { includeLocalePrefix });
+    const path = buildLocalizedPath(activeLocale, serviceId, {
+      includeLocalePrefix,
+    });
     navigate(path);
     setIsOpen(false);
     setServicesOpen(false);
@@ -84,7 +99,9 @@ export function Navigation() {
   };
 
   const handleHomeClick = () => {
-    const path = buildLocalizedPath(activeLocale, "home", { includeLocalePrefix });
+    const path = buildLocalizedPath(activeLocale, "home", {
+      includeLocalePrefix,
+    });
     const isAlreadyHome = routeInfo.page === "home";
 
     if (isAlreadyHome) {
@@ -99,7 +116,9 @@ export function Navigation() {
   };
 
   const handleContactClick = () => {
-    const path = buildLocalizedPath(activeLocale, "home", { includeLocalePrefix });
+    const path = buildLocalizedPath(activeLocale, "home", {
+      includeLocalePrefix,
+    });
     navigate(path);
     setIsOpen(false);
     setTimeout(() => {
@@ -111,7 +130,8 @@ export function Navigation() {
   const handleLanguageChange = (newLanguage: Language) => {
     const targetLocale = newLanguage as Locale;
     const path = buildLocalizedPath(targetLocale, routeInfo.page, {
-      includeLocalePrefix: targetLocale !== defaultLocale || routeLocale != null,
+      includeLocalePrefix:
+        targetLocale !== defaultLocale || routeLocale != null,
     });
     navigate(path, { replace: true });
     setLanguage(newLanguage);
@@ -119,7 +139,9 @@ export function Navigation() {
   };
 
   const navigateToFreeConsultation = () => {
-    const path = buildLocalizedPath(activeLocale, "free-consultation", { includeLocalePrefix });
+    const path = buildLocalizedPath(activeLocale, "free-consultation", {
+      includeLocalePrefix,
+    });
     navigate(path);
   };
 
@@ -158,7 +180,7 @@ export function Navigation() {
     <nav
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-white/95 backdrop-blur-sm shadow-lg border-b border-gray-200/20 dark:bg-bdigital-midnight/95 dark:border-bdigital-dark-navy/60 dark:shadow-black/40"
+          ? "border-b border-slate-200 bg-white dark:border-slate-800 dark:bg-bdigital-midnight"
           : "bg-transparent"
       }`}
     >
@@ -168,15 +190,22 @@ export function Navigation() {
           <div className="flex-shrink-0">
             <button
               onClick={handleHomeClick}
-              className="flex items-center space-x-2 group transition-all duration-300 hover:scale-105"
+              className="focus-ring flex items-center space-x-2"
               aria-label="DIAL Digital - Početna stranica"
             >
-              <div className="w-8 h-8 lg:w-10 lg:h-10 bg-bdigital-cyan-dark rounded-lg flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow duration-300">
-                <img src="/logo.svg" alt="DIAL Digital logo" className="w-7 h-7 lg:w-8 lg:h-8" loading="lazy" />
+              <div className="flex h-8 w-8 items-center justify-center rounded-md bg-bdigital-cyan-dark lg:h-10 lg:w-10">
+                <img
+                  src="/logo.svg"
+                  alt="DIAL Digital logo"
+                  className="w-7 h-7 lg:w-8 lg:h-8"
+                  loading="lazy"
+                />
               </div>
               <span
                 className={`text-lg lg:text-xl font-bold transition-colors duration-300 ${
-                  isScrolled ? "text-bdigital-navy dark:text-slate-100" : "text-white"
+                  isScrolled
+                    ? "text-bdigital-navy dark:text-slate-100"
+                    : "text-white"
                 }`}
               >
                 DIAL Digital
@@ -189,7 +218,9 @@ export function Navigation() {
             <button
               onClick={handleHomeClick}
               className={`text-sm font-medium transition-colors duration-300 ${
-                isScrolled ? "hover:text-bdigital-cyan-dark dark:hover:text-bdigital-cyan" : "hover:text-bdigital-cyan"
+                isScrolled
+                  ? "hover:text-bdigital-cyan-dark dark:hover:text-bdigital-cyan"
+                  : "hover:text-bdigital-cyan"
               } ${
                 routeInfo.page === "home"
                   ? isScrolled
@@ -204,12 +235,22 @@ export function Navigation() {
             </button>
 
             {/* Services Dropdown */}
-            <div ref={dropdownRef} className="relative" onMouseEnter={handleServicesMouseEnter} onMouseLeave={handleServicesMouseLeave}>
+            <div
+              ref={dropdownRef}
+              className="relative"
+              onMouseEnter={handleServicesMouseEnter}
+              onMouseLeave={handleServicesMouseLeave}
+            >
               <button
+                onClick={() => setServicesOpen((open) => !open)}
                 className={`flex items-center space-x-1 text-sm font-medium transition-colors duration-300 ${
-                  isScrolled ? "hover:text-bdigital-cyan-dark dark:hover:text-bdigital-cyan" : "hover:text-bdigital-cyan"
+                  isScrolled
+                    ? "hover:text-bdigital-cyan-dark dark:hover:text-bdigital-cyan"
+                    : "hover:text-bdigital-cyan"
                 } py-2 ${
-                  servicePageIds.includes(routeInfo.page as (typeof servicePageIds)[number])
+                  servicePageIds.includes(
+                    routeInfo.page as (typeof servicePageIds)[number],
+                  )
                     ? isScrolled
                       ? "text-bdigital-cyan-dark dark:text-bdigital-cyan"
                       : "text-bdigital-cyan"
@@ -221,13 +262,17 @@ export function Navigation() {
                 aria-haspopup="true"
               >
                 <span>{_t("nav.services")}</span>
-                <ChevronDown className={`h-4 w-4 transition-transform duration-300 ${servicesOpen ? "rotate-180" : ""}`} />
+                <ChevronDown
+                  className={`h-4 w-4 transition-transform duration-300 ${servicesOpen ? "rotate-180" : ""}`}
+                />
               </button>
 
               {/* Dropdown Menu */}
               <div
-                className={`absolute top-full left-0 mt-1 w-80 rounded-xl border border-gray-200 bg-white py-4 shadow-xl transition-all duration-300 dark:border-bdigital-dark-navy dark:bg-bdigital-midnight ${
-                  servicesOpen ? "opacity-100 translate-y-0 pointer-events-auto visible" : "opacity-0 translate-y-2 pointer-events-none invisible"
+                className={`absolute left-0 top-full mt-2 w-80 rounded-md border border-gray-200 bg-white py-2 shadow-lg transition-[opacity,transform] duration-200 dark:border-slate-700 dark:bg-bdigital-midnight ${
+                  servicesOpen
+                    ? "opacity-100 translate-y-0 pointer-events-auto visible"
+                    : "opacity-0 translate-y-2 pointer-events-none invisible"
                 }`}
                 onMouseEnter={handleDropdownMouseEnter}
                 onMouseLeave={handleDropdownMouseLeave}
@@ -236,28 +281,21 @@ export function Navigation() {
                 <div className="absolute -top-1 left-0 right-0 h-1 bg-transparent"></div>
 
                 {services.map((service) => (
-                    <button
-                      key={service.id}
-                      onClick={() => handleServiceClick(service.id as PageType)}
+                  <button
+                    key={service.id}
+                    onClick={() => handleServiceClick(service.id as PageType)}
                     className="w-full px-4 py-3 text-left transition-colors duration-200 group hover:bg-gray-50 focus:bg-gray-50 focus:outline-none dark:hover:bg-slate-900 dark:focus:bg-slate-900"
-                    >
+                  >
                     <div className="mb-1 text-sm font-medium text-bdigital-navy transition-colors duration-200 group-hover:text-bdigital-cyan-dark group-focus:text-bdigital-cyan-dark dark:text-slate-100 dark:group-hover:text-bdigital-cyan dark:group-focus:text-bdigital-cyan">
                       {service.title}
                     </div>
-                    <div className="text-xs text-neutral-gray dark:text-slate-400">{service.description}</div>
+                    <div className="text-xs text-neutral-gray dark:text-slate-400">
+                      {service.description}
+                    </div>
                   </button>
                 ))}
               </div>
             </div>
-
-            <button
-              onClick={handleContactClick}
-              className={`text-sm font-medium transition-colors duration-300 ${
-                isScrolled ? "hover:text-bdigital-cyan-dark dark:hover:text-bdigital-cyan" : "hover:text-bdigital-cyan"
-              } ${isScrolled ? "text-bdigital-navy dark:text-slate-100" : "text-white"}`}
-            >
-              {_t("nav.contact")}
-            </button>
 
             {/* Language Switcher */}
             <div className="flex items-center space-x-2">
@@ -267,7 +305,9 @@ export function Navigation() {
                   language === "me"
                     ? "bg-bdigital-cyan text-bdigital-navy"
                     : `hover:bg-bdigital-cyan/20 dark:hover:bg-slate-800/70 ${
-                        isScrolled ? "text-bdigital-navy dark:text-slate-100" : "text-white"
+                        isScrolled
+                          ? "text-bdigital-navy dark:text-slate-100"
+                          : "text-white"
                       }`
                 }`}
               >
@@ -279,7 +319,9 @@ export function Navigation() {
                   language === "en"
                     ? "bg-bdigital-cyan text-bdigital-navy"
                     : `hover:bg-bdigital-cyan/20 dark:hover:bg-slate-800/70 ${
-                        isScrolled ? "text-bdigital-navy dark:text-slate-100" : "text-white"
+                        isScrolled
+                          ? "text-bdigital-navy dark:text-slate-100"
+                          : "text-white"
                       }`
                 }`}
               >
@@ -291,7 +333,9 @@ export function Navigation() {
                   language === "fr"
                     ? "bg-bdigital-cyan text-bdigital-navy"
                     : `hover:bg-bdigital-cyan/20 dark:hover:bg-slate-800/70 ${
-                        isScrolled ? "text-bdigital-navy dark:text-slate-100" : "text-white"
+                        isScrolled
+                          ? "text-bdigital-navy dark:text-slate-100"
+                          : "text-white"
                       }`
                 }`}
               >
@@ -308,18 +352,30 @@ export function Navigation() {
             >
               <Moon
                 className={`h-3.5 w-3.5 transition-colors ${
-                  theme === "dark" ? "text-bdigital-cyan" : isScrolled ? "text-bdigital-navy/60 dark:text-slate-400" : "text-white/70"
+                  theme === "dark"
+                    ? "text-bdigital-cyan"
+                    : isScrolled
+                      ? "text-bdigital-navy/60 dark:text-slate-400"
+                      : "text-white/70"
                 }`}
               />
               <Switch
                 checked={theme === "dark"}
                 onCheckedChange={toggleTheme}
-                aria-label={theme === "dark" ? _t("nav.light_mode") ?? "Switch to light mode" : _t("nav.dark_mode") ?? "Switch to dark mode"}
+                aria-label={
+                  theme === "dark"
+                    ? (_t("nav.light_mode") ?? "Switch to light mode")
+                    : (_t("nav.dark_mode") ?? "Switch to dark mode")
+                }
                 className="h-5 w-10 data-[state=checked]:bg-bdigital-cyan data-[state=unchecked]:bg-slate-300/80 dark:data-[state=unchecked]:bg-slate-700"
               />
               <Sun
                 className={`h-3.5 w-3.5 transition-colors ${
-                  theme === "dark" ? "text-slate-300" : isScrolled ? "text-bdigital-cyan-dark" : "text-white"
+                  theme === "dark"
+                    ? "text-slate-300"
+                    : isScrolled
+                      ? "text-bdigital-cyan-dark"
+                      : "text-white"
                 }`}
               />
             </div>
@@ -327,7 +383,7 @@ export function Navigation() {
             {/* CTA Button - now links to free consultation */}
             <Button
               onClick={navigateToFreeConsultation}
-              className="bg-bdigital-cyan text-bdigital-navy hover:bg-bdigital-cyan-light font-semibold px-6 py-2 text-sm shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+              className="focus-ring rounded-md bg-bdigital-cyan px-6 py-2 text-sm font-semibold text-bdigital-navy shadow-none transition-colors hover:bg-bdigital-cyan-light"
             >
               {_t("web.cta.primary")}
             </Button>
@@ -339,26 +395,40 @@ export function Navigation() {
               <SheetTrigger asChild>
                 <Button
                   className={`p-2 ${
-                    isScrolled ? "text-bdigital-navy dark:text-slate-100" : "text-white"
+                    isScrolled
+                      ? "text-bdigital-navy dark:text-slate-100"
+                      : "text-white"
                   } hover:bg-bdigital-cyan/20 dark:hover:bg-slate-800/70`}
                   aria-label="Otvori meni"
                 >
                   <Menu className="h-6 w-6" />
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right" className="w-full bg-white sm:w-80 dark:bg-bdigital-midnight">
+              <SheetContent
+                side="right"
+                className="w-full bg-white sm:w-80 dark:bg-bdigital-midnight"
+              >
                 <SheetHeader className="sr-only">
                   <SheetTitle>Navigation</SheetTitle>
-                  <SheetDescription>Displays the mobile navigation menu.</SheetDescription>
+                  <SheetDescription>
+                    Displays the mobile navigation menu.
+                  </SheetDescription>
                 </SheetHeader>
                 <div className="flex flex-col h-full">
                   {/* Header */}
                   <div className="flex justify-between items-center py-4 border-b border-gray-200 dark:border-slate-800">
                     <div className="flex items-center space-x-2">
                       <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center shadow dark:bg-bdigital-night">
-                        <img src="/logo.svg" alt="DIAL Digital logo" className="w-6 h-6" loading="lazy" />
+                        <img
+                          src="/logo.svg"
+                          alt="DIAL Digital logo"
+                          className="w-6 h-6"
+                          loading="lazy"
+                        />
                       </div>
-                      <span className="text-lg font-bold text-bdigital-navy dark:text-slate-100">DIAL Digital</span>
+                      <span className="text-lg font-bold text-bdigital-navy dark:text-slate-100">
+                        DIAL Digital
+                      </span>
                     </div>
                     <Button
                       variant="ghost"
@@ -392,7 +462,9 @@ export function Navigation() {
                         aria-expanded={servicesOpen}
                       >
                         <span>{_t("nav.services")}</span>
-                        <ChevronDown className={`h-4 w-4 transition-transform duration-300 ${servicesOpen ? "rotate-180" : ""}`} />
+                        <ChevronDown
+                          className={`h-4 w-4 transition-transform duration-300 ${servicesOpen ? "rotate-180" : ""}`}
+                        />
                       </button>
 
                       {servicesOpen && (
@@ -400,15 +472,21 @@ export function Navigation() {
                           {services.map((service) => (
                             <button
                               key={service.id}
-                              onClick={() => handleServiceClick(service.id as PageType)}
+                              onClick={() =>
+                                handleServiceClick(service.id as PageType)
+                              }
                               className={`w-full text-left px-4 py-3 text-sm rounded-lg transition-all duration-200 ${
                                 routeInfo.page === service.id
                                   ? "bg-bdigital-cyan text-bdigital-navy"
                                   : "text-neutral-gray hover:bg-gray-50 hover:text-bdigital-navy dark:text-slate-300 dark:hover:bg-slate-900 dark:hover:text-slate-100"
                               }`}
                             >
-                              <div className="font-medium mb-1">{service.title}</div>
-                              <div className="text-xs opacity-70">{service.description}</div>
+                              <div className="font-medium mb-1">
+                                {service.title}
+                              </div>
+                              <div className="text-xs opacity-70">
+                                {service.description}
+                              </div>
                             </button>
                           ))}
                         </div>
@@ -427,7 +505,9 @@ export function Navigation() {
                   <div className="border-t border-gray-200 pt-6 space-y-4 dark:border-slate-800">
                     {/* Language Switcher */}
                     <div className="flex items-center justify-center space-x-2">
-                      <span className="text-sm text-neutral-gray dark:text-slate-400">Jezik:</span>
+                      <span className="text-sm text-neutral-gray dark:text-slate-400">
+                        Jezik:
+                      </span>
                       <button
                         onClick={() => handleLanguageChange("me")}
                         className={`px-3 py-1 text-sm font-medium rounded-lg transition-all duration-200 ${
@@ -465,16 +545,22 @@ export function Navigation() {
                         {_t("nav.theme") ?? "Theme:"}
                       </span>
                       <div className="flex items-center gap-2 rounded-full border border-slate-200/70 bg-white/80 px-2 py-1 text-xs font-semibold text-bdigital-navy transition-colors duration-300 dark:border-bdigital-dark-navy/80 dark:bg-bdigital-night/80 dark:text-slate-100">
-                        <Moon className={`h-3.5 w-3.5 ${theme === "dark" ? "text-bdigital-cyan" : "text-slate-400"}`} />
+                        <Moon
+                          className={`h-3.5 w-3.5 ${theme === "dark" ? "text-bdigital-cyan" : "text-slate-400"}`}
+                        />
                         <Switch
                           checked={theme === "dark"}
                           onCheckedChange={toggleTheme}
                           aria-label={
-                            theme === "dark" ? _t("nav.light_mode") ?? "Switch to light mode" : _t("nav.dark_mode") ?? "Switch to dark mode"
+                            theme === "dark"
+                              ? (_t("nav.light_mode") ?? "Switch to light mode")
+                              : (_t("nav.dark_mode") ?? "Switch to dark mode")
                           }
                           className="h-5 w-10 data-[state=checked]:bg-bdigital-cyan data-[state=unchecked]:bg-slate-300/80 dark:data-[state=unchecked]:bg-slate-700"
                         />
-                        <Sun className={`h-3.5 w-3.5 ${theme === "dark" ? "text-slate-300" : "text-bdigital-cyan-dark"}`} />
+                        <Sun
+                          className={`h-3.5 w-3.5 ${theme === "dark" ? "text-slate-300" : "text-bdigital-cyan-dark"}`}
+                        />
                       </div>
                     </div>
 

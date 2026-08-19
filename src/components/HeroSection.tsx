@@ -1,237 +1,80 @@
-import { useEffect, useState } from "react";
-import { Button } from "./ui/button";
-import { Badge } from "./ui/badge";
-import { ArrowRight, CheckCircle, Star, Users, Award } from "lucide-react";
-import { useLanguage } from "./LanguageContext";
+import { ArrowRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { buildLocalizedPath } from "../routing";
+import { useLanguage } from "./LanguageContext";
 import { useActiveLocale } from "../hooks/useActiveLocale";
+import { buildLocalizedPath } from "../routing";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 
-const PARTICLE_CONFIGS = Array.from({ length: 20 }, (_, index) => {
-  const left = 5 + ((index * 37) % 90);
-  const top = 5 + ((index * 53) % 90);
-  const animationDelay = (index % 5) * 0.35;
-  const animationDuration = 2.4 + (index % 4) * 0.45;
-
-  return {
-    left: `${left.toFixed(2)}%`,
-    top: `${top.toFixed(2)}%`,
-    animationDelay: `${animationDelay.toFixed(2)}s`,
-    animationDuration: `${animationDuration.toFixed(2)}s`,
-  } as const;
-});
-
-function usePrefersReducedMotion() {
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
-
-  useEffect(() => {
-    if (typeof window === "undefined" || !window.matchMedia) return;
-
-    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const updatePreference = () => setPrefersReducedMotion(mediaQuery.matches);
-
-    updatePreference();
-    mediaQuery.addEventListener("change", updatePreference);
-
-    return () => mediaQuery.removeEventListener("change", updatePreference);
-  }, []);
-
-  return prefersReducedMotion;
-}
-
 export function HeroSection() {
-  const { t: _t } = useLanguage();
+  const { t } = useLanguage();
   const navigate = useNavigate();
   const { activeLocale, includeLocalePrefix } = useActiveLocale();
-  const prefersReducedMotion = usePrefersReducedMotion();
 
-  const stats = [
-    { icon: Users, value: "100+", label: _t("hero.stats.clients") },
-    { icon: Award, value: "200+", label: _t("hero.stats.projects") },
-    { icon: Star, value: "4.9", label: _t("hero.stats.rating") },
-    { icon: CheckCircle, value: "24h", label: _t("hero.stats.response") },
-  ];
-
-  const handleGetStarted = () => {
-    const path = buildLocalizedPath(activeLocale, "service-inquiry", { includeLocalePrefix });
-    navigate(path);
-  };
-
-  const handleViewPortfolio = () => {
-    const element = document.querySelector("#portfolio");
-    element?.scrollIntoView({ behavior: "smooth" });
-  };
+  const bookCall = () =>
+    navigate(
+      buildLocalizedPath(activeLocale, "free-consultation", {
+        includeLocalePrefix,
+      }),
+    );
+  const viewWork = () =>
+    document
+      .querySelector("#portfolio")
+      ?.scrollIntoView({ behavior: "smooth" });
 
   return (
     <section
       id="hero"
-      className="relative min-h-screen bg-gradient-to-br from-bdigital-navy via-bdigital-dark-navy to-bdigital-midnight overflow-hidden"
+      className="relative overflow-hidden bg-bdigital-navy text-white"
     >
-      {/* Background Elements */}
-      <div className="absolute inset-0 bg-gradient-to-br from-bdigital-navy/80 via-bdigital-dark-navy/85 to-bdigital-midnight/90"></div>
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(0,212,255,0.18),transparent_48%)]"></div>
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(0,212,255,0.1),transparent_50%)]"></div>
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(0,212,255,0.05),transparent_50%)]"></div>
+      <div className="site-container grid min-h-screen items-center gap-14 pb-20 pt-28 lg:grid-cols-12 lg:gap-8 lg:pb-24 lg:pt-32">
+        <div className="relative z-10 lg:col-span-7">
+          <p className="eyebrow mb-8 !text-slate-300">{t("hero.tagline")}</p>
+          <h1 className="display-title max-w-5xl text-white">
+            {t("hero.title")}
+          </h1>
+          <p className="mt-8 max-w-2xl text-lg leading-8 text-slate-300 sm:text-xl">
+            {t("hero.subtitle")}
+          </p>
 
-      {/* Animated Background Particles */}
-      {!prefersReducedMotion && (
-        <div className="absolute inset-0 overflow-hidden">
-          {PARTICLE_CONFIGS.map((particle, i) => (
-            <div
-              key={i}
-              className="absolute w-1 h-1 bg-bdigital-cyan/20 rounded-full animate-pulse"
-              style={{
-                left: particle.left,
-                top: particle.top,
-                animationDelay: particle.animationDelay,
-                animationDuration: particle.animationDuration,
-              }}
+          <div className="mt-10 flex flex-col items-start gap-5 sm:flex-row sm:items-center">
+            <button
+              type="button"
+              onClick={bookCall}
+              className="focus-ring inline-flex min-h-12 items-center gap-3 rounded-md bg-bdigital-cyan px-6 py-3 text-sm font-semibold text-bdigital-navy transition-colors hover:bg-bdigital-cyan-light"
+            >
+              {t("web.cta.primary")}
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </button>
+            <button
+              type="button"
+              onClick={viewWork}
+              className="focus-ring min-h-12 border-b border-white/40 px-1 py-3 text-sm font-semibold text-white transition-colors hover:border-bdigital-cyan hover:text-bdigital-cyan"
+            >
+              {t("hero.secondary")}
+            </button>
+          </div>
+
+          <div className="mt-16 flex max-w-xl items-start gap-5 border-t border-white/20 pt-6">
+            <span
+              className="mt-2 h-2 w-2 flex-none bg-bdigital-cyan"
+              aria-hidden="true"
             />
-          ))}
-        </div>
-      )}
-
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-12 lg:pb-20">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center min-h-[calc(100vh-5rem)]">
-          {/* Left Content */}
-          <div className="text-white space-y-6 lg:space-y-8 text-center lg:text-left">
-            {/* Badge */}
-            <div className="flex justify-center lg:justify-start">
-              <Badge className="bg-bdigital-cyan/20 text-bdigital-cyan border-bdigital-cyan/30 px-4 py-2 text-sm font-medium backdrop-blur-sm">
-                {_t("hero.badge")}
-              </Badge>
-            </div>
-
-            {/* Main Heading */}
-            <div className="space-y-4">
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">{_t("hero.title")}</h1>
-              <div className="w-20 h-1 bg-bdigital-cyan mx-auto lg:mx-0 rounded-full"></div>
-            </div>
-
-            {/* Subtitle */}
-            <p className="text-base font-semibold uppercase tracking-[0.2em] text-bdigital-cyan/80">{_t("hero.tagline")}</p>
-            <p className="text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed">{_t("hero.subtitle")}</p>
-
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4">
-              <Button
-                size="lg"
-                onClick={handleGetStarted}
-                className="bg-bdigital-cyan text-bdigital-navy hover:bg-bdigital-cyan-light font-semibold px-8 py-4 text-base shadow-2xl hover:shadow-bdigital-cyan/25 transition-all duration-300 transform hover:scale-105 group"
-              >
-                {_t("hero.cta")}
-                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
-              </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                onClick={handleViewPortfolio}
-                className="border-2 border-bdigital-cyan text-bdigital-cyan hover:bg-bdigital-cyan hover:text-bdigital-navy font-semibold px-8 py-4 text-base backdrop-blur-sm transition-all duration-300 transform hover:scale-105"
-              >
-                {_t("hero.secondary")}
-              </Button>
-            </div>
-
-            {/* Trust Indicators */}
-            <div className="pt-8 lg:pt-12">
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
-                {stats.map((stat, index) => {
-                  const IconComponent = stat.icon;
-                  return (
-                    <div key={index} className="text-center lg:text-left group">
-                      <div className="flex items-center justify-center lg:justify-start mb-2">
-                        <IconComponent className="h-5 w-5 text-bdigital-cyan mr-2 group-hover:scale-110 transition-transform duration-300" />
-                      </div>
-                      <div className="text-2xl lg:text-3xl font-bold text-bdigital-cyan group-hover:scale-110 transition-transform duration-300">
-                        {stat.value}
-                      </div>
-                      <div className="text-sm text-gray-400 leading-tight">{stat.label}</div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
-
-          {/* Right Content - Visual */}
-          <div className="relative order-first lg:order-last">
-            <div className="relative">
-              {/* Main Image Container */}
-              <div className="relative rounded-2xl bg-white p-4 shadow-2xl transition-all duration-500 group hover:scale-105 lg:rounded-3xl lg:p-8 dark:bg-bdigital-night dark:shadow-black/40">
-                {/* Floating Elements */}
-                <div
-                  className={`absolute -top-4 -right-4 w-8 h-8 bg-bdigital-cyan rounded-full flex items-center justify-center shadow-lg ${
-                    prefersReducedMotion ? "" : "animate-bounce"
-                  }`}
-                >
-                  <Star className="h-4 w-4 text-bdigital-navy" />
-                </div>
-                <div
-                  className={`absolute -bottom-4 -left-4 w-12 h-12 bg-gradient-to-br from-bdigital-cyan to-bdigital-cyan-light rounded-full flex items-center justify-center shadow-lg ${
-                    prefersReducedMotion ? "" : "animate-pulse"
-                  }`}
-                >
-                  <CheckCircle className="h-6 w-6 text-bdigital-navy" />
-                </div>
-
-                {/* Main Hero Image */}
-                <div className="relative overflow-hidden rounded-xl lg:rounded-2xl">
-                  <ImageWithFallback
-                    src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop&q=80"
-                    alt={_t("hero.image_alt")}
-                    className="w-full h-64 sm:h-80 lg:h-96 object-cover group-hover:scale-105 transition-transform duration-500"
-                    loading="eager"
-                    decoding="async"
-                    fetchPriority="high"
-                  />
-
-                  {/* Overlay Stats */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-bdigital-navy/20 via-transparent to-transparent">
-                    <div className="absolute bottom-4 left-4 right-4">
-                      <div className="rounded-lg bg-white/90 p-3 backdrop-blur-sm transition-transform duration-300 group-hover:translate-y-0 dark:bg-bdigital-night/80">
-                        <div className="flex items-center justify-between">
-                          <div>
-                            <div className="text-sm font-medium text-bdigital-navy dark:text-slate-100">{_t("hero.stats.conversionRate")}</div>
-                            <div className="text-2xl font-bold text-bdigital-cyan-dark">+287%</div>
-                          </div>
-                          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-green-100 dark:bg-emerald-900/40">
-                            <div className="text-xs text-green-600 dark:text-emerald-300">↗</div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Decorative Elements */}
-              <div className="absolute right-6 top-1/3 hidden w-40 rounded-2xl border border-white/20 bg-white/10 p-4 text-left text-xs text-white/80 shadow-xl backdrop-blur lg:block">
-                <div className="mb-2 flex items-center gap-2 text-bdigital-cyan">
-                  <span className="h-2 w-2 rounded-full bg-bdigital-cyan"></span>
-                  Live analytics
-                </div>
-                <div className="text-lg font-semibold text-white">12.4K</div>
-                <div className="text-white/60">Active visitors today</div>
-              </div>
-              <div className="absolute -z-10 -top-8 -right-8 w-32 h-32 bg-bdigital-cyan/10 rounded-full blur-3xl"></div>
-              <div className="absolute -z-10 -bottom-8 -left-8 w-24 h-24 bg-bdigital-cyan/10 rounded-full blur-2xl"></div>
-            </div>
+            <p className="text-sm leading-6 text-slate-300">
+              {t("hero.badge")}
+            </p>
           </div>
         </div>
 
-        {/* Scroll Indicator */}
-        <div
-          className={`absolute bottom-8 left-1/2 transform -translate-x-1/2 ${
-            prefersReducedMotion ? "" : "animate-bounce"
-          }`}
-        >
-          <div className="w-6 h-10 border-2 border-bdigital-cyan rounded-full flex justify-center">
-            <div
-              className={`w-1 h-3 bg-bdigital-cyan rounded-full mt-2 ${
-                prefersReducedMotion ? "" : "animate-pulse"
-              }`}
-            ></div>
+        <div className="relative lg:col-span-5 lg:translate-x-10">
+          <div className="aspect-[4/5] overflow-hidden rounded-lg border border-white/10 bg-bdigital-dark-navy">
+            <ImageWithFallback
+              src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=900&h=1125&fit=crop&q=85"
+              alt={t("hero.image_alt")}
+              className="h-full w-full object-cover opacity-80 mix-blend-luminosity"
+              loading="eager"
+              decoding="async"
+              fetchPriority="high"
+            />
           </div>
         </div>
       </div>
