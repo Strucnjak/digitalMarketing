@@ -4,11 +4,13 @@ import { useLanguage } from "./LanguageContext";
 import { useActiveLocale } from "../hooks/useActiveLocale";
 import { buildLocalizedPath } from "../routing";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
+import { usePrefersReducedMotion } from "../hooks/usePrefersReducedMotion";
 
 export function HeroSection() {
   const { t } = useLanguage();
   const navigate = useNavigate();
   const { activeLocale, includeLocalePrefix } = useActiveLocale();
+  const prefersReducedMotion = usePrefersReducedMotion();
 
   const bookCall = () =>
     navigate(
@@ -19,7 +21,7 @@ export function HeroSection() {
   const viewWork = () =>
     document
       .querySelector("#portfolio")
-      ?.scrollIntoView({ behavior: "smooth" });
+      ?.scrollIntoView({ behavior: prefersReducedMotion ? "auto" : "smooth" });
 
   return (
     <section
@@ -53,20 +55,11 @@ export function HeroSection() {
               {t("hero.secondary")}
             </button>
           </div>
-
-          <div className="mt-16 flex max-w-xl items-start gap-5 border-t border-white/20 pt-6">
-            <span
-              className="mt-2 h-2 w-2 flex-none bg-bdigital-cyan"
-              aria-hidden="true"
-            />
-            <p className="text-sm leading-6 text-slate-300">
-              {t("hero.badge")}
-            </p>
-          </div>
         </div>
 
         <div className="relative lg:col-span-5 lg:translate-x-10">
           <div className="aspect-[4/5] overflow-hidden rounded-lg border border-white/10 bg-bdigital-dark-navy">
+            {/* Temporary representative image: replace with original DIAL work or an approved brand image. */}
             <ImageWithFallback
               src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=900&h=1125&fit=crop&q=85"
               alt={t("hero.image_alt")}
