@@ -634,5 +634,9 @@
   "about.team.marko.name": "Profil d’équipe en attente d’approbation",
   "about.team.ana.name": "Profil d’équipe en attente d’approbation",
   "about.team.stefan.name": "Profil d’équipe en attente d’approbation",
-  "contact.error.submit": "Votre message n’a pas pu être envoyé. Réessayez ou contactez-nous par téléphone ou par e-mail."
+  "contact.error.submit": "Votre message n’a pas pu être envoyé. Réessayez ou contactez-nous par téléphone ou par e-mail.",
+  "not_found.title": "Page introuvable",
+  "not_found.description": "L’adresse ouverte ne correspond à aucune page disponible.",
+  "not_found.home": "Retour à l’accueil",
+  "form.submit_error": "La demande n’a pas pu être envoyée. Veuillez réessayer."
 }

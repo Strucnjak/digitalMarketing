@@ -5,6 +5,7 @@ import { useLanguage } from "./LanguageContext";
 import { useActiveLocale } from "../hooks/useActiveLocale";
 import { buildLocalizedPath } from "../routing";
 import { submitLead } from "../utils/leadSubmission";
+import { emitCommercialEvent } from "../utils/measurement";
 
 interface ConsultationFormData {
   fullName: string;
@@ -152,6 +153,7 @@ export function FreeConsultationPage() {
         language,
       });
       setIsSubmitted(true);
+      emitCommercialEvent({ event: "consultation_submission_success", locale: language });
     } catch {
       setSubmitError(t("consultation.error.submit"));
     } finally {

@@ -634,5 +634,9 @@
   "about.team.marko.name": "Profil člana tima čeka odobrenje",
   "about.team.ana.name": "Profil člana tima čeka odobrenje",
   "about.team.stefan.name": "Profil člana tima čeka odobrenje",
-  "contact.error.submit": "Poruka nije poslata. Pokušajte ponovo ili nas kontaktirajte telefonom ili e-mailom."
+  "contact.error.submit": "Poruka nije poslata. Pokušajte ponovo ili nas kontaktirajte telefonom ili e-mailom.",
+  "not_found.title": "Stranica nije pronađena",
+  "not_found.description": "Adresa koju ste otvorili ne vodi do postojeće stranice.",
+  "not_found.home": "Nazad na početnu",
+  "form.submit_error": "Slanje upita nije uspjelo. Pokušajte ponovo."
 }

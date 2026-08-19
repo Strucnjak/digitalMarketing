@@ -634,5 +634,9 @@
   "about.team.marko.name": "Team profile pending approval",
   "about.team.ana.name": "Team profile pending approval",
   "about.team.stefan.name": "Team profile pending approval",
-  "contact.error.submit": "We could not send your message. Please try again or contact us by phone or email."
+  "contact.error.submit": "We could not send your message. Please try again or contact us by phone or email.",
+  "not_found.title": "Page not found",
+  "not_found.description": "The address you opened does not lead to an available page.",
+  "not_found.home": "Back to home",
+  "form.submit_error": "The inquiry could not be sent. Please try again."
 }

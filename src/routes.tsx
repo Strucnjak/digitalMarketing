@@ -6,7 +6,6 @@ import {
   type ReactNode,
 } from "react";
 import {
-  Navigate,
   Outlet,
   useLocation,
   useParams,
@@ -19,6 +18,9 @@ import { useInitialState } from "./components/InitialStateContext";
 import { ThemeProvider } from "./components/ThemeContext";
 import { getSeoMetadata } from "./config/seo-meta";
 import { SITE_BASE_URL } from "./config/site";
+import { captureFirstTouchAttribution } from "./utils/attribution";
+import { emitCommercialEvent } from "./utils/measurement";
+import { NotFoundPage } from "./components/NotFoundPage";
 import {
   STRUCTURED_DATA_ELEMENT_ID,
   buildCanonicalCluster,
@@ -26,13 +28,14 @@ import {
   buildOrganizationJsonLd,
   buildWebsiteJsonLd,
   buildWebPageJsonLd,
+  getLocalePresentation,
   serializeJsonLd,
 } from "./utils/seo";
 import {
-  buildLocalizedPath,
   defaultLocale,
   getRoutePattern,
   isLocale,
+  locales,
   parsePathname,
   type PageType,
 } from "./routing";
@@ -170,6 +173,7 @@ function SeoMetadataUpdater() {
     }
 
     document.title = title;
+    document.documentElement.lang = getLocalePresentation(locale).htmlLang;
 
     let descriptionTag = document.querySelector('meta[name="description"]');
     if (!descriptionTag) {
@@ -198,6 +202,36 @@ function SeoMetadataUpdater() {
     }
 
     const canonicalUrl = canonicalCluster?.canonical ?? fallbackCanonicalHref;
+
+    const setMeta = (selector: string, attribute: "name" | "property", key: string, content: string) => {
+      let tag = document.querySelector(selector);
+      if (!tag) {
+        tag = document.createElement("meta");
+        tag.setAttribute(attribute, key);
+        document.head.appendChild(tag);
+      }
+      tag.setAttribute("content", content);
+    };
+    const presentation = getLocalePresentation(locale);
+    const images = getSeoMetadata(locale, parsed.page).images ?? [];
+    setMeta('meta[property="og:title"]', "property", "og:title", title);
+    setMeta('meta[property="og:description"]', "property", "og:description", description);
+    setMeta('meta[property="og:url"]', "property", "og:url", canonicalUrl);
+    setMeta('meta[property="og:type"]', "property", "og:type", "website");
+    setMeta('meta[property="og:locale"]', "property", "og:locale", presentation.ogLocale);
+    setMeta('meta[name="twitter:title"]', "name", "twitter:title", title);
+    setMeta('meta[name="twitter:description"]', "name", "twitter:description", description);
+    if (images[0]) {
+      setMeta('meta[property="og:image"]', "property", "og:image", images[0]);
+      setMeta('meta[name="twitter:image"]', "name", "twitter:image", images[0]);
+    }
+    document.querySelectorAll('meta[property="og:locale:alternate"]').forEach((tag) => tag.remove());
+    locales.filter((item) => item !== locale).forEach((item) => {
+      const tag = document.createElement("meta");
+      tag.setAttribute("property", "og:locale:alternate");
+      tag.setAttribute("content", getLocalePresentation(item).ogLocale);
+      document.head.appendChild(tag);
+    });
 
     if (canonicalCluster) {
       canonicalTag.setAttribute("href", canonicalCluster.canonical);
@@ -321,6 +355,19 @@ function AppLayout() {
     window.scrollTo({ top: 0, behavior: "auto" });
   }, [location.pathname, location.hash]);
 
+  useEffect(() => {
+    captureFirstTouchAttribution();
+    const trackContactAction = (event: MouseEvent) => {
+      const link = (event.target as Element | null)?.closest("a");
+      const href = link?.getAttribute("href") ?? "";
+      if (href.startsWith("mailto:")) emitCommercialEvent({ event: "email_click" });
+      else if (href.startsWith("tel:")) emitCommercialEvent({ event: "phone_click" });
+      else if (href.includes("consult")) emitCommercialEvent({ event: "consultation_cta_click" });
+    };
+    document.addEventListener("click", trackContactAction);
+    return () => document.removeEventListener("click", trackContactAction);
+  }, []);
+
   return (
     <div className="min-h-screen bg-background text-foreground transition-colors duration-300">
       <Navigation />
@@ -385,6 +432,7 @@ function createChildRoutes(): RouteObject[] {
 }
 
 const localizedChildren = createChildRoutes();
+localizedChildren.push({ path: "*", element: <NotFoundPage /> });
 
 export const appRouteObjects: RouteObject[] = [
   {
@@ -399,14 +447,8 @@ export const appRouteObjects: RouteObject[] = [
   },
   {
     path: "*",
-    element: (
-      <Navigate
-        to={buildLocalizedPath(defaultLocale, "home", {
-          includeLocalePrefix: false,
-        })}
-        replace
-      />
-    ),
+    element: <LocalizedLayout />,
+    children: [{ path: "*", element: <NotFoundPage /> }],
   },
 ];
 

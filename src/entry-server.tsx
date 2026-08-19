@@ -111,6 +111,8 @@ export function render(url: string, options: RenderOptions = {}): RenderResult {
     `<meta name="description" content="${escapeAttribute(metadata.description)}" />`,
     `<meta property="og:title" content="${escapeAttribute(metadata.title)}">`,
     `<meta property="og:description" content="${escapeAttribute(metadata.description)}">`,
+    `<meta property="og:url" content="${escapeAttribute(canonicalCluster.canonical)}">`,
+    `<meta property="og:type" content="website">`,
     `<meta name="twitter:title" content="${escapeAttribute(metadata.title)}">`,
     `<meta name="twitter:description" content="${escapeAttribute(metadata.description)}">`,
     `<meta property="og:locale" content="${escapeAttribute(localePresentation.ogLocale)}">`,
