@@ -1,4 +1,11 @@
-import { useState, useEffect, useRef } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+  type FocusEvent,
+  type KeyboardEvent,
+} from "react";
+import { ChevronDown, Menu, Moon, Sun, X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "./ui/button";
 import {
@@ -22,66 +29,61 @@ import {
 } from "../routing";
 import { useRouteInfo } from "../hooks/useRouteInfo";
 import { useActiveLocale } from "../hooks/useActiveLocale";
+import { useRouteInfo } from "../hooks/useRouteInfo";
+import { usePrefersReducedMotion } from "../hooks/usePrefersReducedMotion";
+import {
+  buildLocalizedPath,
+  defaultLocale,
+  servicePageIds,
+  type Locale,
+  type PageType,
+} from "../routing";
+
+const localeOptions: { value: Language; label: string }[] = [
+  { value: "me", label: "ME" },
+  { value: "en", label: "EN" },
+  { value: "fr", label: "FR" },
+];
 
 export function Navigation() {
-  const { language, setLanguage, t: _t } = useLanguage();
+  const { language, setLanguage, t } = useLanguage();
   const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
   const routeInfo = useRouteInfo();
   const { activeLocale, includeLocalePrefix, routeLocale } = useActiveLocale();
-  const [isOpen, setIsOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
+  const prefersReducedMotion = usePrefersReducedMotion();
+  const [mobileOpen, setMobileOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
-  const dropdownTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [isScrolled, setIsScrolled] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
-
-  // Handle scroll effect
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrolled = window.scrollY > 20;
-      setIsScrolled((prev) => (prev === scrolled ? prev : scrolled));
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  // Clean up timeout on unmount
-  useEffect(() => {
-    return () => {
-      if (dropdownTimeoutRef.current) {
-        clearTimeout(dropdownTimeoutRef.current);
-      }
-    };
-  }, []);
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const services = [
-    {
-      id: "web-design",
-      title: _t("services.web.title"),
-      description: _t("services.web.desc"),
-    },
-    {
-      id: "seo",
-      title: _t("services.seo.title"),
-      description: _t("services.seo.desc"),
-    },
-    {
-      id: "social-media",
-      title: _t("services.social.title"),
-      description: _t("services.social.desc"),
-    },
-    {
-      id: "branding",
-      title: _t("services.branding.title"),
-      description: _t("services.branding.desc"),
-    },
-    {
-      id: "strategy",
-      title: _t("services.strategy.title"),
-      description: _t("services.strategy.desc"),
+    "web-design",
+    "seo",
+    "social-media",
+    "branding",
+    "strategy",
+  ].map((id) => ({
+    id: id as PageType,
+    title: t(
+      `services.${id === "web-design" ? "web" : id === "social-media" ? "social" : id}.title`,
+    ),
+    description: t(
+      `services.${id === "web-design" ? "web" : id === "social-media" ? "social" : id}.desc`,
+    ),
+  }));
+
+  useEffect(() => {
+    const onScroll = () => setIsScrolled(window.scrollY > 20);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(
+    () => () => {
+      if (closeTimer.current) clearTimeout(closeTimer.current);
     },
   ];
 
@@ -112,7 +114,16 @@ export function Navigation() {
       setTimeout(scrollToTop, 100);
     }
 
-    setIsOpen(false);
+  const localizedPath = (page: PageType) =>
+    buildLocalizedPath(activeLocale, page, { includeLocalePrefix });
+  const goHome = () => {
+    if (routeInfo.page === "home")
+      window.scrollTo({
+        top: 0,
+        behavior: prefersReducedMotion ? "auto" : "smooth",
+      });
+    else navigate(localizedPath("home"));
+    setMobileOpen(false);
   };
 
   const handleContactClick = () => {
@@ -144,37 +155,27 @@ export function Navigation() {
     });
     navigate(path);
   };
-
-  const handleServicesMouseEnter = () => {
-    // Clear any existing timeout
-    if (dropdownTimeoutRef.current) {
-      clearTimeout(dropdownTimeoutRef.current);
-      dropdownTimeoutRef.current = null;
-    }
+  const openServices = () => {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
     setServicesOpen(true);
   };
-
-  const handleServicesMouseLeave = () => {
-    // Add a delay before closing
-    dropdownTimeoutRef.current = setTimeout(() => {
-      setServicesOpen(false);
-    }, 300); // 300ms delay
+  const scheduleClose = () => {
+    closeTimer.current = setTimeout(() => setServicesOpen(false), 180);
   };
-
-  const handleDropdownMouseEnter = () => {
-    // Clear timeout when mouse enters dropdown
-    if (dropdownTimeoutRef.current) {
-      clearTimeout(dropdownTimeoutRef.current);
-      dropdownTimeoutRef.current = null;
+  const handleDropdownBlur = (event: FocusEvent<HTMLDivElement>) => {
+    if (!event.currentTarget.contains(event.relatedTarget as Node | null))
+      setServicesOpen(false);
+  };
+  const handleDropdownKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === "Escape") {
+      setServicesOpen(false);
+      dropdownRef.current?.querySelector<HTMLButtonElement>("button")?.focus();
     }
   };
 
-  const handleDropdownMouseLeave = () => {
-    // Add delay when leaving dropdown
-    dropdownTimeoutRef.current = setTimeout(() => {
-      setServicesOpen(false);
-    }, 300);
-  };
+  const foreground = isScrolled
+    ? "text-bdigital-navy dark:text-white"
+    : "text-white";
 
   return (
     <nav
@@ -184,10 +185,37 @@ export function Navigation() {
           : "bg-transparent"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16 lg:h-20">
-          {/* Logo */}
-          <div className="flex-shrink-0">
+      <div className="site-container flex h-16 items-center justify-between lg:h-20">
+        <button
+          type="button"
+          onClick={goHome}
+          className={`focus-ring flex items-center gap-3 ${foreground}`}
+          aria-label="DIAL Digital"
+        >
+          <span className="flex h-8 w-8 items-center justify-center rounded-md bg-bdigital-cyan-dark lg:h-9 lg:w-9">
+            <img src="/logo.svg" alt="" className="h-6 w-6" />
+          </span>
+          <span className="text-base font-semibold tracking-tight lg:text-lg">
+            DIAL Digital
+          </span>
+        </button>
+
+        <div className="hidden items-center gap-7 lg:flex">
+          <button
+            type="button"
+            onClick={goHome}
+            className={`focus-ring text-sm transition-colors hover:text-slate-500 dark:hover:text-slate-300 ${foreground} ${routeInfo.page === "home" ? "font-semibold" : "font-normal"}`}
+          >
+            {t("nav.home")}
+          </button>
+          <div
+            ref={dropdownRef}
+            className="relative"
+            onMouseEnter={openServices}
+            onMouseLeave={scheduleClose}
+            onBlur={handleDropdownBlur}
+            onKeyDown={handleDropdownKeyDown}
+          >
             <button
               onClick={handleHomeClick}
               className="focus-ring flex items-center space-x-2"
@@ -296,6 +324,7 @@ export function Navigation() {
                 ))}
               </div>
             </div>
+          </div>
 
             {/* Language Switcher */}
             <div className="flex items-center space-x-2">
@@ -339,7 +368,7 @@ export function Navigation() {
                       }`
                 }`}
               >
-                FR
+                <Menu className="h-5 w-5" />
               </button>
             </div>
 
@@ -492,12 +521,21 @@ export function Navigation() {
                         </div>
                       )}
                     </div>
-
                     <button
-                      onClick={handleContactClick}
-                      className="w-full text-left px-4 py-3 text-base font-medium text-bdigital-navy hover:bg-gray-50 rounded-lg transition-colors duration-200 dark:text-slate-100 dark:hover:bg-slate-900"
+                      type="button"
+                      onClick={toggleTheme}
+                      className="focus-ring flex h-11 w-11 items-center justify-center rounded-md border border-slate-200 text-slate-500 dark:border-slate-700 dark:text-slate-400"
+                      aria-label={
+                        theme === "dark"
+                          ? t("nav.light_mode")
+                          : t("nav.dark_mode")
+                      }
                     >
-                      {_t("nav.contact")}
+                      {theme === "dark" ? (
+                        <Sun className="h-4 w-4" />
+                      ) : (
+                        <Moon className="h-4 w-4" />
+                      )}
                     </button>
                   </div>
 
@@ -576,9 +614,9 @@ export function Navigation() {
                     </Button>
                   </div>
                 </div>
-              </SheetContent>
-            </Sheet>
-          </div>
+              </div>
+            </SheetContent>
+          </Sheet>
         </div>
       </div>
     </nav>

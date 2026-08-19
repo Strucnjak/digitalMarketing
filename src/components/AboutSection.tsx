@@ -66,6 +66,18 @@ export function AboutSection() {
               </p>
             </div>
           ))}
+        </ol>
+
+        <div className="mt-28 grid gap-12 lg:grid-cols-12 lg:items-end">
+          <div className="lg:col-span-5">
+            <p className="eyebrow !text-slate-400">{t("about.team.title")}</p>
+            <h3 className="mt-6 text-4xl font-semibold leading-tight tracking-[-0.04em] text-white sm:text-5xl">
+              {t("about.team.subtitle")}
+            </h3>
+          </div>
+          <p className="text-sm leading-6 text-slate-400 lg:col-span-4 lg:col-start-9">
+            {t("about.description")}
+          </p>
         </div>
 
         <div className="mt-24 grid gap-10 lg:grid-cols-12 lg:items-end">

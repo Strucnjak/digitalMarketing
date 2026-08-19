@@ -34,6 +34,8 @@ export function ServicesSection() {
       title: t("services.strategy.title"),
       description: t("services.strategy.desc"),
     },
+  ];
+  const supporting = [
     {
       id: "social-media",
       icon: Share2,
