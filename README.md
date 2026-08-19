@@ -9,6 +9,11 @@ npm install
 npm run dev
 ```
 
+Copy `.env.example` to `.env.local` and set `VITE_API_URL` to the public base
+URL of the lead-delivery API. This value is exposed to the browser and must not
+contain credentials or other secrets. Lead forms fail visibly without it rather
+than reporting a false success.
+
 ## Production Build Pipeline
 
 ```bash
@@ -35,5 +40,6 @@ Sitemaps are generated during the production build and emitted to both `dist/cli
 - `https://bdigital.me/sitemap-index.xml`
 - `https://bdigital.me/sitemap-me.xml`
 - `https://bdigital.me/sitemap-en.xml`
+- `https://bdigital.me/sitemap-fr.xml`
 
 The sitemap files include `<xhtml:link>` elements so each page references its localized alternates, and the sitemap index aggregates the per-locale files for easier discovery by search engines.

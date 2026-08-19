@@ -633,5 +633,6 @@
   "seo.service.technical.description": "Un examen de l’exploration, de l’indexation, des performances et des données structurées.",
   "about.team.marko.name": "Profil d’équipe en attente d’approbation",
   "about.team.ana.name": "Profil d’équipe en attente d’approbation",
-  "about.team.stefan.name": "Profil d’équipe en attente d’approbation"
+  "about.team.stefan.name": "Profil d’équipe en attente d’approbation",
+  "contact.error.submit": "Votre message n’a pas pu être envoyé. Réessayez ou contactez-nous par téléphone ou par e-mail."
 }

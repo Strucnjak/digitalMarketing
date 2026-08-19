@@ -633,5 +633,6 @@
   "seo.service.technical.description": "Pregled indeksiranja, pretraživanja sajta, performansi i osnova strukturiranih podataka.",
   "about.team.marko.name": "Profil člana tima čeka odobrenje",
   "about.team.ana.name": "Profil člana tima čeka odobrenje",
-  "about.team.stefan.name": "Profil člana tima čeka odobrenje"
+  "about.team.stefan.name": "Profil člana tima čeka odobrenje",
+  "contact.error.submit": "Poruka nije poslata. Pokušajte ponovo ili nas kontaktirajte telefonom ili e-mailom."
 }
