@@ -638,5 +638,13 @@
   "not_found.title": "Page not found",
   "not_found.description": "The address you opened does not lead to an available page.",
   "not_found.home": "Back to home",
-  "form.submit_error": "The inquiry could not be sent. Please try again."
+  "form.submit_error": "The inquiry could not be sent. Please try again.",
+  "lead.error.validation": "Please review the highlighted fields.",
+  "lead.error.field": "Please check this value.",
+  "lead.error.rate_limit": "Too many requests. Please wait and try again.",
+  "lead.error.server": "We could not accept your request. Please try again.",
+  "lead.error.timeout": "The request took too long. Its outcome may be uncertain; please wait before retrying.",
+  "lead.error.network": "Check your connection and try again.",
+  "lead.error.configuration": "Lead submission is not configured. Please contact us directly.",
+  "lead.error.generic": "We could not accept your request. Please try again."
 }

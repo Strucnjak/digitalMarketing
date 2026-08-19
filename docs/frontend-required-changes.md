@@ -1,0 +1,3 @@
+# Frontend required changes
+
+The canonical contract in `canonical-api-contract.md` is authoritative. Build explicit DTOs, trim and validate all strings and limits, use exact language and enum values, coerce newsletters to Boolean, construct only documented fields, and parse stable errors without exposing raw backend content. Continue using the three canonical endpoints and environment-based `VITE_API_URL`; do not add attribution or idempotency until backend migrations exist. A 2xx response means durable acceptance, not email delivery. Preserve the approximately 15-second boundary. Keep current selection strings for compatibility because canonical service/package/project identifiers remain pending business agreement.

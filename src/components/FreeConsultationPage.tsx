@@ -4,7 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { useLanguage } from "./LanguageContext";
 import { useActiveLocale } from "../hooks/useActiveLocale";
 import { buildLocalizedPath } from "../routing";
-import { submitLead } from "../utils/leadSubmission";
+import { LeadSubmissionError, leadErrorTranslationKey, submitLead } from "../utils/leadSubmission";
+import { buildConsultationRequest, LeadContractError } from "../api/leadContract";
 import { emitCommercialEvent } from "../utils/measurement";
 
 interface ConsultationFormData {
@@ -140,7 +141,7 @@ export function FreeConsultationPage() {
     setIsSubmitting(true);
     setSubmitError(null);
     try {
-      await submitLead("/api/consultations", {
+      const request = buildConsultationRequest({
         ...formData,
         fullName: formData.fullName.trim(),
         email: formData.email.trim(),
@@ -152,10 +153,13 @@ export function FreeConsultationPage() {
         additionalInfo: formData.additionalInfo.trim(),
         language,
       });
+      await submitLead("/api/consultations", request);
       setIsSubmitted(true);
       emitCommercialEvent({ event: "consultation_submission_success", locale: language });
-    } catch {
-      setSubmitError(t("consultation.error.submit"));
+    } catch (caught) {
+      if (caught instanceof LeadContractError) setErrors(Object.fromEntries(Object.keys(caught.fields).map((field) => [field, t("lead.error.field")])));
+      if (caught instanceof LeadSubmissionError && caught.kind === "validation") setErrors(Object.fromEntries(Object.keys(caught.fields).map((field) => [field, t("lead.error.field")])));
+      setSubmitError(t(caught instanceof LeadContractError ? "lead.error.validation" : leadErrorTranslationKey(caught)));
     } finally {
       submissionInProgress.current = false;
       setIsSubmitting(false);

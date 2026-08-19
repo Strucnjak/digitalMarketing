@@ -638,5 +638,13 @@
   "not_found.title": "Page introuvable",
   "not_found.description": "L’adresse ouverte ne correspond à aucune page disponible.",
   "not_found.home": "Retour à l’accueil",
-  "form.submit_error": "La demande n’a pas pu être envoyée. Veuillez réessayer."
+  "form.submit_error": "La demande n’a pas pu être envoyée. Veuillez réessayer.",
+  "lead.error.validation": "Veuillez vérifier les champs signalés.",
+  "lead.error.field": "Veuillez vérifier cette valeur.",
+  "lead.error.rate_limit": "Trop de demandes. Patientez avant de réessayer.",
+  "lead.error.server": "Nous n’avons pas pu accepter votre demande. Veuillez réessayer.",
+  "lead.error.timeout": "La demande a expiré. Son résultat peut être incertain ; patientez avant de réessayer.",
+  "lead.error.network": "Vérifiez votre connexion et réessayez.",
+  "lead.error.configuration": "L’envoi des demandes n’est pas configuré. Contactez-nous directement.",
+  "lead.error.generic": "Nous n’avons pas pu accepter votre demande. Veuillez réessayer."
 }
