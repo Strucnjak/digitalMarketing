@@ -2,6 +2,7 @@ import {
   ArrowUpRight,
   Monitor,
   Palette,
+  ChartNoAxesCombined,
   Search,
   Share2,
   Target,
@@ -144,6 +145,18 @@ export function ServicesSection() {
             <p className="eyebrow">{t("services.group.supporting")}</p>
           </div>
           <div className="border-t border-slate-300 dark:border-slate-700 lg:col-span-9 lg:border-l lg:border-t-0">
+            <div className="grid gap-5 border-b border-slate-300 py-8 text-left dark:border-slate-700 sm:grid-cols-[2rem_1fr_1.2fr_auto] sm:items-center lg:px-10">
+              <ChartNoAxesCombined className="h-4 w-4 text-slate-400" aria-hidden="true" />
+              <span className="font-semibold text-bdigital-navy dark:text-white">
+                {t("services.analytics.title")}
+              </span>
+              <span className="text-sm leading-6 text-slate-500 dark:text-slate-400">
+                {t("services.analytics.desc")}
+              </span>
+              <span className="text-xs font-semibold uppercase tracking-wider text-slate-400">
+                {t("services.route_pending")}
+              </span>
+            </div>
             {supporting.map((service) => {
               const Icon = service.icon;
               return (

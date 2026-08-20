@@ -646,5 +646,10 @@
   "lead.error.timeout": "La demande a expiré. Son résultat peut être incertain ; patientez avant de réessayer.",
   "lead.error.network": "Vérifiez votre connexion et réessayez.",
   "lead.error.configuration": "L’envoi des demandes n’est pas configuré. Contactez-nous directement.",
-  "lead.error.generic": "Nous n’avons pas pu accepter votre demande. Veuillez réessayer."
+  "lead.error.generic": "Nous n’avons pas pu accepter votre demande. Veuillez réessayer.",
+  "services.analytics.title": "[PENDING TRANSLATION] Analytics, Tracking & CRM",
+  "services.analytics.desc": "[PENDING TRANSLATION] GA4, GTM, conversion tracking, source mapping and CRM workflows.",
+  "services.route_pending": "[PENDING TRANSLATION] Page recommended",
+  "strategy.feature.optimisation": "[PENDING TRANSLATION] Optimisation priorities",
+  "strategy.service.optimisation_desc": "[PENDING TRANSLATION] Turn the audit into an ordered plan based on likely impact, effort and commercial relevance."
 }

@@ -21,9 +21,9 @@ const DEFAULT_SEO_METADATA_BY_LOCALE: Record<Locale, SeoMetadata> = {
     images: SOCIAL_IMAGE_BY_LOCALE.me,
   },
   en: {
-    title: "DIAL Digital Agency",
+    title: "Performance Marketing Agency Montenegro | DIAL",
     description:
-      "DIAL Digital is a digital agency in Montenegro for design, marketing, and strategy.",
+      "Performance marketing, Google Ads, Meta Ads, SEO, conversion-focused websites, analytics and CRM systems for businesses that need qualified leads and clearer ROI.",
     images: SOCIAL_IMAGE_BY_LOCALE.en,
   },
   fr: {
@@ -125,44 +125,44 @@ const SEO_METADATA: Record<Locale, Partial<Record<PageType, SeoMetadata>>> = {
   en: {
     home: {
       title:
-        "DIAL Digital Agency | Digital Marketing & Web Design in Montenegro",
+        "Performance Marketing Agency Montenegro | DIAL",
       description:
-        "DIAL Digital is a full-service digital agency delivering design, marketing, and growth solutions across Montenegro.",
+        "Performance marketing, Google Ads, Meta Ads, SEO, conversion-focused websites, analytics and CRM systems for businesses that need qualified leads and clearer ROI.",
     },
     "web-design": {
-      title: "Web Design & Development | DIAL Digital Agency",
+      title: "Web Design & Development Montenegro | DIAL",
       description:
-        "We craft modern, responsive websites that are optimized for conversions and business growth.",
+        "Conversion-focused websites and landing pages built for speed, search visibility, tracking and lead generation.",
     },
     seo: {
-      title: "SEO Services in Montenegro | DIAL Digital Agency",
+      title: "SEO Services Montenegro | Technical & Local SEO | DIAL",
       description:
-        "Increase your search visibility and win more clients with our comprehensive SEO services.",
+        "Technical, on-page and local SEO focused on relevant search intent, crawlability, content structure and sustainable organic visibility.",
     },
     "social-media": {
-      title: "Social Media Marketing Services | DIAL Digital Agency",
+      title: "Meta Ads & Social Media Marketing Montenegro | DIAL",
       description:
-        "Grow your brand community and engagement with data-driven social media strategies.",
+        "Paid-social strategy, Meta Ads management, audience testing, creative testing and measurement focused on relevant demand and qualified enquiries.",
     },
     branding: {
-      title: "Branding & Graphic Design | DIAL Digital Agency",
+      title: "Branding & Graphic Design Montenegro | DIAL",
       description:
-        "Build a memorable visual identity with bespoke branding and design solutions from our creative team.",
+        "Brand identity, guidelines and campaign creative designed to keep your message consistent across web, paid media and sales materials.",
     },
     strategy: {
-      title: "Digital Strategy & Consulting | DIAL Digital Agency",
+      title: "Digital Marketing Strategy Montenegro | DIAL",
       description:
-        "Develop a data-driven digital strategy that accelerates growth and delivers measurable results.",
+        "Acquisition audits, channel planning, measurement architecture and CRM/source mapping for businesses that need a clearer digital marketing strategy.",
     },
     "service-inquiry": {
-      title: "Request a Project Quote | DIAL Digital Agency",
+      title: "Discuss a Digital Marketing Project | DIAL",
       description:
-        "Tell us about your project and receive a tailored proposal from the DIAL Digital team within 24 hours.",
+        "Share your project scope, current setup and commercial objective so DIAL can recommend the right engagement and next step.",
     },
     "free-consultation": {
-      title: "Book a Free Consultation | DIAL Digital Agency",
+      title: "Book a Digital Marketing Strategy Call | DIAL",
       description:
-        "Schedule a free consultation with our digital experts to discover growth opportunities for your business.",
+        "Discuss your acquisition, website, tracking or lead-generation priorities in a focused 45-minute introductory strategy call with no fee or obligation.",
     },
   },
 };
