@@ -19,6 +19,9 @@ export function TestimonialsSection() {
       <div className="site-container">
         <div className="mx-auto max-w-5xl text-center">
           <p className="eyebrow">{t("testimonials.title")}</p>
+          <p className="mx-auto mt-5 max-w-2xl text-sm leading-6 text-slate-500 dark:text-slate-400">
+            {t("testimonials.subtitle")}
+          </p>
           <figure className="mt-12">
             <blockquote className="text-3xl font-medium leading-tight tracking-[-0.04em] text-bdigital-navy sm:text-5xl lg:text-6xl dark:text-white">
               “{testimonials[0].quote}”
