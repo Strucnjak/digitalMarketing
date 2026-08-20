@@ -168,41 +168,41 @@ export function FreeConsultationPage() {
 
   if (isSubmitted) {
     return (
-      <main className="min-h-screen bg-white pb-20 pt-28 dark:bg-bdigital-midnight">
+      <main className="min-h-screen bg-surface pb-20 pt-28 dark:bg-background">
         <div className="site-container max-w-3xl">
           <div
             ref={statusRef}
             tabIndex={-1}
             role="status"
-            className="border-y border-slate-300 py-16 outline-none dark:border-slate-700"
+            className="border-y border-border-default py-16 outline-none dark:border-border-default"
           >
             <CheckCircle
               className="h-9 w-9 text-emerald-600"
               aria-hidden="true"
             />
-            <h1 className="mt-7 text-4xl font-semibold tracking-tight text-bdigital-navy dark:text-white">
+            <h1 className="mt-7 text-4xl font-semibold tracking-tight text-text-primary dark:text-white">
               {t("consultation.success.title")}
             </h1>
             <p className="lead-copy mt-5 max-w-2xl">
               {t("consultation.success.description")}
             </p>
-            <h2 className="mt-10 font-semibold text-bdigital-navy dark:text-white">
+            <h2 className="mt-10 font-semibold text-text-primary dark:text-white">
               {t("consultation.expect.title")}
             </h2>
-            <ul className="mt-4 grid gap-3 text-slate-600 sm:grid-cols-2 dark:text-slate-300">
+            <ul className="mt-4 grid gap-3 text-text-secondary sm:grid-cols-2 dark:text-text-secondary">
               {["review", "strategy", "advice", "proposal"].map((item) => (
                 <li key={item}>— {t(`consultation.expect.${item}`)}</li>
               ))}
             </ul>
             <div className="mt-10 flex flex-wrap gap-4">
               <button
-                className="focus-ring min-h-12 rounded-md bg-bdigital-cyan px-6 font-semibold text-bdigital-navy"
+                className="focus-ring min-h-12 rounded-md bg-accent px-6 font-semibold text-text-primary"
                 onClick={() => navigate(homePath)}
               >
                 {t("general.back_home")}
               </button>
               <button
-                className="focus-ring min-h-12 border-b border-slate-400 px-2 font-semibold text-bdigital-navy dark:text-white"
+                className="focus-ring min-h-12 border-b border-border-strong px-2 font-semibold text-text-primary dark:text-white"
                 onClick={() => {
                   setFormData(initialFormData);
                   setIsSubmitted(false);
@@ -218,21 +218,21 @@ export function FreeConsultationPage() {
   }
 
   const fieldClass =
-    "mt-2 min-h-12 w-full rounded-md border border-slate-300 bg-transparent px-4 text-bdigital-navy focus:border-bdigital-cyan focus:outline-none focus:ring-2 focus:ring-bdigital-cyan/20 dark:border-slate-700 dark:text-white";
+    "mt-2 min-h-12 w-full rounded-md border border-border-default bg-transparent px-4 text-text-primary focus:border-focus focus:outline-none focus:ring-2 focus:ring-focus/20 dark:border-border-default dark:text-white";
   return (
-    <main className="min-h-screen bg-white pb-20 pt-24 dark:bg-bdigital-midnight">
+    <main className="min-h-screen bg-surface pb-20 pt-24 dark:bg-background">
       <div className="site-container max-w-5xl">
         <button
-          className="focus-ring inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-bdigital-navy dark:text-white"
+          className="focus-ring inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-text-primary dark:text-white"
           onClick={() => navigate(homePath)}
         >
           <ArrowLeft className="h-4 w-4" aria-hidden="true" />
           {t("general.back_home")}
         </button>
-        <header className="mt-12 grid gap-8 border-b border-slate-300 pb-14 dark:border-slate-700 lg:grid-cols-12">
+        <header className="mt-12 grid gap-8 border-b border-border-default pb-14 dark:border-border-default lg:grid-cols-12">
           <div className="lg:col-span-8">
             <p className="eyebrow">{t("consultation.eyebrow")}</p>
-            <h1 className="display-title mt-7 text-bdigital-navy dark:text-white">
+            <h1 className="display-title mt-7 text-text-primary dark:text-white">
               {t("consultation.title")}
             </h1>
           </div>
@@ -242,7 +242,7 @@ export function FreeConsultationPage() {
         </header>
         <section
           aria-labelledby="benefits-title"
-          className="grid border-b border-slate-300 dark:border-slate-700 md:grid-cols-3"
+          className="grid border-b border-border-default dark:border-border-default md:grid-cols-3"
         >
           <h2 id="benefits-title" className="sr-only">
             {t("consultation.benefits.title")}
@@ -250,12 +250,12 @@ export function FreeConsultationPage() {
           {["duration", "tailored", "free"].map((item) => (
             <div
               key={item}
-              className="border-b border-slate-200 py-8 last:border-0 md:border-b-0 md:border-r md:px-8 md:first:pl-0 md:last:border-r-0"
+              className="border-b border-border-subtle py-8 last:border-0 md:border-b-0 md:border-r md:px-8 md:first:pl-0 md:last:border-r-0"
             >
-              <h3 className="font-semibold text-bdigital-navy dark:text-white">
+              <h3 className="font-semibold text-text-primary dark:text-white">
                 {t(`consultation.benefit.${item}.title`)}
               </h3>
-              <p className="mt-2 text-sm leading-6 text-slate-500 dark:text-slate-400">
+              <p className="mt-2 text-sm leading-6 text-text-muted dark:text-text-muted">
                 {t(`consultation.benefit.${item}.description`)}
               </p>
             </div>
@@ -270,14 +270,14 @@ export function FreeConsultationPage() {
         >
           <h2
             id="consultation-form-title"
-            className="section-title text-bdigital-navy dark:text-white"
+            className="section-title text-text-primary dark:text-white"
           >
             {t("consultation.form.title")}
           </h2>
-          <p className="mt-3 text-slate-500 dark:text-slate-400">
+          <p className="mt-3 text-text-muted dark:text-text-muted">
             {t("consultation.form.description")}
           </p>
-          <p className="mt-3 text-sm text-slate-500">
+          <p className="mt-3 text-sm text-text-muted">
             {t("consultation.form.required_note")}
           </p>
           <div className="mt-10 grid gap-6 sm:grid-cols-2">
@@ -317,7 +317,7 @@ export function FreeConsultationPage() {
               <div key={field}>
                 <label
                   htmlFor={field}
-                  className="text-sm font-medium text-bdigital-navy dark:text-slate-200"
+                  className="text-sm font-medium text-text-primary dark:text-slate-200"
                 >
                   {t(label)}
                 </label>
@@ -337,7 +337,7 @@ export function FreeConsultationPage() {
             <div>
               <label
                 htmlFor="businessType"
-                className="text-sm font-medium text-bdigital-navy dark:text-slate-200"
+                className="text-sm font-medium text-text-primary dark:text-slate-200"
               >
                 {t("consultation.form.business_type")} *
               </label>
@@ -362,7 +362,7 @@ export function FreeConsultationPage() {
           <div className="mt-6">
             <label
               htmlFor="currentChallenges"
-              className="text-sm font-medium text-bdigital-navy dark:text-slate-200"
+              className="text-sm font-medium text-text-primary dark:text-slate-200"
             >
               {t("consultation.form.challenges")} *
             </label>
@@ -380,7 +380,7 @@ export function FreeConsultationPage() {
           <div className="mt-6">
             <label
               htmlFor="goals"
-              className="text-sm font-medium text-bdigital-navy dark:text-slate-200"
+              className="text-sm font-medium text-text-primary dark:text-slate-200"
             >
               {t("consultation.form.goals")} *
             </label>
@@ -401,14 +401,14 @@ export function FreeConsultationPage() {
               errors.interestedServices ? "interestedServices-error" : undefined
             }
           >
-            <legend className="text-sm font-medium text-bdigital-navy dark:text-slate-200">
+            <legend className="text-sm font-medium text-text-primary dark:text-slate-200">
               {t("consultation.form.services")} *
             </legend>
             <div className="mt-4 grid gap-3 sm:grid-cols-2">
               {serviceOptions.map((service) => (
                 <label
                   key={service}
-                  className="flex min-h-11 items-center gap-3 text-slate-600 dark:text-slate-300"
+                  className="flex min-h-11 items-center gap-3 text-text-secondary dark:text-text-secondary"
                 >
                   <input
                     type="checkbox"
@@ -437,14 +437,14 @@ export function FreeConsultationPage() {
                 errors.preferredContact ? "preferredContact-error" : undefined
               }
             >
-              <legend className="text-sm font-medium text-bdigital-navy dark:text-slate-200">
+              <legend className="text-sm font-medium text-text-primary dark:text-slate-200">
                 {t("consultation.form.preferred_contact")} *
               </legend>
               <div className="mt-4 space-y-2">
                 {contactOptions.map((option) => (
                   <label
                     key={option}
-                    className="flex min-h-11 items-center gap-3 text-slate-600 dark:text-slate-300"
+                    className="flex min-h-11 items-center gap-3 text-text-secondary dark:text-text-secondary"
                   >
                     <input
                       type="radio"
@@ -465,7 +465,7 @@ export function FreeConsultationPage() {
             <div>
               <label
                 htmlFor="preferredTime"
-                className="text-sm font-medium text-bdigital-navy dark:text-slate-200"
+                className="text-sm font-medium text-text-primary dark:text-slate-200"
               >
                 {t("consultation.form.preferred_time")}
               </label>
@@ -487,7 +487,7 @@ export function FreeConsultationPage() {
           <div className="mt-8">
             <label
               htmlFor="additionalInfo"
-              className="text-sm font-medium text-bdigital-navy dark:text-slate-200"
+              className="text-sm font-medium text-text-primary dark:text-slate-200"
             >
               {t("form.additional_info_label")}
             </label>
@@ -499,7 +499,7 @@ export function FreeConsultationPage() {
               className={`${fieldClass} min-h-24 py-3`}
             />
           </div>
-          <label className="mt-6 flex min-h-11 items-center gap-3 text-sm text-slate-600 dark:text-slate-300">
+          <label className="mt-6 flex min-h-11 items-center gap-3 text-sm text-text-secondary dark:text-text-secondary">
             <input
               type="checkbox"
               checked={formData.newsletter}
@@ -520,7 +520,7 @@ export function FreeConsultationPage() {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="focus-ring mt-8 inline-flex min-h-12 items-center rounded-md bg-bdigital-cyan px-7 font-semibold text-bdigital-navy disabled:opacity-60"
+            className="focus-ring mt-8 inline-flex min-h-12 items-center rounded-md bg-accent px-7 font-semibold text-text-primary disabled:opacity-60"
           >
             <Send className="mr-2 h-4 w-4" aria-hidden="true" />
             {isSubmitting

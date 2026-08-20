@@ -175,7 +175,7 @@ export function MobileQuickNav({ onSectionClick }: MobileQuickNavProps) {
           aria-expanded={isOpen}
           aria-controls="mobile-quick-nav"
           aria-label="Toggle quick navigation"
-          className="bg-bdigital-cyan text-bdigital-navy rounded-full p-4 shadow-lg shadow-bdigital-cyan/25 border border-bdigital-cyan/20 backdrop-blur-sm"
+          className="bg-accent text-text-primary rounded-full p-4 shadow-lg shadow-md border border-accent-border/20 backdrop-blur-sm"
         >
           <AnimatePresence mode="wait">
             {isOpen ? (
@@ -211,7 +211,7 @@ export function MobileQuickNav({ onSectionClick }: MobileQuickNavProps) {
               whileHover={{ scale: prefersReducedMotion ? 1 : 1.05 }}
               whileTap={{ scale: prefersReducedMotion ? 1 : 0.95 }}
               onClick={scrollToTop}
-              className="bg-bdigital-navy text-bdigital-cyan rounded-full p-3 shadow-lg shadow-bdigital-navy/25 border border-bdigital-cyan/20 backdrop-blur-sm"
+              className="bg-bdigital-navy text-accent-strong rounded-full p-3 shadow-lg shadow-bdigital-navy/25 border border-accent-border/20 backdrop-blur-sm"
               title={t.scrollToTop}
               aria-label={t.scrollToTop}
             >
@@ -243,7 +243,7 @@ export function MobileQuickNav({ onSectionClick }: MobileQuickNavProps) {
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.8, opacity: 0, y: 20 }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
-          className="absolute bottom-24 right-6 min-w-48 overflow-hidden rounded-2xl border border-gray-200/50 bg-white/95 shadow-2xl backdrop-blur-md dark:border-bdigital-dark-navy/70 dark:bg-bdigital-midnight/95"
+          className="absolute bottom-24 right-6 min-w-48 overflow-hidden rounded-2xl border border-border-subtle/50 bg-surface/95 shadow-2xl backdrop-blur-md dark:border-bdigital-dark-navy/70 dark:bg-background/95"
           onClick={(e) => e.stopPropagation()}
         >
               {sections.map((section, index) => {
@@ -256,9 +256,9 @@ export function MobileQuickNav({ onSectionClick }: MobileQuickNavProps) {
                     animate={{ x: 0, opacity: 1 }}
                     transition={{ delay: prefersReducedMotion ? 0 : index * 0.05 }}
                     onClick={() => handleSectionClick(section.id)}
-                    className="flex w-full items-center gap-3 border-b border-gray-100/50 px-4 py-3 text-left text-bdigital-navy transition-colors hover:bg-bdigital-cyan/10 active:bg-bdigital-cyan/20 last:border-b-0 dark:border-slate-800/70 dark:text-slate-100 dark:hover:bg-slate-900"
+                    className="flex w-full items-center gap-3 border-b border-border-subtle/50 px-4 py-3 text-left text-text-primary transition-colors hover:bg-accent/10 active:bg-accent/20 last:border-b-0 dark:border-border-subtle/70 dark:text-slate-100 dark:hover:bg-slate-900"
                   >
-                    <IconComponent size={18} className="text-bdigital-cyan flex-shrink-0" />
+                    <IconComponent size={18} className="text-accent-strong flex-shrink-0" />
                     <span className="flex-1">{section.label}</span>
                   </motion.button>
                 );
