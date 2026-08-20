@@ -60,12 +60,12 @@ for (const { path, cluster } of results) {
   );
   assertCondition(
     montenegrinAlternate,
-    `Expected hreflang=\"me\" alternate for ${path} to be present`,
+    `Expected hreflang="me" alternate for ${path} to be present`,
   );
   assertEqual(
     montenegrinAlternate.href,
     normalizedCanonical,
-    `hreflang=\"me\" alternate for ${path} should point to the canonical URL`,
+    `hreflang="me" alternate for ${path} should point to the canonical URL`,
   );
 
   const xDefaultAlternate = cluster.alternates.find(
@@ -73,12 +73,12 @@ for (const { path, cluster } of results) {
   );
   assertCondition(
     xDefaultAlternate,
-    `Expected hreflang=\"x-default\" alternate for ${path} to be present`,
+    `Expected hreflang="x-default" alternate for ${path} to be present`,
   );
   assertEqual(
     xDefaultAlternate.href,
     normalizedCanonical,
-    `hreflang=\"x-default\" alternate for ${path} should mirror the canonical URL`,
+    `hreflang="x-default" alternate for ${path} should mirror the canonical URL`,
   );
 }
 
@@ -90,7 +90,7 @@ console.log(
 const frenchFallback = getSeoMetadata("fr", "unmapped" as PageType);
 assertEqual(
   frenchFallback.title,
-  "Agence DIAL Digital",
+  "Agence de marketing à la performance au Monténégro | DIAL",
   "Unmapped French pages should use the safe French metadata default",
 );
 

@@ -15,9 +15,9 @@ const SOCIAL_IMAGE_BY_LOCALE: Record<Locale, string[]> = {
 
 const DEFAULT_SEO_METADATA_BY_LOCALE: Record<Locale, SeoMetadata> = {
   me: {
-    title: "DIAL Digital agencija",
+    title: "Performance marketing agencija Crna Gora | DIAL",
     description:
-      "DIAL Digital je digitalna agencija iz Crne Gore za dizajn, marketing i strategiju.",
+      "Performance marketing, Google Ads, Meta Ads, SEO, sajtovi usmjereni na konverzije, analitika i CRM sistemi za kompanije kojima su potrebni kvalifikovani leadovi i jasniji ROI.",
     images: SOCIAL_IMAGE_BY_LOCALE.me,
   },
   en: {
@@ -27,9 +27,9 @@ const DEFAULT_SEO_METADATA_BY_LOCALE: Record<Locale, SeoMetadata> = {
     images: SOCIAL_IMAGE_BY_LOCALE.en,
   },
   fr: {
-    title: "Agence DIAL Digital",
+    title: "Agence de marketing à la performance au Monténégro | DIAL",
     description:
-      "DIAL Digital est une agence digitale au Monténégro spécialisée dans le design, le marketing et la stratégie.",
+      "Marketing à la performance, Google Ads, Meta Ads, SEO, sites axés sur la conversion, analytique et CRM pour générer des leads qualifiés et clarifier le ROI.",
     images: SOCIAL_IMAGE_BY_LOCALE.fr,
   },
 };
@@ -39,87 +39,87 @@ const DEFAULT_SEO_METADATA = DEFAULT_SEO_METADATA_BY_LOCALE[defaultLocale];
 const SEO_METADATA: Record<Locale, Partial<Record<PageType, SeoMetadata>>> = {
   me: {
     home: {
-      title: "DIAL Digital agencija | Digitalni marketing i web dizajn",
+      title: "Performance marketing agencija Crna Gora | DIAL",
       description:
-        "DIAL Digital je full-service digitalna agencija iz Crne Gore koja isporučuje dizajn, marketing i strategije rasta.",
+        "Performance marketing, Google Ads, Meta Ads, SEO, sajtovi usmjereni na konverzije, analitika i CRM sistemi za kompanije kojima su potrebni kvalifikovani leadovi i jasniji ROI.",
     },
     "web-design": {
-      title: "Web dizajn i development | DIAL Digital agencija",
+      title: "Web dizajn i razvoj u Crnoj Gori | DIAL",
       description:
-        "Pravimo moderne, responzivne sajtove optimizovane za konverzije i rast vašeg biznisa.",
+        "Sajtovi i landing stranice usmjereni na konverzije, izgrađeni za brzinu, vidljivost u pretrazi, praćenje i generisanje leadova.",
     },
     seo: {
-      title: "SEO usluge u Crnoj Gori | DIAL Digital agencija",
+      title: "SEO usluge Crna Gora | Tehnički i lokalni SEO | DIAL",
       description:
-        "Povećajte vidljivost na pretraživačima i osvojite više klijenata uz naš SEO tim.",
+        "Tehnički, on-page i lokalni SEO usmjeren na relevantnu namjeru pretrage, dostupnost pretraživačima, strukturu sadržaja i održivu organsku vidljivost.",
     },
     "social-media": {
-      title: "Upravljanje društvenim mrežama | DIAL Digital agencija",
+      title: "Meta Ads i marketing na društvenim mrežama | DIAL",
       description:
-        "Gradimo vašu zajednicu i povećavamo angažman kroz kreativne kampanje na društvenim mrežama.",
+        "Strategija plaćenih društvenih mreža, Meta Ads upravljanje, testiranje publike i kreativnih rješenja te mjerenje usmjereno na relevantnu potražnju i kvalifikovane upite.",
     },
     branding: {
-      title: "Brending i grafički dizajn | DIAL Digital agencija",
+      title: "Brending i grafički dizajn u Crnoj Gori | DIAL",
       description:
-        "Razvijamo prepoznatljiv vizuelni identitet i profesionalne marketinške materijale za vaš brend.",
+        "Identitet brenda, smjernice i kreativna rješenja za kampanje koja održavaju poruku dosljednom na webu, u plaćenim medijima i prodajnim materijalima.",
     },
     strategy: {
-      title: "Digitalna strategija i konsalting | DIAL Digital agencija",
+      title: "Strategija digitalnog marketinga Crna Gora | DIAL",
       description:
-        "Planovi zasnovani na podacima koji ubrzavaju rast i prodaju vašeg poslovanja.",
+        "Revizije akvizicije, planiranje kanala, arhitektura mjerenja i CRM/mapiranje izvora za kompanije kojima je potrebna jasnija strategija digitalnog marketinga.",
     },
     "service-inquiry": {
-      title: "Zatražite ponudu | DIAL Digital agencija",
+      title: "Razgovarajte o projektu digitalnog marketinga | DIAL",
       description:
-        "Pošaljite detalje projekta i dobićete personalizovanu ponudu u roku od 24 sata.",
+        "Podijelite obim projekta, postojeću postavku i poslovni cilj kako bi DIAL preporučio odgovarajući angažman i sljedeći korak.",
     },
     "free-consultation": {
-      title: "Besplatne konsultacije | DIAL Digital agencija",
+      title: "Zakažite strateški razgovor o digitalnom marketingu | DIAL",
       description:
-        "Rezervišite besplatan razgovor sa našim timom digitalnog marketinga i saznajte kako možemo pomoći.",
+        "Razgovarajte o akviziciji, sajtu, praćenju ili generisanju leadova tokom fokusiranog uvodnog strateškog razgovora od 45 minuta, bez naknade i obaveze.",
     },
   },
   fr: {
     home: {
       title:
-        "Agence DIAL Digital | Marketing digital et conception web au Monténégro",
+        "Agence de marketing à la performance au Monténégro | DIAL",
       description:
-        "DIAL Digital est une agence full-service qui fournit des solutions de design, de marketing et de croissance au Monténégro.",
+        "Marketing à la performance, Google Ads, Meta Ads, SEO, sites axés sur la conversion, analytique et CRM pour générer des leads qualifiés et clarifier le ROI.",
     },
     "web-design": {
-      title: "Conception et développement web | Agence DIAL Digital",
+      title: "Conception et développement web au Monténégro | DIAL",
       description:
-        "Nous créons des sites modernes et responsives, optimisés pour la conversion et la croissance de votre entreprise.",
+        "Sites et landing pages axés sur la conversion, conçus pour la rapidité, la visibilité dans les moteurs de recherche, le suivi et la génération de leads.",
     },
     seo: {
-      title: "Services SEO au Monténégro | Agence DIAL Digital",
+      title: "Services SEO au Monténégro | SEO technique et local | DIAL",
       description:
-        "Améliorez votre visibilité sur les moteurs de recherche et gagnez plus de clients grâce à notre équipe SEO.",
+        "SEO technique, on-page et local axé sur les intentions pertinentes, l’explorabilité, la structure du contenu et une visibilité organique durable.",
     },
     "social-media": {
-      title: "Marketing des réseaux sociaux | Agence DIAL Digital",
+      title: "Meta Ads et marketing sur les réseaux sociaux | DIAL",
       description:
-        "Développez votre communauté et l'engagement grâce à des campagnes créatives sur les réseaux sociaux.",
+        "Stratégie social ads, gestion Meta Ads, tests d’audience et créatifs, et mesure axée sur une demande pertinente et des prospects qualifiés.",
     },
     branding: {
-      title: "Branding et design graphique | Agence DIAL Digital",
+      title: "Identité de marque et design graphique au Monténégro | DIAL",
       description:
-        "Nous élaborons une identité visuelle distinctive et des supports marketing professionnels pour votre marque.",
+        "Identité, charte et créations de campagne conçues pour maintenir la cohérence du message sur le web, dans les médias payants et les supports commerciaux.",
     },
     strategy: {
-      title: "Stratégie digitale et conseil | Agence DIAL Digital",
+      title: "Stratégie de marketing digital au Monténégro | DIAL",
       description:
-        "Des plans fondés sur les données qui accélèrent la croissance et les ventes de votre entreprise.",
+        "Audits d’acquisition, planification des canaux, architecture de mesure et cartographie CRM/des sources pour clarifier votre stratégie de marketing digital.",
     },
     "service-inquiry": {
-      title: "Demander une proposition | Agence DIAL Digital",
+      title: "Discuter d’un projet de marketing digital | DIAL",
       description:
-        "Envoyez les détails de votre projet et recevez une proposition personnalisée en 24 heures.",
+        "Partagez le périmètre, la configuration actuelle et l’objectif commercial afin que DIAL recommande la mission et la prochaine étape adaptées.",
     },
     "free-consultation": {
-      title: "Réservez une consultation gratuite | Agence DIAL Digital",
+      title: "Réserver un échange stratégique en marketing digital | DIAL",
       description:
-        "Planifiez un appel gratuit avec notre équipe marketing pour découvrir comment nous pouvons vous aider.",
+        "Échangez sur vos priorités d’acquisition, de site, de suivi ou de génération de leads lors d’un entretien initial ciblé de 45 minutes, sans frais ni engagement.",
     },
   },
   en: {
