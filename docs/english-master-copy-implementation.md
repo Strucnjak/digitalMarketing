@@ -72,5 +72,6 @@ The new parity keys are listed in `docs/pending-copy-translations.md`. Existing 
 - `src/components/ServicesSection.tsx`
 - `src/components/TestimonialsSection.tsx`
 - `src/components/services/StrategyPage.tsx`
+- `src/routes.tsx`
 - `docs/pending-copy-translations.md`
 - `docs/english-master-copy-implementation.md`

@@ -435,13 +435,15 @@ const localizedChildren = createChildRoutes();
 localizedChildren.push({ path: "*", element: <NotFoundPage /> });
 
 export const appRouteObjects: RouteObject[] = [
+  // Match locale-prefixed URLs before the root tree: the root tree has a
+  // wildcard child that would otherwise claim `/en`, `/fr`, and `/me` as 404s.
   {
-    path: "/",
+    path: "/:locale(en|me|fr)",
     element: <LocalizedLayout />,
     children: localizedChildren,
   },
   {
-    path: "/:locale(en|me|fr)",
+    path: "/",
     element: <LocalizedLayout />,
     children: localizedChildren,
   },
