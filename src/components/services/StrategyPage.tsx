@@ -88,22 +88,22 @@ export function StrategyPage() {
   };
 
   return (
-    <div className="min-h-screen bg-white dark:bg-bdigital-midnight">
+    <div className="min-h-screen bg-surface dark:bg-background">
       {/* Hero Section */}
       <section className="pt-20 pb-16 bg-gradient-to-br from-bdigital-navy via-bdigital-dark-navy to-bdigital-midnight">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="text-white">
-              <Badge className="bg-bdigital-cyan/20 text-bdigital-cyan border-bdigital-cyan mb-4">{t("strategy.badge")}</Badge>
+              <Badge className="bg-accent/20 text-accent-strong border-accent-border mb-4">{t("strategy.badge")}</Badge>
               <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
-                <span className="text-bdigital-cyan">{t("strategy.hero.emphasis")}</span> {t("strategy.hero.trailing")}
+                <span className="text-accent-strong">{t("strategy.hero.emphasis")}</span> {t("strategy.hero.trailing")}
               </h1>
               <p className="text-gray-300 text-lg mb-8 leading-relaxed">{t("strategy.hero.desc")}</p>
 
               <div className="flex flex-col sm:flex-row gap-4 mb-8">
                 <Button
                   size="lg"
-                  className="bg-bdigital-cyan text-bdigital-navy hover:bg-bdigital-cyan-light px-8 py-3 font-semibold"
+                  className="bg-accent text-bdigital-navy hover:bg-accent-hover px-8 py-3 font-semibold"
                   onClick={handleConsultation}
                 >
                   {t("strategy.hero.cta")}
@@ -112,7 +112,7 @@ export function StrategyPage() {
                 <Button
                   variant="outline"
                   size="lg"
-                  className="border-bdigital-cyan text-bdigital-cyan hover:bg-bdigital-cyan hover:text-bdigital-navy px-8 py-3 font-semibold"
+                  className="border-accent-border text-accent-strong hover:bg-accent hover:text-text-primary px-8 py-3 font-semibold"
                   onClick={() => {
                     const path = buildLocalizedPath(activeLocale, "home", { includeLocalePrefix });
                     navigate(path);
@@ -124,7 +124,7 @@ export function StrategyPage() {
             </div>
 
             <div className="relative">
-              <div className="rounded-2xl bg-white p-8 shadow-2xl dark:bg-bdigital-night dark:shadow-black/40">
+              <div className="rounded-2xl bg-surface p-8 shadow-2xl dark:bg-surface dark:shadow-black/40">
                 <ImageWithFallback
                   src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=500&h=400&fit=crop"
                   alt="Strategy"
@@ -137,10 +137,10 @@ export function StrategyPage() {
       </section>
 
       {/* Services Section */}
-      <section className="bg-gray-50 py-20 dark:bg-bdigital-night">
+      <section className="bg-surface-subtle py-20 dark:bg-surface">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="mb-4 text-3xl font-bold text-bdigital-navy md:text-4xl dark:text-slate-100">{t("strategy.services.heading")}</h2>
+            <h2 className="mb-4 text-3xl font-bold text-text-primary md:text-4xl dark:text-slate-100">{t("strategy.services.heading")}</h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -149,14 +149,14 @@ export function StrategyPage() {
               return (
                 <Card
                   key={index}
-                  className="border-0 shadow-lg transition-all duration-300 group hover:shadow-xl dark:border dark:border-bdigital-dark-navy dark:bg-bdigital-night"
+                  className="border border-border-subtle shadow-sm transition-colors duration-300 group hover:border-border-default dark:bg-surface"
                 >
                   <CardContent className="p-6">
-                    <div className="w-12 h-12 bg-bdigital-cyan/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-bdigital-cyan group-hover:text-white transition-all duration-300">
-                      <IconComponent className="h-6 w-6 text-bdigital-cyan group-hover:text-white" />
+                    <div className="w-12 h-12 bg-surface-subtle rounded-xl flex items-center justify-center mb-4 text-text-secondary transition-colors duration-300">
+                      <IconComponent className="h-6 w-6 text-text-secondary" />
                     </div>
-                    <h3 className="mb-3 text-xl font-bold text-bdigital-navy dark:text-slate-100">{service.title}</h3>
-                    <p className="text-neutral-gray leading-relaxed dark:text-slate-300">{service.description}</p>
+                    <h3 className="mb-3 text-xl font-bold text-text-primary dark:text-slate-100">{service.title}</h3>
+                    <p className="text-text-secondary leading-relaxed dark:text-text-secondary">{service.description}</p>
                   </CardContent>
                 </Card>
               );
@@ -166,38 +166,38 @@ export function StrategyPage() {
       </section>
 
       {/* Pricing Section */}
-      <section className="bg-white py-20 dark:bg-bdigital-midnight">
+      <section className="bg-surface py-20 dark:bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="mb-4 text-3xl font-bold text-bdigital-navy md:text-4xl dark:text-slate-100">{t("strategy.pricing.heading")}</h2>
+            <h2 className="mb-4 text-3xl font-bold text-text-primary md:text-4xl dark:text-slate-100">{t("strategy.pricing.heading")}</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {packages.map((pkg, index) => (
               <Card
                 key={index}
-                className={`relative border-0 shadow-lg transition-all duration-300 hover:shadow-xl dark:border dark:border-bdigital-dark-navy dark:bg-bdigital-night ${
-                  pkg.popular ? "ring-2 ring-bdigital-cyan" : ""
+                className={`relative border border-border-subtle shadow-sm transition-colors duration-300 hover:border-border-default dark:bg-surface ${
+                  pkg.popular ? "ring-2 ring-focus" : ""
                 }`}
               >
                 {pkg.popular && (
                   <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                    <Badge className="bg-bdigital-cyan text-bdigital-navy px-4 py-1">{t("packages.most_popular")}</Badge>
+                    <Badge className="bg-surface-subtle text-text-secondary border border-border-default px-4 py-1">{t("packages.most_popular")}</Badge>
                   </div>
                 )}
                 <CardContent className="p-6">
                   <div className="text-center mb-6">
-                    <h3 className="mb-2 text-xl font-bold text-bdigital-navy dark:text-slate-100">{pkg.name}</h3>
+                    <h3 className="mb-2 text-xl font-bold text-text-primary dark:text-slate-100">{pkg.name}</h3>
                   </div>
                   <ul className="space-y-3 mb-6">
                     {pkg.features.map((feature, idx) => (
                       <li key={idx} className="flex items-center text-sm">
-                        <CheckCircle className="h-4 w-4 text-bdigital-cyan-dark mr-3 flex-shrink-0" />
-                        <span className="text-neutral-gray dark:text-slate-300">{feature}</span>
+                        <CheckCircle className="h-4 w-4 text-text-muted mr-3 flex-shrink-0" />
+                        <span className="text-text-secondary dark:text-text-secondary">{feature}</span>
                       </li>
                     ))}
                   </ul>
                   <Button
-                    className={`w-full ${pkg.popular ? "bg-bdigital-cyan text-bdigital-navy hover:bg-bdigital-cyan-light" : "border border-bdigital-cyan-dark text-bdigital-cyan-dark hover:bg-bdigital-cyan hover:text-bdigital-navy"} font-semibold`}
+                    className={`w-full ${pkg.popular ? "border border-border-strong bg-surface-subtle text-text-primary hover:bg-surface-elevated" : "border border-border-default text-text-secondary hover:border-border-strong hover:text-text-primary"} font-semibold`}
                     variant={pkg.popular ? "default" : "outline"}
                     onClick={() => handlePackageSelect(pkg.name)}
                   >
@@ -208,7 +208,7 @@ export function StrategyPage() {
             ))}
           </div>{" "}
           {/* Pricing Note */}
-          <p className="mx-auto mt-8 max-w-2xl text-center text-sm text-neutral-gray dark:text-slate-300">{t("web.pricing.note")}</p>
+          <p className="mx-auto mt-8 max-w-2xl text-center text-sm text-text-secondary dark:text-text-secondary">{t("web.pricing.note")}</p>
         </div>
       </section>
 
@@ -219,7 +219,7 @@ export function StrategyPage() {
           <p className="text-gray-300 text-lg mb-8 max-w-2xl mx-auto">{t("strategy.cta.desc")}</p>
           <Button
             size="lg"
-            className="bg-bdigital-cyan text-bdigital-navy hover:bg-bdigital-cyan-light px-8 py-3 font-semibold"
+            className="bg-accent text-bdigital-navy hover:bg-accent-hover px-8 py-3 font-semibold"
             onClick={handleConsultation}
           >
             {t("strategy.cta.primary")}

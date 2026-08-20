@@ -52,49 +52,49 @@ export function ContactSection() {
     }
   };
   const fieldClass =
-    "h-12 rounded-md border-slate-300 bg-transparent px-4 focus-visible:border-bdigital-cyan focus-visible:ring-bdigital-cyan/20 dark:border-slate-700 dark:bg-transparent dark:text-white";
+    "h-12 rounded-md border-border-default bg-transparent px-4 focus-visible:border-accent-border focus-visible:ring-focus/20 dark:border-border-default dark:bg-transparent dark:text-white";
 
   return (
     <section
       id="contact"
-      className="section-shell bg-white dark:bg-bdigital-midnight"
+      className="section-shell bg-surface dark:bg-background"
     >
       <div className="site-container grid gap-16 lg:grid-cols-12 lg:gap-8">
         <div className="lg:col-span-4">
           <p className="eyebrow mb-7">{t("contact.badge")}</p>
-          <h2 className="section-title text-bdigital-navy dark:text-white">
+          <h2 className="section-title text-text-primary dark:text-white">
             {t("contact.heading.part1")} {t("contact.heading.emphasis")}
           </h2>
           <p className="lead-copy mt-7">{t("contact.description")}</p>
 
-          <address className="mt-12 space-y-7 border-t border-slate-300 pt-8 not-italic dark:border-slate-700">
+          <address className="mt-12 space-y-7 border-t border-border-default pt-8 not-italic dark:border-border-default">
             <div>
-              <p className="text-xs font-medium text-slate-500">
+              <p className="text-xs font-medium text-text-muted">
                 {t("contact.info.email")}
               </p>
               <a
-                className="focus-ring mt-1 inline-block font-semibold text-bdigital-navy underline decoration-slate-300 underline-offset-4 hover:decoration-bdigital-cyan dark:text-white"
+                className="focus-ring mt-1 inline-block font-semibold text-text-primary underline decoration-slate-300 underline-offset-4 hover:decoration-bdigital-cyan dark:text-white"
                 href={`mailto:${EMAIL}`}
               >
                 {EMAIL}
               </a>
             </div>
             <div>
-              <p className="text-xs font-medium text-slate-500">
+              <p className="text-xs font-medium text-text-muted">
                 {t("contact.info.phone")}
               </p>
               <a
-                className="focus-ring mt-1 inline-block font-semibold text-bdigital-navy underline decoration-slate-300 underline-offset-4 hover:decoration-bdigital-cyan dark:text-white"
+                className="focus-ring mt-1 inline-block font-semibold text-text-primary underline decoration-slate-300 underline-offset-4 hover:decoration-bdigital-cyan dark:text-white"
                 href={`tel:${PHONE.replace(/\s+/g, "")}`}
               >
                 {PHONE}
               </a>
             </div>
             <div>
-              <p className="text-xs font-medium text-slate-500">
+              <p className="text-xs font-medium text-text-muted">
                 {t("contact.info.location")}
               </p>
-              <p className="mt-1 font-semibold text-bdigital-navy dark:text-white">
+              <p className="mt-1 font-semibold text-text-primary dark:text-white">
                 {ADDRESS}
               </p>
             </div>
@@ -104,14 +104,14 @@ export function ContactSection() {
         <div className="lg:col-span-7 lg:col-start-6">
           {isSubmitted ? (
             <div
-              className="flex min-h-96 flex-col justify-center border-y border-slate-300 py-16 dark:border-slate-700"
+              className="flex min-h-96 flex-col justify-center border-y border-border-default py-16 dark:border-border-default"
               role="status"
             >
               <CheckCircle className="h-10 w-10 text-emerald-600" />
-              <h3 className="mt-6 text-3xl font-semibold text-bdigital-navy dark:text-white">
+              <h3 className="mt-6 text-3xl font-semibold text-text-primary dark:text-white">
                 {t("contact.success.title")}
               </h3>
-              <p className="mt-3 text-slate-600 dark:text-slate-300">
+              <p className="mt-3 text-text-secondary dark:text-text-secondary">
                 {t("contact.success.desc")}
               </p>
             </div>
@@ -119,13 +119,13 @@ export function ContactSection() {
             <form
               onSubmit={handleSubmit}
               noValidate
-              className="border-t border-slate-300 pt-8 dark:border-slate-700"
+              className="border-t border-border-default pt-8 dark:border-border-default"
             >
-              <h3 className="mb-8 text-2xl font-semibold text-bdigital-navy dark:text-white">
+              <h3 className="mb-8 text-2xl font-semibold text-text-primary dark:text-white">
                 {t("contact.form.title")}
               </h3>
               <div className="grid gap-6 sm:grid-cols-2">
-                <label className="text-sm font-medium text-bdigital-navy dark:text-slate-200">
+                <label className="text-sm font-medium text-text-primary dark:text-slate-200">
                   {t("contact.name")} *
                   <Input
                     required
@@ -136,7 +136,7 @@ export function ContactSection() {
                     className={`mt-2 ${fieldClass}`}
                   />
                 </label>
-                <label className="text-sm font-medium text-bdigital-navy dark:text-slate-200">
+                <label className="text-sm font-medium text-text-primary dark:text-slate-200">
                   {t("contact.email")} *
                   <Input
                     required
@@ -148,7 +148,7 @@ export function ContactSection() {
                     className={`mt-2 ${fieldClass}`}
                   />
                 </label>
-                <label className="text-sm font-medium text-bdigital-navy dark:text-slate-200">
+                <label className="text-sm font-medium text-text-primary dark:text-slate-200">
                   {t("contact.company")}
                   <Input
                     maxLength={LEAD_LIMITS.company}
@@ -158,7 +158,7 @@ export function ContactSection() {
                     className={`mt-2 ${fieldClass}`}
                   />
                 </label>
-                <label className="text-sm font-medium text-bdigital-navy dark:text-slate-200">
+                <label className="text-sm font-medium text-text-primary dark:text-slate-200">
                   {t("contact.phone")}
                   <Input
                     type="tel"
@@ -170,7 +170,7 @@ export function ContactSection() {
                   />
                 </label>
               </div>
-              <label className="mt-6 block text-sm font-medium text-bdigital-navy dark:text-slate-200">
+              <label className="mt-6 block text-sm font-medium text-text-primary dark:text-slate-200">
                 {t("contact.message")} *
                 <Textarea
                   required
@@ -178,18 +178,18 @@ export function ContactSection() {
                   value={formData.message}
                   onChange={(e) => change("message", e.target.value)}
                   placeholder={t("form.placeholder_additional_info")}
-                  className="mt-2 min-h-36 resize-y rounded-md border-slate-300 bg-transparent p-4 focus-visible:border-bdigital-cyan focus-visible:ring-bdigital-cyan/20 dark:border-slate-700 dark:bg-transparent dark:text-white"
+                  className="mt-2 min-h-36 resize-y rounded-md border-border-default bg-transparent p-4 focus-visible:border-accent-border focus-visible:ring-focus/20 dark:border-border-default dark:bg-transparent dark:text-white"
                 />
               </label>
               <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="focus-ring mt-8 min-h-12 w-full rounded-md bg-bdigital-cyan font-semibold text-bdigital-navy shadow-none hover:bg-bdigital-cyan-light sm:w-auto sm:px-8"
+                className="focus-ring mt-8 min-h-12 w-full rounded-md bg-accent font-semibold text-text-primary shadow-none hover:bg-accent-hover sm:w-auto sm:px-8"
               >
                 <Send className="mr-2 h-4 w-4" aria-hidden="true" />
                 {isSubmitting ? t("contact.sending") : t("contact.send")}
               </Button>
-              <p className="mt-4 text-xs leading-5 text-slate-500">
+              <p className="mt-4 text-xs leading-5 text-text-muted">
                 {t("contact.privacy")}
               </p>
               {error && (

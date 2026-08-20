@@ -130,12 +130,12 @@ export function Navigation() {
   };
 
   const foreground = isScrolled
-    ? "text-bdigital-navy dark:text-white"
+    ? "text-text-primary dark:text-white"
     : "text-white";
 
   return (
     <nav
-      className={`fixed inset-x-0 top-0 z-50 border-b transition-colors duration-200 motion-reduce:transition-none ${isScrolled ? "border-slate-200 bg-white dark:border-slate-800 dark:bg-bdigital-midnight" : "border-transparent bg-transparent"}`}
+      className={`fixed inset-x-0 top-0 z-50 border-b transition-colors duration-200 motion-reduce:transition-none ${isScrolled ? "border-border-subtle bg-surface dark:border-border-subtle dark:bg-background" : "border-transparent bg-transparent"}`}
       aria-label={t("nav.primary")}
     >
       <div className="site-container flex h-16 items-center justify-between lg:h-20">
@@ -145,7 +145,7 @@ export function Navigation() {
           className={`focus-ring flex items-center gap-3 ${foreground}`}
           aria-label="DIAL Digital"
         >
-          <span className="flex h-8 w-8 items-center justify-center rounded-md bg-bdigital-cyan-dark lg:h-9 lg:w-9">
+          <span className="flex h-8 w-8 items-center justify-center rounded-md bg-accent-dark lg:h-9 lg:w-9">
             <img src="/logo.svg" alt="" className="h-6 w-6" />
           </span>
           <span className="text-base font-semibold tracking-tight lg:text-lg">
@@ -157,7 +157,7 @@ export function Navigation() {
           <button
             type="button"
             onClick={goHome}
-            className={`focus-ring text-sm transition-colors hover:text-slate-500 dark:hover:text-slate-300 ${foreground} ${routeInfo.page === "home" ? "font-semibold" : "font-normal"}`}
+            className={`focus-ring text-sm transition-colors hover:text-text-muted dark:hover:text-slate-300 ${foreground} ${routeInfo.page === "home" ? "font-semibold" : "font-normal"}`}
           >
             {t("nav.home")}
           </button>
@@ -172,7 +172,7 @@ export function Navigation() {
             <button
               type="button"
               onClick={() => setServicesOpen((open: boolean) => !open)}
-              className={`focus-ring flex items-center gap-1.5 text-sm transition-colors hover:text-slate-500 dark:hover:text-slate-300 ${foreground} ${servicePageIds.includes(routeInfo.page as (typeof servicePageIds)[number]) ? "font-semibold" : "font-normal"}`}
+              className={`focus-ring flex items-center gap-1.5 text-sm transition-colors hover:text-text-muted dark:hover:text-slate-300 ${foreground} ${servicePageIds.includes(routeInfo.page as (typeof servicePageIds)[number]) ? "font-semibold" : "font-normal"}`}
               aria-expanded={servicesOpen}
               aria-haspopup="true"
             >
@@ -183,19 +183,19 @@ export function Navigation() {
               />
             </button>
             <div
-              className={`absolute left-0 top-full mt-5 w-96 border border-slate-200 bg-white py-1 text-bdigital-navy shadow-lg dark:border-slate-700 dark:bg-bdigital-midnight dark:text-white ${servicesOpen ? "visible opacity-100" : "invisible opacity-0"}`}
+              className={`absolute left-0 top-full mt-5 w-96 border border-border-subtle bg-surface py-1 text-text-primary shadow-lg dark:border-border-default dark:bg-background dark:text-white ${servicesOpen ? "visible opacity-100" : "invisible opacity-0"}`}
             >
               {services.map((service) => (
                 <button
                   key={service.id}
                   type="button"
                   onClick={() => goService(service.id)}
-                  className="focus-ring block w-full border-b border-slate-100 px-5 py-4 text-left last:border-0 hover:bg-slate-50 dark:border-slate-800 dark:hover:bg-slate-900"
+                  className="focus-ring block w-full border-b border-slate-100 px-5 py-4 text-left last:border-0 hover:bg-surface-subtle dark:border-border-subtle dark:hover:bg-slate-900"
                 >
                   <span className="block text-sm font-semibold">
                     {service.title}
                   </span>
-                  <span className="mt-1 block text-xs leading-5 text-slate-500 dark:text-slate-400">
+                  <span className="mt-1 block text-xs leading-5 text-text-muted dark:text-text-muted">
                     {service.description}
                   </span>
                 </button>
@@ -204,7 +204,7 @@ export function Navigation() {
           </div>
 
           <div
-            className={`flex items-center gap-2 text-xs ${isScrolled ? "text-slate-500 dark:text-slate-400" : "text-slate-300"}`}
+            className={`flex items-center gap-2 text-xs ${isScrolled ? "text-text-muted dark:text-text-muted" : "text-slate-300"}`}
             aria-label={t("nav.language")}
           >
             {localeOptions.map((option, index) => (
@@ -225,7 +225,7 @@ export function Navigation() {
           <button
             type="button"
             onClick={toggleTheme}
-            className={`focus-ring flex h-9 w-9 items-center justify-center rounded-md border transition-colors ${isScrolled ? "border-slate-200 text-slate-500 hover:text-bdigital-navy dark:border-slate-700 dark:text-slate-400 dark:hover:text-white" : "border-white/25 text-slate-300 hover:text-white"}`}
+            className={`focus-ring flex h-9 w-9 items-center justify-center rounded-md border transition-colors ${isScrolled ? "border-border-subtle text-text-muted hover:text-text-primary dark:border-border-default dark:text-text-muted dark:hover:text-white" : "border-white/25 text-slate-300 hover:text-white"}`}
             aria-label={
               theme === "dark" ? t("nav.light_mode") : t("nav.dark_mode")
             }
@@ -239,7 +239,7 @@ export function Navigation() {
 
           <Button
             onClick={bookCall}
-            className="focus-ring rounded-md bg-bdigital-cyan px-5 text-sm font-semibold text-bdigital-navy shadow-none hover:bg-bdigital-cyan-light"
+            className="focus-ring rounded-md bg-accent px-5 text-sm font-semibold text-text-primary shadow-none hover:bg-accent-hover"
           >
             {t("web.cta.primary")}
           </Button>
@@ -258,21 +258,21 @@ export function Navigation() {
             </SheetTrigger>
             <SheetContent
               side="right"
-              className="w-full border-l border-slate-200 bg-white p-0 sm:w-96 dark:border-slate-800 dark:bg-bdigital-midnight"
+              className="w-full border-l border-border-subtle bg-surface p-0 sm:w-96 dark:border-border-subtle dark:bg-background"
             >
               <SheetHeader className="sr-only">
                 <SheetTitle>{t("nav.primary")}</SheetTitle>
                 <SheetDescription>{t("nav.primary")}</SheetDescription>
               </SheetHeader>
               <div className="flex h-full flex-col px-6 pb-8 pt-5">
-                <div className="flex items-center justify-between border-b border-slate-200 pb-5 dark:border-slate-800">
-                  <span className="text-lg font-semibold text-bdigital-navy dark:text-white">
+                <div className="flex items-center justify-between border-b border-border-subtle pb-5 dark:border-border-subtle">
+                  <span className="text-lg font-semibold text-text-primary dark:text-white">
                     DIAL Digital
                   </span>
                   <button
                     type="button"
                     onClick={() => setMobileOpen(false)}
-                    className="focus-ring flex h-11 w-11 items-center justify-center text-bdigital-navy dark:text-white"
+                    className="focus-ring flex h-11 w-11 items-center justify-center text-text-primary dark:text-white"
                     aria-label={t("nav.close")}
                   >
                     <X className="h-5 w-5" />
@@ -282,14 +282,14 @@ export function Navigation() {
                   <button
                     type="button"
                     onClick={goHome}
-                    className="focus-ring block min-h-12 w-full border-b border-slate-200 py-4 text-left text-lg font-semibold text-bdigital-navy dark:border-slate-800 dark:text-white"
+                    className="focus-ring block min-h-12 w-full border-b border-border-subtle py-4 text-left text-lg font-semibold text-text-primary dark:border-border-subtle dark:text-white"
                   >
                     {t("nav.home")}
                   </button>
                   <button
                     type="button"
                     onClick={() => setServicesOpen((open: boolean) => !open)}
-                    className="focus-ring flex min-h-12 w-full items-center justify-between border-b border-slate-200 py-4 text-left text-lg font-semibold text-bdigital-navy dark:border-slate-800 dark:text-white"
+                    className="focus-ring flex min-h-12 w-full items-center justify-between border-b border-border-subtle py-4 text-left text-lg font-semibold text-text-primary dark:border-border-subtle dark:text-white"
                     aria-expanded={servicesOpen}
                   >
                     {t("nav.services")}
@@ -298,13 +298,13 @@ export function Navigation() {
                     />
                   </button>
                   {servicesOpen && (
-                    <div className="border-b border-slate-200 py-2 dark:border-slate-800">
+                    <div className="border-b border-border-subtle py-2 dark:border-border-subtle">
                       {services.map((service) => (
                         <button
                           key={service.id}
                           type="button"
                           onClick={() => goService(service.id)}
-                          className="focus-ring block min-h-11 w-full py-3 pl-4 text-left text-sm text-slate-600 dark:text-slate-300"
+                          className="focus-ring block min-h-11 w-full py-3 pl-4 text-left text-sm text-text-secondary dark:text-text-secondary"
                         >
                           {service.title}
                         </button>
@@ -312,9 +312,9 @@ export function Navigation() {
                     </div>
                   )}
                 </div>
-                <div className="border-t border-slate-200 pt-6 dark:border-slate-800">
+                <div className="border-t border-border-subtle pt-6 dark:border-border-subtle">
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3 text-xs text-slate-500 dark:text-slate-400">
+                    <div className="flex items-center gap-3 text-xs text-text-muted dark:text-text-muted">
                       {localeOptions.map((option) => (
                         <button
                           key={option.value}
@@ -332,7 +332,7 @@ export function Navigation() {
                     <button
                       type="button"
                       onClick={toggleTheme}
-                      className="focus-ring flex h-11 w-11 items-center justify-center rounded-md border border-slate-200 text-slate-500 dark:border-slate-700 dark:text-slate-400"
+                      className="focus-ring flex h-11 w-11 items-center justify-center rounded-md border border-border-subtle text-text-muted dark:border-border-default dark:text-text-muted"
                       aria-label={
                         theme === "dark"
                           ? t("nav.light_mode")
@@ -348,7 +348,7 @@ export function Navigation() {
                   </div>
                   <Button
                     onClick={bookCall}
-                    className="focus-ring mt-6 min-h-12 w-full rounded-md bg-bdigital-cyan font-semibold text-bdigital-navy shadow-none hover:bg-bdigital-cyan-light"
+                    className="focus-ring mt-6 min-h-12 w-full rounded-md bg-accent font-semibold text-text-primary shadow-none hover:bg-accent-hover"
                   >
                     {t("web.cta.primary")}
                   </Button>

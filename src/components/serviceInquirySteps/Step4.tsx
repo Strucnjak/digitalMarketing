@@ -22,7 +22,7 @@ export function Step4({ formData, errors, touched, updateFormData, handleBlur }:
   return (
     <div className="space-y-6">
       <div className="relative z-20">
-        <Label className="mb-3 block text-bdigital-navy dark:text-slate-200">{t("form.preferred_contact_label")}</Label>
+        <Label className="mb-3 block text-text-primary dark:text-slate-200">{t("form.preferred_contact_label")}</Label>
         <Tooltip open={!!errors.preferredContact && touched.preferredContact}>
           <TooltipTrigger asChild>
             <RadioGroup
@@ -32,19 +32,19 @@ export function Step4({ formData, errors, touched, updateFormData, handleBlur }:
             >
               <div className="flex items-center space-x-2">
                 <RadioGroupItem value="email" />
-                <Label className="text-neutral-gray dark:text-slate-300">{t("form.contact_option.email")}</Label>
+                <Label className="text-text-secondary dark:text-text-secondary">{t("form.contact_option.email")}</Label>
               </div>
               <div className="flex items-center space-x-2">
                 <RadioGroupItem value="phone" />
-                <Label className="text-neutral-gray dark:text-slate-300">{t("form.contact_option.phone")}</Label>
+                <Label className="text-text-secondary dark:text-text-secondary">{t("form.contact_option.phone")}</Label>
               </div>
               <div className="flex items-center space-x-2">
                 <RadioGroupItem value="whatsapp" />
-                <Label className="text-neutral-gray dark:text-slate-300">{t("form.contact_option.whatsapp")}</Label>
+                <Label className="text-text-secondary dark:text-text-secondary">{t("form.contact_option.whatsapp")}</Label>
               </div>
               <div className="flex items-center space-x-2">
                 <RadioGroupItem value="meeting" />
-                <Label className="text-neutral-gray dark:text-slate-300">{t("form.contact_option.meeting")}</Label>
+                <Label className="text-text-secondary dark:text-text-secondary">{t("form.contact_option.meeting")}</Label>
               </div>
             </RadioGroup>
           </TooltipTrigger>
@@ -53,9 +53,9 @@ export function Step4({ formData, errors, touched, updateFormData, handleBlur }:
       </div>
 
       <div className="relative z-20">
-        <Label className="mb-2 block text-bdigital-navy dark:text-slate-200">{t("form.how_hear_label")}</Label>
+        <Label className="mb-2 block text-text-primary dark:text-slate-200">{t("form.how_hear_label")}</Label>
         <Select value={formData.howDidYouHear} onValueChange={(value) => updateFormData("howDidYouHear", value)}>
-          <SelectTrigger className="border-gray-300 focus:border-bdigital-cyan dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100">
+          <SelectTrigger className="border-border-default focus:border-focus dark:border-border-default dark:bg-surface-elevated dark:text-slate-100">
             <SelectValue placeholder={t("form.placeholder_how_hear")} />
           </SelectTrigger>
           <SelectContent className="z-[999]">
@@ -70,7 +70,7 @@ export function Step4({ formData, errors, touched, updateFormData, handleBlur }:
       </div>
 
       <div>
-        <Label className="mb-2 flex items-center gap-2 text-bdigital-navy dark:text-slate-200">
+        <Label className="mb-2 flex items-center gap-2 text-text-primary dark:text-slate-200">
           <MessageSquare className="h-4 w-4" />
           {t("form.additional_info_label")}
         </Label>
@@ -78,7 +78,7 @@ export function Step4({ formData, errors, touched, updateFormData, handleBlur }:
           value={formData.additionalInfo}
           onChange={(e) => updateFormData("additionalInfo", e.target.value)}
           placeholder={t("form.placeholder_additional_info")}
-          className="min-h-[100px] resize-none border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan dark:border-slate-700 dark:bg-slate-900/60 dark:text-slate-100 dark:placeholder:text-slate-500"
+          className="min-h-[100px] resize-none border-border-default focus:border-focus focus:ring-focus dark:border-border-default dark:bg-surface-elevated/60 dark:text-slate-100 dark:placeholder:text-text-muted"
         />
       </div>
 
@@ -86,9 +86,9 @@ export function Step4({ formData, errors, touched, updateFormData, handleBlur }:
         <Checkbox
           checked={formData.newsletter}
           onCheckedChange={(checked) => updateFormData("newsletter", checked === true)}
-          className="border-gray-300 dark:border-slate-700"
+          className="border-border-default dark:border-border-default"
         />
-        <Label className="text-sm font-normal text-neutral-gray dark:text-slate-300">{t("form.newsletter_label")}</Label>
+        <Label className="text-sm font-normal text-text-secondary dark:text-text-secondary">{t("form.newsletter_label")}</Label>
       </div>
     </div>
   );

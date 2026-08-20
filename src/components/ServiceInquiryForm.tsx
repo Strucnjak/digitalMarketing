@@ -247,13 +247,13 @@ export function ServiceInquiryForm() {
     return (
       <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white pb-16 pt-20 dark:from-bdigital-midnight dark:to-bdigital-dark-navy">
         <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Card className="border-0 shadow-2xl dark:border dark:border-bdigital-dark-navy dark:bg-bdigital-night">
+          <Card className="border-0 shadow-2xl dark:border dark:border-bdigital-dark-navy dark:bg-surface">
             <CardContent className="p-8 text-center lg:p-12">
               <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-green-100 dark:bg-emerald-900/40">
                 <CheckCircle className="h-10 w-10 text-green-600 dark:text-emerald-300" />
               </div>
-              <h2 className="mb-4 text-2xl font-bold text-bdigital-navy lg:text-3xl dark:text-slate-100">{t("form.success_title")}</h2>
-              <p className="mb-8 text-lg text-neutral-gray leading-relaxed dark:text-slate-300">
+              <h2 className="mb-4 text-2xl font-bold text-text-primary lg:text-3xl dark:text-slate-100">{t("form.success_title")}</h2>
+              <p className="mb-8 text-lg text-text-secondary leading-relaxed dark:text-text-secondary">
                 {t("form.success_intro")}{" "}
                 {currentServiceInfo?.title && formData.selectedPackage
                   ? `${currentServiceInfo.title} - ${formData.selectedPackage}`
@@ -266,7 +266,7 @@ export function ServiceInquiryForm() {
                     const path = buildLocalizedPath(activeLocale, "home", { includeLocalePrefix });
                     navigate(path);
                   }}
-                  className="bg-bdigital-cyan text-bdigital-navy hover:bg-bdigital-cyan-light font-semibold px-8 py-3"
+                  className="bg-accent text-bdigital-navy hover:bg-accent-hover font-semibold px-8 py-3"
                 >
                   {t("general.back_home")}
                 </Button>
@@ -296,7 +296,7 @@ export function ServiceInquiryForm() {
                       newsletter: false,
                     });
                   }}
-                  className="border-bdigital-cyan-dark text-bdigital-cyan-dark hover:bg-bdigital-cyan hover:text-bdigital-navy font-semibold px-8 py-3 dark:text-bdigital-cyan dark:hover:text-slate-900"
+                  className="border-accent-strong text-accent-strong hover:bg-accent hover:text-text-primary font-semibold px-8 py-3 dark:text-accent-strong dark:hover:text-text-primary"
                 >
                   {t("form.new_quote")}
                 </Button>
@@ -319,43 +319,43 @@ export function ServiceInquiryForm() {
               const path = buildLocalizedPath(activeLocale, "home", { includeLocalePrefix });
               navigate(path);
             }}
-            className="mb-6 -ml-2 text-bdigital-navy hover:text-bdigital-cyan-dark dark:text-slate-100 dark:hover:text-bdigital-cyan"
+            className="mb-6 -ml-2 text-text-primary hover:text-accent-strong dark:text-slate-100 dark:hover:text-accent-strong"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
             {t("general.back_home")}
           </Button>
 
           <div className="text-center mb-8">
-            <h1 className="mb-4 text-3xl font-bold text-bdigital-navy sm:text-4xl lg:text-5xl dark:text-slate-100">{t("inquiry.title")}</h1>
-            <p className="mx-auto max-w-2xl text-lg text-neutral-gray dark:text-slate-300">{t("inquiry.subtitle")}</p>
+            <h1 className="mb-4 text-3xl font-bold text-text-primary sm:text-4xl lg:text-5xl dark:text-slate-100">{t("inquiry.title")}</h1>
+            <p className="mx-auto max-w-2xl text-lg text-text-secondary dark:text-text-secondary">{t("inquiry.subtitle")}</p>
           </div>
 
           {/* Service & Package Display - Enhanced */}
           {(formData.selectedService || formData.selectedPackage) && (
             <div className="mb-8">
-              <Card className="border-bdigital-cyan/20 bg-gradient-to-r from-bdigital-cyan/5 to-bdigital-navy/5 dark:border-bdigital-cyan/40 dark:from-bdigital-cyan/10 dark:to-bdigital-navy/20">
+              <Card className="border-border-default bg-surface-subtle">
                 <CardContent className="p-6">
                   <div className="flex items-center gap-4 mb-4">
-                    <div className="w-12 h-12 bg-bdigital-cyan/10 rounded-xl flex items-center justify-center">
-                      <Package className="h-6 w-6 text-bdigital-cyan" />
+                    <div className="w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center">
+                      <Package className="h-6 w-6 text-accent-strong" />
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold text-bdigital-navy dark:text-slate-100">{t("form.selected_service_title")}</h3>
-                      <p className="text-sm text-neutral-gray dark:text-slate-300">{t("form.selected_service_desc")}</p>
+                      <h3 className="text-lg font-semibold text-text-primary dark:text-slate-100">{t("form.selected_service_title")}</h3>
+                      <p className="text-sm text-text-secondary dark:text-text-secondary">{t("form.selected_service_desc")}</p>
                     </div>
                   </div>
 
                   <div className="space-y-3">
                     {currentServiceInfo && (
-                      <div className="flex items-center justify-between rounded-lg border border-gray-100 bg-white p-4 dark:border-bdigital-dark-navy dark:bg-bdigital-night">
+                      <div className="flex items-center justify-between rounded-lg border border-border-subtle bg-surface p-4 dark:border-bdigital-dark-navy dark:bg-surface">
                         <div className="flex items-center gap-3">
                           <span className="text-2xl">{currentServiceInfo.icon}</span>
                           <div>
-                            <div className="font-medium text-bdigital-navy dark:text-slate-100">{currentServiceInfo.title}</div>
-                            <div className="text-sm text-neutral-gray dark:text-slate-300">{currentServiceInfo.description}</div>
+                            <div className="font-medium text-text-primary dark:text-slate-100">{currentServiceInfo.title}</div>
+                            <div className="text-sm text-text-secondary dark:text-text-secondary">{currentServiceInfo.description}</div>
                           </div>
                         </div>
-                        <Badge className="bg-bdigital-cyan text-bdigital-navy">
+                        <Badge className="bg-accent text-text-primary">
                           <Star className="h-3 w-3 mr-1" />
                           {t("form.chosen")}
                         </Badge>
@@ -363,19 +363,19 @@ export function ServiceInquiryForm() {
                     )}
 
                     {formData.selectedPackage && (
-                      <div className="flex items-center justify-between rounded-lg border border-gray-100 bg-white p-4 dark:border-bdigital-dark-navy dark:bg-bdigital-night">
+                      <div className="flex items-center justify-between rounded-lg border border-border-subtle bg-surface p-4 dark:border-bdigital-dark-navy dark:bg-surface">
                         <div className="flex items-center gap-3">
                           <div className="w-8 h-8 bg-bdigital-navy/10 rounded-lg flex items-center justify-center">
-                            <Package className="h-4 w-4 text-bdigital-navy" />
+                            <Package className="h-4 w-4 text-text-primary" />
                           </div>
                           <div>
-                            <div className="font-medium text-bdigital-navy dark:text-slate-100">
+                            <div className="font-medium text-text-primary dark:text-slate-100">
                               {t("form.package_prefix")} {formData.selectedPackage}
                             </div>
-                            <div className="text-sm text-neutral-gray dark:text-slate-300">{t("form.selected_package_desc")}</div>
+                            <div className="text-sm text-text-secondary dark:text-text-secondary">{t("form.selected_package_desc")}</div>
                           </div>
                         </div>
-                        <Badge variant="outline" className="border-bdigital-navy text-bdigital-navy dark:border-slate-300 dark:text-slate-100">
+                        <Badge variant="outline" className="border-bdigital-navy text-text-primary dark:border-border-default dark:text-slate-100">
                           {t("form.package_badge")}
                         </Badge>
                       </div>
@@ -390,8 +390,8 @@ export function ServiceInquiryForm() {
         {/* Progress Section */}
         <div className="mb-8">
           <div className="flex justify-between items-center mb-4">
-            <span className="text-sm text-neutral-gray dark:text-slate-300">Korak {currentStep} od 4</span>
-            <span className="text-sm text-neutral-gray dark:text-slate-300">{Math.round(progressPercentage)}% završeno</span>
+            <span className="text-sm text-text-secondary dark:text-text-secondary">Korak {currentStep} od 4</span>
+            <span className="text-sm text-text-secondary dark:text-text-secondary">{Math.round(progressPercentage)}% završeno</span>
           </div>
           <Progress value={progressPercentage} className="h-2 mb-6" />
 
@@ -407,19 +407,19 @@ export function ServiceInquiryForm() {
                   <div
                     className={`mb-2 flex h-10 w-10 items-center justify-center rounded-full transition-all duration-300 ${
                       isCompleted
-                        ? "bg-bdigital-cyan text-bdigital-navy"
+                        ? "bg-accent text-text-primary"
                         : isActive
                           ? "bg-bdigital-navy text-white"
-                          : "bg-gray-200 text-gray-500 dark:bg-bdigital-dark-navy dark:text-slate-400"
+                          : "bg-gray-200 text-text-secondary dark:bg-bdigital-dark-navy dark:text-text-muted"
                     }`}
                   >
                     {isCompleted ? <Check className="h-5 w-5" /> : <IconComponent className="h-5 w-5" />}
                   </div>
                   <div className="text-center">
-                    <div className={`text-sm font-medium ${isActive ? "text-bdigital-navy dark:text-slate-100" : "text-neutral-gray dark:text-slate-400"}`}>
+                    <div className={`text-sm font-medium ${isActive ? "text-text-primary dark:text-slate-100" : "text-text-secondary dark:text-text-muted"}`}>
                       {step.title}
                     </div>
-                    <div className="hidden text-xs text-neutral-gray sm:block dark:text-slate-500">{step.description}</div>
+                    <div className="hidden text-xs text-text-secondary sm:block dark:text-text-muted">{step.description}</div>
                   </div>
                 </div>
               );
@@ -427,9 +427,9 @@ export function ServiceInquiryForm() {
           </div>
         </div>
 
-        <Card className="border-0 shadow-2xl dark:border dark:border-bdigital-dark-navy dark:bg-bdigital-night">
+        <Card className="border-0 shadow-2xl dark:border dark:border-bdigital-dark-navy dark:bg-surface">
           <CardHeader>
-            <CardTitle className="text-2xl text-bdigital-navy dark:text-slate-100">{steps[currentStep - 1].title}</CardTitle>
+            <CardTitle className="text-2xl text-text-primary dark:text-slate-100">{steps[currentStep - 1].title}</CardTitle>
           </CardHeader>
           <CardContent className="p-6 lg:p-8">
             <AnimatePresence mode="wait">
@@ -494,19 +494,19 @@ export function ServiceInquiryForm() {
             </AnimatePresence>
 
             {/* Navigation Buttons */}
-            <div className="mt-8 flex items-center justify-between border-t border-gray-200 pt-6 dark:border-bdigital-dark-navy">
+            <div className="mt-8 flex items-center justify-between border-t border-border-subtle pt-6 dark:border-bdigital-dark-navy">
               <Button
                 variant="outline"
                 onClick={prevStep}
                 disabled={currentStep === 1}
-                className="border-bdigital-cyan-dark text-bdigital-cyan-dark hover:bg-bdigital-cyan hover:text-bdigital-navy disabled:cursor-not-allowed disabled:opacity-50 dark:text-bdigital-cyan dark:hover:text-slate-900"
+                className="border-accent-strong text-accent-strong hover:bg-accent hover:text-text-primary disabled:cursor-not-allowed disabled:opacity-50 dark:text-accent-strong dark:hover:text-text-primary"
               >
                 <ArrowLeft className="h-4 w-4 mr-2" />
                 {t("general.back")}
               </Button>
 
               {currentStep < 4 ? (
-                <Button onClick={nextStep} className="bg-bdigital-cyan text-bdigital-navy hover:bg-bdigital-cyan-light font-semibold px-8 py-3">
+                <Button onClick={nextStep} className="bg-accent text-bdigital-navy hover:bg-accent-hover font-semibold px-8 py-3">
                   {t("form.next_step")}
                   <ChevronRight className="h-4 w-4 ml-2" />
                 </Button>
@@ -514,7 +514,7 @@ export function ServiceInquiryForm() {
                 <Button
                   onClick={handleSubmit}
                   disabled={isSubmitting}
-                  className="bg-bdigital-cyan text-bdigital-navy hover:bg-bdigital-cyan-light font-semibold px-8 py-3"
+                  className="bg-accent text-bdigital-navy hover:bg-accent-hover font-semibold px-8 py-3"
                 >
                   {isSubmitting ? (
                     <>

@@ -44,13 +44,13 @@ export function PortfolioSection() {
   return (
     <section
       id="portfolio"
-      className="section-shell bg-white dark:bg-bdigital-midnight"
+      className="section-shell bg-surface dark:bg-background"
     >
       <div className="site-container">
         <div className="grid gap-10 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-8">
             <p className="eyebrow mb-7">{t("portfolio.badge")}</p>
-            <h2 className="section-title text-bdigital-navy dark:text-white">
+            <h2 className="section-title text-text-primary dark:text-white">
               {t("portfolio.heading.part1")} {t("portfolio.heading.emphasis")}{" "}
               {t("portfolio.heading.part2")}
             </h2>
@@ -61,7 +61,7 @@ export function PortfolioSection() {
         </div>
 
         <div className="mt-20 space-y-24 lg:mt-28 lg:space-y-32">
-          <p className="border-l-2 border-slate-300 pl-4 text-sm leading-6 text-slate-500 dark:border-slate-700 dark:text-slate-400">
+          <p className="border-l-2 border-border-default pl-4 text-sm leading-6 text-text-muted dark:border-border-default dark:text-text-muted">
             {t("portfolio.placeholder_notice")}
           </p>
           {projectDefinitions.map((definition, index) => {
@@ -83,7 +83,7 @@ export function PortfolioSection() {
                   className={`${index === 0 ? "lg:col-span-8" : "lg:col-span-7 lg:col-start-2"} ${index % 2 === 1 ? "lg:order-2 lg:col-start-6" : ""}`}
                 >
                   <div
-                    className={`${index === 0 ? "aspect-[16/10]" : "aspect-[4/3]"} relative overflow-hidden rounded-lg bg-slate-100 dark:bg-bdigital-night`}
+                    className={`${index === 0 ? "aspect-[16/10]" : "aspect-[4/3]"} relative overflow-hidden rounded-lg bg-slate-100 dark:bg-surface`}
                   >
                     <ImageWithFallback
                       src={definition.image}
@@ -103,25 +103,25 @@ export function PortfolioSection() {
                 <div
                   className={`${index === 0 ? "lg:col-span-4" : "lg:col-span-4"} ${index % 2 === 1 ? "lg:order-1 lg:col-start-1" : ""} flex flex-col justify-end`}
                 >
-                  <p className="font-mono text-xs text-slate-400">
+                  <p className="font-mono text-xs text-text-muted">
                     0{index + 1}
                   </p>
-                  <p className="mt-8 text-xs font-medium text-slate-500 dark:text-slate-400">
+                  <p className="mt-8 text-xs font-medium text-text-muted dark:text-text-muted">
                     {t(`${prefix}.category`)} · {t(`${prefix}.year`)}
                   </p>
-                  <h3 className="mt-3 text-3xl font-semibold tracking-[-0.035em] text-bdigital-navy dark:text-white">
+                  <h3 className="mt-3 text-3xl font-semibold tracking-[-0.035em] text-text-primary dark:text-white">
                     {definition.title}
                   </h3>
-                  <dl className="mt-8 border-t border-slate-300 dark:border-slate-700">
+                  <dl className="mt-8 border-t border-border-default dark:border-border-default">
                     {fields.map((field) => (
                       <div
                         key={field.label}
-                        className="grid gap-2 border-b border-slate-200 py-5 dark:border-slate-800 sm:grid-cols-[7rem_1fr]"
+                        className="grid gap-2 border-b border-border-subtle py-5 dark:border-border-subtle sm:grid-cols-[7rem_1fr]"
                       >
-                        <dt className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-400">
+                        <dt className="text-xs font-semibold uppercase tracking-[0.12em] text-text-muted">
                           {field.label}
                         </dt>
-                        <dd className="text-sm leading-6 text-slate-600 dark:text-slate-300">
+                        <dd className="text-sm leading-6 text-text-secondary dark:text-text-secondary">
                           {field.value}
                         </dd>
                       </div>

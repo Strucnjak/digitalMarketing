@@ -21,7 +21,7 @@ export function Step2({ formData, errors, touched, updateFormData, handleProject
   return (
     <div className="space-y-6">
       <div>
-        <Label className="mb-3 block text-bdigital-navy dark:text-slate-200">{t("form.project_types_label")}</Label>
+        <Label className="mb-3 block text-text-primary dark:text-slate-200">{t("form.project_types_label")}</Label>
         <Tooltip open={!!errors.projectTypes && touched.projectTypes}>
           <TooltipTrigger asChild>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -40,9 +40,9 @@ export function Step2({ formData, errors, touched, updateFormData, handleProject
                   <Checkbox
                     checked={formData.projectTypes.includes(projectType.value)}
                     onCheckedChange={(checked) => handleProjectTypeChange(projectType.value, checked as boolean)}
-                    className="border-gray-300 dark:border-slate-700"
+                    className="border-border-default dark:border-border-default"
                   />
-                  <Label className="text-sm font-normal text-neutral-gray dark:text-slate-300">{projectType.label}</Label>
+                  <Label className="text-sm font-normal text-text-secondary dark:text-text-secondary">{projectType.label}</Label>
                 </div>
               ))}
             </div>
@@ -52,7 +52,7 @@ export function Step2({ formData, errors, touched, updateFormData, handleProject
       </div>
 
       <div>
-        <Label className="mb-2 block text-bdigital-navy dark:text-slate-200">{t("form.current_situation")}</Label>
+        <Label className="mb-2 block text-text-primary dark:text-slate-200">{t("form.current_situation")}</Label>
         <Tooltip open={!!errors.currentSituation && touched.currentSituation}>
           <TooltipTrigger asChild>
             <Textarea
@@ -60,7 +60,7 @@ export function Step2({ formData, errors, touched, updateFormData, handleProject
               onChange={(e) => updateFormData("currentSituation", e.target.value)}
               onBlur={() => handleBlur("currentSituation")}
               placeholder={t("form.placeholder_current_situation")}
-              className={`min-h-[100px] resize-none border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan dark:border-slate-700 dark:bg-slate-900/60 dark:text-slate-100 dark:placeholder:text-slate-500 ${
+              className={`min-h-[100px] resize-none border-border-default focus:border-focus focus:ring-focus dark:border-border-default dark:bg-surface-elevated/60 dark:text-slate-100 dark:placeholder:text-text-muted ${
                 errors.currentSituation && touched.currentSituation ? "border-red-500" : ""
               }`}
             />
@@ -70,7 +70,7 @@ export function Step2({ formData, errors, touched, updateFormData, handleProject
       </div>
 
       <div>
-        <Label className="mb-2 block text-bdigital-navy dark:text-slate-200">{t("form.project_goals")}</Label>
+        <Label className="mb-2 block text-text-primary dark:text-slate-200">{t("form.project_goals")}</Label>
         <Tooltip open={!!errors.projectGoals && touched.projectGoals}>
           <TooltipTrigger asChild>
             <Textarea
@@ -78,7 +78,7 @@ export function Step2({ formData, errors, touched, updateFormData, handleProject
               onChange={(e) => updateFormData("projectGoals", e.target.value)}
               onBlur={() => handleBlur("projectGoals")}
               placeholder={t("form.placeholder_project_goals")}
-              className={`min-h-[100px] resize-none border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan dark:border-slate-700 dark:bg-slate-900/60 dark:text-slate-100 dark:placeholder:text-slate-500 ${
+              className={`min-h-[100px] resize-none border-border-default focus:border-focus focus:ring-focus dark:border-border-default dark:bg-surface-elevated/60 dark:text-slate-100 dark:placeholder:text-text-muted ${
                 errors.projectGoals && touched.projectGoals ? "border-red-500" : ""
               }`}
             />
@@ -88,12 +88,12 @@ export function Step2({ formData, errors, touched, updateFormData, handleProject
       </div>
 
       <div>
-        <Label className="mb-2 block text-bdigital-navy dark:text-slate-200">{t("form.target_audience")}</Label>
+        <Label className="mb-2 block text-text-primary dark:text-slate-200">{t("form.target_audience")}</Label>
         <Input
           value={formData.targetAudience}
           onChange={(e) => updateFormData("targetAudience", e.target.value)}
           placeholder={t("form.placeholder_target_audience")}
-          className="border-gray-300 focus:border-bdigital-cyan focus:ring-bdigital-cyan dark:border-slate-700 dark:bg-slate-900/60 dark:text-slate-100 dark:placeholder:text-slate-500"
+          className="border-border-default focus:border-focus focus:ring-focus dark:border-border-default dark:bg-surface-elevated/60 dark:text-slate-100 dark:placeholder:text-text-muted"
         />
       </div>
     </div>

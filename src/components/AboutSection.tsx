@@ -27,7 +27,7 @@ function TeamPortraitPlaceholder({
       aria-label={`${name}. ${label}`}
     >
       <span
-        className="text-5xl font-light tracking-[-0.06em] text-slate-600"
+        className="text-5xl font-light tracking-[-0.06em] text-text-secondary"
         aria-hidden="true"
       >
         {initials}
@@ -51,7 +51,7 @@ export function AboutSection() {
     >
       <div className="site-container">
         <div className="max-w-5xl">
-          <p className="eyebrow !text-slate-400">
+          <p className="eyebrow !text-text-muted">
             {t("about.approach.eyebrow")}
           </p>
           <h2 className="mt-8 text-4xl font-semibold leading-[1.08] tracking-[-0.045em] text-white sm:text-6xl lg:text-7xl">
@@ -77,12 +77,12 @@ export function AboutSection() {
 
         <div className="mt-28 grid gap-12 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-5">
-            <p className="eyebrow !text-slate-400">{t("about.team.title")}</p>
+            <p className="eyebrow !text-text-muted">{t("about.team.title")}</p>
             <h3 className="mt-6 text-4xl font-semibold leading-tight tracking-[-0.04em] text-white sm:text-5xl">
               {t("about.team.subtitle")}
             </h3>
           </div>
-          <p className="text-sm leading-6 text-slate-400 lg:col-span-4 lg:col-start-9">
+          <p className="text-sm leading-6 text-text-muted lg:col-span-4 lg:col-start-9">
             {t("about.description")}
           </p>
         </div>
@@ -98,13 +98,13 @@ export function AboutSection() {
               <h4 className="mt-5 text-xl font-semibold text-white">
                 {t(`about.team.${member.id}.name`)}
               </h4>
-              <p className="mt-1 text-sm font-medium text-slate-400">
+              <p className="mt-1 text-sm font-medium text-text-muted">
                 {t(`about.team.${member.id}.role`)}
               </p>
-              <p className="mt-3 text-sm leading-6 text-slate-400">
+              <p className="mt-3 text-sm leading-6 text-text-muted">
                 {t(`about.team.${member.id}.description`)}
               </p>
-              <p className="mt-4 text-xs italic text-slate-500">
+              <p className="mt-4 text-xs italic text-text-muted">
                 {t("about.team.image_placeholder")}
               </p>
             </article>

@@ -42,7 +42,7 @@ export function HeroSection() {
             <button
               type="button"
               onClick={bookCall}
-              className="focus-ring inline-flex min-h-12 items-center gap-3 rounded-md bg-bdigital-cyan px-6 py-3 text-sm font-semibold text-bdigital-navy transition-colors hover:bg-bdigital-cyan-light"
+              className="focus-ring inline-flex min-h-12 items-center gap-3 rounded-md bg-accent px-6 py-3 text-sm font-semibold text-text-primary transition-colors hover:bg-accent-hover"
             >
               {t("web.cta.primary")}
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -50,7 +50,7 @@ export function HeroSection() {
             <button
               type="button"
               onClick={viewWork}
-              className="focus-ring min-h-12 border-b border-white/40 px-1 py-3 text-sm font-semibold text-white transition-colors hover:border-bdigital-cyan hover:text-bdigital-cyan"
+              className="focus-ring min-h-12 border-b border-white/40 px-1 py-3 text-sm font-semibold text-white transition-colors hover:border-accent-border hover:text-accent-strong"
             >
               {t("hero.secondary")}
             </button>

@@ -30,18 +30,18 @@ export function Footer({ initialYear }: FooterProps) {
               })}
               className="focus-ring inline-flex items-center gap-3"
             >
-              <span className="flex h-10 w-10 items-center justify-center rounded-md bg-bdigital-cyan-dark">
+              <span className="flex h-10 w-10 items-center justify-center rounded-md bg-accent-dark">
                 <img src="/logo.svg" alt="" className="h-7 w-7" />
               </span>
               <span className="text-xl font-semibold">DIAL Digital</span>
             </Link>
-            <p className="mt-6 max-w-md text-base leading-7 text-slate-400">
+            <p className="mt-6 max-w-md text-base leading-7 text-text-muted">
               {t("footer.description")}
             </p>
           </div>
 
           <nav className="lg:col-span-3" aria-label={t("footer.services")}>
-            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-text-muted">
               {t("footer.services")}
             </p>
             <ul className="mt-6 space-y-3">
@@ -61,7 +61,7 @@ export function Footer({ initialYear }: FooterProps) {
           </nav>
 
           <div className="lg:col-span-4">
-            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-text-muted">
               {t("footer.contact")}
             </p>
             <div className="mt-6 space-y-3 text-sm">
@@ -77,12 +77,12 @@ export function Footer({ initialYear }: FooterProps) {
               >
                 {PHONE}
               </a>
-              <p className="text-slate-400">{ADDRESS}</p>
+              <p className="text-text-muted">{ADDRESS}</p>
             </div>
           </div>
         </div>
 
-        <div className="mt-16 flex flex-col gap-3 border-t border-white/10 pt-6 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-16 flex flex-col gap-3 border-t border-white/10 pt-6 text-xs text-text-muted sm:flex-row sm:items-center sm:justify-between">
           <p>
             © {initialYear ?? new Date().getFullYear()} DIAL Digital.{" "}
             {t("footer.rights")}

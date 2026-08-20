@@ -13,7 +13,7 @@ export function FloatingConsultationButton() {
     <div className="fixed bottom-6 left-6 z-40 hidden md:flex">
       <Link
         to={consultationPath}
-        className="flex items-center gap-2 rounded-full border border-bdigital-cyan/40 bg-bdigital-cyan/90 px-4 py-3 text-sm font-semibold text-bdigital-navy shadow-lg transition hover:-translate-y-0.5 hover:bg-bdigital-cyan hover:shadow-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bdigital-cyan"
+        className="flex items-center gap-2 rounded-full border border-accent-border/40 bg-accent/90 px-4 py-3 text-sm font-semibold text-text-primary shadow-lg transition hover:-translate-y-0.5 hover:bg-accent hover:shadow-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
       >
         <MessageSquareText className="h-4 w-4" />
         {t("web.cta.primary")}
