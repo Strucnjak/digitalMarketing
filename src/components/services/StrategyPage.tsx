@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "../ui/button";
 import { Card, CardContent } from "../ui/card";
 import { Badge } from "../ui/badge";
-import { TrendingUp, Target, BarChart3, Users, ArrowRight, CheckCircle } from "lucide-react";
+import { TrendingUp, Target, BarChart3, Users, ListChecks, ArrowRight, CheckCircle } from "lucide-react";
 import { ImageWithFallback } from "../figma/ImageWithFallback";
 import { useLanguage } from "../LanguageContext";
 import { useActiveLocale } from "../../hooks/useActiveLocale";
@@ -33,6 +33,11 @@ export function StrategyPage() {
       icon: Users,
       title: t("strategy.feature.consulting"),
       description: t("strategy.service.consulting_desc"),
+    },
+    {
+      icon: ListChecks,
+      title: t("strategy.feature.optimisation"),
+      description: t("strategy.service.optimisation_desc"),
     },
   ];
 

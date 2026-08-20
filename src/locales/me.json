@@ -646,5 +646,10 @@
   "lead.error.timeout": "Zahtjev traje predugo. Ishod može biti neizvjestan; sačekajte prije ponovnog pokušaja.",
   "lead.error.network": "Provjerite internet vezu i pokušajte ponovo.",
   "lead.error.configuration": "Slanje upita nije podešeno. Kontaktirajte nas direktno.",
-  "lead.error.generic": "Nijesmo mogli prihvatiti zahtjev. Pokušajte ponovo."
+  "lead.error.generic": "Nijesmo mogli prihvatiti zahtjev. Pokušajte ponovo.",
+  "services.analytics.title": "[PENDING TRANSLATION] Analytics, Tracking & CRM",
+  "services.analytics.desc": "[PENDING TRANSLATION] GA4, GTM, conversion tracking, source mapping and CRM workflows.",
+  "services.route_pending": "[PENDING TRANSLATION] Page recommended",
+  "strategy.feature.optimisation": "[PENDING TRANSLATION] Optimisation priorities",
+  "strategy.service.optimisation_desc": "[PENDING TRANSLATION] Turn the audit into an ordered plan based on likely impact, effort and commercial relevance."
 }
