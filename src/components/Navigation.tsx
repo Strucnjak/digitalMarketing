@@ -54,13 +54,14 @@ export function Navigation() {
     "social-media",
     "branding",
     "strategy",
+    "analytics-tracking-crm",
   ].map((id) => ({
     id: id as PageType,
     title: t(
-      `services.${id === "web-design" ? "web" : id === "social-media" ? "social" : id}.title`,
+      id === "analytics-tracking-crm" ? "services.analytics.title" : `services.${id === "web-design" ? "web" : id === "social-media" ? "social" : id}.title`,
     ),
     description: t(
-      `services.${id === "web-design" ? "web" : id === "social-media" ? "social" : id}.desc`,
+      id === "analytics-tracking-crm" ? "services.analytics.desc" : `services.${id === "web-design" ? "web" : id === "social-media" ? "social" : id}.desc`,
     ),
   }));
 

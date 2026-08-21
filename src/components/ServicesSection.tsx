@@ -145,7 +145,7 @@ export function ServicesSection() {
             <p className="eyebrow">{t("services.group.supporting")}</p>
           </div>
           <div className="border-t border-border-default dark:border-border-default lg:col-span-9 lg:border-l lg:border-t-0">
-            <div className="grid gap-5 border-b border-border-default py-8 text-left dark:border-border-default sm:grid-cols-[2rem_1fr_1.2fr_auto] sm:items-center lg:px-10">
+            <button type="button" onClick={() => open("analytics-tracking-crm")} className="focus-ring group grid w-full gap-5 border-b border-border-default py-8 text-left dark:border-border-default sm:grid-cols-[2rem_1fr_1.2fr_auto] sm:items-center lg:px-10">
               <ChartNoAxesCombined className="h-4 w-4 text-text-muted" aria-hidden="true" />
               <span className="font-semibold text-text-primary dark:text-white">
                 {t("services.analytics.title")}
@@ -153,10 +153,8 @@ export function ServicesSection() {
               <span className="text-sm leading-6 text-text-muted dark:text-text-muted">
                 {t("services.analytics.desc")}
               </span>
-              <span className="text-xs font-semibold uppercase tracking-wider text-text-muted">
-                {t("services.route_pending")}
-              </span>
-            </div>
+              <ArrowUpRight className="h-4 w-4 text-text-muted transition-colors group-hover:text-text-primary dark:group-hover:text-white" aria-hidden="true" />
+            </button>
             {supporting.map((service) => {
               const Icon = service.icon;
               return (

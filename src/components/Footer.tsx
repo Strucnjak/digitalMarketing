@@ -17,6 +17,7 @@ export function Footer({ initialYear }: FooterProps) {
     { id: "social-media", label: t("services.social.title") },
     { id: "branding", label: t("services.branding.title") },
     { id: "strategy", label: t("services.strategy.title") },
+    { id: "analytics-tracking-crm", label: t("services.analytics.title") },
   ];
 
   return (

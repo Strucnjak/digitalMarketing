@@ -98,6 +98,11 @@ const StrategyPage = lazy(() =>
     default: mod.StrategyPage,
   })),
 );
+const AnalyticsTrackingCrmPage = lazy(() =>
+  import("./components/services/AnalyticsTrackingCrmPage").then((mod) => ({
+    default: mod.AnalyticsTrackingCrmPage,
+  })),
+);
 const ServiceInquiryForm = lazy(() =>
   import("./components/ServiceInquiryForm").then((mod) => ({
     default: mod.ServiceInquiryForm,
@@ -408,6 +413,7 @@ const pageElements: Record<PageType, ReactElement> = {
   "social-media": withPageSuspense(<SocialMediaPage />),
   branding: withPageSuspense(<BrandingPage />),
   strategy: withPageSuspense(<StrategyPage />),
+  "analytics-tracking-crm": withPageSuspense(<AnalyticsTrackingCrmPage />),
   "service-inquiry": withPageSuspense(<ServiceInquiryForm />),
   "free-consultation": withPageSuspense(<FreeConsultationPage />),
 };
