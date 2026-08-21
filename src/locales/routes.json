@@ -7,6 +7,7 @@
     "social-media": "social-media",
     "branding": "branding",
     "strategy": "strategy",
+    "analytics-tracking-crm": "analytics-tracking-crm",
     "service-inquiry": "service-inquiry",
     "free-consultation": "free-consultation"
   },
@@ -18,6 +19,7 @@
     "social-media": "drustvene-mreze",
     "branding": "brending",
     "strategy": "strategija",
+    "analytics-tracking-crm": "analitika-pracenje-crm",
     "service-inquiry": "upit-za-uslugu",
     "free-consultation": "besplatna-konsultacija"
   },
@@ -29,6 +31,7 @@
     "social-media": "reseaux-sociaux",
     "branding": "identite-de-marque",
     "strategy": "strategie-digitale",
+    "analytics-tracking-crm": "analytics-suivi-crm",
     "service-inquiry": "demande-de-service",
     "free-consultation": "consultation-gratuite"
   }

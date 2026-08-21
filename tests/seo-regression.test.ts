@@ -96,3 +96,34 @@ assertEqual(
 
 assertEqual(parsePathname("/en/does-not-exist").isKnown, false, "Unknown localized paths must be classified as 404s");
 assertEqual(parsePathname("/fr/services/referencement").isKnown, true, "Known localized deep links must not be classified as 404s");
+
+const analyticsPaths = [
+  "/en/services/analytics-tracking-crm",
+  "/usluge/analitika-pracenje-crm",
+  "/fr/services/analytics-suivi-crm",
+] as const;
+for (const path of analyticsPaths) {
+  const parsed = parsePathname(path);
+  assertEqual(parsed.isKnown, true, `Analytics route ${path} must be known`);
+  assertEqual(
+    parsed.page,
+    "analytics-tracking-crm",
+    `Analytics route ${path} must resolve to the shared page identifier`,
+  );
+}
+
+assertEqual(
+  getSeoMetadata("en", "analytics-tracking-crm").title,
+  "Marketing Analytics, Tracking & CRM | DIAL",
+  "The English Analytics page must expose its approved SEO title",
+);
+assertEqual(
+  getSeoMetadata("me", "analytics-tracking-crm").title,
+  "Analitika, praćenje i CRM | DIAL",
+  "The Montenegrin Analytics page must expose localised SEO metadata",
+);
+assertEqual(
+  getSeoMetadata("fr", "analytics-tracking-crm").title,
+  "Analytics, suivi des conversions & CRM | DIAL",
+  "The French Analytics page must expose localised SEO metadata",
+);

@@ -68,6 +68,10 @@ const SEO_METADATA: Record<Locale, Partial<Record<PageType, SeoMetadata>>> = {
       description:
         "Revizije akvizicije, planiranje kanala, arhitektura mjerenja i CRM/mapiranje izvora za kompanije kojima je potrebna jasnija strategija digitalnog marketinga.",
     },
+    "analytics-tracking-crm": {
+      title: "Analitika, praćenje i CRM | DIAL",
+      description: "GA4, GTM, praćenje konverzija, mapiranje izvora i CRM struktura koja povezuje marketinške kampanje sa kvalitetom leadova i poslovnim rezultatima.",
+    },
     "service-inquiry": {
       title: "Razgovarajte o projektu digitalnog marketinga | DIAL",
       description:
@@ -111,6 +115,10 @@ const SEO_METADATA: Record<Locale, Partial<Record<PageType, SeoMetadata>>> = {
       description:
         "Audits d’acquisition, planification des canaux, architecture de mesure et cartographie CRM/des sources pour clarifier votre stratégie de marketing digital.",
     },
+    "analytics-tracking-crm": {
+      title: "Analytics, suivi des conversions & CRM | DIAL",
+      description: "GA4, GTM, suivi des conversions, attribution des sources et architecture CRM pour relier les campagnes à la qualité des leads et aux résultats commerciaux.",
+    },
     "service-inquiry": {
       title: "Discuter d’un projet de marketing digital | DIAL",
       description:
@@ -153,6 +161,10 @@ const SEO_METADATA: Record<Locale, Partial<Record<PageType, SeoMetadata>>> = {
       title: "Digital Marketing Strategy Montenegro | DIAL",
       description:
         "Acquisition audits, channel planning, measurement architecture and CRM/source mapping for businesses that need a clearer digital marketing strategy.",
+    },
+    "analytics-tracking-crm": {
+      title: "Marketing Analytics, Tracking & CRM | DIAL",
+      description: "GA4, GTM, conversion tracking, source mapping and CRM lead architecture that connect campaign activity with lead quality and commercial outcomes.",
     },
     "service-inquiry": {
       title: "Discuss a Digital Marketing Project | DIAL",

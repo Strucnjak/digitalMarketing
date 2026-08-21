@@ -6,6 +6,7 @@ export const servicePageIds = [
   "social-media",
   "branding",
   "strategy",
+  "analytics-tracking-crm",
 ] as const;
 
 export type PageType =
@@ -34,6 +35,7 @@ const routeSegmentKeys = [
   "social-media",
   "branding",
   "strategy",
+  "analytics-tracking-crm",
   "service-inquiry",
   "free-consultation",
 ] as const;
@@ -51,6 +53,7 @@ const routeSegmentKeysByPage: Record<PageType, RouteSegmentKey[]> = {
   "social-media": ["services", "social-media"],
   branding: ["services", "branding"],
   strategy: ["services", "strategy"],
+  "analytics-tracking-crm": ["services", "analytics-tracking-crm"],
   "service-inquiry": ["service-inquiry"],
   "free-consultation": ["free-consultation"],
 };
