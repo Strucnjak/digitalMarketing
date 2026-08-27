@@ -33,7 +33,16 @@ const getInitialTheme = (): Theme => {
 };
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useState<Theme>(() => getInitialTheme());
+  // The server always renders the light theme. Keep the client's first render
+  // identical, then restore the visitor's preference once hydration completes.
+  // Reading localStorage in the state initializer makes dark-mode visitors
+  // render different markup from the prerendered HTML and triggers React's
+  // hydration error #418.
+  const [theme, setTheme] = useState<Theme>("light");
+
+  useEffect(() => {
+    setTheme(getInitialTheme());
+  }, []);
 
   useEffect(() => {
     if (typeof document === "undefined") {
